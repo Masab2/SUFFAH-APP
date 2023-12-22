@@ -21,19 +21,20 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final ValueNotifier<bool> _obscurepass = ValueNotifier(true);
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    _obscurepass.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Stack(
+        resizeToAvoidBottomInset: true,
+        body: Stack(
           children: [
             Container(
               height: context.mh * 0.55,
@@ -59,7 +60,7 @@ class _LoginViewState extends State<LoginView> {
                   right: context.mw * 0.05,
                 ),
                 child: Container(
-                  height: context.mh * 0.55,
+                  height: context.mh * 0.60,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       boxShadow: [
@@ -72,84 +73,108 @@ class _LoginViewState extends State<LoginView> {
                       ],
                       color: AppColor.whiteColor,
                       borderRadius: BorderRadius.circular(20)),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Sign In to your accocunt',
-                          style:
-                              GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                        ),
-                        0.03.ph,
-                        CustomizedFeild(
-                            controller: emailController,
-                            title: 'Email',
-                            prefixIcon: const Icon(
-                              IconlyBold.message,
-                            )),
-                        0.02.ph,
-                        CustomizedFeild(
-                            controller: emailController,
-                            title: 'Password',
-                            prefixIcon: const Icon(
-                              IconlyBold.password,
-                            )),
-                        0.03.ph,
-                        MaterialButton(
-                          height: context.mh * 0.05,
-                          minWidth: context.mw * 0.80,
-                          color: AppColor.cgreenColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          onPressed: () {},
-                          child: Text(
-                            'Login',
+                  child: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          0.04.ph,
+                          Text(
+                            'Sign In to your accocunt',
                             style:
-                                GoogleFonts.poppins(color: AppColor.whiteColor),
+                                GoogleFonts.poppins(fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        0.03.ph,
-                        const LoginOrRow(),
-                        0.02.ph,
-                        SignInButton(
-                          buttonType: ButtonType.google,
-                          onPressed: () {},
-                        )
-                      ]),
+                          0.03.ph,
+                          CustomizedFeild(
+                              controller: emailController,
+                              title: 'Email',
+                              hint: 'abc@gmail.com',
+                              prefixIcon: const Icon(
+                                IconlyBold.message,color: AppColor.cgreenColor,
+                              )),
+                          0.02.ph,
+                          ValueListenableBuilder(
+                            valueListenable: _obscurepass,
+                            builder: (context, value, child) {
+                              return CustomizedFeild(
+                                title: 'Password',
+                                hint: '6 character/digit',
+                                prefixIcon: const Icon(
+                                  IconlyBold.password,
+                                  color: AppColor.cgreenColor,
+                                ),
+                                obscuretext: _obscurepass.value,
+                                sufixIcon: InkWell(
+                                    onTap: () {
+                                      _obscurepass.value = !_obscurepass.value;
+                                    },
+                                    child: _obscurepass.value
+                                        ? const Icon(
+                                            Icons.visibility_off,
+                                            color: AppColor.cgreenColor,
+                                          )
+                                        : const Icon(
+                                            Icons.visibility,
+                                            color: AppColor.cgreenColor,
+                                          )),
+                                controller: emailController,
+                              );
+                            },
+                          ),
+                          0.03.ph,
+                          MaterialButton(
+                            height: context.mh * 0.05,
+                            minWidth: context.mw * 0.80,
+                            color: AppColor.cgreenColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            onPressed: () {},
+                            child: Text(
+                              'Login',
+                              style:
+                                  GoogleFonts.poppins(color: AppColor.whiteColor),
+                            ),
+                          ),
+                          0.02.ph,
+                          const LoginOrRow(),
+                          0.01.ph,
+                          SignInButton(
+                            buttonType: ButtonType.google,
+                            onPressed: () {},
+                          ),
+                          0.01.ph,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Don't have an account",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 15,
+                                    color: AppColor.geryColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              0.01.pw,
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed(RoutesNames.signUpScreen);
+                                },
+                                child: Text(
+                                  "Sign Up",
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 15,
+                                      color: AppColor.cgreenColor,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          )
+                        ]),
+                  ),
                 ),
               ),
             ),
           ],
-        ),
-        0.02.ph,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              "Dont't have an account",
-              style: GoogleFonts.roboto(
-                  fontSize: 15,
-                  color: AppColor.geryColor,
-                  fontWeight: FontWeight.bold),
-            ),
-            0.01.pw,
-            InkWell(
-              onTap: () {
-                Get.toNamed(RoutesNames.signUpScreen);
-              },
-              child: Text(
-                "Sign Up",
-                style: GoogleFonts.roboto(
-                    fontSize: 15,
-                    color: AppColor.cgreenColor,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        )
-      ],
-    ));
+        ));
   }
 }
