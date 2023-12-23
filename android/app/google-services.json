@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "491712482003",
+    "project_id": "suffa-app-497e8",
+    "storage_bucket": "suffa-app-497e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491712482003:android:90509f8f5f385de0eb2226",
+        "android_client_info": {
+          "package_name": "com.example.suffa_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmsrFnjCuwpSauyey1EWjCg75VEPDB6Aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
