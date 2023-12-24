@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
+import 'package:suffa_app/ViewModel/DonnorAuth/signUpViewModel.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -14,6 +16,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final signUpController = Get.put(SignUpViewModel());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final ValueNotifier<bool> _obscurepass = ValueNotifier(true);
@@ -22,6 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     emailController.dispose();
     passwordController.dispose();
     _obscurepass.dispose();
+    signUpController.dispose();
     super.dispose();
   }
 
@@ -75,8 +79,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         0.04.ph,
                         Text(
-                          'Sign In to your accocunt',
-                          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                          'Create your account',
+                          style:
+                              GoogleFonts.poppins(fontWeight: FontWeight.bold),
                         ),
                         0.03.ph,
                         CustomizedFeild(
@@ -112,7 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           Icons.visibility,
                                           color: AppColor.cgreenColor,
                                         )),
-                              controller: emailController,
+                              controller: passwordController,
                             );
                           },
                         ),
@@ -123,7 +128,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           color: AppColor.cgreenColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
-                          onPressed: () {},
+                          onPressed: () {
+                            signUpController.signUpAccount(
+                                emailController, passwordController);
+                          },
                           child: Text(
                             'Create Account',
                             style:
