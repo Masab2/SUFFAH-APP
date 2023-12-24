@@ -56,7 +56,7 @@ class Apis {
   static Future<void> saveUserData(User user, email) async {
     final userDoc = await firestore
         .collection(DonorinfoCollection)
-        .where('uid', isEqualTo: user!.uid)
+        .where('uid', isEqualTo: user.uid)
         .limit(1)
         .get();
     if (userDoc.docs.isEmpty) {
