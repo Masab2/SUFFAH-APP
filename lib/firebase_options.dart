@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCmsrFnjCuwpSauyey1EWjCg75VEPDB6Aw',
-    appId: '1:491712482003:android:90509f8f5f385de0eb2226',
+    appId: '1:491712482003:android:63ed1d49b20294cdeb2226',
     messagingSenderId: '491712482003',
     projectId: 'suffa-app-497e8',
     storageBucket: 'suffa-app-497e8.appspot.com',
@@ -59,10 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCcyBecWftMKURmoTWQ2tOTI_tSgwOQZZE',
-    appId: '1:491712482003:ios:bca3f69aebd0657ceb2226',
+    appId: '1:491712482003:ios:c63377a8bcf94106eb2226',
     messagingSenderId: '491712482003',
     projectId: 'suffa-app-497e8',
     storageBucket: 'suffa-app-497e8.appspot.com',
-    iosBundleId: 'com.example.suffaApp',
+    androidClientId: '491712482003-63j0rndu19dhe5ur9gj36p2s3pptr44n.apps.googleusercontent.com',
+    iosClientId: '491712482003-bbepqb4dnuvkunt0ngog9ljoknejm4sf.apps.googleusercontent.com',
+    iosBundleId: 'com.MHDevs.suffaApp',
   );
 }

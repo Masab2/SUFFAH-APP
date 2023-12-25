@@ -1,4 +1,4 @@
-package com.example.suffa_app
+package com.MHDevs.suffa_app
 
 import io.flutter.embedding.android.FlutterActivity
 

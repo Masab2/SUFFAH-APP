@@ -74,7 +74,7 @@ class Apis {
 
   // LogOut from DashBoard
   static Future<void> logOutAccount() async {
-    for (final userinfo in user!.providerData) {
+    for (final userinfo in user.providerData) {
       if (userinfo.providerId == 'Google') {
         await googleSignIn.signOut();
       } else {

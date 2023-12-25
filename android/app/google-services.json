@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:491712482003:android:90509f8f5f385de0eb2226",
+        "mobilesdk_app_id": "1:491712482003:android:63ed1d49b20294cdeb2226",
         "android_client_info": {
-          "package_name": "com.example.suffa_app"
+          "package_name": "com.MHDevs.suffa_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "491712482003-je5kfh2qe636t7gnp5tvv0s5uebngpo3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCmsrFnjCuwpSauyey1EWjCg75VEPDB6Aw"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491712482003-je5kfh2qe636t7gnp5tvv0s5uebngpo3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "491712482003-9a8eov4so4123t3rjicovqg9l4al6a7j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.suffaApp"
+              }
+            }
+          ]
         }
       }
     }
