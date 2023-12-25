@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sign_button/constants.dart';
-import 'package:sign_button/create_button.dart';
-import 'package:suffa_app/ViewModel/DonnorAuth/loginViewModel.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iconly/iconly.dart';
+import 'package:suffa_app/ViewModel/Admin/adminAuth/adminLoginViewModel.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
-import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
-import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class AdminLoginDashBoard extends StatefulWidget {
+  const AdminLoginDashBoard({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<AdminLoginDashBoard> createState() => _AdminLoginDashBoardState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  final loginController = Get.put(LoginViewModel());
+class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
+  final adminAuthController = Get.put(AdminLoginViewModel());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final ValueNotifier<bool> _obscurepass = ValueNotifier(true);
@@ -29,7 +25,7 @@ class _LoginViewState extends State<LoginView> {
     emailController.dispose();
     passwordController.dispose();
     _obscurepass.dispose();
-    loginController.dispose();
+    adminAuthController.dispose();
     super.dispose();
   }
 
@@ -48,6 +44,7 @@ class _LoginViewState extends State<LoginView> {
                   bottomRight: Radius.circular(40),
                 )),
           ),
+          
           Positioned(
               top: 20,
               right: 50,
@@ -58,12 +55,12 @@ class _LoginViewState extends State<LoginView> {
                 parent: AlwaysScrollableScrollPhysics()),
             child: Padding(
               padding: EdgeInsets.only(
-                top: context.mh * 0.33,
+                top: context.mh * 0.35,
                 left: context.mw * 0.05,
                 right: context.mw * 0.05,
               ),
               child: Container(
-                height: context.mh * 0.60,
+                height: context.mh * 0.50,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -83,7 +80,7 @@ class _LoginViewState extends State<LoginView> {
                       children: [
                         0.04.ph,
                         Text(
-                          'Sign In to your account',
+                          'For Admin Login',
                           style:
                               GoogleFonts.poppins(fontWeight: FontWeight.bold),
                         ),
@@ -125,7 +122,7 @@ class _LoginViewState extends State<LoginView> {
                             );
                           },
                         ),
-                        0.02.ph,
+                        0.03.ph,
                         MaterialButton(
                           height: context.mh * 0.05,
                           minWidth: context.mw * 0.80,
@@ -133,7 +130,7 @@ class _LoginViewState extends State<LoginView> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                           onPressed: () {
-                            loginController.loginAccount(
+                            adminAuthController.adminLoginAccount(
                                 emailController, passwordController);
                           },
                           child: Text(
@@ -143,34 +140,24 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                         0.01.ph,
-                        const LoginOrRow(),
-                        0.01.ph,
-                        SignInButton(
-                          buttonType: ButtonType.google,
-                          onPressed: () {
-                            loginController.googleLogin();
-                          },
-                        ),
-                        0.01.ph,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              "Don't have an account",
+                              "Register the Suffah Center",
                               style: GoogleFonts.roboto(
-                                  fontSize: 15,
+                                  fontSize: 14,
                                   color: AppColor.geryColor,
                                   fontWeight: FontWeight.bold),
                             ),
                             0.01.pw,
                             InkWell(
                               onTap: () {
-                                Get.toNamed(RoutesNames.signUpScreen);
                               },
                               child: Text(
-                                "Sign Up",
+                                "Click here",
                                 style: GoogleFonts.roboto(
                                     fontSize: 14,
                                     color: AppColor.cgreenColor,
@@ -179,30 +166,19 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           ],
                         ),
-                        0.005.ph,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Get.toNamed(RoutesNames.loginDashBoardScreen);
-                              },
-                              child: Text(
-                                'For Admin login',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 12,
-                                    color: AppColor.cgreenColor,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
-                        )
                       ]),
                 ),
               ),
             ),
           ),
+          Positioned(
+              top: context.mh * 0.06,
+              left: context.mw * 0.04,
+              child: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Icon(IconlyBold.arrow_left))),
         ],
       ),
     );

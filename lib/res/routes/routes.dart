@@ -4,6 +4,9 @@ import 'package:suffa_app/views/Auth/VerifyScreen/verifyScreen.dart';
 import 'package:suffa_app/views/Auth/login/login.dart';
 import 'package:suffa_app/views/Auth/signup/signUpScreen.dart';
 import 'package:suffa_app/views/Donners/HomeScreen.dart';
+import 'package:suffa_app/views/admin/Auth/LoginDashBoard/adminLoginDashBoard.dart';
+import 'package:suffa_app/views/admin/DashBoard/adminDashboard.dart';
+import 'package:suffa_app/views/admin/suffaCenters/DashBoard/suffacenterDashboard.dart';
 import 'package:suffa_app/views/splashView/splashView.dart';
 
 class AppRoutes {
@@ -24,9 +27,27 @@ class AppRoutes {
             name: RoutesNames.verifyScreen,
             page: () => const VerifyScreen(),
             transition: Transition.leftToRight),
+
+        // Donner DashBoard
         GetPage(
             name: RoutesNames.homeScreen,
             page: () => const HomeScreen(),
-            transition: Transition.leftToRight)
+            transition: Transition.leftToRight),
+
+        // Adminstration Auth landing page
+        GetPage(
+            name: RoutesNames.loginDashBoardScreen,
+            page: () => const AdminLoginDashBoard(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.adminDashBoardScreen,
+            page: () => const AdminDashBoard(),
+            transition: Transition.leftToRight),
+
+        // Suffa Center DashBoard
+        GetPage(
+            name: RoutesNames.suffacenterDashBoardScreen,
+            page: () => const SuffaCenterDashboard(),
+            transition: Transition.leftToRight),
       ];
 }

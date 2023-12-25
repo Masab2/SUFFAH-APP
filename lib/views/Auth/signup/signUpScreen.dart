@@ -168,6 +168,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
           ),
+          Positioned(
+              top: context.mh * 0.06,
+              left: context.mw * 0.04,
+              child: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Icon(IconlyBold.arrow_left))),
         ],
       ),
     );
