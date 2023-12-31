@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as storage;
@@ -81,5 +83,38 @@ class Apis {
         await auth.signOut();
       }
     }
+  }
+
+  // Add Suffah center
+  static Future<void> addSuffahCenter(File file, name, email, suffahemail,
+      password, phoneno, city, country, address, adminid) async {
+    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = imagestorage.ref().child('/Images/MasjidImages$id');
+    storage.UploadTask uploadTask = ref.putFile(file);
+    Future.value(uploadTask).then((value) async {
+      var imageUrl = await ref.getDownloadURL();
+      await firestore.collection(suffahCenterCollection).doc(id).set({
+        'adminCreatedId': adminid,
+        'centerid': id,
+        'name': name,
+        'email': email,
+        'suffahemail': suffahemail,
+        'password': password,
+        'phoneno': phoneno,
+        'masjidimg': imageUrl.toString(),
+        'city': city,
+        'country': country,
+        'address': address,
+      });
+    }).onError((error, stackTrace) {
+      throw FirebaseException;
+    });
+  }
+
+  static Future<void> updateEmailInAdminCollection(email, password, id) async {
+    await firestore
+        .collection(adminCollection)
+        .doc(id)
+        .set({'email': email, 'id': id, 'password': password});
   }
 }

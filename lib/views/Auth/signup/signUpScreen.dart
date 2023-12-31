@@ -45,9 +45,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 )),
           ),
           Positioned(
-              top: 20,
-              right: 50,
-              left: 50,
+              top: context.mh * 0.002,
+              right: context.mw * 0.05,
+              left: context.mw * 0.05,
               child: Image(image: AssetImage(ImageAsset.applogo))),
           SingleChildScrollView(
             physics: const BouncingScrollPhysics(

@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sign_button/constants.dart';
@@ -49,9 +51,9 @@ class _LoginViewState extends State<LoginView> {
                 )),
           ),
           Positioned(
-              top: 20,
-              right: 50,
-              left: 50,
+              top: context.mh * 0.001,
+              right: context.mw * 0.05,
+              left: context.mw * 0.05,
               child: Image(image: AssetImage(ImageAsset.applogo))),
           SingleChildScrollView(
             physics: const BouncingScrollPhysics(
@@ -126,22 +128,26 @@ class _LoginViewState extends State<LoginView> {
                           },
                         ),
                         0.02.ph,
-                        MaterialButton(
-                          height: context.mh * 0.05,
-                          minWidth: context.mw * 0.80,
-                          color: AppColor.cgreenColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          onPressed: () {
-                            loginController.loginAccount(
-                                emailController, passwordController);
-                          },
-                          child: Text(
-                            'Login',
-                            style:
-                                GoogleFonts.poppins(color: AppColor.whiteColor),
-                          ),
-                        ),
+                        Obx(() {
+                          return loginController.isLoading == true
+                              ? const CircularProgressIndicator.adaptive()
+                              : MaterialButton(
+                                  height: context.mh * 0.05,
+                                  minWidth: context.mw * 0.80,
+                                  color: AppColor.cgreenColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  onPressed: () {
+                                    loginController.loginAccount(
+                                        emailController, passwordController);
+                                  },
+                                  child: Text(
+                                    'Login',
+                                    style: GoogleFonts.poppins(
+                                        color: AppColor.whiteColor),
+                                  ),
+                                );
+                        }),
                         0.01.ph,
                         const LoginOrRow(),
                         0.01.ph,

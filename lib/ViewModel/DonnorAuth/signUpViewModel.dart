@@ -5,13 +5,19 @@ import 'package:suffa_app/res/routes/routesNames.dart';
 
 class SignUpViewModel extends GetxController {
   final SignUpRepo _signUpRepo = SignUpRepo();
+  RxBool isLoading = false.obs;
   Future<void> signUpAccount(
       TextEditingController email, TextEditingController password) async {
-    final result = await _signUpRepo.signUpAccount(email, password);
-    if (result == null) {
-      Get.offAllNamed(RoutesNames.verifyScreen);
-    } else {
-      Get.snackbar('Error', result.toString());
+    try {
+      isLoading(true);
+      final result = await _signUpRepo.signUpAccount(email, password);
+      if (result == null) {
+        Get.offAllNamed(RoutesNames.verifyScreen);
+      } else {
+        Get.snackbar('Error', result.toString());
+      }
+    } finally {
+      isLoading.value = false;
     }
   }
 }

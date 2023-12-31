@@ -6,14 +6,19 @@ import 'package:suffa_app/res/routes/routesNames.dart';
 
 class LoginViewModel extends GetxController {
   final _loginRepo = LoginRepo();
-
+  RxBool isLoading = false.obs;
   Future<void> loginAccount(
       TextEditingController email, TextEditingController password) async {
-    final result = await _loginRepo.loginAccount(email, password);
-    if (result == null) {
-      Get.offAllNamed(RoutesNames.homeScreen);
-    } else {
-      Get.snackbar('Error', result.toString());
+    try {
+      isLoading(true);
+      final result = await _loginRepo.loginAccount(email, password);
+      if (result == null) {
+        Get.offAllNamed(RoutesNames.homeScreen);
+      } else {
+        Get.snackbar('Error', result.toString());
+      }
+    } finally {
+      isLoading(false);
     }
   }
 

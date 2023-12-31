@@ -7,7 +7,7 @@ import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 
 class LoginRepo {
   Future<String?> loginAccount(
-      TextEditingController email, TextEditingController password) async{
+      TextEditingController email, TextEditingController password) async {
     if (email.text.isEmpty && password.text.isEmpty) {
       return 'Please Enter the Data';
     } else if (email.text.isEmpty) {

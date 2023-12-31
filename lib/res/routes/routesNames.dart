@@ -12,6 +12,9 @@ class RoutesNames {
   // AdminDashBoard
   static const String loginDashBoardScreen = '/loginDashBoardScreen';
   static const String adminDashBoardScreen = '/adminDashBoardScreen';
+  static const String viewSuffahCenterScreen = '/viewSuffahCenterScreen';
+  static const String addSuffahCenterScreen = '/addSuffahCenterScreen';
+  static const String createEmailScreen = '/createEmailScreen';
 
   // Suffa Center DashBoard
   static const String suffacenterDashBoardScreen =

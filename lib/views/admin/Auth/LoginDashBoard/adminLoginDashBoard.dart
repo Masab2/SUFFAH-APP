@@ -1,9 +1,12 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/Admin/adminAuth/adminLoginViewModel.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
+import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -44,11 +47,10 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
                   bottomRight: Radius.circular(40),
                 )),
           ),
-          
           Positioned(
-              top: 20,
-              right: 50,
-              left: 50,
+              top: context.mh * 0.0002,
+              right: context.mw * 0.05,
+              left: context.mw * 0.05,
               child: Image(image: AssetImage(ImageAsset.applogo))),
           SingleChildScrollView(
             physics: const BouncingScrollPhysics(
@@ -123,62 +125,42 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
                           },
                         ),
                         0.03.ph,
-                        MaterialButton(
-                          height: context.mh * 0.05,
-                          minWidth: context.mw * 0.80,
-                          color: AppColor.cgreenColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          onPressed: () {
-                            adminAuthController.adminLoginAccount(
-                                emailController, passwordController);
-                          },
-                          child: Text(
-                            'Login',
-                            style:
-                                GoogleFonts.poppins(color: AppColor.whiteColor),
-                          ),
-                        ),
-                        0.01.ph,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Register the Suffah Center",
-                              style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  color: AppColor.geryColor,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            0.01.pw,
-                            InkWell(
-                              onTap: () {
-                              },
-                              child: Text(
-                                "Click here",
-                                style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    color: AppColor.cgreenColor,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
+                        Obx(() {
+                          return adminAuthController.isLoading == true
+                              ? const CircularProgressIndicator.adaptive()
+                              : MaterialButton(
+                                  height: context.mh * 0.05,
+                                  minWidth: context.mw * 0.80,
+                                  color: AppColor.cgreenColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  onPressed: () {
+                                    adminAuthController.adminLoginAccount(
+                                        emailController,
+                                        passwordController,
+                                        context);
+                                  },
+                                  child: Text(
+                                    'Login',
+                                    style: GoogleFonts.poppins(
+                                        color: AppColor.whiteColor),
+                                  ),
+                                );
+                        })
                       ]),
                 ),
               ),
             ),
           ),
           Positioned(
-              top: context.mh * 0.06,
+              top: context.mh * 0.07,
               left: context.mw * 0.04,
               child: InkWell(
                   onTap: () {
                     Get.back();
                   },
-                  child: const Icon(IconlyBold.arrow_left))),
+                  child: const Icon(IconlyBold.arrow_left_circle,
+                      color: AppColor.whiteColor))),
         ],
       ),
     );

@@ -6,8 +6,11 @@ import 'package:suffa_app/views/Auth/signup/signUpScreen.dart';
 import 'package:suffa_app/views/Donners/HomeScreen.dart';
 import 'package:suffa_app/views/admin/Auth/LoginDashBoard/adminLoginDashBoard.dart';
 import 'package:suffa_app/views/admin/DashBoard/adminDashboard.dart';
-import 'package:suffa_app/views/admin/suffaCenters/DashBoard/suffacenterDashboard.dart';
+import 'package:suffa_app/views/admin/SuffahCenter/ViewSuffahCenter.dart';
+import 'package:suffa_app/views/admin/SuffahCenter/addSuffahCenter.dart';
+import 'package:suffa_app/views/admin/SuffahCenter/createEmailView.dart';
 import 'package:suffa_app/views/splashView/splashView.dart';
+import 'package:suffa_app/views/suffaCenters/DashBoard/suffacenterDashboard.dart';
 
 class AppRoutes {
   static appRoutes() => [
@@ -42,6 +45,18 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.adminDashBoardScreen,
             page: () => const AdminDashBoard(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.viewSuffahCenterScreen,
+            page: () => const ViewSuffahCenter(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.addSuffahCenterScreen,
+            page: () => const AddSuffahCenter(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.createEmailScreen,
+            page: () => const CreateEmail(),
             transition: Transition.leftToRight),
 
         // Suffa Center DashBoard
