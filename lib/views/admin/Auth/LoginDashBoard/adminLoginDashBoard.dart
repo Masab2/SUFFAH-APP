@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/Admin/adminAuth/adminLoginViewModel.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
-import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';

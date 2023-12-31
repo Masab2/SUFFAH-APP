@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:suffa_app/Repository/AdminRepo/adminAuthRepo/adminAuthrepo.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
-import 'package:suffa_app/utils/Utils.dart';
 
 class AdminLoginViewModel extends GetxController {
   final AdminAuthRepo _adminLoginRepo = AdminAuthRepo();
