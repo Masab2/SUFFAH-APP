@@ -13,7 +13,7 @@ class LoginViewModel extends GetxController {
       isLoading(true);
       final result = await _loginRepo.loginAccount(email, password);
       if (result == null) {
-        Get.offAllNamed(RoutesNames.homeScreen);
+        Get.offAllNamed(RoutesNames.bottomNavbarScreen);
       } else {
         Get.snackbar('Error', result.toString());
       }
@@ -25,7 +25,7 @@ class LoginViewModel extends GetxController {
   // Google SignUp
   Future<void> googleLogin() async {
     Apis.signUpWithGoogle().then((value) {
-      Get.offAllNamed(RoutesNames.homeScreen);
+      Get.offAllNamed(RoutesNames.bottomNavbarScreen);
     }).onError((error, stackTrace) {
       Get.snackbar('Error', error.toString());
     });

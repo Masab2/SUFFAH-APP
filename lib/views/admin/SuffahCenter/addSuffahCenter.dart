@@ -75,15 +75,22 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
                       ));
                     },
                   )
-                : ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image(
-                        height: context.mh * 0.20,
-                        width: context.mw * 0.40,
-                        fit: BoxFit.cover,
-                        image: FileImage(
-                            File(addsuffahControlller.imagePath.toString()))),
-                  ),
+                : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
+                  child: SizedBox(
+                      height: context.mh * 0.20,
+                      width: context.mw * 0.60,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image(
+                            height: context.mh * 0.20,
+                            width: context.mw * 0.40,
+                            fit: BoxFit.cover,
+                            image: FileImage(
+                                File(addsuffahControlller.imagePath.toString()))),
+                      ),
+                    ),
+                ),
           ),
           0.05.ph,
           AddSuffahCenterComp(

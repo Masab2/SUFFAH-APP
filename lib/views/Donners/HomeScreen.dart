@@ -15,7 +15,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final controller = Get.put(LoginViewModel());
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
   } 
   @override

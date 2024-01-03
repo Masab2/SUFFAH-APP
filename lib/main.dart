@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:suffa_app/firebase_options.dart';
 import 'package:suffa_app/res/routes/routes.dart';
+import 'package:suffa_app/utils/color/appColor.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SUFFA-APP',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: AppColor.cgreenColor),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 0, 68, 61)),
         useMaterial3: true,
       ),
       getPages: AppRoutes.appRoutes(),

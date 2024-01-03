@@ -20,14 +20,15 @@ class AdminLoginViewModel extends GetxController {
       final result = await _adminLoginRepo.adminLoginAccount(
         TextEditingController(text: email.text),
         TextEditingController(text: password.text),
-        () {
+        (id) {
           final emailDomain = email.text.split('@').last;
           switch (emailDomain) {
             case 'admin.com':
               Get.offAndToNamed(RoutesNames.adminDashBoardScreen);
               break;
             case 'suffacenter.com':
-              Get.offAndToNamed(RoutesNames.suffacenterDashBoardScreen);
+              Get.offAndToNamed(RoutesNames.suffacenterDashBoardScreen,
+                  arguments: id);
               break;
             case 'suffastore.com':
               // Handle suffastore.com case

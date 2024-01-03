@@ -111,10 +111,24 @@ class Apis {
     });
   }
 
+  // Add the Generated Email in the admin Collection
   static Future<void> updateEmailInAdminCollection(email, password, id) async {
     await firestore
         .collection(adminCollection)
         .doc(id)
         .set({'email': email, 'id': id, 'password': password});
+  }
+
+  // get All Registered Suffa Center
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllSuffaCenter() {
+    return firestore.collection(suffahCenterCollection).snapshots();
+  }
+
+  // get All Registered Suffa Center Access his Profile
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getSuffaCenterData(String id) {
+    return firestore
+        .collection(suffahCenterCollection)
+        .where('adminCreatedId', isEqualTo: id)
+        .snapshots();
   }
 }
