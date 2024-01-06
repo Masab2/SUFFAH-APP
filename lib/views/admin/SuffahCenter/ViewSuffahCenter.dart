@@ -45,7 +45,7 @@ class _ViewSuffahCenterState extends State<ViewSuffahCenter> {
                   ),
                 );
               } else if (!snapshot.hasData) {
-                return const Text('No Product For Sale');
+                return const Text('No Data Found');
               } else {
                 return Expanded(
                     child: ListView.builder(

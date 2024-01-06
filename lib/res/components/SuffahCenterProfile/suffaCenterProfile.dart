@@ -34,6 +34,44 @@ class UserInfoListTile extends StatelessWidget {
   }
 }
 
+class SettingInfoListTile extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Widget traling;
+  final VoidCallback? ontap;
+  const SettingInfoListTile(
+      {super.key,
+      required this.icon,
+      required this.title,
+      required this.subtitle,
+      required this.traling,
+      this.ontap});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: ontap,
+      leading: CircleAvatar(
+        radius: 25,
+        backgroundColor: AppColor.cgreenColor,
+        child: Icon(
+          icon,
+          color: AppColor.whiteColor,
+        ),
+      ),
+      selectedColor: AppColor.cgreenColor.withOpacity(0.23),
+      splashColor: AppColor.cgreenColor.withOpacity(0.23),
+      title: Text(
+        title,
+        style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+      ),
+      subtitle: Text(subtitle),
+      trailing: traling,
+    );
+  }
+}
+
 // class LogOutListTile extends StatelessWidget {
 //   final IconData icon;
 //   final String title;

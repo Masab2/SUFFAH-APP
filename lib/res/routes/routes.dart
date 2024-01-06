@@ -4,7 +4,7 @@ import 'package:suffa_app/views/Auth/VerifyScreen/verifyScreen.dart';
 import 'package:suffa_app/views/Auth/login/login.dart';
 import 'package:suffa_app/views/Auth/signup/signUpScreen.dart';
 import 'package:suffa_app/views/Donners/BottomNavBar/BottomNavbar.dart';
-import 'package:suffa_app/views/Donners/HomeScreen.dart';
+import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
 import 'package:suffa_app/views/admin/Auth/LoginDashBoard/adminLoginDashBoard.dart';
 import 'package:suffa_app/views/admin/DashBoard/adminDashboard.dart';
 import 'package:suffa_app/views/admin/SuffahCenter/ViewSuffahCenter.dart';
@@ -35,12 +35,12 @@ class AppRoutes {
 
         // Donner DashBoard
         GetPage(
-            name: RoutesNames.homeScreen,
-            page: () => const HomeScreen(),
-            transition: Transition.leftToRight),
-        GetPage(
             name: RoutesNames.bottomNavbarScreen,
             page: () => const CustomizedBottomNavBar(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.settingsScreen,
+            page: () => const DonnerSettings(),
             transition: Transition.leftToRight),
 
         // Adminstration Auth landing page

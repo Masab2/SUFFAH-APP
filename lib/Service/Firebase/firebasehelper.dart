@@ -125,10 +125,19 @@ class Apis {
   }
 
   // get All Registered Suffa Center Access his Profile
-  static Stream<QuerySnapshot<Map<String, dynamic>>> getSuffaCenterData(String id) {
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getSuffaCenterData(
+      String id) {
     return firestore
         .collection(suffahCenterCollection)
         .where('adminCreatedId', isEqualTo: id)
+        .snapshots();
+  }
+
+  // Get The Login Donner Info
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getLoginDonnerInfo() {
+    return firestore
+        .collection(DonorinfoCollection)
+        .where('uid', isEqualTo: user.uid)
         .snapshots();
   }
 }

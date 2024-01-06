@@ -5,9 +5,8 @@ import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/BottomNavBar/BottomNavBarViewModel.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-import 'package:suffa_app/views/Donners/HomeScreen.dart';
-import 'package:suffa_app/views/admin/SuffahCenter/ViewSuffahCenter.dart';
-import 'package:suffa_app/views/admin/SuffahCenter/addSuffahCenter.dart';
+import 'package:suffa_app/views/Donners/Home/homeView.dart';
+import 'package:suffa_app/views/Donners/Profile/DonnerProfile/DonnerProfle.dart';
 
 class CustomizedBottomNavBar extends StatefulWidget {
   const CustomizedBottomNavBar({super.key});
@@ -69,8 +68,15 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
                 ),
                 _bottomAppBarItem(
                   context,
-                  defaultIcon: IconlyLight.profile,
+                  defaultIcon: IconlyLight.notification,
                   page: 2,
+                  label: "Notifs",
+                  filledIcon: IconlyBold.notification,
+                ),
+                _bottomAppBarItem(
+                  context,
+                  defaultIcon: IconlyLight.profile,
+                  page: 3,
                   label: "Profile",
                   filledIcon: IconlyBold.profile,
                 ),
@@ -90,6 +96,7 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
         HomeScreen(),
         Scaffold(body: Center(child: Text('Home2'))),
         Scaffold(body: Center(child: Text('Home3'))),
+        DonnerProfile()
       ],
     );
   }

@@ -9,6 +9,7 @@ class RoutesNames {
   // Donner DashBoard
   static const String homeScreen = '/homeScreen';
   static const String bottomNavbarScreen = '/bottomNavbarScreen';
+  static const String settingsScreen = '/settingsScreen';
 
   // AdminDashBoard
   static const String loginDashBoardScreen = '/loginDashBoardScreen';
