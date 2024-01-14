@@ -56,6 +56,27 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                   ],
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Get.width * 0.04, vertical: Get.height * 0.02),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AdminDashBoardtiles(
+                      title: 'Members Request',
+                      ontap: () {
+                        Get.toNamed(RoutesNames.memberRequestScreen);
+                      },
+                      image: ImageAsset.islamicIcon.toString(),
+                    ),
+                    AdminDashBoardtiles(
+                      title: 'Add Admins',
+                      ontap: () {},
+                      image: ImageAsset.storeIcon,
+                    ),
+                  ],
+                ),
+              ),
             ]));
   }
 }

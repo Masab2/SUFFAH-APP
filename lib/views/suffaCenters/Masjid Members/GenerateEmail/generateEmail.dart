@@ -5,22 +5,25 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/Admin/createEmailViewModel/CreateEmailViewModel.dart';
+import 'package:suffa_app/ViewModel/SuffahCenter/AddMasjidMembers/generateEmailAddress.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
+import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-import 'package:suffa_app/utils/asset/ImageAsset.dart';
 
-class CreateEmail extends StatefulWidget {
-  const CreateEmail({super.key});
+
+class GenerateEmailSuffaMembers extends StatefulWidget {
+  const GenerateEmailSuffaMembers({super.key});
 
   @override
-  State<CreateEmail> createState() => _CreateEmailState();
+  State<GenerateEmailSuffaMembers> createState() =>
+      _GenerateEmailSuffaMembersState();
 }
 
-class _CreateEmailState extends State<CreateEmail> {
+class _GenerateEmailSuffaMembersState extends State<GenerateEmailSuffaMembers> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final createEmailController = Get.put(CreateEmailViewModel());
+  final createEmailController = Get.put(CreateEmailAddressSuffaMembersViewModel());
   @override
   void dispose() {
     emailController.dispose();
@@ -101,7 +104,7 @@ class _CreateEmailState extends State<CreateEmail> {
                       passwordController);
                 },
                 child: Text(
-                  'Register Masjid',
+                  'Generate Email',
                   style: GoogleFonts.poppins(
                       color: AppColor.whiteColor, fontSize: 16),
                 ),

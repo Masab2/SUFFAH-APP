@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/res/components/adminDashBoardTiles/adminDashBoardtiles.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
@@ -15,13 +17,22 @@ class SuffaCenterDashboard extends StatefulWidget {
 }
 
 class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final id = Get.arguments;
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () {
+              onPressed: () async {
                 Get.back();
               },
               icon: const Icon(IconlyBold.arrow_left_circle)),
@@ -44,14 +55,15 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                   children: [
                     AdminDashBoardtiles(
                       title: 'Neady People',
-                      ontap: () {
-                        // Get.toNamed(RoutesNames.viewSuffahCenterScreen);
-                      },
+                      ontap: () {},
                       image: ImageAsset.neadyIcon.toString(),
                     ),
                     AdminDashBoardtiles(
                       title: 'Masjid Members',
-                      ontap: () {},
+                      ontap: () {
+                        Get.toNamed(RoutesNames.suffacenterViewMembersScreen,
+                            arguments: id);
+                      },
                       image: ImageAsset.mosqueIcon,
                     ),
                   ],
@@ -72,7 +84,7 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                       image: ImageAsset.islamicIcon.toString(),
                     ),
                     AdminDashBoardtiles(
-                      title: 'Masjid Members',
+                      title: 'Log out',
                       ontap: () {},
                       image: ImageAsset.mosqueIcon,
                     ),

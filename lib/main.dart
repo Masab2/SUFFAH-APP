@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:suffa_app/ViewModel/Lang/LanguageChangeViewModel.dart';
 import 'package:suffa_app/firebase_options.dart';
 import 'package:suffa_app/res/routes/routes.dart';
@@ -13,6 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 

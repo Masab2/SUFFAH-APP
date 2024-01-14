@@ -1,5 +1,14 @@
 {
   "appSetting": "Einstellung",
   "langHeading": "Sprache",
-  "langSubtitle": "Sprache auswählen"
+  "langSubtitle": "Sprache auswählen",
+  "editSettingSubtitle": "Einstellung bearbeiten",
+  "myDonnationTitle": "Meine Spende",
+  "myDonnationSubtitle": "Spende ansehen",
+  "logOutTitle": "Ausloggen",
+  "logOutSubtitle": "Melden Sie Ihr Konto ab",
+  "uidTitle": "AUSWEIS",
+  "emailTitle": "ēmāl",
+  "donnerProfileHeadingPersonalinfo": "Persönliche Informationen",
+  "donnerProfileHeadingAccountSetting": "Account Einstellungen"
 }

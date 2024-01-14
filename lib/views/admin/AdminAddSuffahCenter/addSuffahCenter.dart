@@ -21,6 +21,7 @@ class AddSuffahCenter extends StatefulWidget {
 
 class _AddSuffahCenterState extends State<AddSuffahCenter> {
   final muntazimController = TextEditingController();
+  final masjidController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final countryController = TextEditingController();
@@ -76,8 +77,9 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
                     },
                   )
                 : Padding(
-                  padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
-                  child: SizedBox(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: context.mw * 0.04),
+                    child: SizedBox(
                       height: context.mh * 0.20,
                       width: context.mw * 0.60,
                       child: ClipRRect(
@@ -86,16 +88,22 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
                             height: context.mh * 0.20,
                             width: context.mw * 0.40,
                             fit: BoxFit.cover,
-                            image: FileImage(
-                                File(addsuffahControlller.imagePath.toString()))),
+                            image: FileImage(File(
+                                addsuffahControlller.imagePath.toString()))),
                       ),
                     ),
-                ),
+                  ),
           ),
           0.05.ph,
           AddSuffahCenterComp(
               title: 'Muntazim Name',
               icon: IconlyBold.add_user,
+              controller: masjidController),
+          0.01.ph,
+          AddSuffahCenterComp(
+              title: 'Masjid Name',
+              icon: Icons.mosque,
+              hint: 'Jamia Masjid',
               controller: muntazimController),
           0.01.ph,
           AddSuffahCenterComp(
@@ -145,7 +153,8 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
                 phoneController,
                 cityController,
                 countryController,
-                addressController);
+                addressController,
+                masjidController);
           },
           child: Text(
             'Register Masjid',

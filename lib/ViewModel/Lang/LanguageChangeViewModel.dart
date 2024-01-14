@@ -39,13 +39,13 @@ class AppLanguageController extends GetxController {
       log(type.toString());
       _appLocale.value = const Locale("en");
       await prefs.setString('language_code', 'en');
-      await prefs.setString('countryCode', 'en');
+      await prefs.setString('countryCode', 'en'); 
     } else if (type == const Locale("ur")) {
       log(type.toString());
       _appLocale.value = const Locale("ur");
       await prefs.setString('language_code', 'ur');
       await prefs.setString('countryCode', 'ur');
     }
-    update(); // Use update() to notify listeners in GetX
+    update();
   }
 }

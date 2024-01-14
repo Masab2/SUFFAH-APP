@@ -21,7 +21,7 @@ class AddSuffahCenterViewModel extends GetxController {
 
   // Add Suffah Center
   Future<void> addSuffahCenter(
-      name, emailAddress, phoneno, city, country, address) async {
+      name, emailAddress, phoneno, city, country, address, masjidname) async {
     final result = await _addSuffahCenterRepo.addSuffahCenter(
         File(imagePath.value.toString()),
         name,
@@ -29,7 +29,8 @@ class AddSuffahCenterViewModel extends GetxController {
         phoneno,
         city,
         country,
-        address);
+        address,
+        masjidname);
     if (result == null) {
       Get.toNamed(RoutesNames.createEmailScreen, arguments: [
         imagePath.value,
@@ -38,7 +39,8 @@ class AddSuffahCenterViewModel extends GetxController {
         phoneno,
         city,
         country,
-        address
+        address,
+        masjidname
       ]);
     } else {
       Get.snackbar('Error', result.toString());

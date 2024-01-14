@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +18,8 @@ class CreateEmailRepo {
     TextEditingController address,
     TextEditingController genEmail,
     TextEditingController genPasword,
+    image,
+    TextEditingController masjidname,
   ) async {
     if (genEmail.text.isEmpty && genPasword.text.isEmpty) {
       return 'Please Enter the Email address and Password';
@@ -29,10 +32,10 @@ class CreateEmailRepo {
       await SharePrefs.saveRandomId();
       final int uniqueId = await SharePrefs.getRandomId();
       QuerySnapshot snapshot =
-          await Apis.firestore.collection(adminCollection).get();
+          await Apis.firestore.collection(suffahCenterCollection).get();
       for (var doc in snapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
-        if (data["email"] == genEmail.text) {
+        if (data["suffahemail"] == genEmail.text) {
           return 'The Email is Already Available';
         }
       }
@@ -51,15 +54,15 @@ class CreateEmailRepo {
                 city.text,
                 country.text,
                 address.text,
-                uniqueId.toString());
-            await Apis.updateEmailInAdminCollection(
-                genEmail.text, genPasword.text, uniqueId.toString());
+                uniqueId.toString(),
+                masjidname.text);
           } catch (e) {
+            log(e.toString());
             return e.toString();
           }
           break;
         default:
-          return 'Please Enter the Authorized Domain suffacenter.com';
+          return 'Please Enter the Authorized Domain';
       }
     }
     return null;

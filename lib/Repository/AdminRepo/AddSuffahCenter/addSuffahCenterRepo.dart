@@ -11,7 +11,8 @@ class AddSuffahCenterRepo {
       TextEditingController phoneno,
       TextEditingController city,
       TextEditingController country,
-      TextEditingController address) async {
+      TextEditingController address,
+      TextEditingController masjid) async {
     if (file == null &&
         name.text.isEmpty &&
         emailAddress.text.isEmpty &&

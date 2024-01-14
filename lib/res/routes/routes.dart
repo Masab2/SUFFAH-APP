@@ -6,16 +6,25 @@ import 'package:suffa_app/views/Auth/signup/signUpScreen.dart';
 import 'package:suffa_app/views/Donners/BottomNavBar/BottomNavbar.dart';
 import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
 import 'package:suffa_app/views/admin/Auth/LoginDashBoard/adminLoginDashBoard.dart';
+import 'package:suffa_app/views/admin/ChoiceScreen/ChoiceScreen.dart';
 import 'package:suffa_app/views/admin/DashBoard/adminDashboard.dart';
-import 'package:suffa_app/views/admin/SuffahCenter/ViewSuffahCenter.dart';
-import 'package:suffa_app/views/admin/SuffahCenter/addSuffahCenter.dart';
-import 'package:suffa_app/views/admin/SuffahCenter/createEmailView.dart';
+import 'package:suffa_app/views/admin/AdminAddSuffahCenter/ViewSuffahCenter.dart';
+import 'package:suffa_app/views/admin/AdminAddSuffahCenter/addSuffahCenter.dart';
+import 'package:suffa_app/views/admin/AdminAddSuffahCenter/createEmailView.dart';
+import 'package:suffa_app/views/admin/MemberRequest/memberRequest.dart';
 import 'package:suffa_app/views/splashView/splashView.dart';
+import 'package:suffa_app/views/suffaCenters/Auth/SuffahCenterAuth.dart';
 import 'package:suffa_app/views/suffaCenters/DashBoard/suffacenterDashboard.dart';
+import 'package:suffa_app/views/suffaCenters/Masjid%20Members/AddMembers/addMember.dart';
+import 'package:suffa_app/views/suffaCenters/Masjid%20Members/GenerateEmail/generateEmail.dart';
+import 'package:suffa_app/views/suffaCenters/Masjid%20Members/ViewMembers/MembersDetails/MembersDetails.dart';
+import 'package:suffa_app/views/suffaCenters/Masjid%20Members/ViewMembers/ViewMasjidmembers.dart';
 import 'package:suffa_app/views/suffaCenters/Profile/suffaCenterProfileView.dart';
+import 'package:suffa_app/views/suffaStores/Auth/SuffahStoreAuth.dart';
 
 class AppRoutes {
   static appRoutes() => [
+        //! Donner Auth Screens
         GetPage(
             name: RoutesNames.splashScreen,
             page: () => const SplashView(),
@@ -33,7 +42,13 @@ class AppRoutes {
             page: () => const VerifyScreen(),
             transition: Transition.leftToRight),
 
-        // Donner DashBoard
+        //? Choice Screen
+        GetPage(
+            name: RoutesNames.choiceScreen,
+            page: () => const ChoiceScreen(),
+            transition: Transition.leftToRight),
+
+        //^ Donner DashBoard
         GetPage(
             name: RoutesNames.bottomNavbarScreen,
             page: () => const CustomizedBottomNavBar(),
@@ -43,7 +58,7 @@ class AppRoutes {
             page: () => const DonnerSettings(),
             transition: Transition.leftToRight),
 
-        // Adminstration Auth landing page
+        //! Adminstration DashBoard
         GetPage(
             name: RoutesNames.loginDashBoardScreen,
             page: () => const AdminLoginDashBoard(),
@@ -64,8 +79,16 @@ class AppRoutes {
             name: RoutesNames.createEmailScreen,
             page: () => const CreateEmail(),
             transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.memberRequestScreen,
+            page: () => const MemberRequest(),
+            transition: Transition.leftToRight),
 
-        // Suffa Center DashBoard
+        //* Suffa Center DashBoard
+        GetPage(
+            name: RoutesNames.suffahloginDashBoardScreen,
+            page: () => const SuffahCenterLoginDashBoard(),
+            transition: Transition.leftToRight),
         GetPage(
             name: RoutesNames.suffacenterDashBoardScreen,
             page: () => const SuffaCenterDashboard(),
@@ -73,6 +96,28 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.suffacenterProfileScreen,
             page: () => const SuffaCenterProfile(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.suffacenterViewMembersScreen,
+            page: () => const ViewMasjidMembers(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.suffacenterAddMembersScreen,
+            page: () => const AddSuffahMember(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.suffacentergenerateEmailScreen,
+            page: () => const GenerateEmailSuffaMembers(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.suffacenterMemberDetailScreen,
+            page: () => const SuffaCenterMemberDetail(),
+            transition: Transition.leftToRight),
+
+        //& Shuffa Store Routes
+        GetPage(
+            name: RoutesNames.suffahStoreloginDashBoardScreen,
+            page: () => const SuffahStoreLoginDashBoard(),
             transition: Transition.leftToRight),
       ];
 }

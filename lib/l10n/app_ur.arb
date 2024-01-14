@@ -1,5 +1,14 @@
 {
   "appSetting": "ترتیبات",
   "langHeading": "زبان",
-  "langSubtitle": "زبان منتخب کریں"
+  "langSubtitle": "زبان منتخب کریں",
+  "editSettingSubtitle": "ترتیب میں ترمیم کریں",
+  "myDonnationTitle": "میرا عطیہ",
+  "myDonnationSubtitle": "عطیہ دیکھیں",
+  "logOutTitle": "لاگ آوٹ",
+  "logOutSubtitle": "اپنا اکاؤنٹ لاگ آؤٹ کریں۔",
+  "uidTitle": "آئی ڈی",
+  "emailTitle": "ای میل",
+  "donnerProfileHeadingPersonalinfo": "ذاتی معلومات",
+  "donnerProfileHeadingAccountSetting": "اکاؤنٹ کی ترتیبات"
 }

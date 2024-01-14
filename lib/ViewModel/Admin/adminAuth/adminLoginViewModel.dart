@@ -17,30 +17,11 @@ class AdminLoginViewModel extends GetxController {
   ) async {
     try {
       isLoading(true);
-      final result = await _adminLoginRepo.adminLoginAccount(
-        TextEditingController(text: email.text),
-        TextEditingController(text: password.text),
-        (id) {
-          final emailDomain = email.text.split('@').last;
-          switch (emailDomain) {
-            case 'admin.com':
-              Get.offAndToNamed(RoutesNames.adminDashBoardScreen);
-              break;
-            case 'suffacenter.com':
-              Get.offAndToNamed(RoutesNames.suffacenterDashBoardScreen,
-                  arguments: id);
-              break;
-            case 'suffastore.com':
-              // Handle suffastore.com case
-              break;
-            default:
-              Get.snackbar(
-                  'UnAuthorized', 'Please Enter the Authorized Domain');
-          }
-        },
-      );
-      if (result != null) {
-        Get.snackbar('Error', result.toString());
+      final result = await _adminLoginRepo.adminLoginAccount(email, password);
+      if (result == null) {
+        email.clear();
+        password.clear();
+        Get.toNamed(RoutesNames.adminDashBoardScreen);
       }
     } finally {
       isLoading(false);

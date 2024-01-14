@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -87,7 +88,7 @@ class Apis {
 
   // Add Suffah center
   static Future<void> addSuffahCenter(File file, name, email, suffahemail,
-      password, phoneno, city, country, address, adminid) async {
+      password, phoneno, city, country, address, adminid, masjidname) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/MasjidImages$id');
     storage.UploadTask uploadTask = ref.putFile(file);
@@ -105,18 +106,29 @@ class Apis {
         'city': city,
         'country': country,
         'address': address,
+        'masjidname': masjidname,
+      });
+      await firestore.collection(suffahCenterMembers).doc(adminid).set({
+        'MuntazimId': adminid,
+        'name': name,
+        'email': email,
+        'suffahemail': suffahemail,
+        'password': password,
+        'phoneno': phoneno,
+        'masjidimg': imageUrl.toString(),
+        'city': city,
+        'country': country,
+        'address': address,
+        'MemberId': adminid,
+        'status': 'Verified',
+        'Desig': 'Muntazim',
+        'masjidname': masjidname
+      }).onError((error, stackTrace) {
+        log(error.toString());
       });
     }).onError((error, stackTrace) {
       throw FirebaseException;
     });
-  }
-
-  // Add the Generated Email in the admin Collection
-  static Future<void> updateEmailInAdminCollection(email, password, id) async {
-    await firestore
-        .collection(adminCollection)
-        .doc(id)
-        .set({'email': email, 'id': id, 'password': password});
   }
 
   // get All Registered Suffa Center
@@ -138,6 +150,59 @@ class Apis {
     return firestore
         .collection(DonorinfoCollection)
         .where('uid', isEqualTo: user.uid)
+        .snapshots();
+  }
+
+  // Add Suffah center Commettie members
+  static Future<void> addSuffahCommitteMembers(File file, name, email,
+      suffahemail, password, phoneno, city, country, address, adminid) async {
+    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = imagestorage.ref().child('/Images/MasjidImages$id');
+    storage.UploadTask uploadTask = ref.putFile(file);
+    Future.value(uploadTask).then((value) async {
+      var imageUrl = await ref.getDownloadURL();
+      await firestore.collection(suffahCenterMembers).doc(id).set({
+        'MuntazimId': adminid,
+        'name': name,
+        'email': email,
+        'suffahemail': suffahemail,
+        'password': password,
+        'phoneno': phoneno,
+        'masjidimg': imageUrl.toString(),
+        'city': city,
+        'country': country,
+        'address': address,
+        'MemberId': id,
+        'status': "Requested",
+        'Desig': "Member",
+      });
+    }).onError((error, stackTrace) {
+      throw FirebaseException;
+    });
+  }
+
+  // Accept The request of the admin
+  static Future<void> acceptRequestofMember(id) async {
+    firestore
+        .collection(suffahCenterMembers)
+        .doc(id)
+        .update({'status': 'Verified'});
+  }
+
+  // get All Registered Suffa Center
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllSuffaCenterMembers(
+      id) {
+    return firestore
+        .collection(suffahCenterMembers)
+        .where('MuntazimId', isEqualTo: id)
+        .where('status', isEqualTo: 'Verified')
+        .snapshots();
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getSuffaCenterMembers() {
+    return firestore
+        .collection(suffahCenterMembers)
+        .where('status', isEqualTo: 'Requested')
         .snapshots();
   }
 }

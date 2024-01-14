@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
-import 'package:suffa_app/ViewModel/DonnorAuth/loginViewModel.dart';
+import 'package:suffa_app/ViewModel/Donner/DonnorAuth/loginViewModel.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
@@ -192,7 +192,7 @@ class _LoginViewState extends State<LoginView> {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.toNamed(RoutesNames.loginDashBoardScreen);
+                                Get.toNamed(RoutesNames.choiceScreen);
                               },
                               child: Text(
                                 'For Admin login',

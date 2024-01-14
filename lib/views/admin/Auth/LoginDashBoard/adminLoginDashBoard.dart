@@ -61,7 +61,7 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
                 right: context.mw * 0.05,
               ),
               child: Container(
-                height: context.mh * 0.50,
+                height: context.mh * 0.45,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     boxShadow: [
