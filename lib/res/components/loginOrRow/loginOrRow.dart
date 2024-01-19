@@ -13,20 +13,20 @@ class LoginOrRow extends StatelessWidget {
           child: Divider(
             endIndent: 20,
             indent: 30,
-            thickness: 2,
+            thickness: 1,
             color: AppColor.geryColor,
           ),
         ),
         Text(
           'OR',
           style: GoogleFonts.poppins(
-              color: AppColor.geryColor, fontWeight: FontWeight.bold),
+              color: AppColor.geryColor),
         ),
         const Expanded(
           child: Divider(
             endIndent: 30,
             indent: 20,
-            thickness: 2,
+            thickness: 1,
             color: AppColor.geryColor,
           ),
         ),

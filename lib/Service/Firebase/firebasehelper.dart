@@ -58,12 +58,12 @@ class Apis {
   // Donner Authentication via Email verified Link
   static Future<void> saveUserData(User user, email) async {
     final userDoc = await firestore
-        .collection(DonorinfoCollection)
+        .collection(donorinfoCollection)
         .where('uid', isEqualTo: user.uid)
         .limit(1)
         .get();
     if (userDoc.docs.isEmpty) {
-      firestore.collection(DonorinfoCollection).doc(user.uid).set({
+      firestore.collection(donorinfoCollection).doc(user.uid).set({
         'email': email,
         'uid': user.uid,
       });
@@ -148,7 +148,7 @@ class Apis {
   // Get The Login Donner Info
   static Stream<QuerySnapshot<Map<String, dynamic>>> getLoginDonnerInfo() {
     return firestore
-        .collection(DonorinfoCollection)
+        .collection(donorinfoCollection)
         .where('uid', isEqualTo: user.uid)
         .snapshots();
   }
@@ -204,5 +204,45 @@ class Apis {
         .collection(suffahCenterMembers)
         .where('status', isEqualTo: 'Requested')
         .snapshots();
+  }
+
+  // Add Needy People To The database
+  static Future<void> addNeedyPeople(
+      File file,
+      muntazimid,
+      phoneno,
+      address,
+      masjidName,
+      program,
+      gender,
+      cnicno,
+      cardholdername,
+      dob,
+      doCardIssue,
+      doCardExpire) async {
+    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = imagestorage.ref().child('/Images/NeedyPeople$id');
+    storage.UploadTask uploadTask = ref.putFile(file);
+    Future.value(uploadTask).then((value) async {
+      var imageUrl = await ref.getDownloadURL();
+      await firestore.collection(suffahCenterNeedyPeople).doc(id).set({
+        'personId': id,
+        'MuntazimId': muntazimid,
+        'PersonProfile': imageUrl.toString(),
+        'PersonName': cardholdername,
+        'PersonPhoneNo': phoneno,
+        'PersonAddress': address,
+        'MasjidName': masjidName,
+        'program': program,
+        'gender': gender,
+        'CNICNo': cnicno,
+        'CardHolderName': cardholdername,
+        'DateofBirth': dob,
+        'DateofCardIssue': doCardIssue,
+        'DateofCardExpire': doCardExpire
+      });
+    }).onError((error, stackTrace) {
+      throw Exception(error.toString());
+    });
   }
 }

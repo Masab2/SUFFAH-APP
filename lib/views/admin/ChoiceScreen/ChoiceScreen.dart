@@ -33,45 +33,38 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: ListView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // 0.06.ph,
-            Center(
-              child: Image(
-                  height: context.mh * 0.35,
-                  image: AssetImage(ImageAsset.verifyemail)),
-            ),
-            0.04.ph,
-            ChoiceComp(
-              title: 'Admin Login',
-              ontap: () {
-                Get.toNamed(RoutesNames.loginDashBoardScreen);
-              },
-              color: AppColor.cgreenColor,
-            ),
-            0.03.ph,
-            ChoiceComp(
-              title: 'SUFFFAH PERSON Login',
-              ontap: () {
-                Get.toNamed(RoutesNames.suffahloginDashBoardScreen);
-              },
-              color: Colors.teal,
-            ),
-            0.03.ph,
-            ChoiceComp(
-              title: 'SUFFAH STORE Login',
-              ontap: () {
-                Get.toNamed(RoutesNames.suffahStoreloginDashBoardScreen);
-              },
-              color: Colors.tealAccent,
-            )
-          ],
-        ),
+        children: [
+          Center(
+            child: Image(
+                height: context.mh * 0.35,
+                image: AssetImage(ImageAsset.verifyemail)),
+          ),
+          0.12.ph,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ChoiceComp(
+                title: 'Admin Login',
+                ontap: () {
+                  Get.toNamed(RoutesNames.loginDashBoardScreen);
+                },
+                color: AppColor.cgreenColor,
+              ),
+              0.03.ph,
+              ChoiceComp(
+                title: 'SUFFFAH PERSON Login',
+                ontap: () {
+                  Get.toNamed(RoutesNames.suffahloginDashBoardScreen);
+                },
+                color: Colors.teal,
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

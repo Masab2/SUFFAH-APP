@@ -36,6 +36,8 @@ class RoutesNames {
       '/suffacentergenerateEmailScreen';
   static const String suffacenterMemberDetailScreen =
       '/suffacenterMemberDetailScreen';
+  static const String addNeedyPeopleScreen = '/addNeedyPeopleScreen';
+  static const String addPersonalDataScreen = '/addPersonalDataScreen';
 
   // SUFFAH STORE
   static const String suffahStoreloginDashBoardScreen =

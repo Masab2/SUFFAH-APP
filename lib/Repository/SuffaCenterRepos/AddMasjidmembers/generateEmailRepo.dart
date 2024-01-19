@@ -25,8 +25,6 @@ class GenerateEmailSuffaMembersRepo {
     } else if (genPasword.text.isEmpty) {
       return 'Please Enter the Password';
     } else {
-      SharePrefs.generateRandomNumber();
-      await SharePrefs.saveRandomId();
       final id = await SharePrefs.getId('id');
       QuerySnapshot snapshot =
           await Apis.firestore.collection(suffahCenterMembers).get();

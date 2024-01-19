@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/res/components/adminDashBoardTiles/adminDashBoardtiles.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
@@ -55,11 +53,13 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                   children: [
                     AdminDashBoardtiles(
                       title: 'Neady People',
-                      ontap: () {},
+                      ontap: () {
+                        Get.toNamed(RoutesNames.addPersonalDataScreen,arguments: id);
+                      },
                       image: ImageAsset.neadyIcon.toString(),
                     ),
                     AdminDashBoardtiles(
-                      title: 'Masjid Members',
+                      title: "Masjid Member's",
                       ontap: () {
                         Get.toNamed(RoutesNames.suffacenterViewMembersScreen,
                             arguments: id);

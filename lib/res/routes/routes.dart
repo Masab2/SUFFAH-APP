@@ -19,6 +19,8 @@ import 'package:suffa_app/views/suffaCenters/Masjid%20Members/AddMembers/addMemb
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/GenerateEmail/generateEmail.dart';
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/ViewMembers/MembersDetails/MembersDetails.dart';
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/ViewMembers/ViewMasjidmembers.dart';
+import 'package:suffa_app/views/suffaCenters/NeedyPeople/AddNeadyPeople/AddNeedyPeople.dart';
+import 'package:suffa_app/views/suffaCenters/NeedyPeople/AddPersonalData/addPersonalData.dart';
 import 'package:suffa_app/views/suffaCenters/Profile/suffaCenterProfileView.dart';
 import 'package:suffa_app/views/suffaStores/Auth/SuffahStoreAuth.dart';
 
@@ -112,6 +114,14 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.suffacenterMemberDetailScreen,
             page: () => const SuffaCenterMemberDetail(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.addNeedyPeopleScreen,
+            page: () => const  AddNeedyPeople(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.addPersonalDataScreen,
+            page: () => const AddPersonalData(),
             transition: Transition.leftToRight),
 
         //& Shuffa Store Routes
