@@ -38,6 +38,8 @@ class RoutesNames {
       '/suffacenterMemberDetailScreen';
   static const String addNeedyPeopleScreen = '/addNeedyPeopleScreen';
   static const String addPersonalDataScreen = '/addPersonalDataScreen';
+  static const String addaffiliatedProgramScreen = '/addaffiliatedProgramScreen';
+  static const String affiliatedProgramScreen = '/affiliatedProgramScreen';
 
   // SUFFAH STORE
   static const String suffahStoreloginDashBoardScreen =

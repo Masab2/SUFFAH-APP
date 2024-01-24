@@ -13,6 +13,8 @@ import 'package:suffa_app/views/admin/AdminAddSuffahCenter/addSuffahCenter.dart'
 import 'package:suffa_app/views/admin/AdminAddSuffahCenter/createEmailView.dart';
 import 'package:suffa_app/views/admin/MemberRequest/memberRequest.dart';
 import 'package:suffa_app/views/splashView/splashView.dart';
+import 'package:suffa_app/views/suffaCenters/AffiliatedProgram/AddAffiliatedProgram/addAffiliatedProgram.dart';
+import 'package:suffa_app/views/suffaCenters/AffiliatedProgram/ViewPrograms/viewAffiliatedPrograms.dart';
 import 'package:suffa_app/views/suffaCenters/Auth/SuffahCenterAuth.dart';
 import 'package:suffa_app/views/suffaCenters/DashBoard/suffacenterDashboard.dart';
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/AddMembers/addMember.dart';
@@ -122,6 +124,14 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.addPersonalDataScreen,
             page: () => const AddPersonalData(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.affiliatedProgramScreen,
+            page: () => const ViewAffiliatedPrograms(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.addaffiliatedProgramScreen,
+            page: () => const AddAffiliatedProgram(),
             transition: Transition.leftToRight),
 
         //& Shuffa Store Routes

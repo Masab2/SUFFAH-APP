@@ -54,7 +54,8 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                     AdminDashBoardtiles(
                       title: 'Neady People',
                       ontap: () {
-                        Get.toNamed(RoutesNames.addPersonalDataScreen,arguments: id);
+                        Get.toNamed(RoutesNames.addPersonalDataScreen,
+                            arguments: id);
                       },
                       image: ImageAsset.neadyIcon.toString(),
                     ),
@@ -84,8 +85,11 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                       image: ImageAsset.islamicIcon.toString(),
                     ),
                     AdminDashBoardtiles(
-                      title: 'Log out',
-                      ontap: () {},
+                      title: 'Affiliated Program',
+                      ontap: () {
+                        Get.toNamed(RoutesNames.affiliatedProgramScreen,
+                            arguments: id);
+                      },
                       image: ImageAsset.mosqueIcon,
                     ),
                   ],

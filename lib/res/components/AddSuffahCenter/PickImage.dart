@@ -8,7 +8,8 @@ import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class PickImageWidget extends StatelessWidget {
   VoidCallback ontap;
-  PickImageWidget({super.key, required this.ontap});
+   final String? title;
+  PickImageWidget({super.key, required this.ontap, this.title = 'Choose Image'});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class PickImageWidget extends StatelessWidget {
               ),
               0.02.ph,
               Text(
-                'Choose Image',
+                title!,
                 style: GoogleFonts.roboto(
                     fontSize: 18, color: AppColor.cgreenColor),
               )
