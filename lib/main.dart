@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
           Locale('ur'), // Urdu
         ],
         debugShowCheckedModeBanner: false,
-        title: 'SUFFA-APP',
+        title: 'AL-SUFFA',
         theme: ThemeData(
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: AppColor.cgreenColor),

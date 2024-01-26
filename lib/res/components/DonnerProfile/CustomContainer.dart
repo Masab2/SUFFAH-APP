@@ -12,7 +12,7 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.mh * 0.10,
+      height: context.mh * 0.12,
       padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
       margin: EdgeInsets.symmetric(
           horizontal: context.mw * 0.04, vertical: context.mh * 0.02),
@@ -31,18 +31,26 @@ class CustomContainer extends StatelessWidget {
           )
         ],
       ),
-      child: ListTile(
-        contentPadding: EdgeInsets.symmetric(vertical: context.mh * 0.01),
-        leading: const Icon(
-          Icons.account_circle_rounded,
-          color: AppColor.cgreenColor,
-          size: 35,
-        ),
-        title: Text(
-          title,
-          style: GoogleFonts.poppins(
-              textStyle: TextStyle(
-                  fontSize: context.mh * 0.020, fontWeight: FontWeight.bold)),
+      child: Center(
+        child: ListTile(
+          contentPadding: EdgeInsets.symmetric(vertical: context.mh * 0.01),
+          leading: Icon(
+            Icons.account_circle_rounded,
+            color: AppColor.cgreenColor,
+            size: context.mh * 0.070,
+          ),
+          title: Text(
+            title,
+            style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                    fontSize: context.mh * 0.020, fontWeight: FontWeight.bold)),
+          ),
+          subtitle: Text(subtitle,
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: AppColor.geryColor,
+                      fontSize: context.mh * 0.016,
+                      fontWeight: FontWeight.bold))),
         ),
       ),
     );

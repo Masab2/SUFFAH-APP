@@ -7,8 +7,7 @@ import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 
 class AddPersonalInfoViewModel extends GetxController {
-  final RxList<String> programs =
-      ['Rashan Program', 'Food Program', 'Quran Program'].obs;
+  final RxList<String> programs = ['Rashan Program', 'One Time Meal'].obs;
   var selectedValue = "Rashan Program".obs;
   RxString imagePath = ''.obs;
   RxInt selectedGender = 0.obs;

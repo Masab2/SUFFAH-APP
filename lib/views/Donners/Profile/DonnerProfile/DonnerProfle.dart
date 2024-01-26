@@ -3,12 +3,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/Donner/DonnorAuth/loginViewModel.dart';
+import 'package:suffa_app/res/components/AppBar/AppBar.dart';
 import 'package:suffa_app/res/components/DonnerProfile/CustomContainer.dart';
 import 'package:suffa_app/res/components/DonnerProfile/DonnerProfileAccountSettings.dart';
+import 'package:suffa_app/res/components/SuffahCenterProfile/suffaCenterProfile.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -26,24 +27,17 @@ class _DonnerProfileState extends State<DonnerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'SUFFAH APP',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-        ),
-      ),
+      appBar: HomeAppBar.HomeBar(),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
         child: Column(
           children: [
-            0.02.ph,
+            0.01.ph,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
                 0.02.ph,
                 StreamBuilder(
                   stream: Apis.getLoginDonnerInfo(),
@@ -62,13 +56,13 @@ class _DonnerProfileState extends State<DonnerProfile> {
                       var data = snapshot.data!.docs.first;
                       log(data['uid']);
                       return CustomContainer(
-                          title: data['email'],
-                          subtitle: '');
+                          title: AppLocalizations.of(context)!.emailTitle,
+                          subtitle: data['email']);
                     }
                   },
                 ),
                 Container(
-                  height: context.mh * 0.14,
+                  height: context.mh * 0.20,
                   padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
                   margin: EdgeInsets.symmetric(
                       horizontal: context.mw * 0.04,
@@ -87,17 +81,26 @@ class _DonnerProfileState extends State<DonnerProfile> {
                         )
                       ],
                       borderRadius: BorderRadius.circular(10)),
-                  child: const Column(
-                    children: [
-                      ListTile(
-                        leading: Icon(Icons.notifications),
-                        title: Text('Profile'),
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          0.02.ph,
+                          const SettingInfoListTile(
+                              icon: IconlyBold.profile,
+                              title: 'Profile',
+                              subtitle: 'Vist Profile',
+                              traling: Icon(Icons.arrow_forward_ios)),
+                          const SettingInfoListTile(
+                              icon: IconlyBold.heart,
+                              title: 'Track Donnation',
+                              subtitle: 'Status',
+                              traling: Icon(Icons.arrow_forward_ios)),
+                        ],
                       ),
-                      ListTile(
-                        leading: Icon(Icons.person),
-                        title: Text('Friends'),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],

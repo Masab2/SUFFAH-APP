@@ -52,13 +52,9 @@ class SettingInfoListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: ontap,
-      leading: CircleAvatar(
-        radius: 25,
-        backgroundColor: AppColor.cgreenColor,
-        child: Icon(
-          icon,
-          color: AppColor.whiteColor,
-        ),
+      leading: Icon(
+        icon,
+        color: AppColor.cgreenColor,
       ),
       selectedColor: AppColor.cgreenColor.withOpacity(0.23),
       splashColor: AppColor.cgreenColor.withOpacity(0.23),

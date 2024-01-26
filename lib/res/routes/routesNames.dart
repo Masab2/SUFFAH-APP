@@ -10,6 +10,8 @@ class RoutesNames {
   static const String homeScreen = '/homeScreen';
   static const String bottomNavbarScreen = '/bottomNavbarScreen';
   static const String settingsScreen = '/settingsScreen';
+  static const String selectMasjidScreen = '/selectMasjidScreen';
+  static const String donateNeedyPeopleScreen = '/donateNeedyPeopleScreen';
 
   //Choice Screen
   static const String choiceScreen = '/choiceScreen';
@@ -38,7 +40,8 @@ class RoutesNames {
       '/suffacenterMemberDetailScreen';
   static const String addNeedyPeopleScreen = '/addNeedyPeopleScreen';
   static const String addPersonalDataScreen = '/addPersonalDataScreen';
-  static const String addaffiliatedProgramScreen = '/addaffiliatedProgramScreen';
+  static const String addaffiliatedProgramScreen =
+      '/addaffiliatedProgramScreen';
   static const String affiliatedProgramScreen = '/affiliatedProgramScreen';
 
   // SUFFAH STORE

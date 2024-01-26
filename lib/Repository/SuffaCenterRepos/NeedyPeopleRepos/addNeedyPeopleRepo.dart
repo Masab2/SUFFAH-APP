@@ -2,8 +2,10 @@
 
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
+import 'package:suffa_app/utils/constant/constant.dart';
 
 class AddNeedyPeopleRepo {
   Future<String?> addNeedyPeople(File file, TextEditingController phoneno,
@@ -90,6 +92,14 @@ class AddNeedyPeopleRepo {
       muntazimid,
       gender) async {
     try {
+      QuerySnapshot snapshot =
+          await Apis.firestore.collection(suffahCenterNeedyPeople).get();
+      for (var doc in snapshot.docs) {
+        final data = doc.data() as Map<String, dynamic>;
+        if (data["CNICNo"] == cnicNo.text) {
+          return 'The Email is Already Available';
+        }
+      }
       await Apis.addNeedyPeople(
           file,
           muntazimid,

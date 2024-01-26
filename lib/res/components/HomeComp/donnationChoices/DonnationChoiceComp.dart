@@ -25,7 +25,7 @@ class DonnationChoice extends StatelessWidget {
             // color: AppColor.cgreenColor,
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
-              opacity: 0.63,
+              opacity: 0.73,
               image: AssetImage(image),
               fit: BoxFit.cover,
             ),
@@ -80,7 +80,7 @@ class DonnationChoice extends StatelessWidget {
                     InkWell(
                       onTap: ontap,
                       child: Text(
-                        'Donnate Now',
+                        'Donate Now',
                         style: GoogleFonts.poppins(
                             fontSize: context.mh * 0.020,
                             fontWeight: FontWeight.bold,

@@ -4,6 +4,8 @@ import 'package:suffa_app/views/Auth/VerifyScreen/verifyScreen.dart';
 import 'package:suffa_app/views/Auth/login/login.dart';
 import 'package:suffa_app/views/Auth/signup/signUpScreen.dart';
 import 'package:suffa_app/views/Donners/BottomNavBar/BottomNavbar.dart';
+import 'package:suffa_app/views/Donners/Home/Donate%20NeedyPeople/donateNeedyPeopleScreen.dart';
+import 'package:suffa_app/views/Donners/Home/Select%20Masjids/ViewMasjids/SelectMasjidsView.dart';
 import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
 import 'package:suffa_app/views/admin/Auth/LoginDashBoard/adminLoginDashBoard.dart';
 import 'package:suffa_app/views/admin/ChoiceScreen/ChoiceScreen.dart';
@@ -60,6 +62,14 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.settingsScreen,
             page: () => const DonnerSettings(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.selectMasjidScreen,
+            page: () => const SelectMasjidsView(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.donateNeedyPeopleScreen,
+            page: () => const DonateNeedyPeopleView(),
             transition: Transition.leftToRight),
 
         //! Adminstration DashBoard
@@ -119,7 +129,7 @@ class AppRoutes {
             transition: Transition.leftToRight),
         GetPage(
             name: RoutesNames.addNeedyPeopleScreen,
-            page: () => const  AddNeedyPeople(),
+            page: () => const AddNeedyPeople(),
             transition: Transition.leftToRight),
         GetPage(
             name: RoutesNames.addPersonalDataScreen,

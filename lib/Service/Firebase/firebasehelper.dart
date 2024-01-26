@@ -245,4 +245,24 @@ class Apis {
       throw Exception(error.toString());
     });
   }
+
+  // Get All Needy people According to there Program
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllNeedyPeopleByProgram(
+      program, muntazimid) {
+    return firestore
+        .collection(suffahCenterNeedyPeople)
+        .where('program', isEqualTo: program)
+        .where('MuntazimId', isEqualTo: muntazimid)
+        .snapshots();
+  }
+
+  // // Get All Needy people According to there Program
+  // static Stream<QuerySnapshot<Map<String, dynamic>>>
+  //     getAllNeedyPeopleCountByProgram(program, muntazimid) {
+  //   return firestore
+  //       .collection(suffahCenterNeedyPeople)
+  //       .where('program', isEqualTo: program)
+  //       .where('MuntazimId', isEqualTo: muntazimid)
+  //       .snapshots();
+  // }
 }
