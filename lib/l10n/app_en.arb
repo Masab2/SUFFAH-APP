@@ -1,4 +1,7 @@
 {
+  "apptitlefirst": "Al",
+  "apptitlesecond": "SUFFAH",
+  "@_PROFILESCREEN": {},
   "appSetting": "Setting",
   "langHeading": "Language",
   "langSubtitle": "select language",
@@ -10,5 +13,10 @@
   "uidTitle": "UID",
   "emailTitle": "Email",
   "donnerProfileHeadingPersonalinfo": "Personalo Info",
-  "donnerProfileHeadingAccountSetting": "Account Settings"
+  "donnerProfileHeadingAccountSetting": "Account Settings",
+  "trackDonnationTitle": "Track Donnnation",
+  "profileTitle": "Profile",
+  "@_HOMESCREEN": {},
+  "ourDonnationTitle": "Our Donnation Choices",
+  "donnateNow": "Donnate Now"
 }

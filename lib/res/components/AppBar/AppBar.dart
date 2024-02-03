@@ -1,28 +1,83 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconly/iconly.dart';
+import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:suffa_app/utils/extenshion/extenshion.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomeAppBar {
-  static PreferredSizeWidget HomeBar() {
+  static PreferredSizeWidget HomeBar(BuildContext context, Widget? leading) {
     return AppBar(
+      leading: const Icon(IconlyLight.search),
       title: RichText(
           text: TextSpan(
-              text: 'AL ',
+              text: "${AppLocalizations.of(context)!.apptitlefirst} ",
               style: GoogleFonts.poppins(
-                  fontSize: 23,
+                  fontSize: context.mh * 0.025,
                   color: AppColor.cgreenColor,
                   fontWeight: FontWeight.bold),
               children: [
             TextSpan(
-                text: 'SUFFAH',
+                text: AppLocalizations.of(context)!.apptitlesecond,
                 style: GoogleFonts.poppins(
-                    fontSize: 23,
+                    fontSize: context.mh * 0.025,
                     color: AppColor.geryColor,
                     fontWeight: FontWeight.bold))
           ])),
       centerTitle: true,
+    );
+  }
+
+  static PreferredSizeWidget alSuffahPersonbar(
+      BuildContext context, VoidCallback ontap) {
+    return AppBar(
+      title: Text(
+        'AL-SUFFAH PERSON',
+        style: GoogleFonts.poppins(
+          fontSize: context.mh * 0.024,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      centerTitle: true,
+      actions: [
+        StreamBuilder(
+          stream: Apis.getAllNeedyPeopleDonateCount('OneTimeMeal'),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              int itemCount = snapshot.data?.docs.length ?? 0;
+              log(itemCount.toString());
+              if (itemCount > 0) {
+                return badges.Badge(
+                    badgeContent: Text(itemCount.toString(),
+                        style: GoogleFonts.poppins(
+                          color: AppColor.whiteColor,
+                        )),
+                    child: InkWell(
+                      onTap: ontap,
+                      child: Icon(
+                        IconlyBold.heart,
+                        size: context.mh * 0.035,
+                      ),
+                    ));
+              } else {
+                return const Icon(
+                  IconlyBold.heart,
+                );
+              }
+            }
+          },
+        ),
+        0.05.pw,
+      ],
     );
   }
 }

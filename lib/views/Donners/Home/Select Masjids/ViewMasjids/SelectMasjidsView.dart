@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
-import 'package:suffa_app/enum/AffiliatedProgramEnum.dart';
 import 'package:suffa_app/res/components/HomeComp/SelectMasjidComp/masjidDisplayComp.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
@@ -26,9 +25,7 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            program == ProgramType.ONETIMEMEAL
-                ? 'OneTimeMeal'
-                : 'RashanProgram',
+            'AL-SUFFAH CENTER',
             style: GoogleFonts.poppins(
               fontSize: context.mh * 0.024,
               fontWeight: FontWeight.bold,
@@ -45,7 +42,7 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
             ),
             0.03.ph,
             StreamBuilder(
-                stream: Apis.getAllSuffaCenter(),
+                stream: Apis.getAllSuffaCenterByProgram(program),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
@@ -61,21 +58,23 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
                     return Expanded(
                         child: ListView.builder(
                       physics: const BouncingScrollPhysics(
-                          parent: AlwaysScrollableScrollPhysics()),
+                        parent: AlwaysScrollableScrollPhysics(),
+                      ),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         var data = snapshot.data!.docs[index];
                         return MasjidDisplayComp(
-                          masjidname: data['Masjidname'],
+                          masjidname: data['masjidname'],
                           image: data['masjidimg'],
                           masjidaddress: data['address'],
                           ontap: () {
                             Get.toNamed(RoutesNames.donateNeedyPeopleScreen,
-                                arguments: [program, data['adminCreatedId']]);
+                                arguments: [
+                                  'OneTimeMeal',
+                                  data['adminCreatedId'],
+                                ]);
                           },
-                          program: program == ProgramType.ONETIMEMEAL
-                              ? 'OneTimeMeal'
-                              : 'RashanProgram',
+                          program: program,
                           muntazimid: data['adminCreatedId'],
                         );
                       },

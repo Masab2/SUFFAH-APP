@@ -22,21 +22,24 @@ class AddNeedyPeopleViewModel extends GetxController {
       masjid,
       program,
       muntazimid,
-      gender) async {
+      gender,
+      masjidid) async {
     try {
       final result = await _addNeedyPeopleRepo.addCnicDataManually(
-          name,
-          cnicno,
-          dob,
-          doCardIssue,
-          doCardExpire,
-          image,
-          phoneno,
-          address,
-          masjid,
-          program,
-          muntazimid,
-          gender);
+        name,
+        cnicno,
+        dob,
+        doCardIssue,
+        doCardExpire,
+        image,
+        phoneno,
+        address,
+        masjid,
+        program,
+        muntazimid,
+        gender,
+        masjidid,
+      );
       if (result == null) {
         Get.snackbar('Successfull', 'Person add sucessfully');
       } else {
@@ -61,7 +64,8 @@ class AddNeedyPeopleViewModel extends GetxController {
       masjid,
       program,
       muntazimid,
-      gender) async {
+      gender,
+      masjidid) async {
     CnicModel cnicModel =
         await CnicScanner().scanImage(imageSource: imageSource);
     if (cnicModel == null) {
@@ -81,18 +85,20 @@ class AddNeedyPeopleViewModel extends GetxController {
       } else {
         try {
           final result = await _addNeedyPeopleRepo.addCnicDataScan(
-              name,
-              cnicno,
-              dob,
-              doCardIssue,
-              doCardExpire,
-              image,
-              phoneno,
-              address,
-              masjid,
-              program,
-              muntazimid,
-              gender);
+            name,
+            cnicno,
+            dob,
+            doCardIssue,
+            doCardExpire,
+            image,
+            phoneno,
+            address,
+            masjid,
+            program,
+            muntazimid,
+            gender,
+            masjidid,
+          );
           if (result == null) {
             Get.snackbar('Successfull', 'Person add sucessfully');
           } else {

@@ -122,7 +122,8 @@ class Apis {
         'MemberId': adminid,
         'status': 'Verified',
         'Desig': 'Muntazim',
-        'masjidname': masjidname
+        'masjidname': masjidname,
+        'centerId': id.toString()
       }).onError((error, stackTrace) {
         log(error.toString());
       });
@@ -132,6 +133,14 @@ class Apis {
   }
 
   // get All Registered Suffa Center
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllSuffaCenterByProgram(
+      program) {
+    return firestore
+        .collection(suffahCenterCollection)
+        .where('Programs', arrayContains: program)
+        .snapshots();
+  }
+
   static Stream<QuerySnapshot<Map<String, dynamic>>> getAllSuffaCenter() {
     return firestore.collection(suffahCenterCollection).snapshots();
   }
@@ -239,30 +248,90 @@ class Apis {
         'CardHolderName': cardholdername,
         'DateofBirth': dob,
         'DateofCardIssue': doCardIssue,
-        'DateofCardExpire': doCardExpire
+        'DateofCardExpire': doCardExpire,
+        'status': 'waiting',
+        'tempStatus': 'waiting',
+        'donerSelectionId': '',
       });
     }).onError((error, stackTrace) {
       throw Exception(error.toString());
     });
   }
 
-  // Get All Needy people According to there Program
-  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllNeedyPeopleByProgram(
-      program, muntazimid) {
+  // Get All Needy people According to there Program and By Masjid
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getAllNeedyPeopleByProgramMasjid(program, muntazimid) {
     return firestore
         .collection(suffahCenterNeedyPeople)
         .where('program', isEqualTo: program)
         .where('MuntazimId', isEqualTo: muntazimid)
+        .where('status', isEqualTo: 'waiting')
         .snapshots();
   }
 
-  // // Get All Needy people According to there Program
-  // static Stream<QuerySnapshot<Map<String, dynamic>>>
-  //     getAllNeedyPeopleCountByProgram(program, muntazimid) {
-  //   return firestore
-  //       .collection(suffahCenterNeedyPeople)
-  //       .where('program', isEqualTo: program)
-  //       .where('MuntazimId', isEqualTo: muntazimid)
-  //       .snapshots();
-  // }
+  // Get All Needy people According to there Program
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllNeedyPeopleByProgram(
+      program) {
+    return firestore
+        .collection(suffahCenterNeedyPeople)
+        .where('program', isEqualTo: program)
+        .snapshots();
+  }
+
+  // Bulk and Single Donnation Collection
+  static Future<void> donnatationTark() async {
+    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    await firestore.collection(donnationTrack).doc(id).set({
+      'suffaPerson': {},
+      'status': 'Waiting',
+    });
+  }
+
+  // Update the temporary status of the Al-suffa Person
+  static Future<void> updateStatusAlSuffahPerson(id, status) async {
+    await firestore.collection(suffahCenterNeedyPeople).doc(id).update({
+      'tempStatus': status,
+      'donerSelectionId': user.uid,
+    });
+  }
+
+  // get the selected count for the donner to donate
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getAllNeedyPeopleDonateCount(program) {
+    return firestore
+        .collection(suffahCenterNeedyPeople)
+        .where('program', isEqualTo: program)
+        .where('donerSelectionId', isEqualTo: user.uid)
+        .where('tempStatus', isEqualTo: 'Added')
+        .snapshots();
+  }
+
+  // add Affiliated Program into the database
+  static Future<void> addAffiliatedProgramByAdmin(file, title, status) async {
+    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = imagestorage.ref().child('/Images/Affiliatedprogram$id');
+    storage.UploadTask uploadTask = ref.putFile(file);
+    Future.value(uploadTask).then((value) async {
+      var imageUrl = await ref.getDownloadURL();
+      await firestore.collection(suffahAffiliatedprogram).doc(id).set({
+        'programId': id,
+        'image': imageUrl.toString(),
+        'programTitle': title,
+        'Status': status,
+      });
+    });
+  }
+
+  // Get All Suffah Affiliated Program
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllPrograms() {
+    return firestore.collection(suffahAffiliatedprogram).snapshots();
+  }
+
+  // Add Programs into The Suffa center Collection
+  static Future<void> updateTheSuffaCenterPrograms(
+      List<dynamic> programs, id) async {
+    firestore.collection(suffahCenterCollection).doc(id).update({
+      'Programs': [programs],
+    });
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
+import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class UserInfoListTile extends StatelessWidget {
   final IconData icon;
@@ -16,7 +17,7 @@ class UserInfoListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
-        radius: 25,
+        radius: context.mh * 0.030,
         backgroundColor: AppColor.cgreenColor,
         child: Icon(
           icon,

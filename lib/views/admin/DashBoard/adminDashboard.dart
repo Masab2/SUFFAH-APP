@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/res/components/adminDashBoardTiles/adminDashBoardtiles.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
-import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class AdminDashBoard extends StatefulWidget {
@@ -46,12 +45,12 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                       ontap: () {
                         Get.toNamed(RoutesNames.viewSuffahCenterScreen);
                       },
-                      image: ImageAsset.mosqueIcon.toString(),
+                      icon: Icons.mosque,
                     ),
                     AdminDashBoardtiles(
                       title: 'SUFFAH Store',
                       ontap: () {},
-                      image: ImageAsset.storeIcon,
+                      icon: Icons.shop,
                     ),
                   ],
                 ),
@@ -67,12 +66,34 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                       ontap: () {
                         Get.toNamed(RoutesNames.memberRequestScreen);
                       },
-                      image: ImageAsset.islamicIcon.toString(),
+                      icon: Icons.remove_from_queue,
                     ),
                     AdminDashBoardtiles(
                       title: 'Add Admins',
                       ontap: () {},
-                      image: ImageAsset.storeIcon,
+                      icon: Icons.add,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Get.width * 0.04, vertical: Get.height * 0.02),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AdminDashBoardtiles(
+                      title: 'Affiliated Program',
+                      ontap: () {
+                        Get.toNamed(
+                            RoutesNames.addaffiliatedProgramScreenforAdmin);
+                      },
+                      icon: Icons.ac_unit_outlined,
+                    ),
+                    AdminDashBoardtiles(
+                      title: 'Add Admins',
+                      ontap: () {},
+                      icon: Icons.add,
                     ),
                   ],
                 ),

@@ -49,6 +49,9 @@ dependencies:
   intl: any
   cnic_scanner: ^0.0.4
   simple_animation_progress_bar: ^1.6.0
+  http: any
+  badges: ^3.1.2
+  crypto: ^3.0.3
   #Database
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
@@ -56,6 +59,8 @@ dependencies:
   cloud_firestore: ^4.13.6
   google_sign_in: any
   shared_preferences: ^2.2.2
+  # Payment Method Integration
+  jazzcash_flutter: ^1.0.5
 
 dev_dependencies:
   flutter_test:

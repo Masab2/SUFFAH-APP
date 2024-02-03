@@ -27,7 +27,6 @@ class _SuffahCenterLoginDashBoardState extends State<SuffahCenterLoginDashBoard>
     emailController.dispose();
     passwordController.dispose();
     _obscurepass.dispose();
-    suffaCenterAuthController.dispose();
     super.dispose();
   }
   @override

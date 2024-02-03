@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-class AdminDashBoardtiles extends StatelessWidget {
-  String image;
-  String title;
-  VoidCallback ontap;
 
-  AdminDashBoardtiles(
+class AdminDashBoardtiles extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final VoidCallback ontap;
+
+  const AdminDashBoardtiles(
       {super.key,
-      required this.image,
       required this.title,
-      required this.ontap});
+      required this.ontap,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +39,9 @@ class AdminDashBoardtiles extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image(
-                image: AssetImage(image.toString()),
-                height: context.mh * 0.05,
-                width: context.mw * 0.10,
+              Icon(
+                icon,
+                size: context.mh * 0.0400,
               ),
               0.02.ph,
               Text(

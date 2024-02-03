@@ -46,6 +46,7 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
     final id = Get.arguments[4];
     final gender = Get.arguments[5];
     final program = Get.arguments[6];
+    final masjidid = Get.arguments[7];
     log(id);
     return Scaffold(
       appBar: AppBar(
@@ -142,18 +143,20 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                           borderRadius: BorderRadius.circular(20)),
                       onPressed: () {
                         addNeedyController.addDataManually(
-                            nameController,
-                            cnicController,
-                            dobController,
-                            dateofCardIssueController,
-                            dateofCardExpireController,
-                            File(image),
-                            phoneno,
-                            address,
-                            masjidname,
-                            program,
-                            id,
-                            gender == '0' ? 'Male' : 'Female');
+                          nameController,
+                          cnicController,
+                          dobController,
+                          dateofCardIssueController,
+                          dateofCardExpireController,
+                          File(image),
+                          phoneno,
+                          address,
+                          masjidname,
+                          program,
+                          id,
+                          gender == '0' ? 'Male' : 'Female',
+                          masjidid,
+                        );
                       },
                       color: AppColor.cgreenColor,
                       child: Row(
@@ -185,19 +188,21 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                           borderRadius: BorderRadius.circular(20)),
                       onPressed: () {
                         addNeedyController.scanCnic(
-                            ImageSource.camera,
-                            nameController,
-                            cnicController,
-                            dobController,
-                            dateofCardIssueController,
-                            dateofCardExpireController,
-                            File(image),
-                            phoneno,
-                            address,
-                            masjidname,
-                            program,
-                            id,
-                            gender);
+                          ImageSource.camera,
+                          nameController,
+                          cnicController,
+                          dobController,
+                          dateofCardIssueController,
+                          dateofCardExpireController,
+                          File(image),
+                          phoneno,
+                          address,
+                          masjidname,
+                          program,
+                          id,
+                          gender,
+                          masjidid,
+                        );
                       },
                       color: AppColor.cgreenColor,
                       child: Row(

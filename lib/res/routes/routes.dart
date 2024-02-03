@@ -7,6 +7,7 @@ import 'package:suffa_app/views/Donners/BottomNavBar/BottomNavbar.dart';
 import 'package:suffa_app/views/Donners/Home/Donate%20NeedyPeople/donateNeedyPeopleScreen.dart';
 import 'package:suffa_app/views/Donners/Home/Select%20Masjids/ViewMasjids/SelectMasjidsView.dart';
 import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
+import 'package:suffa_app/views/admin/Affiliated%20Program/addProgram/addPrograms.dart';
 import 'package:suffa_app/views/admin/Auth/LoginDashBoard/adminLoginDashBoard.dart';
 import 'package:suffa_app/views/admin/ChoiceScreen/ChoiceScreen.dart';
 import 'package:suffa_app/views/admin/DashBoard/adminDashboard.dart';
@@ -25,6 +26,7 @@ import 'package:suffa_app/views/suffaCenters/Masjid%20Members/ViewMembers/Member
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/ViewMembers/ViewMasjidmembers.dart';
 import 'package:suffa_app/views/suffaCenters/NeedyPeople/AddNeadyPeople/AddNeedyPeople.dart';
 import 'package:suffa_app/views/suffaCenters/NeedyPeople/AddPersonalData/addPersonalData.dart';
+import 'package:suffa_app/views/suffaCenters/NeedyPeople/selectProgram/selectProgram.dart';
 import 'package:suffa_app/views/suffaCenters/Profile/suffaCenterProfileView.dart';
 import 'package:suffa_app/views/suffaStores/Auth/SuffahStoreAuth.dart';
 
@@ -97,6 +99,10 @@ class AppRoutes {
             name: RoutesNames.memberRequestScreen,
             page: () => const MemberRequest(),
             transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.addaffiliatedProgramScreenforAdmin,
+            page: () => const AddProgramsView(),
+            transition: Transition.leftToRight),
 
         //* Suffa Center DashBoard
         GetPage(
@@ -142,6 +148,10 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.addaffiliatedProgramScreen,
             page: () => const AddAffiliatedProgram(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.selectProgramScreen,
+            page: () => const SelectProgram(),
             transition: Transition.leftToRight),
 
         //& Shuffa Store Routes

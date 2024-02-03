@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
+import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class AddSuffahCenterComp extends StatelessWidget {
   String title;
@@ -24,13 +25,13 @@ class AddSuffahCenterComp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
         leading: CircleAvatar(
-          radius: 35,
-          backgroundColor: AppColor.geryColor.withOpacity(0.23),
+          radius: context.mh * 0.030,
+          backgroundColor: AppColor.cgreenColor,
           child: Center(
               child: Icon(
             icon,
-            size: 20,
-            color: AppColor.cgreenColor,
+            size: context.mh * 0.025,
+            color: AppColor.whiteColor,
           )),
         ),
         title: Text(

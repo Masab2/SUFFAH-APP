@@ -1,3 +1,16 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "highlight.regexes": {
+        "(\"@_[A-Z_]+\": {},)": {
+            "filterFileRegex": ".*\\.arb",
+            "decorations": [
+                {
+                    "overviewRulerColor": "#d19a66",
+                    "backgroundColor": "#d19a66",
+                    "color": "#282c34",
+                    "fontWeight": "bold"
+                }
+            ]
+        }
+    },
 }

@@ -42,6 +42,7 @@ class DonnerProfileAccountSettings extends StatelessWidget {
               horizontal: context.mw * 0.04, vertical: context.mw * 0.01),
           decoration: BoxDecoration(
             color: AppColor.whiteColor,
+            borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.43),

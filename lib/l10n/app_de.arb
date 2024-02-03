@@ -1,4 +1,7 @@
 {
+  "apptitlefirst": "Al",
+  "apptitlesecond": "SUFFAH",
+  "@_PROFILESCREEN": {},
   "appSetting": "Einstellung",
   "langHeading": "Sprache",
   "langSubtitle": "Sprache auswählen",
@@ -10,5 +13,10 @@
   "uidTitle": "AUSWEIS",
   "emailTitle": "ēmāl",
   "donnerProfileHeadingPersonalinfo": "Persönliche Informationen",
-  "donnerProfileHeadingAccountSetting": "Account Einstellungen"
+  "donnerProfileHeadingAccountSetting": "Account Einstellungen",
+  "trackDonnationTitle": "Spende verfolgen",
+  "profileTitle": "Profil",
+  "@_HOMESCREEN": {},
+  "ourDonnationTitle": "Unsere Spendenmöglichkeiten",
+  "donnateNow": "Spende jetzt"
 }

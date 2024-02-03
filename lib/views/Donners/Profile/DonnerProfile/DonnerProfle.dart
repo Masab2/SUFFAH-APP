@@ -27,7 +27,7 @@ class _DonnerProfileState extends State<DonnerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar.HomeBar(),
+      appBar: HomeAppBar.HomeBar(context,const Icon(IconlyLight.search)),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
@@ -62,7 +62,7 @@ class _DonnerProfileState extends State<DonnerProfile> {
                   },
                 ),
                 Container(
-                  height: context.mh * 0.20,
+                  height: context.mh * 0.22,
                   padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
                   margin: EdgeInsets.symmetric(
                       horizontal: context.mw * 0.04,
@@ -87,15 +87,20 @@ class _DonnerProfileState extends State<DonnerProfile> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          0.02.ph,
-                          const SettingInfoListTile(
+                          0.01.ph,
+                          SettingInfoListTile(
                               icon: IconlyBold.profile,
-                              title: 'Profile',
+                              title: AppLocalizations.of(context)!.profileTitle,
                               subtitle: 'Vist Profile',
-                              traling: Icon(Icons.arrow_forward_ios)),
-                          const SettingInfoListTile(
+                              traling: const Icon(Icons.arrow_forward_ios)),
+                          const Divider(
+                            endIndent: 20,
+                            indent: 20,
+                          ),
+                          SettingInfoListTile(
                               icon: IconlyBold.heart,
-                              title: 'Track Donnation',
+                              title: AppLocalizations.of(context)!
+                                  .trackDonnationTitle,
                               subtitle: 'Status',
                               traling: Icon(Icons.arrow_forward_ios)),
                         ],

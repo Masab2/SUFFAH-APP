@@ -56,7 +56,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
               ),
               0.03.ph,
               ChoiceComp(
-                title: 'SUFFFAH PERSON Login',
+                title: 'SUFFFAH CENTER LOGIN',
                 ontap: () {
                   Get.toNamed(RoutesNames.suffahloginDashBoardScreen);
                 },

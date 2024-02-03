@@ -7,8 +7,8 @@ import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 
 class AddPersonalInfoViewModel extends GetxController {
-  final RxList<String> programs = ['Rashan Program', 'One Time Meal'].obs;
-  var selectedValue = "Rashan Program".obs;
+  final RxList<String> programs = ['RashanProgram', 'OneTimeMeal'].obs;
+  var selectedValue = "RashanProgram".obs;
   RxString imagePath = ''.obs;
   RxInt selectedGender = 0.obs;
 
@@ -36,7 +36,7 @@ class AddPersonalInfoViewModel extends GetxController {
   }
 
   // Add Data Into DataBase
-  void addNeedyPerson(phoneno, address, masjid, program, gender) async {
+  void addNeedyPerson(phoneno, address, masjid, program, gender, masjidid) async {
     final result = await _addNeedyPeopleRepo.addNeedyPeople(
         File(imagePath.value.toString()), phoneno, address, masjid);
     await SharePrefs.getId('id').then((value) {
@@ -45,10 +45,11 @@ class AddPersonalInfoViewModel extends GetxController {
           imagePath.value.toString(),
           phoneno.text.toString(),
           address.text.toString(),
-          masjid.text.toString(),
+          masjid.toString(),
           value.toString(),
           gender.toString(),
-          program.toString()
+          program.toString(),
+          masjidid.toString()
         ]);
       } else {
         Get.snackbar('Error', result.toString());

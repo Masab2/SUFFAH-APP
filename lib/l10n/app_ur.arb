@@ -1,4 +1,7 @@
 {
+  "apptitlefirst": "ال",
+  "apptitlesecond": "سفاح",
+  "@_PROFILESCREEN": {},
   "appSetting": "ترتیبات",
   "langHeading": "زبان",
   "langSubtitle": "زبان منتخب کریں",
@@ -10,5 +13,10 @@
   "uidTitle": "آئی ڈی",
   "emailTitle": "ای میل",
   "donnerProfileHeadingPersonalinfo": "ذاتی معلومات",
-  "donnerProfileHeadingAccountSetting": "اکاؤنٹ کی ترتیبات"
+  "donnerProfileHeadingAccountSetting": "اکاؤنٹ کی ترتیبات",
+  "trackDonnationTitle": "عطیہ کو ٹریک کریں",
+  "profileTitle": "پروفائل",
+  "@_HOMESCREEN": {},
+  "ourDonnationTitle": "ہمارے عطیہ کے انتخاب",
+  "donnateNow": "ابھی عطیہ کیجیے"
 }

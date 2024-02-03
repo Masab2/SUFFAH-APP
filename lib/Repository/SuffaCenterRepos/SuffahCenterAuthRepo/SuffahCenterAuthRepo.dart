@@ -26,7 +26,18 @@ class ShuffaCenterAuthRepo {
             data['password'] == password.text &&
             data['status'] == 'Verified') {
           final id = data['MuntazimId'];
-          await SharePrefs.saveData('id', id);
+          final masjidname = data['masjidname'];
+          final centerId = data['centerId'];
+
+          // Save user ID and Masjid information simultaneously
+          log(centerId);
+          final futures = [
+            SharePrefs.saveData('id', id),
+            SharePrefs.saveData('masjidName', masjidname),
+            SharePrefs.saveData('centerId', centerId),
+          ];
+          await Future.wait(futures);
+
           log(id.toString());
           return null;
         }

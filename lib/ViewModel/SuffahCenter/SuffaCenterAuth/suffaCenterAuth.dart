@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,13 +22,26 @@ class SuffaCenterAuthViewModel extends GetxController {
       if (result == null) {
         email.clear();
         password.clear();
-        await SharePrefs.getId('id').then((value) {
-          Get.toNamed(RoutesNames.suffacenterDashBoardScreen, arguments: value);
-        });
+        final futures = await Future.wait([
+          SharePrefs.getId('id'),
+          SharePrefs.getMasjid('masjidName'), // Use getString instead of getId
+          SharePrefs.getMasjidID('centerId'), // Use getString instead of getId
+        ]);
+        final userId = futures[0];
+        final masjidName = futures[1];
+        final centerId = futures[2];
+        log(masjidName);
+        Get.toNamed(RoutesNames.suffacenterDashBoardScreen, arguments: [
+          userId,
+          masjidName,
+          centerId,
+        ]);
       } else {
+        log(result.toString());
         Get.snackbar('Error', result.toString());
       }
     } catch (e) {
+      log(e.toString());
       Get.snackbar('Error', e.toString());
     } finally {
       isLoading(false);
