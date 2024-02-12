@@ -28,6 +28,7 @@ class ShuffaCenterAuthRepo {
           final id = data['MuntazimId'];
           final masjidname = data['masjidname'];
           final centerId = data['centerId'];
+          final email = data['email'];
 
           // Save user ID and Masjid information simultaneously
           log(centerId);
@@ -35,6 +36,7 @@ class ShuffaCenterAuthRepo {
             SharePrefs.saveData('id', id),
             SharePrefs.saveData('masjidName', masjidname),
             SharePrefs.saveData('centerId', centerId),
+            SharePrefs.saveData('email', email),
           ];
           await Future.wait(futures);
 

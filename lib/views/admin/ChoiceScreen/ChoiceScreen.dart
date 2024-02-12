@@ -20,13 +20,6 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(
-              IconlyBold.arrow_left_circle,
-            )),
         title: Text(
           'Adminstration',
           style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
@@ -42,7 +35,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                 height: context.mh * 0.35,
                 image: AssetImage(ImageAsset.verifyemail)),
           ),
-          0.12.ph,
+          0.08.ph,
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,6 +54,14 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   Get.toNamed(RoutesNames.suffahloginDashBoardScreen);
                 },
                 color: Colors.teal,
+              ),
+              0.03.ph,
+              ChoiceComp(
+                title: 'SUFFFAH SHOP LOGIN',
+                ontap: () {
+                  Get.toNamed(RoutesNames.suffahloginDashBoardScreen);
+                },
+                color: AppColor.cgreenColor,
               ),
             ],
           )

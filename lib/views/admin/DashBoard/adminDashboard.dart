@@ -6,6 +6,8 @@ import 'package:suffa_app/res/components/adminDashBoardTiles/adminDashBoardtiles
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
+import '../../../res/components/adminDashBoardTiles/adminTilesUperheading/upperHeading.dart';
+
 class AdminDashBoard extends StatefulWidget {
   const AdminDashBoard({super.key});
 
@@ -18,11 +20,6 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(IconlyBold.arrow_left_circle)),
           title: Text(
             'Admin Panel',
             style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
@@ -33,6 +30,10 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),
             children: [
+              const UpperHeading(
+                icon: Icons.admin_panel_settings,
+                title: 'Masab Haider',
+              ),
               0.01.ph,
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -71,7 +72,7 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                     AdminDashBoardtiles(
                       title: 'Add Admins',
                       ontap: () {},
-                      icon: Icons.add,
+                      icon: Icons.admin_panel_settings,
                     ),
                   ],
                 ),
@@ -86,14 +87,17 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                       title: 'Affiliated Program',
                       ontap: () {
                         Get.toNamed(
-                            RoutesNames.addaffiliatedProgramScreenforAdmin);
+                          RoutesNames.displayaffiliatedProgramScreenforAdmin,
+                        );
                       },
                       icon: Icons.ac_unit_outlined,
                     ),
                     AdminDashBoardtiles(
-                      title: 'Add Admins',
-                      ontap: () {},
-                      icon: Icons.add,
+                      title: 'Requested Program',
+                      ontap: () {
+                        Get.toNamed(RoutesNames.requestProgramScreen);
+                      },
+                      icon: Icons.control_camera_outlined,
                     ),
                   ],
                 ),

@@ -20,7 +20,7 @@ class AddMasjidMemberViewModel extends GetxController {
   }
 
   Future<void> addSuffahCenterMasjidMembers(
-      name, emailAddress, phoneno, city, country, address) async {
+      name, emailAddress, phoneno, city, country, address, masjidid) async {
     final result = await _addMasjidRepo.addSuffahCenterMembers(
         File(imagePath.value.toString()),
         name,
@@ -37,7 +37,8 @@ class AddMasjidMemberViewModel extends GetxController {
         phoneno,
         city,
         country,
-        address
+        address,
+        masjidid,
       ]);
     } else {
       Get.snackbar('Error', result.toString());

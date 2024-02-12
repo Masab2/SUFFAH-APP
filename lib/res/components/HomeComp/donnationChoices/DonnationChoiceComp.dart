@@ -7,6 +7,7 @@ import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DonnationChoice extends StatelessWidget {
   final String image;
@@ -30,8 +31,11 @@ class DonnationChoice extends StatelessWidget {
       children: [
         Container(
           height: context.mh * 0.25,
-          width: context.mw * 0.90,
-          margin: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
+          width: context.mw,
+          margin: EdgeInsets.symmetric(
+            horizontal: context.mw * 0.02,
+            vertical: context.mh * 0.02,
+          ),
           decoration: BoxDecoration(
             // color: AppColor.cgreenColor,
             borderRadius: BorderRadius.circular(20),
@@ -41,7 +45,7 @@ class DonnationChoice extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(context.mw * 0.016),
         ),
         Positioned(
           left: 0,
@@ -49,7 +53,7 @@ class DonnationChoice extends StatelessWidget {
           right: 0,
           child: Container(
             height: context.mh * 0.15,
-            width: context.mw * 0.100,
+            width: context.mw * 0.120,
             margin: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
             decoration: BoxDecoration(
               color: AppColor.whiteColor.withOpacity(0.43),
@@ -167,7 +171,7 @@ class DonnationChoice extends StatelessWidget {
                     ),
                     onPressed: ontap,
                     child: Text(
-                      'Donate In this Program',
+                      AppLocalizations.of(context)!.donnateNow,
                       style: GoogleFonts.poppins(
                         fontSize: context.mh * 0.020,
                         color: AppColor.whiteColor,

@@ -25,7 +25,7 @@ class AdminDashBoardtiles extends StatelessWidget {
           width: context.mw / 2.3,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: AppColor.cgreenColor.withOpacity(0.23),
+            color: Colors.grey[300],
             boxShadow: const [
               BoxShadow(
                 color: AppColor.whiteColor,
@@ -48,7 +48,7 @@ class AdminDashBoardtiles extends StatelessWidget {
                 title,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.poppins(
-                    fontSize: 13,
+                    fontSize: context.mh * 0.013,
                     fontWeight: FontWeight.bold,
                     color: AppColor.geryColor),
               )

@@ -17,6 +17,7 @@ class GenerateEmailSuffaMembersRepo {
     TextEditingController address,
     TextEditingController genEmail,
     TextEditingController genPasword,
+    masjidid,
   ) async {
     if (genEmail.text.isEmpty && genPasword.text.isEmpty) {
       return 'Please Enter the Email address and Password';
@@ -49,7 +50,8 @@ class GenerateEmailSuffaMembersRepo {
                 city.text,
                 country.text,
                 address.text,
-                id);
+                id,
+                masjidid);
           } catch (e) {
             return e.toString();
           }

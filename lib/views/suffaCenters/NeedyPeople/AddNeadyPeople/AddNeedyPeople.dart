@@ -8,6 +8,7 @@ import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/ViewModel/SuffahCenter/NeedyPeople/addNeedyPeopleViewModel.dart';
 import 'package:suffa_app/res/components/AddNeedyPeople/addNeedyPeopleComp.dart';
+import 'package:suffa_app/res/components/CNICFormComp/CnicFormComp.dart';
 import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -99,39 +100,13 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                 ),
               ),
               0.05.ph,
-              AddNeedyPeopleComp(
-                  title: 'Card Holder Name',
-                  icon: Icons.person,
-                  hint: 'Masab / Ayesha',
-                  controller: nameController),
-              AddNeedyPeopleComp(
-                  title: 'CNIC Number',
-                  icon: Icons.person,
-                  hint: '352020-4545452-1',
-                  controller: cnicController),
-              Row(
-                children: [
-                  Expanded(
-                    child: AddNeedyPeopleComp(
-                        title: 'Date of Issue',
-                        hint: 'DD/MM/YYYY',
-                        icon: Icons.dataset,
-                        controller: dateofCardIssueController),
-                  ),
-                  Expanded(
-                    child: AddNeedyPeopleComp(
-                        title: 'Date of Expire',
-                        hint: 'DD/MM/YYYY',
-                        icon: Icons.person,
-                        controller: dateofCardExpireController),
-                  ),
-                ],
+              CnicFormComp(
+                cardHoldername: nameController,
+                doIssue: dateofCardIssueController,
+                doExpire: dateofCardExpireController,
+                doBirth: dobController,
+                cnicno: cnicController,
               ),
-              AddNeedyPeopleComp(
-                  title: 'Date of Birth',
-                  icon: Icons.person,
-                  hint: 'DD/MM/YYYY',
-                  controller: dobController),
               0.02.ph,
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),

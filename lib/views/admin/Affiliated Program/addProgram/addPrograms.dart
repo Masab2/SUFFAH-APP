@@ -20,6 +20,7 @@ class AddProgramsView extends StatefulWidget {
 
 class _AddProgramsViewState extends State<AddProgramsView> {
   final titleController = TextEditingController();
+  final priceController = TextEditingController();
   final controller = Get.put(AffiliatedViewModel());
   @override
   Widget build(BuildContext context) {
@@ -72,6 +73,12 @@ class _AddProgramsViewState extends State<AddProgramsView> {
               icon: Icons.title,
               hint: 'Rashan Pack',
               controller: titleController),
+          0.01.ph,
+          AddNeedyPeopleComp(
+              title: 'Donnation Price',
+              icon: Icons.title,
+              hint: '00 PKR',
+              controller: priceController),
           0.02.ph,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: context.mw * 0.05),
@@ -119,6 +126,7 @@ class _AddProgramsViewState extends State<AddProgramsView> {
                 controller.addAffiliatedProgram(
                   titleController,
                   controller.selectedValue.value,
+                  priceController,
                 );
               },
               color: AppColor.cgreenColor,

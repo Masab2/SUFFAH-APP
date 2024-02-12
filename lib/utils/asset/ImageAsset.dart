@@ -8,4 +8,11 @@ class ImageAsset {
   static String islamicIcon = 'assets/images/islamicman.png';
   static String rashanimg = 'assets/images/rashanimg.jpg';
   static String hungryimg = 'assets/images/hungry.jpg';
+  
+  // Payment Methods Pic
+  static String jazzcashimg = 'assets/images/jazzcashlogo.png';
+  static String easyPisaimg = 'assets/images/easypisa.jpg';
+  static String paypalimg = 'assets/images/paypal.png';
+  static String applePayimg = 'assets/images/applepay.png';
+  static String googlePayimg = 'assets/images/googlepay.png';
 }

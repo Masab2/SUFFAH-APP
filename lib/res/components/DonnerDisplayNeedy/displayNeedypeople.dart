@@ -71,3 +71,186 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
     );
   }
 }
+
+class DisplayPaymentMethodComp extends StatelessWidget {
+  final String paymentname, image, paymentDescrip;
+  final VoidCallback ontap;
+  final Color color;
+  const DisplayPaymentMethodComp({
+    super.key,
+    required this.paymentname,
+    required this.image,
+    required this.ontap,
+    required this.color,
+    required this.paymentDescrip,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: ontap,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: context.mw * 0.05),
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      width: context.mw * 0.30,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: context.mw * 0.03),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColor.geryColor,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image(
+                          image: AssetImage(image),
+                          height: context.mw * 0.15,
+                          width: context.mw * 0.30,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: context.mw * 0.06),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          paymentname,
+                          style: GoogleFonts.poppins(
+                            fontSize: context.mh * 0.020,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          paymentDescrip,
+                          style: GoogleFonts.poppins(
+                            fontSize: context.mh * 0.014,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.geryColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const Icon(
+                  Icons.arrow_forward_ios,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PaymentUperheading extends StatelessWidget {
+  final String image, program, donnationprice, noofMeals, actualPrice;
+  const PaymentUperheading(
+      {super.key,
+      required this.image,
+      required this.program,
+      required this.donnationprice,
+      required this.noofMeals,
+      required this.actualPrice});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: context.mw * 0.05),
+          child: Row(
+            children: [
+              Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image(
+                      image: AssetImage(image),
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                ],
+              ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        program,
+                        style: GoogleFonts.poppins(
+                          fontSize: context.mh * 0.020,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      0.01.ph,
+                      Text(
+                        'Meal for One: $actualPrice PKR',
+                        style: GoogleFonts.poppins(
+                          fontSize: context.mh * 0.012,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      0.01.ph,
+                      Row(
+                        children: [
+                          Text(
+                            donnationprice,
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.015,
+                              color: AppColor.geryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          0.01.pw,
+                          Text(
+                            ' | ',
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.015,
+                              color: AppColor.geryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          0.01.pw,
+                          Text(
+                            noofMeals,
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.015,
+                              color: AppColor.geryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

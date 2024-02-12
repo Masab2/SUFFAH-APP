@@ -27,6 +27,15 @@ class _AddSuffahMemberState extends State<AddSuffahMember> {
   final cityController = TextEditingController();
   final addressController = TextEditingController();
   final addsuffahControlller = Get.put(AddMasjidMemberViewModel());
+  late String id;
+  late String masjidid;
+  @override
+  void initState() {
+    id = Get.arguments[0] ?? '';
+    masjidid = Get.arguments[1] ?? '';
+    super.initState();
+  }
+
   @override
   void dispose() {
     muntazimController.dispose();
@@ -146,7 +155,8 @@ class _AddSuffahMemberState extends State<AddSuffahMember> {
                 phoneController,
                 cityController,
                 countryController,
-                addressController);
+                addressController,
+                masjidid);
           },
           child: Text(
             'Register Masjid Member',

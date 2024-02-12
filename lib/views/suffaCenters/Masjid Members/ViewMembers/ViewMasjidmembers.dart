@@ -16,9 +16,17 @@ class ViewMasjidMembers extends StatefulWidget {
 }
 
 class _ViewMasjidMembersState extends State<ViewMasjidMembers> {
+  late String id;
+  late String masjidid;
+  @override
+  void initState() {
+    id = Get.arguments[0] ?? '';
+    masjidid = Get.arguments[1] ?? '';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final id = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -77,7 +85,10 @@ class _ViewMasjidMembersState extends State<ViewMasjidMembers> {
           color: AppColor.whiteColor,
         ),
         onPressed: () {
-          Get.toNamed(RoutesNames.suffacenterAddMembersScreen);
+          Get.toNamed(RoutesNames.suffacenterAddMembersScreen, arguments: [
+            id,
+            masjidid,
+          ]);
         },
       ),
     );

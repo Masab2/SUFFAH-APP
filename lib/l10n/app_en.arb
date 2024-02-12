@@ -18,5 +18,9 @@
   "profileTitle": "Profile",
   "@_HOMESCREEN": {},
   "ourDonnationTitle": "Our Donnation Choices",
-  "donnateNow": "Donnate Now"
+  "donnateNow": "Donnate in this Program",
+  "@_ALSUFFAHCENTER": {},
+  "pageTitle": "AL-SUFFAH CENTER",
+  "donateMasjid": "Donate In this masjid",
+  "searchMasjid": "Search Masjid"
 }

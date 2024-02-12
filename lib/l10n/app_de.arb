@@ -18,5 +18,9 @@
   "profileTitle": "Profil",
   "@_HOMESCREEN": {},
   "ourDonnationTitle": "Unsere Spendenmöglichkeiten",
-  "donnateNow": "Spende jetzt"
+  "donnateNow": "Spenden Sie in diesem Programm",
+  "@_ALSUFFAHCENTER": {},
+  "pageTitle": "AL-SUFFAH ZENTRUM",
+  "donateMasjid": "Spenden Sie in dieser Moschee",
+  "searchMasjid":"Suche nach Moschee"
 }

@@ -1,20 +1,18 @@
 // ignore_for_file: unrelated_type_equality_checks
-import 'dart:convert';
-
-import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
+import 'package:suffa_app/Model/alSuffahPersonModel/suffaPersonModel.dart';
+import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/Donner/displayNeedyPeopleController/NeedyPeopleController.dart';
 import 'package:suffa_app/ViewModel/PaymentMethods/JazzCash/jazzcashPaymentViewModel.dart';
-import 'package:suffa_app/enum/AffiliatedProgramEnum.dart';
 import 'package:suffa_app/res/components/AppBar/AppBar.dart';
 import 'package:suffa_app/res/components/DonnerDisplayNeedy/displayNeedypeople.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
+import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
-import 'package:suffa_app/utils/constant/constant.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class DonateNeedyPeopleView extends StatefulWidget {
@@ -28,11 +26,15 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
   final needyPeopleController = Get.put(NeedyPeopleController());
   final jazzcashPayment = Get.put(JazcashPaymentViewModel());
   final searchController = TextEditingController();
-  final program = Get.arguments[0];
-  final muntazimid = Get.arguments[1];
+  late String program;
+  late String muntazimid;
+  late String price;
   @override
   void initState() {
-    needyPeopleController.fetchData('OneTimeMeal', muntazimid);
+    program = Get.arguments[0];
+    muntazimid = Get.arguments[1];
+    price = Get.arguments[2];
+    needyPeopleController.fetchData(program, muntazimid);
     super.initState();
   }
 
@@ -47,7 +49,16 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar.alSuffahPersonbar(context, () {}),
+      appBar: HomeAppBar.alSuffahPersonbar(context, () {
+        final totalPrice =
+            needyPeopleController.calulateTotalDonnation(int.parse(price));
+        List<SuffahPersonModel> addedPeople = needyPeopleController.needyPeople
+            .where((person) => person.tempstatus == 'Added')
+            .toList();
+        String tPrice = totalPrice.toString();
+        Get.toNamed(RoutesNames.donatePaymentScreen,
+            arguments: [addedPeople, tPrice, price]);
+      }, program),
       body: Column(
         children: [
           Obx(() {
@@ -72,6 +83,9 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                           prefixIcon: const Icon(
                             IconlyLight.search,
                           ),
+                          onChanged: (value) {
+                            needyPeopleController.filterList(value);
+                          },
                         ),
                       ),
                     ],
@@ -80,35 +94,30 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                   Expanded(
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(
-                          parent: AlwaysScrollableScrollPhysics()),
-                      itemCount: needyPeopleController.needyPeople.length,
+                        parent: AlwaysScrollableScrollPhysics(),
+                      ),
+                      itemCount: needyPeopleController.filteredPeople.length,
                       itemBuilder: (context, index) {
-                        final person = needyPeopleController.needyPeople[index];
+                        final person =
+                            needyPeopleController.filteredPeople[index];
                         return DisplayNeedyPeopleComp(
                             masjidname: person.personname,
                             image: person.image,
                             masjidaddress: person.address,
-                            ontap: () {
-                              var key = utf8.encode(IntegeritySalt);
-                              var bytes = utf8.encode(superdata);
-                              var hmacSha256 = Hmac(sha256, key);
-                              Digest sha256Result = hmacSha256.convert(bytes);
-                              jazzcashPayment.jazzCashPayment(
-                                '500',
-                                '03264747056',
-                                sha256Result.toString(),
-                              );
+                            ontap: () async {
+                              await needyPeopleController
+                                  .updateStatus(person.personId);
                             },
-                            program: program == ProgramType.ONETIMEMEAL
-                                ? 'OneTimeMeal'
-                                : 'RashanProgram',
+                            program: program,
                             muntazimid: muntazimid,
                             traling: IconButton(
                               onPressed: () async {
                                 await needyPeopleController
                                     .updateStatus(person.personId);
                               },
-                              icon: person.tempstatus == 'Added'
+                              icon: person.tempstatus == 'Added' &&
+                                      person.donnerSelectionId.isNotEmpty &&
+                                      person.donnerSelectionId == Apis.user.uid
                                   ? const Icon(
                                       IconlyBold.heart,
                                       color: Colors.red,
@@ -120,7 +129,9 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                   ),
                   Visibility(
                     visible: needyPeopleController.needyPeople.any(
-                      (person) => person.tempstatus == 'Added',
+                      (person) =>
+                          person.tempstatus == 'Added' &&
+                          person.donnerSelectionId == Apis.user.uid,
                     ),
                     child: MaterialButton(
                       height: context.mh * 0.06,
@@ -129,7 +140,21 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        final totalPrice = needyPeopleController
+                            .calulateTotalDonnation(int.parse(price));
+                        String tPrice = totalPrice.toString();
+                        List<SuffahPersonModel> addedPeople =
+                            needyPeopleController.needyPeople
+                                .where((person) => person.tempstatus == 'Added')
+                                .toList();
+                        Get.toNamed(RoutesNames.donatePaymentScreen,
+                            arguments: [
+                              addedPeople,
+                              tPrice,
+                              price,
+                            ]);
+                      },
                       child: Text(
                         'Donate All',
                         style: GoogleFonts.poppins(

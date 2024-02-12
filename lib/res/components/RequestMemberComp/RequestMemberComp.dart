@@ -7,19 +7,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
-class RequestMemberComp extends StatelessWidget {
-  final VoidCallback onAccept, onReject;
-  final String customername, image, email, address, centerId, city;
-  const RequestMemberComp(
+class RequesttoAdminComp extends StatelessWidget {
+  final VoidCallback onGreenBtnPressed, onGreyBtnPressed;
+  final String greenBtnText, greyBtnText;
+  final String title, image, email, address, centerId, city;
+  const RequesttoAdminComp(
       {super.key,
-      required this.customername,
+      required this.title,
       required this.image,
       required this.email,
-      required this.onAccept,
+      required this.onGreenBtnPressed,
       required this.centerId,
       required this.address,
       required this.city,
-      required this.onReject});
+      required this.onGreyBtnPressed, required this.greenBtnText, required this.greyBtnText});
 
   @override
   Widget build(BuildContext context) {
@@ -35,33 +36,31 @@ class RequestMemberComp extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: GoogleFonts.poppins(
-                      fontSize: 12,
+                      fontSize: context.mh * 0.012,
                       color: AppColor.geryColor,
                       fontWeight: FontWeight.bold)),
             ),
           ),
           Row(
             children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
-                height: context.mh * 0.20,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: CachedNetworkImage(
-                    height: context.mh * 0.10,
-                    width: context.mw / 2.9,
-                    imageUrl: image,
-                    placeholder: (context, url) => const SpinKitChasingDots(
-                      color: AppColor.cgreenColor,
-                      duration: Duration(seconds: 5),
-                      size: 40,
-                    ),
-                    errorWidget: (context, url, error) {
-                      return const Icon(Icons.error);
-                    },
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: CachedNetworkImage(
+                  height: context.mw * 0.4,
+                  width: context.mw * 0.4,
+                  fit: BoxFit.cover,
+                  imageUrl: image,
+                  placeholder: (context, url) => const SpinKitChasingDots(
+                    color: AppColor.cgreenColor,
+                    duration: Duration(seconds: 5),
+                    size: 40,
                   ),
+                  errorWidget: (context, url, error) {
+                    return const Icon(Icons.error);
+                  },
                 ),
               ),
+              0.02.pw,
               Container(
                 padding: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
                 height: context.mh * 0.20,
@@ -71,9 +70,10 @@ class RequestMemberComp extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(customername,
+                    0.03.ph,
+                    Text(title,
                         style: GoogleFonts.poppins(
-                            fontSize: 18,
+                            fontSize: context.mh * 0.018,
                             color: AppColor.geryColor,
                             fontWeight: FontWeight.bold)),
                     0.01.ph,
@@ -81,7 +81,7 @@ class RequestMemberComp extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: Text('$email',
+                          child: Text(email,
                               style: GoogleFonts.poppins(
                                   fontSize: 12,
                                   color: AppColor.cgreenColor,
@@ -90,15 +90,21 @@ class RequestMemberComp extends StatelessWidget {
                       ],
                     ),
                     0.01.ph,
-                    Text('$city'.toUpperCase(),
+                    Text(city.toUpperCase(),
                         style: GoogleFonts.poppins(
-                            fontSize: 12,
+                            fontSize: context.mh * 0.013,
                             color: AppColor.geryColor,
                             fontWeight: FontWeight.bold)),
                     0.01.ph,
-                    Text(address.toUpperCase(),
+                    Expanded(
+                      child: Text(
+                        address.toUpperCase(),
                         style: GoogleFonts.poppins(
-                            fontSize: 15, fontWeight: FontWeight.bold)),
+                          fontSize: context.mh * 0.015,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -113,11 +119,11 @@ class RequestMemberComp extends StatelessWidget {
                 Expanded(
                   child: MaterialButton(
                     minWidth: context.mw * 0.30,
-                    color: AppColor.cgreenColor,
+                    color: AppColor.geryColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    onPressed: onAccept,
-                    child: Text('Accept',
+                    onPressed: onGreyBtnPressed,
+                    child: Text(greyBtnText,
                         style: GoogleFonts.poppins(color: AppColor.whiteColor)),
                   ),
                 ),
@@ -125,11 +131,11 @@ class RequestMemberComp extends StatelessWidget {
                 Expanded(
                   child: MaterialButton(
                     minWidth: context.mw * 0.30,
-                    color: AppColor.geryColor,
+                    color: AppColor.cgreenColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    onPressed: onReject,
-                    child: Text('Reject',
+                    onPressed: onGreenBtnPressed,
+                    child: Text(greenBtnText,
                         style: GoogleFonts.poppins(color: AppColor.whiteColor)),
                   ),
                 ),

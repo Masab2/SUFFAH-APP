@@ -34,7 +34,7 @@ class HomeAppBar {
   }
 
   static PreferredSizeWidget alSuffahPersonbar(
-      BuildContext context, VoidCallback ontap) {
+      BuildContext context, VoidCallback ontap, program) {
     return AppBar(
       title: Text(
         'AL-SUFFAH PERSON',
@@ -46,7 +46,7 @@ class HomeAppBar {
       centerTitle: true,
       actions: [
         StreamBuilder(
-          stream: Apis.getAllNeedyPeopleDonateCount('OneTimeMeal'),
+          stream: Apis.getAllNeedyPeopleDonateCount(program),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();

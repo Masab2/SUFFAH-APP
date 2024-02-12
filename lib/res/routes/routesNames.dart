@@ -12,7 +12,10 @@ class RoutesNames {
   static const String settingsScreen = '/settingsScreen';
   static const String selectMasjidScreen = '/selectMasjidScreen';
   static const String donateNeedyPeopleScreen = '/donateNeedyPeopleScreen';
+  static const String donatePaymentScreen = '/donatePaymentScreen';
 
+  // Payment Screens
+  static const String jazzCashPaymentScreen = '/jazzCashPaymentScreen';
   //Choice Screen
   static const String choiceScreen = '/choiceScreen';
 
@@ -23,8 +26,11 @@ class RoutesNames {
   static const String addSuffahCenterScreen = '/addSuffahCenterScreen';
   static const String createEmailScreen = '/createEmailScreen';
   static const String memberRequestScreen = '/memberRequestScreen';
+  static const String requestProgramScreen = '/requestProgramScreen';
   static const String addaffiliatedProgramScreenforAdmin =
       '/addaffiliatedProgramScreenforAdmin';
+  static const String displayaffiliatedProgramScreenforAdmin =
+      '/displayaffiliatedProgramScreenforAdmin';
 
   // Suffa Center DashBoard
   static const String suffahloginDashBoardScreen =
@@ -44,8 +50,10 @@ class RoutesNames {
   static const String addPersonalDataScreen = '/addPersonalDataScreen';
   static const String addaffiliatedProgramScreen =
       '/addaffiliatedProgramScreen';
-  static const String affiliatedProgramScreen = '/affiliatedProgramScreen';
+  static const String centerProgramScreen = '/centerProgramScreen';
   static const String selectProgramScreen = '/selectProgramScreen';
+  static const String centerProgramDisplayScreen =
+      '/centerProgramDisplayScreen';
 
   // SUFFAH STORE
   static const String suffahStoreloginDashBoardScreen =

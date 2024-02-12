@@ -62,8 +62,10 @@ class HomeScreen extends StatelessWidget {
                       image: ImageAsset.hungryimg,
                       title: data['programTitle'],
                       ontap: () {
-                        Get.toNamed(RoutesNames.selectMasjidScreen,
-                            arguments: data['programTitle']);
+                        Get.toNamed(RoutesNames.selectMasjidScreen, arguments: [
+                          data['programTitle'],
+                          data['Price'],
+                        ]);
                       },
                       program: data['programTitle'],
                     );

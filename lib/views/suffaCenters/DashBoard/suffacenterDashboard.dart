@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/res/components/adminDashBoardTiles/adminDashBoardtiles.dart';
+import 'package:suffa_app/res/components/adminDashBoardTiles/adminTilesUperheading/upperHeading.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
+import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class SuffaCenterDashboard extends StatefulWidget {
@@ -17,6 +19,7 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
   late String id;
   late String masjidname;
   late String masjidId;
+  late String muntazimEmail;
 
   @override
   void initState() {
@@ -24,19 +27,15 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
     id = Get.arguments?[0] ?? "";
     masjidname = Get.arguments?[1] ?? "";
     masjidId = Get.arguments?[2] ?? "";
+    muntazimEmail = Get.arguments?[3] ?? "";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(IconlyBold.arrow_left_circle)),
         title: Text(
-          'SUFFAH CENTER',
+          'AL-SUFFAH CENTER',
           style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -45,32 +44,8 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
           physics: const BouncingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics()),
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.mw * 0.07),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Masjid Name : ',
-                      style: GoogleFonts.poppins(
-                        fontSize: context.mh * 0.020,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      masjidname,
-                      style: GoogleFonts.poppins(
-                        fontSize: context.mh * 0.020,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            0.02.ph,
+            UpperHeading(icon: Icons.mosque, title: masjidname),
+            0.01.ph,
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: Get.width * 0.04, vertical: Get.height * 0.02),
@@ -92,7 +67,10 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                     title: "Masjid Member's",
                     ontap: () {
                       Get.toNamed(RoutesNames.suffacenterViewMembersScreen,
-                          arguments: id);
+                          arguments: [
+                            id,
+                            masjidId,
+                          ]);
                     },
                     icon: Icons.mosque,
                   ),
@@ -114,10 +92,15 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                     icon: Icons.mosque_rounded,
                   ),
                   AdminDashBoardtiles(
-                    title: 'Affiliated Program',
+                    title: 'Suffah Center Program',
                     ontap: () {
-                      Get.toNamed(RoutesNames.affiliatedProgramScreen,
-                          arguments: id);
+                      Get.toNamed(RoutesNames.centerProgramDisplayScreen,
+                          arguments: [
+                            id,
+                            masjidname,
+                            masjidId,
+                            muntazimEmail,
+                          ]);
                     },
                     icon: Icons.dashboard,
                   ),

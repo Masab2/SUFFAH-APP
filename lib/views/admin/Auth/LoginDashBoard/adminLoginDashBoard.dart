@@ -35,10 +35,13 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        backgroundColor: AppColor.cgreenColor,
+      ),
       body: Stack(
         children: [
           Container(
-            height: context.mh * 0.55,
+            height: context.mh * 0.45,
             decoration: const BoxDecoration(
                 color: AppColor.cgreenColor,
                 borderRadius: BorderRadius.only(
@@ -47,16 +50,16 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
                 )),
           ),
           Positioned(
-              top: context.mh * 0.0002,
+              // top: context.mh * 0.0002,
               right: context.mw * 0.05,
               left: context.mw * 0.05,
-              child: Image(image: AssetImage(ImageAsset.applogo))),
+              child: Image(image: AssetImage(ImageAsset.applogobackremove))),
           SingleChildScrollView(
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),
             child: Padding(
               padding: EdgeInsets.only(
-                top: context.mh * 0.35,
+                top: context.mh * 0.28,
                 left: context.mw * 0.05,
                 right: context.mw * 0.05,
               ),
@@ -151,15 +154,6 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
               ),
             ),
           ),
-          Positioned(
-              top: context.mh * 0.07,
-              left: context.mw * 0.04,
-              child: InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: const Icon(IconlyBold.arrow_left_circle,
-                      color: AppColor.whiteColor))),
         ],
       ),
     );

@@ -5,9 +5,12 @@ import 'package:suffa_app/views/Auth/login/login.dart';
 import 'package:suffa_app/views/Auth/signup/signUpScreen.dart';
 import 'package:suffa_app/views/Donners/BottomNavBar/BottomNavbar.dart';
 import 'package:suffa_app/views/Donners/Home/Donate%20NeedyPeople/donateNeedyPeopleScreen.dart';
+import 'package:suffa_app/views/Donners/Home/PaymentScreen/Jazzcash/jazzcashScreen.dart';
+import 'package:suffa_app/views/Donners/Home/PaymentScreen/paymentScreen.dart';
 import 'package:suffa_app/views/Donners/Home/Select%20Masjids/ViewMasjids/SelectMasjidsView.dart';
 import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
 import 'package:suffa_app/views/admin/Affiliated%20Program/addProgram/addPrograms.dart';
+import 'package:suffa_app/views/admin/Affiliated%20Program/displayprogram/displayAffiliaatedProgram.dart';
 import 'package:suffa_app/views/admin/Auth/LoginDashBoard/adminLoginDashBoard.dart';
 import 'package:suffa_app/views/admin/ChoiceScreen/ChoiceScreen.dart';
 import 'package:suffa_app/views/admin/DashBoard/adminDashboard.dart';
@@ -15,10 +18,11 @@ import 'package:suffa_app/views/admin/AdminAddSuffahCenter/ViewSuffahCenter.dart
 import 'package:suffa_app/views/admin/AdminAddSuffahCenter/addSuffahCenter.dart';
 import 'package:suffa_app/views/admin/AdminAddSuffahCenter/createEmailView.dart';
 import 'package:suffa_app/views/admin/MemberRequest/memberRequest.dart';
+import 'package:suffa_app/views/admin/RequestedProgram/RequestedProgram.dart';
 import 'package:suffa_app/views/splashView/splashView.dart';
-import 'package:suffa_app/views/suffaCenters/AffiliatedProgram/AddAffiliatedProgram/addAffiliatedProgram.dart';
-import 'package:suffa_app/views/suffaCenters/AffiliatedProgram/ViewPrograms/viewAffiliatedPrograms.dart';
 import 'package:suffa_app/views/suffaCenters/Auth/SuffahCenterAuth.dart';
+import 'package:suffa_app/views/suffaCenters/CenterProgram/CreateFunding/addCenterProgram.dart';
+import 'package:suffa_app/views/suffaCenters/CenterProgram/displayProgram/displayCenterProgram.dart';
 import 'package:suffa_app/views/suffaCenters/DashBoard/suffacenterDashboard.dart';
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/AddMembers/addMember.dart';
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/GenerateEmail/generateEmail.dart';
@@ -73,6 +77,14 @@ class AppRoutes {
             name: RoutesNames.donateNeedyPeopleScreen,
             page: () => const DonateNeedyPeopleView(),
             transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.donatePaymentScreen,
+            page: () => const PaymentScreen(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.jazzCashPaymentScreen,
+            page: () => const JazzCashView(),
+            transition: Transition.leftToRight),
 
         //! Adminstration DashBoard
         GetPage(
@@ -102,6 +114,14 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.addaffiliatedProgramScreenforAdmin,
             page: () => const AddProgramsView(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.requestProgramScreen,
+            page: () => const RequestedProgramView(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.displayaffiliatedProgramScreenforAdmin,
+            page: () => const DisplayAffiliatedProgram(),
             transition: Transition.leftToRight),
 
         //* Suffa Center DashBoard
@@ -142,16 +162,16 @@ class AppRoutes {
             page: () => const AddPersonalData(),
             transition: Transition.leftToRight),
         GetPage(
-            name: RoutesNames.affiliatedProgramScreen,
-            page: () => const ViewAffiliatedPrograms(),
-            transition: Transition.leftToRight),
-        GetPage(
-            name: RoutesNames.addaffiliatedProgramScreen,
-            page: () => const AddAffiliatedProgram(),
+            name: RoutesNames.centerProgramScreen,
+            page: () => const AddCenterProgramView(),
             transition: Transition.leftToRight),
         GetPage(
             name: RoutesNames.selectProgramScreen,
             page: () => const SelectProgram(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.centerProgramDisplayScreen,
+            page: () => const DisplayCenterProgram(),
             transition: Transition.leftToRight),
 
         //& Shuffa Store Routes

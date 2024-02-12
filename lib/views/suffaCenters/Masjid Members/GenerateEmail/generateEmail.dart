@@ -10,7 +10,6 @@ import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
-
 class GenerateEmailSuffaMembers extends StatefulWidget {
   const GenerateEmailSuffaMembers({super.key});
 
@@ -22,7 +21,8 @@ class GenerateEmailSuffaMembers extends StatefulWidget {
 class _GenerateEmailSuffaMembersState extends State<GenerateEmailSuffaMembers> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final createEmailController = Get.put(CreateEmailAddressSuffaMembersViewModel());
+  final createEmailController =
+      Get.put(CreateEmailAddressSuffaMembersViewModel());
   @override
   void dispose() {
     emailController.dispose();
@@ -40,6 +40,7 @@ class _GenerateEmailSuffaMembersState extends State<GenerateEmailSuffaMembers> {
     final city = Get.arguments[4];
     final country = Get.arguments[5];
     final address = Get.arguments[6];
+    final masjidid = Get.arguments[7];
 
     return Scaffold(
         appBar: AppBar(
@@ -92,15 +93,17 @@ class _GenerateEmailSuffaMembersState extends State<GenerateEmailSuffaMembers> {
                 height: context.mh * 0.06,
                 onPressed: () {
                   createEmailController.createEmail(
-                      File(image),
-                      name,
-                      email,
-                      phone,
-                      city,
-                      country,
-                      address,
-                      emailController,
-                      passwordController);
+                    File(image),
+                    name,
+                    email,
+                    phone,
+                    city,
+                    country,
+                    address,
+                    emailController,
+                    passwordController,
+                    masjidid,
+                  );
                 },
                 child: Text(
                   'Generate Email',

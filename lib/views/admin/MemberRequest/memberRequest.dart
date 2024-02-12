@@ -64,17 +64,19 @@ class _MemberRequestState extends State<MemberRequest> {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     var data = snapshot.data!.docs[index];
-                    return RequestMemberComp(
-                      customername: data['name'],
+                    return RequesttoAdminComp(
+                      title: data['name'],
                       image: data['masjidimg'],
                       email: data['email'],
-                      onAccept: () {
+                      onGreenBtnPressed: () {
                         memberRequestViewModel.acceptRequest(data['MemberId']);
                       },
                       centerId: data['Desig'],
                       address: data['Masjidname'],
                       city: data['city'],
-                      onReject: () {},
+                      onGreyBtnPressed: () {},
+                      greenBtnText: 'Accept',
+                      greyBtnText: 'Reject',
                     );
                   },
                 ));

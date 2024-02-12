@@ -11,13 +11,13 @@ class CustomizedFeild extends StatelessWidget {
   Widget? sufixIcon;
   Widget? prefixIcon;
   bool? obscuretext = false;
-  VoidCallback? onchanged;
+  final ValueChanged<String>? onChanged;
   TextEditingController controller;
   int maxlines;
   CustomizedFeild(
       {super.key,
       this.title,
-      this.onchanged,
+      this.onChanged,
       required this.controller,
       this.hint,
       this.sufixIcon,
@@ -46,6 +46,7 @@ class CustomizedFeild extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: AppColor.geryColor.withOpacity(0.34)),
             child: TextFormField(
+              onChanged: onChanged,
               controller: controller,
               obscureText: obscuretext ?? false,
               maxLines: maxlines,

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppLanguageController extends GetxController {
   final Rx<Locale?> _appLocale = Rx<Locale?>(null);
   Locale? get appLocal => _appLocale.value;
-
+   Map<String, dynamic>? _translations;
   @override
   void onInit() {
     super.onInit();
@@ -39,7 +40,7 @@ class AppLanguageController extends GetxController {
       log(type.toString());
       _appLocale.value = const Locale("en");
       await prefs.setString('language_code', 'en');
-      await prefs.setString('countryCode', 'en'); 
+      await prefs.setString('countryCode', 'en');
     } else if (type == const Locale("ur")) {
       log(type.toString());
       _appLocale.value = const Locale("ur");
@@ -47,5 +48,37 @@ class AppLanguageController extends GetxController {
       await prefs.setString('countryCode', 'ur');
     }
     update();
+  }
+
+  void loadTranslations() {
+    String jsonContent = ''; // Load JSON content from your assets
+    // Load translations based on the selected language
+    switch (_appLocale.value?.languageCode) {
+      case 'en':
+        jsonContent = ''; // Load en.json content
+        break;
+      case 'de':
+        jsonContent = ''; // Load de.json content
+        break;
+      case 'ur':
+        jsonContent = ''; // Load ur.json content
+        break;
+      // Add cases for other supported languages
+      default:
+        jsonContent = ''; // Load default language content
+    }
+
+    // Parse JSON content into Map
+    _translations = json.decode(jsonContent);
+  }
+
+  String translateDynamicData(String dynamicData) {
+    // Replace placeholders in dynamic data with translations
+    if (_translations != null) {
+      _translations!.forEach((key, value) {
+        dynamicData = dynamicData.replaceAll('{$key}', value);
+      });
+    }
+    return dynamicData;
   }
 }

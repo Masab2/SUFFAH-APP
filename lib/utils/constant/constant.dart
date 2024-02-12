@@ -1,5 +1,7 @@
 //! Firebase Collections
 // ignore_for_file: non_constant_identifier_names
+import 'package:intl/intl.dart';
+
 const String donorinfoCollection = 'DonnerInfo';
 const String adminCollection = 'admin';
 const String suffahCenterCollection = 'SuffahCenter';
@@ -7,16 +9,18 @@ const String suffahCenterMembers = 'SuffahCenterMembers';
 const String suffahCenterNeedyPeople = 'SuffahCenterNeedyPeople';
 const String donnationTrack = 'donnationTrack';
 const String suffahAffiliatedprogram = 'suffahAffiliatedprogram';
+const String suffahCenterDefineProgram = 'CenterDefineProgram';
 
 //^ Payment Methods
 // jazzcash Payment
+String dateandTime = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
 String pp_ReturnUrl =
     'https://sandbox.jazzcash.com.pk/ApplicationAPI/API/Payment/DoTransaction';
 String pp_ver = "1.1";
 String pp_TxnCurrency = "PKR";
 String pp_TxnDateTime = '20/10/2003';
 String pp_TxnExpireDateTime = '20/10/2003';
-String tre = 'T20/10/2003';
+String tre = "T$dateandTime";
 String pp_Amount = "100000";
 String pp_BillReference = "billRef";
 String pp_Description = "Description";
@@ -57,4 +61,3 @@ String superdata = IntegeritySalt +
     pp_ver +
     and +
     ppmpf_1;
-

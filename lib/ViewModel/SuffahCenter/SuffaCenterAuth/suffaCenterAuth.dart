@@ -24,17 +24,20 @@ class SuffaCenterAuthViewModel extends GetxController {
         password.clear();
         final futures = await Future.wait([
           SharePrefs.getId('id'),
-          SharePrefs.getMasjid('masjidName'), // Use getString instead of getId
-          SharePrefs.getMasjidID('centerId'), // Use getString instead of getId
+          SharePrefs.getMasjid('masjidName'),
+          SharePrefs.getMasjidID('centerId'),
+          SharePrefs.getMuntazimEmail('email'),
         ]);
         final userId = futures[0];
         final masjidName = futures[1];
         final centerId = futures[2];
+        final muntazimEmail = futures[3];
         log(masjidName);
         Get.toNamed(RoutesNames.suffacenterDashBoardScreen, arguments: [
           userId,
           masjidName,
           centerId,
+          muntazimEmail,
         ]);
       } else {
         log(result.toString());

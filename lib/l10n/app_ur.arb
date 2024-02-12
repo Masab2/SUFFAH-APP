@@ -1,6 +1,6 @@
 {
   "apptitlefirst": "ال",
-  "apptitlesecond": "سفاح",
+  "apptitlesecond": "صفح",
   "@_PROFILESCREEN": {},
   "appSetting": "ترتیبات",
   "langHeading": "زبان",
@@ -18,5 +18,9 @@
   "profileTitle": "پروفائل",
   "@_HOMESCREEN": {},
   "ourDonnationTitle": "ہمارے عطیہ کے انتخاب",
-  "donnateNow": "ابھی عطیہ کیجیے"
+  "donnateNow": "اس پروگرام میں عطیہ کریں۔",
+  "@_ALSUFFAHCENTER": {},
+  "pageTitle": "الصفح سنٹر",
+  "donateMasjid": "اس مسجد میں صدقہ کریں۔",
+  "searchMasjid": "مسجد تلاش کریں۔"
 }

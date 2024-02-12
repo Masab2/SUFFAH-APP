@@ -22,7 +22,7 @@ class ChoiceComp extends StatelessWidget {
           height: context.mh * 0.10,
           width: context.mw / 1.1,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             color: color,
             boxShadow: const [
               BoxShadow(
@@ -42,7 +42,7 @@ class ChoiceComp extends StatelessWidget {
                 title,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.poppins(
-                    fontSize: 15,
+                    fontSize: context.mh * 0.017,
                     fontWeight: FontWeight.bold,
                     color: AppColor.whiteColor),
               )

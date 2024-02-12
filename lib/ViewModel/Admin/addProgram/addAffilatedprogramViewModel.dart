@@ -11,8 +11,7 @@ class AffiliatedViewModel extends GetxController {
   var selectedValue = "Active".obs;
   final AffiliatedProgramRepo _addProgramRepo = AffiliatedProgramRepo();
   var image;
-  
-  
+
   Future getImageFromgallery(ImageSource source) async {
     image = await _picker.pickImage(source: source, imageQuality: 80);
     if (image != null) {
@@ -22,9 +21,9 @@ class AffiliatedViewModel extends GetxController {
     }
   }
 
-  void addAffiliatedProgram(title, status) async {
+  void addAffiliatedProgram(title, status, price) async {
     final result = await _addProgramRepo.addAffiliatedProgram(
-        File(imagePath.value.toString()), title, status);
+        File(imagePath.value.toString()), title, status, price);
     if (result == null) {
       Get.snackbar('Program Added', 'Program Added Successfully');
     } else {

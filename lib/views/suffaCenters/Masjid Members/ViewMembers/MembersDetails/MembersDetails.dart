@@ -11,7 +11,7 @@ class SuffaCenterMemberDetail extends StatefulWidget {
 class _SuffaCenterMemberDetailState extends State<SuffaCenterMemberDetail> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [
           

@@ -51,10 +51,10 @@ class _LoginViewState extends State<LoginView> {
                 )),
           ),
           Positioned(
-              top: context.mh * 0.001,
+              top: context.mh * 0.04,
               right: context.mw * 0.05,
               left: context.mw * 0.05,
-              child: Image(image: AssetImage(ImageAsset.applogo))),
+              child: Image(image: AssetImage(ImageAsset.applogobackremove))),
           SingleChildScrollView(
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),

@@ -20,12 +20,20 @@ class SharePrefs {
     final String Id = prefs.getString(key) ?? '';
     return Id;
   }
+
   static Future<String> getMasjid(key) async {
     final prefs = await SharedPreferences.getInstance();
     final String masjidname = prefs.getString(key) ?? '';
     return masjidname;
   }
+
   static Future<String> getMasjidID(key) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String masjidname = prefs.getString(key) ?? '';
+    return masjidname;
+  }
+
+  static Future<String> getMuntazimEmail(key) async {
     final prefs = await SharedPreferences.getInstance();
     final String masjidname = prefs.getString(key) ?? '';
     return masjidname;

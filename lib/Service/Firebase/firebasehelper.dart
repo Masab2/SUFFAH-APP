@@ -163,8 +163,18 @@ class Apis {
   }
 
   // Add Suffah center Commettie members
-  static Future<void> addSuffahCommitteMembers(File file, name, email,
-      suffahemail, password, phoneno, city, country, address, adminid) async {
+  static Future<void> addSuffahCommitteMembers(
+      File file,
+      name,
+      email,
+      suffahemail,
+      password,
+      phoneno,
+      city,
+      country,
+      address,
+      adminid,
+      masjidid) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/MasjidImages$id');
     storage.UploadTask uploadTask = ref.putFile(file);
@@ -184,6 +194,7 @@ class Apis {
         'MemberId': id,
         'status': "Requested",
         'Desig': "Member",
+        'centerId': masjidid,
       });
     }).onError((error, stackTrace) {
       throw FirebaseException;
@@ -269,6 +280,28 @@ class Apis {
         .snapshots();
   }
 
+  // Get All Needy people According to there Program and By Masjid Count
+  static AggregateQuery getAllNeedyPeopleByProgramMasjidCount(
+      program, muntazimid) {
+    return firestore
+        .collection(suffahCenterNeedyPeople)
+        .where('program', isEqualTo: program)
+        .where('MuntazimId', isEqualTo: muntazimid)
+        .where('status', isEqualTo: 'waiting')
+        .count();
+  }
+
+  // Get All Needy people According to there Program and By Masjid How Recived Donnation
+  static AggregateQuery getAllNeedyPeopleByProgramMasjidDonate(
+      program, muntazimid) {
+    return firestore
+        .collection(suffahCenterNeedyPeople)
+        .where('program', isEqualTo: program)
+        .where('MuntazimId', isEqualTo: muntazimid)
+        .where('status', isEqualTo: 'Pending')
+        .count();
+  }
+
   // Get All Needy people According to there Program
   static Stream<QuerySnapshot<Map<String, dynamic>>> getAllNeedyPeopleByProgram(
       program) {
@@ -307,7 +340,8 @@ class Apis {
   }
 
   // add Affiliated Program into the database
-  static Future<void> addAffiliatedProgramByAdmin(file, title, status) async {
+  static Future<void> addAffiliatedProgramByAdmin(
+      file, title, status, price) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/Affiliatedprogram$id');
     storage.UploadTask uploadTask = ref.putFile(file);
@@ -318,6 +352,7 @@ class Apis {
         'image': imageUrl.toString(),
         'programTitle': title,
         'Status': status,
+        'Price': price,
       });
     });
   }
@@ -329,9 +364,77 @@ class Apis {
 
   // Add Programs into The Suffa center Collection
   static Future<void> updateTheSuffaCenterPrograms(
-      List<dynamic> programs, id) async {
+    List<dynamic> programs,
+    id,
+  ) async {
     firestore.collection(suffahCenterCollection).doc(id).update({
-      'Programs': [programs],
+      'Programs': [
+        programs,
+      ],
     });
+  }
+
+  // Update The Status of The  Suffa Person Who's Payment is On The Way
+  static Future<void> updateStatusAlSuffahPersonGotDonnation(id, status) async {
+    firestore.collection(suffahCenterNeedyPeople).doc(id).update({
+      'status': status,
+      'tempStatus': 'Success',
+    });
+  }
+
+  // add Center Program By Suffa Center into the database
+  static Future<void> addAffiliatedProgramBySuffahCenter(
+    file,
+    title,
+    status,
+    price,
+    purpose,
+    muntazimId,
+    masjidname,
+    masjidId,
+    cnicno,
+    dob,
+    dateofIssue,
+    dateofExpire,
+  ) async {
+    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = imagestorage.ref().child('/Images/Affiliatedprogram$id');
+    storage.UploadTask uploadTask = ref.putFile(file);
+    Future.value(uploadTask).then((value) async {
+      var imageUrl = await ref.getDownloadURL();
+      await firestore.collection(suffahCenterDefineProgram).doc(id).set({
+        'programId': id,
+        'image': imageUrl.toString(),
+        'programTitle': title,
+        'Status': status,
+        'Price': price,
+        'purpose': purpose,
+        'MasjidId': masjidId,
+        'masjidname': masjidname,
+        'muntazimId': muntazimId,
+        'CnicNo': cnicno,
+        'dob': dob,
+        'doIssue': dateofIssue,
+        'doExpire': dateofExpire,
+      });
+    });
+  }
+
+  // get all the requested Suffah Desfine Programs
+  static Stream<QuerySnapshot<Map<String, dynamic>>> suffahRequestedProgram(
+      status) {
+    return firestore
+        .collection(suffahCenterDefineProgram)
+        .where('Status', isEqualTo: status)
+        .snapshots();
+  }
+
+  // If Accept or Reject Then Update the Status
+  static Future<void> updateSuffahProgramStatus(
+      String programId, String status) async {
+    firestore
+        .collection(suffahCenterDefineProgram)
+        .doc(programId)
+        .update({'Status': status});
   }
 }
