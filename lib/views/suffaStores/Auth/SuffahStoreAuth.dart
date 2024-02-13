@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/Admin/adminAuth/adminLoginViewModel.dart';
+import 'package:suffa_app/ViewModel/SuffaStore/Auth/ShuffaShopAuth.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -19,7 +20,7 @@ class SuffahStoreLoginDashBoard extends StatefulWidget {
 }
 
 class _SuffahStoreLoginDashBoardState extends State<SuffahStoreLoginDashBoard> {
-  final adminAuthController = Get.put(AdminLoginViewModel());
+  final suffahAuthController = Get.put(ShuffaShopAuthViewModel());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final ValueNotifier<bool> _obscurepass = ValueNotifier(true);
@@ -28,7 +29,7 @@ class _SuffahStoreLoginDashBoardState extends State<SuffahStoreLoginDashBoard> {
     emailController.dispose();
     passwordController.dispose();
     _obscurepass.dispose();
-    adminAuthController.dispose();
+    suffahAuthController.dispose();
     super.dispose();
   }
 
@@ -129,7 +130,7 @@ class _SuffahStoreLoginDashBoardState extends State<SuffahStoreLoginDashBoard> {
                         ),
                         0.03.ph,
                         Obx(() {
-                          return adminAuthController.isLoading == true
+                          return suffahAuthController.isLoading == true
                               ? const CircularProgressIndicator.adaptive()
                               : MaterialButton(
                                   height: context.mh * 0.05,
@@ -138,7 +139,7 @@ class _SuffahStoreLoginDashBoardState extends State<SuffahStoreLoginDashBoard> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   onPressed: () {
-                                    adminAuthController.adminLoginAccount(
+                                    suffahAuthController.suffaLoginAccount(
                                         emailController,
                                         passwordController,
                                         context);

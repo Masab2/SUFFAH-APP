@@ -72,26 +72,4 @@ class NeedyPeopleController extends GetxController {
         filteredPeople.where((person) => person.tempstatus == "Added").toList();
     return actualPrice * peopleLength.length;
   }
-
-  
-
-  // Future<void> updateStatusInDatabase(String personId) async {
-  //   // Update status in the Firebase database
-  //   await Apis.updateStatusAlSuffahPerson(personId, status);
-  // }
-
-  // Future<void> updateStatus(String personId) async {
-  //   updateStatusLocally(personId);
-  //   await updateStatusInDatabase(personId);
-  // }
-
-  // int calulateTotalDonnation(int price) {
-  //   int total = 0;
-  //   for (var person in needyPeople) {
-  //     if (person.tempstatus == 'Added') {
-  //       total += price;
-  //     }
-  //   }
-  //   return total;
-  // }
 }

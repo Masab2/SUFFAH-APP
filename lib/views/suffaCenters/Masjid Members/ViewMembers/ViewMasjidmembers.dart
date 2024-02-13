@@ -7,6 +7,7 @@ import 'package:suffa_app/res/components/AddSuffahCenter/displaySuffaCenter.dart
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
+import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class ViewMasjidMembers extends StatefulWidget {
   const ViewMasjidMembers({super.key});
@@ -29,11 +30,6 @@ class _ViewMasjidMembersState extends State<ViewMasjidMembers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(IconlyBold.arrow_left_circle)),
         title: Text(
           'Committee Members',
           style: GoogleFonts.poppins(

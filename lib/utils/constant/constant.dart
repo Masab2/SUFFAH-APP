@@ -10,6 +10,7 @@ const String suffahCenterNeedyPeople = 'SuffahCenterNeedyPeople';
 const String donnationTrack = 'donnationTrack';
 const String suffahAffiliatedprogram = 'suffahAffiliatedprogram';
 const String suffahCenterDefineProgram = 'CenterDefineProgram';
+const String suffahShop = 'SuffahShop';
 
 //^ Payment Methods
 // jazzcash Payment

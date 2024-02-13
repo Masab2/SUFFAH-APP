@@ -50,4 +50,17 @@ class SharePrefs {
     final int uniqueId = prefs.getInt('uniqueId') ?? 0;
     return uniqueId;
   }
+
+  // Shops Local Storage
+  static Future<String> getShopID(key) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String shopId = prefs.getString(key) ?? '';
+    return shopId;
+  }
+
+  static Future<String> getShopName(key) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String shopname = prefs.getString(key) ?? '';
+    return shopname;
+  }
 }

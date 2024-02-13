@@ -36,7 +36,10 @@ class AddSuffahCenterComp extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(
+            fontSize: context.mh * 0.018,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         subtitle: TextFormField(
           keyboardType: keyboardtype,

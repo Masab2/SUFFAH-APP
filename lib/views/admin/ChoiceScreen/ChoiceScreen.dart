@@ -59,7 +59,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
               ChoiceComp(
                 title: 'SUFFFAH SHOP LOGIN',
                 ontap: () {
-                  Get.toNamed(RoutesNames.suffahloginDashBoardScreen);
+                  Get.toNamed(RoutesNames.suffahStoreloginScreen);
                 },
                 color: AppColor.cgreenColor,
               ),

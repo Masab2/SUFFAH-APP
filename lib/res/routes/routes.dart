@@ -20,6 +20,10 @@ import 'package:suffa_app/views/admin/AdminAddSuffahCenter/createEmailView.dart'
 import 'package:suffa_app/views/admin/MemberRequest/memberRequest.dart';
 import 'package:suffa_app/views/admin/RequestedProgram/RequestedProgram.dart';
 import 'package:suffa_app/views/splashView/splashView.dart';
+import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/RegisteredShops/addShopOwnerCnic.dart';
+import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/RegisteredShops/addShops.dart';
+import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/RegisteredShops/genUsernameScreen.dart';
+import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/ViewRegisteredShops/DisplayRegisterdShop.dart';
 import 'package:suffa_app/views/suffaCenters/Auth/SuffahCenterAuth.dart';
 import 'package:suffa_app/views/suffaCenters/CenterProgram/CreateFunding/addCenterProgram.dart';
 import 'package:suffa_app/views/suffaCenters/CenterProgram/displayProgram/displayCenterProgram.dart';
@@ -33,6 +37,7 @@ import 'package:suffa_app/views/suffaCenters/NeedyPeople/AddPersonalData/addPers
 import 'package:suffa_app/views/suffaCenters/NeedyPeople/selectProgram/selectProgram.dart';
 import 'package:suffa_app/views/suffaCenters/Profile/suffaCenterProfileView.dart';
 import 'package:suffa_app/views/suffaStores/Auth/SuffahStoreAuth.dart';
+import 'package:suffa_app/views/suffaStores/DashBoard/shuffaShopDashBoard.dart';
 
 class AppRoutes {
   static appRoutes() => [
@@ -173,11 +178,31 @@ class AppRoutes {
             name: RoutesNames.centerProgramDisplayScreen,
             page: () => const DisplayCenterProgram(),
             transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.addShopsScreen,
+            page: () => const AddAlSuffahShops(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.addShopsCnicScreen,
+            page: () => const AddSuffahShopCnic(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.genUsernamePassShopScreen,
+            page: () => const GenUserNamePassShopScreen(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.displayShopScreen,
+            page: () => const DisplayAlshuffaRegisteredShop(),
+            transition: Transition.leftToRight),
 
         //& Shuffa Store Routes
         GetPage(
-            name: RoutesNames.suffahStoreloginDashBoardScreen,
+            name: RoutesNames.suffahStoreloginScreen,
             page: () => const SuffahStoreLoginDashBoard(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.suffahStoreDashBoardScreen,
+            page: () => const ShuffaShopDashBoardView(),
             transition: Transition.leftToRight),
       ];
 }

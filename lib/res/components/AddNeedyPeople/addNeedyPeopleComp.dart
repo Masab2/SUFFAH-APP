@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
+import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class AddNeedyPeopleComp extends StatelessWidget {
   String title;
@@ -27,7 +28,8 @@ class AddNeedyPeopleComp extends StatelessWidget {
     return ListTile(
         title: Text(
           title,
-          style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(
+              fontSize: context.mh * 0.018, fontWeight: FontWeight.bold),
         ),
         subtitle: TextFormField(
           keyboardType: keyboardtype,

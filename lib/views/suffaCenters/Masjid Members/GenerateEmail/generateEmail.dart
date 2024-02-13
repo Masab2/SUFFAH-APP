@@ -44,11 +44,6 @@ class _GenerateEmailSuffaMembersState extends State<GenerateEmailSuffaMembers> {
 
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(IconlyBold.arrow_left_circle)),
           title: Text(
             'Generate Email',
             style: GoogleFonts.poppins(fontWeight: FontWeight.bold),

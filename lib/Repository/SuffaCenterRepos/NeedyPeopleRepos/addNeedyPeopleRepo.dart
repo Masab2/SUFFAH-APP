@@ -166,7 +166,7 @@ class AddNeedyPeopleRepo {
               .get();
 
       if (!programDoc.exists) {
-        return 'Suffa center not found';
+        return 'Program not found in Suffa center';
       }
 
       // Extract current programs from the suffa center document

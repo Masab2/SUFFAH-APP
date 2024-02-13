@@ -115,12 +115,22 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                 children: [
                   AdminDashBoardtiles(
                     title: 'Add Stores Account',
-                    ontap: () {},
+                    ontap: () {
+                      Get.toNamed(RoutesNames.addShopsScreen, arguments: [
+                        id,
+                        masjidId,
+                        masjidname,
+                      ]);
+                    },
                     icon: IconlyBold.bag,
                   ),
                   AdminDashBoardtiles(
                     title: 'List Registered Stores',
-                    ontap: () {},
+                    ontap: () {
+                      Get.toNamed(RoutesNames.displayShopScreen, arguments: [
+                        masjidId,
+                      ]);
+                    },
                     icon: Icons.verified,
                   ),
                 ],

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
@@ -17,12 +19,20 @@ class SuffaStoreAuthRepo {
       return 'Please Enter the Password';
     } else {
       QuerySnapshot snapshot =
-          await Apis.firestore.collection(adminCollection).get();
+          await Apis.firestore.collection(suffahShop).get();
       for (var doc in snapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
-        if (data["email"] == email.text && data['password'] == password.text) {
-          final id = data['id'];
-          await SharePrefs.saveData('id', id);
+        log(data['genUsername']);
+        if (data["genUsername"] == email.text.trim() &&
+            data['genPassword'] == password.text.trim()) {
+          final id = data['ShopId'];
+          final shopName = data['ShopTitle'];
+          log(shopName);
+          final futures = [
+            SharePrefs.saveData('Shopid', id),
+            SharePrefs.saveData('Shopname', shopName),
+          ];
+          await Future.wait(futures);
           return null;
         }
       }

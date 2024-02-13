@@ -7,6 +7,7 @@ import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/res/components/AddNeedyPeople/addNeedyPeopleComp.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/PickImage.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
@@ -128,60 +129,40 @@ class _AddCenterProgramViewState extends State<AddCenterProgramView> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: context.mw * 0.06,
-              vertical: context.mw * 0.03,
-            ),
-            child: MaterialButton(
-              minWidth: context.mw * 0.80,
-              height: context.mh * 0.05,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              onPressed: () {
-                controller.requestProgramManually(
-                  titleController,
-                  priceController,
-                  purposeController,
-                  holdernameController,
-                  cnicnoController,
-                  dobController,
-                  doIssueController,
-                  doExpireController,
-                  'Requested',
-                  id,
-                  masjidname,
-                  masjidId,
-                  muntazimEmail,
-                );
-              },
-              color: AppColor.cgreenColor,
-              child: Text(
-                'Manually Insert Card Data',
-                style: GoogleFonts.poppins(
-                    color: AppColor.whiteColor, fontSize: context.mh * 0.020),
+              padding: EdgeInsets.symmetric(
+                horizontal: context.mw * 0.06,
+                vertical: context.mw * 0.03,
               ),
-            ),
-          ),
+              child: ReuseAblebtn(
+                title: 'Insert Data',
+                onPressed: () {
+                  controller.requestProgramManually(
+                    titleController,
+                    priceController,
+                    purposeController,
+                    holdernameController,
+                    cnicnoController,
+                    dobController,
+                    doIssueController,
+                    doExpireController,
+                    'Requested',
+                    id,
+                    masjidname,
+                    masjidId,
+                    muntazimEmail,
+                  );
+                },
+              )),
           const LoginOrRow(),
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: context.mw * 0.06,
-              vertical: context.mw * 0.03,
-            ),
-            child: MaterialButton(
-              minWidth: context.mw * 0.80,
-              height: context.mh * 0.05,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              onPressed: () {},
-              color: AppColor.cgreenColor,
-              child: Text(
-                'Scan Id Card',
-                style: GoogleFonts.poppins(
-                    color: AppColor.whiteColor, fontSize: context.mh * 0.020),
+              padding: EdgeInsets.symmetric(
+                horizontal: context.mw * 0.06,
+                vertical: context.mw * 0.03,
               ),
-            ),
-          ),
+              child: ReuseAblebtn(
+                title: 'Scan Id Card',
+                onPressed: () {},
+              )),
         ],
       ),
     );

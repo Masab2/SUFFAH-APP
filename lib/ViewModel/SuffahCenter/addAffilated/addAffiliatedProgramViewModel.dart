@@ -8,8 +8,6 @@ import 'package:suffa_app/Mail/sendEmail.dart';
 import 'package:suffa_app/Repository/SuffaCenterRepos/addCenterProgram/addcenterProgramRepo.dart';
 
 class AddCenterProgramController extends GetxController {
-  var isForNeedyPeople = false.obs;
-  var isForMasjidMaintenance = false.obs;
   final ImagePicker _picker = ImagePicker();
   var image;
   RxString imagePath = ''.obs;

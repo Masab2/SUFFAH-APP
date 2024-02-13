@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/ViewModel/SuffahCenter/NeedyPeople/addNeedyPeopleViewModel.dart';
 import 'package:suffa_app/res/components/AddNeedyPeople/addNeedyPeopleComp.dart';
 import 'package:suffa_app/res/components/CNICFormComp/CnicFormComp.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -50,13 +51,7 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
     final masjidid = Get.arguments[7];
     log(id);
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(IconlyBold.arrow_left_circle)),
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(
@@ -108,100 +103,53 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                 cnicno: cnicController,
               ),
               0.02.ph,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
-                child: Column(
-                  children: [
-                    MaterialButton(
-                      height: context.mh * 0.06,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      onPressed: () {
-                        addNeedyController.addDataManually(
-                          nameController,
-                          cnicController,
-                          dobController,
-                          dateofCardIssueController,
-                          dateofCardExpireController,
-                          File(image),
-                          phoneno,
-                          address,
-                          masjidname,
-                          program,
-                          id,
-                          gender == '0' ? 'Male' : 'Female',
-                          masjidid,
-                        );
-                      },
-                      color: AppColor.cgreenColor,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Insert Data',
-                            style: GoogleFonts.poppins(
-                                color: AppColor.whiteColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: context.mh * 0.022),
-                          ),
-                          0.03.pw,
-                          Icon(
-                            IconlyBold.scan,
-                            size: context.mh * 0.03,
-                            color: AppColor.whiteColor,
-                          )
-                        ],
-                      ),
-                    ),
-                    0.03.ph,
-                    const LoginOrRow(),
-                    0.03.ph,
-                    MaterialButton(
-                      height: context.mh * 0.06,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      onPressed: () {
-                        addNeedyController.scanCnic(
-                          ImageSource.camera,
-                          nameController,
-                          cnicController,
-                          dobController,
-                          dateofCardIssueController,
-                          dateofCardExpireController,
-                          File(image),
-                          phoneno,
-                          address,
-                          masjidname,
-                          program,
-                          id,
-                          gender,
-                          masjidid,
-                        );
-                      },
-                      color: AppColor.cgreenColor,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Scan ID Card',
-                            style: GoogleFonts.poppins(
-                                color: AppColor.whiteColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: context.mh * 0.022),
-                          ),
-                          0.03.pw,
-                          Icon(
-                            IconlyBold.scan,
-                            size: context.mh * 0.03,
-                            color: AppColor.whiteColor,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              Column(
+                children: [
+                  ReuseAblebtn(
+                    title: 'Insert Data',
+                    onPressed: () {
+                      addNeedyController.addDataManually(
+                        nameController,
+                        cnicController,
+                        dobController,
+                        dateofCardIssueController,
+                        dateofCardExpireController,
+                        File(image),
+                        phoneno,
+                        address,
+                        masjidname,
+                        program,
+                        id,
+                        gender == '0' ? 'Male' : 'Female',
+                        masjidid,
+                      );
+                    },
+                  ),
+                  0.03.ph,
+                  const LoginOrRow(),
+                  0.03.ph,
+                  ReuseAblebtn(
+                    title: 'Scan ID Card',
+                    onPressed: () {
+                      addNeedyController.scanCnic(
+                        ImageSource.camera,
+                        nameController,
+                        cnicController,
+                        dobController,
+                        dateofCardIssueController,
+                        dateofCardExpireController,
+                        File(image),
+                        phoneno,
+                        address,
+                        masjidname,
+                        program,
+                        id,
+                        gender,
+                        masjidid,
+                      );
+                    },
+                  )
+                ],
               )
             ],
           ),

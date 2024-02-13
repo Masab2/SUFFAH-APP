@@ -437,4 +437,60 @@ class Apis {
         .doc(programId)
         .update({'Status': status});
   }
+
+  // Add The Suffa Stores into thee database
+  static Future<void> addSuffahStore(
+    File file,
+    cnicno,
+    dob,
+    dateofIssue,
+    dateofExpire,
+    shopTitle,
+    address,
+    country,
+    city,
+    phone,
+    muntazimId,
+    masjidid,
+    masjidname,
+    username,
+    password,
+    email,
+  ) async {
+    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = imagestorage.ref().child('/Images/ShopImage$id');
+    storage.UploadTask uploadTask = ref.putFile(file);
+    Future.value(uploadTask).then((value) async {
+      var imageUrl = await ref.getDownloadURL();
+      await firestore.collection(suffahShop).doc(id).set({
+        'CnicNo': cnicno,
+        'dob': dob,
+        'doIssue': dateofIssue,
+        'doExpire': dateofExpire,
+        'ShopTitle': shopTitle,
+        'Address': address,
+        "Country": country,
+        "City": city,
+        'Image': imageUrl.toString(),
+        'Status': 'Verified',
+        'ShopId': id,
+        'Phoneno': phone,
+        "muntazimId": muntazimId,
+        'masjidId': masjidid,
+        'masjidname': masjidname,
+        'genUsername': username,
+        'genPassword': password,
+        'email': email,
+      });
+    });
+  }
+
+  // Display Shuffah Shop According to masjid
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getShopsforMasjid(
+      masjidid) {
+    return firestore
+        .collection(suffahShop)
+        .where('masjidId', isEqualTo: masjidid)
+        .snapshots();
+  }
 }

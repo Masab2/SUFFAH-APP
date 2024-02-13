@@ -54,8 +54,14 @@ class RoutesNames {
   static const String selectProgramScreen = '/selectProgramScreen';
   static const String centerProgramDisplayScreen =
       '/centerProgramDisplayScreen';
+  static const String addShopsScreen = '/addShopsScreen';
+  static const String addShopsCnicScreen = '/addShopsCnicScreen';
+  static const String displayShopScreen = '/displayShopScreen';
+  static const String genUsernamePassShopScreen = '/genUsernamePassShopScreen';
+  
 
   // SUFFAH STORE
-  static const String suffahStoreloginDashBoardScreen =
-      '/suffahStoreloginDashBoardScreen';
+  static const String suffahStoreloginScreen = '/suffahStoreloginScreen';
+  static const String suffahStoreDashBoardScreen =
+      '/suffahStoreDashBoardScreen';
 }
