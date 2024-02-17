@@ -116,15 +116,18 @@ class RequesttoAdminComp extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: MaterialButton(
-                    minWidth: context.mw * 0.30,
-                    color: AppColor.geryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    onPressed: onGreyBtnPressed,
-                    child: Text(greyBtnText,
-                        style: GoogleFonts.poppins(color: AppColor.whiteColor)),
+                Visibility(
+                  visible: centerId == 'Muntazim' ? false : true,
+                  child: Expanded(
+                    child: MaterialButton(
+                      minWidth: context.mw * 0.30,
+                      color: AppColor.geryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      onPressed: onGreyBtnPressed,
+                      child: Text(greyBtnText,
+                          style: GoogleFonts.poppins(color: AppColor.whiteColor)),
+                    ),
                   ),
                 ),
                 0.02.pw,

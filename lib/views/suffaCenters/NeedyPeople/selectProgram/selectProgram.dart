@@ -69,10 +69,10 @@ class _SelectProgramState extends State<SelectProgram> {
                     return Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: context.mw * 0.03,
-                        vertical: context.mh * 0.02,
+                        vertical: context.mh * 0.03,
                       ),
                       child: SelectProgramComp(
-                        image: ImageAsset.hungryimg,
+                        image: data['image'],
                         title: data['programTitle'],
                         buttonTitle: 'Registered In This Program',
                         ontap: () {

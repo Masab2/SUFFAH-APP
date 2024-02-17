@@ -10,6 +10,7 @@ import 'package:suffa_app/ViewModel/SuffahCenter/NeedyPeople/addPersonalnfoViewM
 import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/PickImage.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/SuffahCenterProfile/suffaCenterProfile.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -98,6 +99,71 @@ class _AddPersonalDataState extends State<AddPersonalData> {
                   ),
           ),
           0.04.ph,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                0.01.ph,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
+                  child: Text(
+                    'Gender',
+                    style: GoogleFonts.poppins(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                0.01.ph,
+                Obx(
+                  () => Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: context.mw * 0.02),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: context.mh * 0.030,
+                          backgroundColor: AppColor.cgreenColor,
+                          child: const Icon(
+                            Icons.ac_unit,
+                            color: AppColor.whiteColor,
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: context.mw * 0.02),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: context.mw * 0.02),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              value: peronalInfoController.selectedValue.value,
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              items: peronalInfoController.programs
+                                  .map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                peronalInfoController.onItemSelected(newValue);
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          0.02.ph,
           UserInfoListTile(
               icon: Icons.mosque_outlined,
               title: 'Masjid',
@@ -122,89 +188,25 @@ class _AddPersonalDataState extends State<AddPersonalData> {
             hint: 'StreetNo 24 z5',
             controller: addressController,
           ),
-          0.01.ph,
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                0.01.ph,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
-                  child: Text('Gender',
-                      style: GoogleFonts.poppins(
-                          fontSize: 16, fontWeight: FontWeight.bold)),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Obx(
-                        () => RadioListTile<int>.adaptive(
-                          title: Text(
-                            'Male',
-                            style: GoogleFonts.poppins(),
-                          ),
-                          value: 0,
-                          groupValue:
-                              peronalInfoController.selectedGender.value,
-                          onChanged: (value) {
-                            peronalInfoController.onGenderSelected(value ?? 0);
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Obx(
-                        () => RadioListTile<int>.adaptive(
-                          title: Text(
-                            'Female',
-                            style: GoogleFonts.poppins(),
-                          ),
-                          value: 1,
-                          groupValue:
-                              peronalInfoController.selectedGender.value,
-                          onChanged: (value) {
-                            peronalInfoController.onGenderSelected(value ?? 0);
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
           0.02.ph,
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: context.mw * 0.03, vertical: context.mh * 0.01),
-        child: MaterialButton(
-          height: context.mh * 0.05,
-          color: AppColor.cgreenColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          onPressed: () {
-            peronalInfoController.addNeedyPerson(
-              phonenoController,
-              addressController,
-              masjidname,
-              program,
-              peronalInfoController.selectedGender.value.toString() == '0'
-                  ? 'Male'
-                  : 'Female',
-              masjidid,
-            );
-          },
-          child: Text(
-            'Next',
-            style: GoogleFonts.poppins(
-                fontSize: context.mh * 0.022, color: AppColor.whiteColor),
-          ),
-        ),
-      ),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.mw * 0.03, vertical: context.mh * 0.01),
+          child: ReuseAblebtn(
+            title: 'Next',
+            onPressed: () {
+              peronalInfoController.addNeedyPerson(
+                phonenoController,
+                addressController,
+                masjidname,
+                program,
+                peronalInfoController.selectedValue.toString(),
+                masjidid,
+              );
+            },
+          )),
     );
   }
 }

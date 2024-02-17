@@ -8,9 +8,9 @@ import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
 
 class AddNeedyPeopleRepo {
-  Future<String?> addNeedyPeople(File file, TextEditingController phoneno,
+  Future<String?> addNeedyPeople(String file, TextEditingController phoneno,
       TextEditingController address, masjid) async {
-    if (file == null && phoneno.text.isEmpty && address.text.isEmpty) {
+    if (file == '' && phoneno.text.isEmpty && address.text.isEmpty) {
       return 'Please Enter The Data';
     } else if (phoneno.text.isEmpty) {
       return 'Please Enter The Phone No';

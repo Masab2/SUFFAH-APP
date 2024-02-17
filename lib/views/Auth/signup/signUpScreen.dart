@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/Donner/DonnorAuth/signUpViewModel.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -84,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Text(
                           'Create your account',
                           style:
-                              GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                              GoogleFonts.poppins(fontWeight: FontWeight.w600),
                         ),
                         0.03.ph,
                         CustomizedFeild(
@@ -125,21 +126,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         0.03.ph,
-                        MaterialButton(
-                          height: context.mh * 0.05,
-                          minWidth: context.mw * 0.80,
-                          color: AppColor.cgreenColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
+                        ReuseAblebtn(
+                          title: 'SignUp',
                           onPressed: () {
                             signUpController.signUpAccount(
                                 emailController, passwordController);
                           },
-                          child: Text(
-                            'Create Account',
-                            style:
-                                GoogleFonts.poppins(color: AppColor.whiteColor),
-                          ),
                         ),
                         0.02.ph,
                         Row(
@@ -149,7 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Text(
                               "Already have an account",
                               style: GoogleFonts.roboto(
-                                  fontSize: 15,
+                                  fontSize: context.mh * 0.015,
                                   color: AppColor.geryColor,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -159,7 +151,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: Text(
                                 "Login",
                                 style: GoogleFonts.roboto(
-                                    fontSize: 15,
+                                    fontSize: context.mh * 0.015,
                                     color: AppColor.cgreenColor,
                                     fontWeight: FontWeight.bold),
                               ),

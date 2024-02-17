@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +11,7 @@ import 'package:suffa_app/ViewModel/SuffahCenter/AddMasjidMembers/addMasjidMembe
 import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/PickImage.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
@@ -52,11 +55,6 @@ class _AddSuffahMemberState extends State<AddSuffahMember> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(IconlyBold.arrow_left_circle)),
         title: Text(
           'Register Member',
           style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
@@ -102,6 +100,37 @@ class _AddSuffahMemberState extends State<AddSuffahMember> {
                     ),
                   ),
           ),
+          0.03.ph,
+          Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: context.mw * 0.05,
+              ),
+              child: Obx(() {
+                return CSCPicker(
+                  dropdownDecoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      color: Colors.white,
+                      border:
+                          Border.all(color: AppColor.cgreenColor, width: 1)),
+                  layout: Layout.horizontal,
+                  showCities: true,
+                  showStates: true,
+                  flagState: CountryFlag.ENABLE,
+                  currentCountry: addsuffahControlller.currentCountry.value,
+                  currentCity: addsuffahControlller.currentCity.value,
+                  currentState: addsuffahControlller.currentState.value,
+                  onCountryChanged: (value) {
+                    addsuffahControlller.onCountryChanged(value);
+                  },
+                  onCityChanged: (value) {
+                    addsuffahControlller.onCityChanged(value ?? '');
+                    log(value.toString());
+                  },
+                  onStateChanged: (value) {
+                    addsuffahControlller.onStateChanged(value ?? '');
+                  },
+                );
+              })),
           0.05.ph,
           AddSuffahCenterComp(
               title: 'Member Name',
@@ -121,18 +150,6 @@ class _AddSuffahMemberState extends State<AddSuffahMember> {
               controller: phoneController),
           0.01.ph,
           AddSuffahCenterComp(
-              hint: 'PK',
-              title: 'Country',
-              icon: IconlyBold.home,
-              controller: countryController),
-          0.01.ph,
-          AddSuffahCenterComp(
-              hint: 'LHR',
-              title: 'City',
-              icon: Icons.location_city_rounded,
-              controller: cityController),
-          0.01.ph,
-          AddSuffahCenterComp(
               hint: 'Street 20 B xxxx',
               title: 'Address',
               icon: IconlyBold.location,
@@ -140,31 +157,23 @@ class _AddSuffahMemberState extends State<AddSuffahMember> {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: context.mw * 0.03, vertical: context.mh * 0.03),
-        child: MaterialButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: AppColor.cgreenColor,
-          minWidth: context.mw * 0.80,
-          height: context.mh * 0.06,
-          onPressed: () {
-            addsuffahControlller.addSuffahCenterMasjidMembers(
+          padding: EdgeInsets.symmetric(
+              horizontal: context.mw * 0.03, vertical: context.mh * 0.03),
+          child: ReuseAblebtn(
+            title: "Registered Masjid Members",
+            onPressed: () {
+              addsuffahControlller.addSuffahCenterMasjidMembers(
                 muntazimController,
                 emailController,
                 phoneController,
-                cityController,
-                countryController,
+                addsuffahControlller.currentCity.value,
+                addsuffahControlller.currentCountry.value,
                 addressController,
-                masjidid);
-          },
-          child: Text(
-            'Register Masjid Member',
-            style:
-                GoogleFonts.poppins(color: AppColor.whiteColor, fontSize: 16),
-          ),
-        ),
-      ),
+                masjidid,
+                addsuffahControlller.currentState.value,
+              );
+            },
+          )),
     );
   }
 }

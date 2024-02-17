@@ -44,7 +44,7 @@ class CustomizedFeild extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: AppColor.geryColor.withOpacity(0.34)),
+                color: Colors.grey[200]),
             child: TextFormField(
               onChanged: onChanged,
               controller: controller,

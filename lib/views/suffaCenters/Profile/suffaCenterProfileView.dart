@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/res/components/SuffahCenterProfile/suffaCenterProfile.dart';
@@ -20,42 +21,18 @@ class _SuffaCenterProfileState extends State<SuffaCenterProfile> {
   Widget build(BuildContext context) {
     final id = Get.arguments;
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Al-Suffah Center Profile',
+          style: GoogleFonts.poppins(
+            fontSize: context.mh * 0.023,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
-          Stack(
-            children: [
-              Container(
-                height: context.mh * 0.35,
-                decoration: const BoxDecoration(
-                  color: AppColor.cgreenColor,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: context.mh * 0.13,
-                right: context.mw * 0.05,
-                left: context.mw * 0.05,
-                child: CircleAvatar(
-                  minRadius: 40,
-                  maxRadius: 80,
-                  child: Image(image: AssetImage(ImageAsset.islamicIcon)),
-                ),
-              ),
-              Positioned(
-                top: context.mh * 0.06,
-                left: context.mw * 0.04,
-                child: InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: const Icon(IconlyBold.arrow_left_circle),
-                ),
-              ),
-            ],
-          ),
           StreamBuilder(
             stream: Apis.getSuffaCenterData(id),
             builder: (context, snapshot) {
@@ -83,8 +60,8 @@ class _SuffaCenterProfileState extends State<SuffaCenterProfile> {
                         children: [
                           UserInfoListTile(
                             icon: IconlyBold.user_2,
-                            title: 'Muntazim Name',
-                            subtitle: data['name'],
+                            title: 'Masjid Name',
+                            subtitle: data['masjidname'],
                           ),
                           0.01.ph,
                           UserInfoListTile(
@@ -113,8 +90,8 @@ class _SuffaCenterProfileState extends State<SuffaCenterProfile> {
                           0.01.ph,
                           UserInfoListTile(
                             icon: IconlyBold.message,
-                            title: 'SUFFAH Email',
-                            subtitle: data['suffahemail'],
+                            title: 'Program Registered',
+                            subtitle: data['Programs'][index],
                           ),
                           0.01.ph,
                           UserInfoListTile(

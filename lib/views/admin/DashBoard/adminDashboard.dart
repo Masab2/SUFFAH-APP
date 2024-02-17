@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/res/components/adminDashBoardTiles/adminDashBoardtiles.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
+import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 import '../../../res/components/adminDashBoardTiles/adminTilesUperheading/upperHeading.dart';
@@ -70,9 +71,9 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                       icon: Icons.remove_from_queue,
                     ),
                     AdminDashBoardtiles(
-                      title: 'Add Admins',
+                      title: 'Countrys',
                       ontap: () {},
-                      icon: Icons.admin_panel_settings,
+                      icon: Icons.flag,
                     ),
                   ],
                 ),

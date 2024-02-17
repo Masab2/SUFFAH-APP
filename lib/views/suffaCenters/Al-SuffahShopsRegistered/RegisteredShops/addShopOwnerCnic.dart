@@ -27,8 +27,7 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
   late String shopTitle;
   late String phonenno;
   late String emailAddress;
-  late String country;
-  late String city;
+
   late String address;
   late String imagePath;
   late String muntazimId;
@@ -40,13 +39,11 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
     shopTitle = Get.arguments[0] ?? "";
     phonenno = Get.arguments[1] ?? "";
     emailAddress = Get.arguments[2] ?? "";
-    country = Get.arguments[3] ?? "Pakistan";
-    city = Get.arguments[4] ?? "";
-    address = Get.arguments[5] ?? "";
-    imagePath = Get.arguments[6] ?? "";
-    muntazimId = Get.arguments[7] ?? "";
-    masjidId = Get.arguments[8] ?? "";
-    masjidname = Get.arguments[9] ?? "";
+    address = Get.arguments[3] ?? "";
+    imagePath = Get.arguments[4] ?? "";
+    muntazimId = Get.arguments[5] ?? "";
+    masjidId = Get.arguments[6] ?? "";
+    masjidname = Get.arguments[7] ?? "";
     super.initState();
   }
 
@@ -128,8 +125,6 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
                       doExpireController,
                       shopTitle,
                       address,
-                      country,
-                      city,
                       phonenno,
                       muntazimId,
                       masjidId,
@@ -151,13 +146,11 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
                       doExpireController,
                       shopTitle,
                       address,
-                      country,
-                      city,
                       phonenno,
                       muntazimId,
                       masjidId,
                       masjidname,
-                      emailAddress
+                      emailAddress,
                     );
                   },
                 ),

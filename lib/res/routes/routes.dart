@@ -12,7 +12,6 @@ import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
 import 'package:suffa_app/views/admin/Affiliated%20Program/addProgram/addPrograms.dart';
 import 'package:suffa_app/views/admin/Affiliated%20Program/displayprogram/displayAffiliaatedProgram.dart';
 import 'package:suffa_app/views/admin/Auth/LoginDashBoard/adminLoginDashBoard.dart';
-import 'package:suffa_app/views/admin/ChoiceScreen/ChoiceScreen.dart';
 import 'package:suffa_app/views/admin/DashBoard/adminDashboard.dart';
 import 'package:suffa_app/views/admin/AdminAddSuffahCenter/ViewSuffahCenter.dart';
 import 'package:suffa_app/views/admin/AdminAddSuffahCenter/addSuffahCenter.dart';
@@ -38,7 +37,7 @@ import 'package:suffa_app/views/suffaCenters/NeedyPeople/selectProgram/selectPro
 import 'package:suffa_app/views/suffaCenters/Profile/suffaCenterProfileView.dart';
 import 'package:suffa_app/views/suffaStores/Auth/SuffahStoreAuth.dart';
 import 'package:suffa_app/views/suffaStores/DashBoard/shuffaShopDashBoard.dart';
-
+import 'package:suffa_app/views/ChoiceScreen/ChoiceScreen.dart';
 class AppRoutes {
   static appRoutes() => [
         //! Donner Auth Screens
@@ -126,6 +125,10 @@ class AppRoutes {
             transition: Transition.leftToRight),
         GetPage(
             name: RoutesNames.displayaffiliatedProgramScreenforAdmin,
+            page: () => const DisplayAffiliatedProgram(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.addCountryScreen,
             page: () => const DisplayAffiliatedProgram(),
             transition: Transition.leftToRight),
 

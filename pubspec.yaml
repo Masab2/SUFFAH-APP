@@ -52,6 +52,9 @@ dependencies:
   http: any
   badges: ^3.1.2
   crypto: ^3.0.3
+  csc_picker: ^0.2.7
+  url_launcher: ^6.2.4
+  intl_phone_number_input: any
   #Database
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3

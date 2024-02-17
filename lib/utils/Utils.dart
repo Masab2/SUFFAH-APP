@@ -26,8 +26,4 @@ class Utils {
         )
         .toString();
   }
-
-  static String translate(String data, String languageCode) {
-    return Intl.message(data, locale: languageCode);
-  }
 }

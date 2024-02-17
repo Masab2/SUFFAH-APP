@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/SuffahCenter/AddMasjidMembers/generateEmailAddress.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -41,6 +42,7 @@ class _GenerateEmailSuffaMembersState extends State<GenerateEmailSuffaMembers> {
     final country = Get.arguments[5];
     final address = Get.arguments[6];
     final masjidid = Get.arguments[7];
+    final state = Get.arguments[8];
 
     return Scaffold(
         appBar: AppBar(
@@ -80,12 +82,8 @@ class _GenerateEmailSuffaMembersState extends State<GenerateEmailSuffaMembers> {
                 hint: '*******',
               ),
               0.03.ph,
-              MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                color: AppColor.cgreenColor,
-                minWidth: context.mw * 0.80,
-                height: context.mh * 0.06,
+              ReuseAblebtn(
+                title: 'Generate Email',
                 onPressed: () {
                   createEmailController.createEmail(
                     File(image),
@@ -98,14 +96,10 @@ class _GenerateEmailSuffaMembersState extends State<GenerateEmailSuffaMembers> {
                     emailController,
                     passwordController,
                     masjidid,
+                    state,
                   );
                 },
-                child: Text(
-                  'Generate Email',
-                  style: GoogleFonts.poppins(
-                      color: AppColor.whiteColor, fontSize: 16),
-                ),
-              ),
+              )
             ],
           ),
         ));

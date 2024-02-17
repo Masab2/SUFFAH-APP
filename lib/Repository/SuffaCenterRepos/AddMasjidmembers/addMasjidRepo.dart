@@ -1,38 +1,28 @@
 // ignore_for_file: unnecessary_null_comparison
 
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 
 class AddMasjidRepo {
   Future<String?> addSuffahCenterMembers(
-      File file,
-      TextEditingController name,
-      TextEditingController emailAddress,
-      TextEditingController phoneno,
-      TextEditingController city,
-      TextEditingController country,
-      TextEditingController address) async {
-    if (file == null &&
-        name.text.isEmpty &&
-        emailAddress.text.isEmpty &&
-        phoneno.text.isEmpty &&
-        city.text.isEmpty &&
-        country.text.isEmpty &&
-        address.text.isEmpty) {
-      return 'Please Enter The Data';
-    } else if (name.text.isEmpty) {
-      return 'Please Enter The Name of The Muntazim';
-    } else if (emailAddress.text.isEmpty) {
-      return 'Please Enter The Email Address';
-    } else if (phoneno.text.isEmpty) {
-      return 'Please Enter The Phone No';
-    } else if (city.text.isEmpty) {
-      return 'Please Enter The Phone No';
-    } else if (country.text.isEmpty) {
-      return 'Please Enter The Phone No';
-    } else if (address.text.isEmpty) {
-      return 'Please Enter The Address';
+    String file,
+    TextEditingController name,
+    TextEditingController emailAddress,
+    TextEditingController phoneno,
+    city,
+    country,
+    TextEditingController address,
+    state,
+  ) async {
+    if (file == '' ||
+        name.text.isEmpty ||
+        emailAddress.text.isEmpty ||
+        phoneno.text.isEmpty ||
+        city == '' ||
+        country == '' ||
+        address.text.isEmpty ||
+        state == '') {
+      return 'Please Enter All The Required Data';
     } else {
       final RegExp emailRegExp =
           RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');

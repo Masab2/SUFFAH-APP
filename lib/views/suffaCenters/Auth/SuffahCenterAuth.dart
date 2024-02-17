@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/SuffahCenter/SuffaCenterAuth/suffaCenterAuth.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -131,23 +132,14 @@ class _SuffahCenterLoginDashBoardState
                         Obx(() {
                           return suffaCenterAuthController.isLoading == true
                               ? const CircularProgressIndicator.adaptive()
-                              : MaterialButton(
-                                  height: context.mh * 0.05,
-                                  minWidth: context.mw * 0.80,
-                                  color: AppColor.cgreenColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
+                              : ReuseAblebtn(
+                                  title: 'Login',
                                   onPressed: () {
                                     suffaCenterAuthController.suffaLoginAccount(
                                         emailController,
                                         passwordController,
                                         context);
                                   },
-                                  child: Text(
-                                    'Login',
-                                    style: GoogleFonts.poppins(
-                                        color: AppColor.whiteColor),
-                                  ),
                                 );
                         })
                       ]),

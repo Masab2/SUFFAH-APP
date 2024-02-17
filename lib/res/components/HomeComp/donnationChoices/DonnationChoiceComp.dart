@@ -1,5 +1,6 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,16 +37,35 @@ class DonnationChoice extends StatelessWidget {
             horizontal: context.mw * 0.02,
             vertical: context.mh * 0.02,
           ),
-          decoration: BoxDecoration(
-            // color: AppColor.cgreenColor,
+          // decoration: BoxDecoration(
+          //   // color: AppColor.cgreenColor,
+          //   borderRadius: BorderRadius.circular(20),
+          //   image: DecorationImage(
+          //     opacity: 0.83,
+          //     image: AssetImage(image),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
+          padding: EdgeInsets.all(context.mw * 0.016),
+          child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              opacity: 0.83,
-              image: AssetImage(image),
+            child: CachedNetworkImage(
+              height: context.mh * 0.15,
+              width: context.mw * 0.30,
+              fadeOutCurve: const FlippedCurve(Curves.easeOutCirc),
+              imageUrl: image,
+              matchTextDirection: true,
               fit: BoxFit.cover,
+              placeholder: (context, url) => const SpinKitChasingDots(
+                color: AppColor.cgreenColor,
+                duration: Duration(seconds: 5),
+                size: 40,
+              ),
+              errorWidget: (context, url, error) {
+                return const Icon(Icons.error);
+              },
             ),
           ),
-          padding: EdgeInsets.all(context.mw * 0.016),
         ),
         Positioned(
           left: 0,
@@ -53,14 +73,14 @@ class DonnationChoice extends StatelessWidget {
           right: 0,
           child: Container(
             height: context.mh * 0.15,
-            width: context.mw * 0.120,
+            width: context.mw,
             margin: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
             decoration: BoxDecoration(
               color: AppColor.whiteColor.withOpacity(0.43),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: AppColor.cgreenColor.withOpacity(0.33),
+                  color: AppColor.cgreenColor.withOpacity(0.03),
                   offset: const Offset(
                     5.0,
                     5.0,
@@ -105,17 +125,6 @@ class DonnationChoice extends StatelessWidget {
                             } else if (!snapshot.hasData) {
                               return const Center(child: Text('No Data Found'));
                             } else {
-                              // int totalNeedyPeople = snapshot.data!.docs.length;
-                              // int temp = totalNeedyPeople;
-                              // log(temp.toString());
-                              // if (totalNeedyPeople < 0) {
-                              //   totalNeedyPeople = 0;
-                              // } else {
-                              //   totalNeedyPeople -= 1;
-                              //   if (totalNeedyPeople < temp) {
-                              //     totalDonations += 1;
-                              //   }
-                              // }
                               return Column(
                                 children: [
                                   SimpleAnimationProgressBar(
@@ -173,7 +182,7 @@ class DonnationChoice extends StatelessWidget {
                     child: Text(
                       AppLocalizations.of(context)!.donnateNow,
                       style: GoogleFonts.poppins(
-                        fontSize: context.mh * 0.020,
+                        fontSize: context.mh * 0.015,
                         color: AppColor.whiteColor,
                       ),
                     ),

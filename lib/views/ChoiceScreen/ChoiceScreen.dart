@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
 import 'package:suffa_app/res/components/ChoiceComp/ChoiceComp.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
-import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class ChoiceScreen extends StatefulWidget {
@@ -21,8 +19,11 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Adminstration',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+          'WELCOME TO AL-SUFFAH',
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            fontSize: context.mh * 0.023,
+          ),
         ),
         centerTitle: true,
       ),
@@ -30,39 +31,35 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
         children: [
-          Center(
-            child: Image(
-                height: context.mh * 0.35,
-                image: AssetImage(ImageAsset.verifyemail)),
-          ),
-          0.08.ph,
+          0.05.ph,
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ChoiceComp(
-                title: 'Admin Login',
+                title: 'Donate People',
                 ontap: () {
-                  Get.toNamed(RoutesNames.loginDashBoardScreen);
+                  Get.toNamed(RoutesNames.loginScreen);
                 },
-                color: AppColor.cgreenColor,
+                image: ImageAsset.donnerIcon,
               ),
               0.03.ph,
               ChoiceComp(
-                title: 'SUFFFAH CENTER LOGIN',
+                title: 'Al-Suffah Center',
                 ontap: () {
                   Get.toNamed(RoutesNames.suffahloginDashBoardScreen);
                 },
-                color: Colors.teal,
+                image: ImageAsset.mosqueIcon,
               ),
               0.03.ph,
               ChoiceComp(
-                title: 'SUFFFAH SHOP LOGIN',
+                title: 'Al-Suffah Shop',
                 ontap: () {
                   Get.toNamed(RoutesNames.suffahStoreloginScreen);
                 },
-                color: AppColor.cgreenColor,
+                image: ImageAsset.shopIcon,
               ),
+              0.03.ph,
             ],
           )
         ],

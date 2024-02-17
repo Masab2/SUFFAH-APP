@@ -30,10 +30,21 @@ class CreateEmailAddressSuffaMembersViewModel extends GetxController {
     }
   }
 
-  Future<void> createEmail(File file, name, emailAddress, phoneno, city,
-      country, address, genEmail, genPassword, masjidid) async {
-    final result = await _createEmailRepo.createEmail(file, name, emailAddress,
-        phoneno, city, country, address, genEmail, genPassword, masjidid);
+  Future<void> createEmail(file, name, emailAddress, phoneno, city, country,
+      address, genEmail, genPassword, masjidid, state) async {
+    final result = await _createEmailRepo.createEmail(
+      file,
+      name,
+      emailAddress,
+      phoneno,
+      city,
+      country,
+      address,
+      genEmail,
+      genPassword,
+      masjidid,
+      state,
+    );
     if (result == null) {
       await sendEmail(
           'masabhaider4@gmail.com', genEmail.text, genPassword.text);

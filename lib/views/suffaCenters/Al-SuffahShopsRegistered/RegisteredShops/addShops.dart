@@ -1,5 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:csc_picker/csc_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,10 +14,11 @@ import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.da
 import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
 import 'package:suffa_app/res/components/CNICFormComp/CnicFormComp.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
+import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../../../../res/components/AddSuffahCenter/PickImage.dart';
 
 class AddAlSuffahShops extends StatefulWidget {
@@ -36,7 +40,7 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
   late String muntazid;
   late String masjidId;
   late String masjidname;
-
+  
   @override
   void initState() {
     muntazid = Get.arguments[0];
@@ -108,6 +112,38 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
                     ),
             ),
             0.02.ph,
+            Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.mw * 0.05,
+                ),
+                child: Obx(() {
+                  return CSCPicker(
+                    dropdownDecoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        color: Colors.white,
+                        border:
+                            Border.all(color: AppColor.cgreenColor, width: 1)),
+                    layout: Layout.horizontal,
+                    showCities: true,
+                    showStates: true,
+                    flagState: CountryFlag.ENABLE,
+                    currentCountry: controller.currentCountry.value,
+                    currentCity: controller.currentCity.value,
+                    currentState: controller.currentState.value,
+                    onCountryChanged: (value) {
+                      controller.onCountryChanged(value);
+                    },
+                    onCityChanged: (value) {
+                      controller.onCityChanged(value ?? '');
+                      log(value.toString());
+                    },
+                    onStateChanged: (value) {
+                      controller.onStateChanged(value ?? '');
+                    },
+                  );
+                })),
+            0.02.ph,
             AddSuffahCenterComp(
               title: 'Shop Title',
               icon: Icons.shop,
@@ -125,18 +161,6 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
               icon: Icons.email,
               controller: emailController,
               hint: 'abc@gmail.com',
-            ),
-            AddSuffahCenterComp(
-              title: 'Country',
-              icon: Icons.flag_circle_rounded,
-              controller: countryController,
-              hint: 'PK / GER',
-            ),
-            AddSuffahCenterComp(
-              title: 'City',
-              icon: Icons.location_city_rounded,
-              controller: cityController,
-              hint: 'Lahore',
             ),
             AddSuffahCenterComp(
               title: 'Address',
@@ -159,8 +183,6 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
                 titleController,
                 phoneController,
                 emailController,
-                countryController,
-                cityController,
                 addressController,
                 muntazid,
                 masjidId,

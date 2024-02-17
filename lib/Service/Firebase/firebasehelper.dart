@@ -164,17 +164,19 @@ class Apis {
 
   // Add Suffah center Commettie members
   static Future<void> addSuffahCommitteMembers(
-      File file,
-      name,
-      email,
-      suffahemail,
-      password,
-      phoneno,
-      city,
-      country,
-      address,
-      adminid,
-      masjidid) async {
+    File file,
+    name,
+    email,
+    suffahemail,
+    password,
+    phoneno,
+    city,
+    country,
+    address,
+    adminid,
+    masjidid,
+    state,
+  ) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/MasjidImages$id');
     storage.UploadTask uploadTask = ref.putFile(file);
@@ -195,6 +197,7 @@ class Apis {
         'status': "Requested",
         'Desig': "Member",
         'centerId': masjidid,
+        'state': state,
       });
     }).onError((error, stackTrace) {
       throw FirebaseException;
@@ -456,6 +459,7 @@ class Apis {
     username,
     password,
     email,
+    state,
   ) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/ShopImage$id');
@@ -481,6 +485,7 @@ class Apis {
         'genUsername': username,
         'genPassword': password,
         'email': email,
+        'state': state,
       });
     });
   }

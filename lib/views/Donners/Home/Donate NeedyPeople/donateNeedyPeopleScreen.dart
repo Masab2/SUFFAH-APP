@@ -10,6 +10,7 @@ import 'package:suffa_app/ViewModel/Donner/displayNeedyPeopleController/NeedyPeo
 import 'package:suffa_app/ViewModel/PaymentMethods/JazzCash/jazzcashPaymentViewModel.dart';
 import 'package:suffa_app/res/components/AppBar/AppBar.dart';
 import 'package:suffa_app/res/components/DonnerDisplayNeedy/displayNeedypeople.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -128,42 +129,30 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                     ),
                   ),
                   Visibility(
-                    visible: needyPeopleController.needyPeople.any(
-                      (person) =>
-                          person.tempstatus == 'Added' &&
-                          person.donnerSelectionId == Apis.user.uid,
-                    ),
-                    child: MaterialButton(
-                      height: context.mh * 0.06,
-                      minWidth: context.mw * 0.80,
-                      color: AppColor.cgreenColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                      visible: needyPeopleController.needyPeople.any(
+                        (person) =>
+                            person.tempstatus == 'Added' &&
+                            person.donnerSelectionId == Apis.user.uid,
                       ),
-                      onPressed: () {
-                        final totalPrice = needyPeopleController
-                            .calulateTotalDonnation(int.parse(price));
-                        String tPrice = totalPrice.toString();
-                        List<SuffahPersonModel> addedPeople =
-                            needyPeopleController.needyPeople
-                                .where((person) => person.tempstatus == 'Added')
-                                .toList();
-                        Get.toNamed(RoutesNames.donatePaymentScreen,
-                            arguments: [
-                              addedPeople,
-                              tPrice,
-                              price,
-                            ]);
-                      },
-                      child: Text(
-                        'Donate All',
-                        style: GoogleFonts.poppins(
-                          fontSize: context.mh * 0.020,
-                          color: AppColor.whiteColor,
-                        ),
-                      ),
-                    ),
-                  ),
+                      child: ReuseAblebtn(
+                        title: 'Donate All',
+                        onPressed: () {
+                          final totalPrice = needyPeopleController
+                              .calulateTotalDonnation(int.parse(price));
+                          String tPrice = totalPrice.toString();
+                          List<SuffahPersonModel> addedPeople =
+                              needyPeopleController.needyPeople
+                                  .where(
+                                      (person) => person.tempstatus == 'Added')
+                                  .toList();
+                          Get.toNamed(RoutesNames.donatePaymentScreen,
+                              arguments: [
+                                addedPeople,
+                                tPrice,
+                                price,
+                              ]);
+                        },
+                      )),
                   0.02.ph,
                 ],
               ));

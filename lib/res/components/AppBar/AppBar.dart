@@ -11,9 +11,13 @@ import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:badges/badges.dart' as badges;
 
 class HomeAppBar {
-  static PreferredSizeWidget HomeBar(BuildContext context, Widget? leading) {
+  static PreferredSizeWidget HomeBar(
+    BuildContext context,
+    Widget leading,
+    Widget trailing,
+  ) {
     return AppBar(
-      leading: const Icon(IconlyLight.search),
+      leading: leading,
       title: RichText(
           text: TextSpan(
               text: "${AppLocalizations.of(context)!.apptitlefirst} ",
@@ -30,6 +34,10 @@ class HomeAppBar {
                     fontWeight: FontWeight.bold))
           ])),
       centerTitle: true,
+      actions: [
+        trailing,
+        0.04.pw,
+      ],
     );
   }
 

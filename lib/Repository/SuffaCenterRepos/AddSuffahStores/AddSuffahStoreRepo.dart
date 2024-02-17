@@ -12,19 +12,23 @@ class AddSuffahStoreRepo {
     TextEditingController shopTitle,
     TextEditingController phoneno,
     TextEditingController email,
-    TextEditingController country,
-    TextEditingController city,
+    country,
+    city,
     TextEditingController address,
     muntazimid,
     masjidid,
     masjidname,
+    state,
+    image,
   ) async {
     if (shopTitle.text.isEmpty ||
         phoneno.text.isEmpty ||
         email.text.isEmpty ||
-        country.text.isEmpty ||
-        city.text.isEmpty ||
-        address.text.isEmpty) {
+        country == '' ||
+        city == '' ||
+        address.text.isEmpty ||
+        state == '' ||
+        image == '') {
       return "Please fill all fields";
     } else {
       final RegExp emailRegExp =
@@ -39,21 +43,23 @@ class AddSuffahStoreRepo {
 
   // Insert Data manually
   Future<String?> addSuffahStoreInDBManually(
-      TextEditingController holdername,
-      TextEditingController cnicNo,
-      TextEditingController dob,
-      TextEditingController doCardissue,
-      TextEditingController doCardExpire,
-      File file,
-      shopTitle,
-      address,
-      country,
-      city,
-      phone,
-      muntazimId,
-      masjidid,
-      masjidname,
-      email) async {
+    TextEditingController holdername,
+    TextEditingController cnicNo,
+    TextEditingController dob,
+    TextEditingController doCardissue,
+    TextEditingController doCardExpire,
+    File file,
+    shopTitle,
+    address,
+    country,
+    city,
+    phone,
+    muntazimId,
+    masjidid,
+    masjidname,
+    email,
+    state,
+  ) async {
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
         dob.text.isEmpty ||
@@ -91,6 +97,7 @@ class AddSuffahStoreRepo {
     masjidid,
     masjidname,
     email,
+    state,
   ) async {
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
@@ -131,6 +138,7 @@ class AddSuffahStoreRepo {
     TextEditingController genUsername,
     TextEditingController genPass,
     email,
+    state,
   ) async {
     if (genUsername.text.isEmpty || genUsername.text.isEmpty) {
       return 'Fill The Required Fields';
@@ -153,6 +161,7 @@ class AddSuffahStoreRepo {
           genUsername.text,
           genPass.text,
           email,
+          state,
         );
         return null;
       } catch (e) {

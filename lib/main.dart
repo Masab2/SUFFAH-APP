@@ -55,7 +55,8 @@ class _MyAppState extends State<MyApp> {
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: AppColor.cgreenColor),
           colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 0, 68, 61)),
+            seedColor: const Color.fromARGB(255, 0, 68, 61),
+          ),
           useMaterial3: true,
         ),
         getPages: AppRoutes.appRoutes(),

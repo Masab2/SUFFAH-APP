@@ -27,7 +27,16 @@ class _DonnerProfileState extends State<DonnerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar.HomeBar(context,const Icon(IconlyLight.search)),
+      appBar: HomeAppBar.HomeBar(
+          context,
+          const Icon(
+            IconlyLight.search,
+            color: AppColor.cgreenColor,
+          ),
+          const Icon(
+            IconlyLight.notification,
+            color: AppColor.cgreenColor,
+          )),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),

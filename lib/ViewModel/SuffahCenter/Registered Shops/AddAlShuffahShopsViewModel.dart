@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_typing_uninitialized_variables, unnecessary_null_comparison
 
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:cnic_scanner/cnic_scanner.dart';
 import 'package:cnic_scanner/model/cnic_model.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,9 @@ import 'package:suffa_app/res/routes/routesNames.dart';
 class AddAlsuffahShopsViewModel extends GetxController {
   final ImagePicker _picker = ImagePicker();
   var image;
+  var currentCountry = 'Pakistan'.obs;
+  var currentCity = 'Lahore'.obs;
+  var currentState = 'Punjab'.obs;
   RxString imagePath = ''.obs;
   final AddSuffahStoreRepo _addSuffahStoreRepo = AddSuffahStoreRepo();
   Future getImageFromgallery(ImageSource source) async {
@@ -26,13 +28,29 @@ class AddAlsuffahShopsViewModel extends GetxController {
     }
   }
 
+  // Select The Country
+  void onCountryChanged(value) {
+    currentCountry.value = value;
+    update();
+  }
+
+  // Select The City
+  void onCityChanged(String value) {
+    currentCity.value = value;
+    update();
+  }
+
+  // Select The State
+  void onStateChanged(String value) {
+    currentState.value = value;
+    update();
+  }
+
   // Validate The Feilds To enter into the database
   void addNewSuffahStore(
     shopTitle,
     phoneno,
     email,
-    country,
-    city,
     address,
     muntazimid,
     masjidid,
@@ -43,25 +61,28 @@ class AddAlsuffahShopsViewModel extends GetxController {
         shopTitle,
         phoneno,
         email,
-        country,
-        city,
+        currentCountry.value,
+        currentCity.value,
         address,
         muntazimid,
         masjidid,
         masjidname,
+        currentState.value,
+        imagePath.value,
       );
       if (result == null) {
         Get.toNamed(RoutesNames.addShopsCnicScreen, arguments: [
           shopTitle.text,
           phoneno.text,
           email.text,
-          country.text,
-          city.text,
+          currentCountry.value,
+          currentCity.value,
           address.text,
           imagePath.value,
           muntazimid,
           masjidid,
           masjidname,
+          currentState.value,
         ]);
       } else {
         Get.snackbar('Error', result);
@@ -80,8 +101,6 @@ class AddAlsuffahShopsViewModel extends GetxController {
     doCardExpire,
     shopTitle,
     address,
-    country,
-    city,
     phone,
     muntazimId,
     masjidid,
@@ -98,13 +117,14 @@ class AddAlsuffahShopsViewModel extends GetxController {
         File(imagePath.value),
         shopTitle,
         address,
-        country,
-        city,
+        currentCountry.value,
+        currentCity.value,
         phone,
         muntazimId,
         masjidid,
         masjidname,
         email,
+        currentState.value,
       );
       if (result == null) {
         Get.toNamed(RoutesNames.genUsernamePassShopScreen, arguments: [
@@ -116,13 +136,14 @@ class AddAlsuffahShopsViewModel extends GetxController {
           imagePath.value,
           shopTitle,
           address,
-          country,
-          city,
+          currentCountry.value,
+          currentCity.value,
           phone,
           muntazimId,
           masjidid,
           masjidname,
           email,
+          currentState.value,
         ]);
       } else {
         log(result);
@@ -143,8 +164,6 @@ class AddAlsuffahShopsViewModel extends GetxController {
     TextEditingController doCardExpire,
     shopTitle,
     address,
-    country,
-    city,
     phone,
     muntazimId,
     masjidid,
@@ -155,6 +174,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
         await CnicScanner().scanImage(imageSource: imageSource);
     if (cnicModel == null) {
       Get.snackbar('No Image Found', 'Scan Your Id Card');
+    } else {
       name.text = cnicModel.cnicHolderName;
       cnicno.text = cnicModel.cnicNumber;
       dob.text = cnicModel.cnicHolderDateOfBirth;
@@ -168,7 +188,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
         Get.snackbar('No Image Found', 'Scan Your Id Card');
       } else {
         try {
-          final result = await _addSuffahStoreRepo.addSuffahStoreInDBManually(
+          final result = await _addSuffahStoreRepo.addSuffahStoreInDBScan(
             name,
             cnicno,
             dob,
@@ -177,13 +197,14 @@ class AddAlsuffahShopsViewModel extends GetxController {
             File(imagePath.value),
             shopTitle,
             address,
-            country,
-            city,
+            currentCountry.value,
+            currentCity.value,
             phone,
             muntazimId,
             masjidid,
             masjidname,
             email,
+            currentState.value,
           );
           if (result == null) {
             Get.toNamed(RoutesNames.genUsernamePassShopScreen, arguments: [
@@ -195,13 +216,14 @@ class AddAlsuffahShopsViewModel extends GetxController {
               imagePath.value,
               shopTitle,
               address,
-              country,
-              city,
+              currentCountry.value,
+              currentCity.value,
               phone,
               muntazimId,
               masjidid,
               masjidname,
               email,
+              currentState.value,
             ]);
           } else {
             Get.snackbar('Error', result);
@@ -223,8 +245,6 @@ class AddAlsuffahShopsViewModel extends GetxController {
     image,
     shopTitle,
     address,
-    country,
-    city,
     phone,
     muntazimId,
     masjidid,
@@ -244,8 +264,8 @@ class AddAlsuffahShopsViewModel extends GetxController {
         image,
         shopTitle,
         address,
-        country,
-        city,
+        currentCountry.value,
+        currentCity.value,
         phone,
         muntazimId,
         masjidid,
@@ -253,6 +273,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
         genUsername,
         genPass,
         email,
+        currentState.value,
       );
       if (result == null) {
         await EmailAuth.sendEmail(

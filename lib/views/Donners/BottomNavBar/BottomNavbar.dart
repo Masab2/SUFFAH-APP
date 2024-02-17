@@ -5,6 +5,7 @@ import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/BottomNavBar/BottomNavBarViewModel.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
+import 'package:suffa_app/views/Donners/Donate/DonateScreenView.dart';
 import 'package:suffa_app/views/Donners/Home/homeView.dart';
 import 'package:suffa_app/views/Donners/Profile/DonnerProfile/DonnerProfle.dart';
 
@@ -90,11 +91,12 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
 
   PageView _mainWrapperBody() {
     return PageView(
+      physics: const NeverScrollableScrollPhysics(),
       onPageChanged: (int page) => bottomController.changePage(page),
       controller: pageController,
       children: const [
         HomeScreen(),
-        Scaffold(body: Center(child: Text('Home2'))),
+        DonateScreenView(),
         Scaffold(body: Center(child: Text('Home3'))),
         DonnerProfile()
       ],

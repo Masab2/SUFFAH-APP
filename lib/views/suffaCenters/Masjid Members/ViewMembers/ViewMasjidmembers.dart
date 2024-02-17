@@ -3,7 +3,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
+import 'package:suffa_app/ViewModel/SuffahCenter/AddMasjidMembers/viewMasjidMemberViewModel.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/displaySuffaCenter.dart';
+import 'package:suffa_app/res/components/RequestMemberComp/RequestMemberComp.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
@@ -17,6 +19,7 @@ class ViewMasjidMembers extends StatefulWidget {
 }
 
 class _ViewMasjidMembersState extends State<ViewMasjidMembers> {
+  final controller = Get.put(ViewMasjidMemberViewModel());
   late String id;
   late String masjidid;
   @override
@@ -61,13 +64,20 @@ class _ViewMasjidMembersState extends State<ViewMasjidMembers> {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     var data = snapshot.data!.docs[index];
-                    return AdminSuffaCenterComp(
-                        customername: data['name'],
-                        image: data['masjidimg'],
-                        email: data['email'],
-                        ontap: () {},
-                        centerId: data['Desig'],
-                        address: data['address']);
+                    return RequesttoAdminComp(
+                      title: data['name'],
+                      image: data['masjidimg'],
+                      email: data['email'],
+                      onGreenBtnPressed: () async {
+                        await controller.launchPhoneApp(data['phoneno']);
+                      },
+                      centerId: data['Desig'],
+                      address: data['address'],
+                      city: '',
+                      onGreyBtnPressed: () {},
+                      greenBtnText: 'Contact',
+                      greyBtnText: 'Disable',
+                    );
                   },
                 ));
               }

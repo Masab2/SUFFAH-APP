@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/Admin/adminAuth/adminLoginViewModel.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -130,23 +131,15 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
                         Obx(() {
                           return adminAuthController.isLoading == true
                               ? const CircularProgressIndicator.adaptive()
-                              : MaterialButton(
-                                  height: context.mh * 0.05,
-                                  minWidth: context.mw * 0.80,
-                                  color: AppColor.cgreenColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
+                              : ReuseAblebtn(
+                                  title: 'Login',
                                   onPressed: () {
                                     adminAuthController.adminLoginAccount(
-                                        emailController,
-                                        passwordController,
-                                        context);
+                                      emailController,
+                                      passwordController,
+                                      context,
+                                    );
                                   },
-                                  child: Text(
-                                    'Login',
-                                    style: GoogleFonts.poppins(
-                                        color: AppColor.whiteColor),
-                                  ),
                                 );
                         })
                       ]),

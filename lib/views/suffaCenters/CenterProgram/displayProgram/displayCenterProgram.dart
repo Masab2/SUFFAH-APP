@@ -92,43 +92,45 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
                 width: double.maxFinite,
                 height: context.mh,
                 child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: tabController, children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.mw * 0.03,
-                        vertical: context.mh * 0.02),
-                    child: const AlSuffahActiveProgramView(),
-                  ),
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.mw * 0.03,
-                          vertical: context.mh * 0.02),
-                      child: const AlSuffahRequestedprogramView()),
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.mw * 0.03,
-                          vertical: context.mh * 0.02),
-                      child: const AlSuffahRejectedView()),
-                ]),
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: tabController,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: context.mw * 0.03,
+                            vertical: context.mh * 0.02),
+                        child: const AlSuffahActiveProgramView(),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.mw * 0.03,
+                              vertical: context.mh * 0.02),
+                          child: const AlSuffahRequestedprogramView()),
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.mw * 0.03,
+                              vertical: context.mh * 0.02),
+                          child: const AlSuffahRejectedView()),
+                    ]),
               )
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.toNamed(
-              RoutesNames.centerProgramScreen,
-              arguments: [
-                id,
-                masjidname,
-                masjidId,
-                muntazimEmail,
-              ],
-            );
-          },
-          child: const Icon(Icons.add)),
+        onPressed: () {
+          Get.toNamed(
+            RoutesNames.centerProgramScreen,
+            arguments: [
+              id,
+              masjidname,
+              masjidId,
+              muntazimEmail,
+            ],
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 

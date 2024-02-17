@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/Lang/LanguageChangeViewModel.dart';
 import 'package:suffa_app/res/components/SuffahCenterProfile/suffaCenterProfile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,11 +20,6 @@ class _DonnerSettingsState extends State<DonnerSettings> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(IconlyBold.arrow_left_circle)),
         title: Text(
           AppLocalizations.of(context)!.appSetting,
           style: GoogleFonts.poppins(fontWeight: FontWeight.bold),

@@ -31,8 +31,7 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
   late dynamic image;
   late String shopTitle;
   late String address;
-  late String country;
-  late String city;
+
   late String phone;
   late String muntazimId;
   late String masjidid;
@@ -49,13 +48,11 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
     image = Get.arguments[5] ?? '';
     shopTitle = Get.arguments[6];
     address = Get.arguments[7];
-    country = Get.arguments[8];
-    city = Get.arguments[9];
-    phone = Get.arguments[10];
-    muntazimId = Get.arguments[11];
-    masjidid = Get.arguments[12];
-    masjidname = Get.arguments[13];
-    email = Get.arguments[14];
+    phone = Get.arguments[8];
+    muntazimId = Get.arguments[9];
+    masjidid = Get.arguments[10];
+    masjidname = Get.arguments[11];
+    email = Get.arguments[12];
     super.initState();
   }
 
@@ -122,8 +119,6 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
                   File(image.toString()),
                   shopTitle,
                   address,
-                  country,
-                  city,
                   phone,
                   muntazimId,
                   masjidid,

@@ -12,12 +12,13 @@ class GenerateEmailSuffaMembersRepo {
     TextEditingController name,
     TextEditingController emailAddress,
     TextEditingController phoneno,
-    TextEditingController city,
-    TextEditingController country,
+    city,
+    country,
     TextEditingController address,
     TextEditingController genEmail,
     TextEditingController genPasword,
     masjidid,
+    state,
   ) async {
     if (genEmail.text.isEmpty && genPasword.text.isEmpty) {
       return 'Please Enter the Email address and Password';
@@ -41,17 +42,19 @@ class GenerateEmailSuffaMembersRepo {
         case 'suffacenter.com':
           try {
             await Apis.addSuffahCommitteMembers(
-                file,
-                name.text,
-                emailAddress.text,
-                genEmail.text,
-                genPasword.text,
-                phoneno.text,
-                city.text,
-                country.text,
-                address.text,
-                id,
-                masjidid);
+              file,
+              name.text,
+              emailAddress.text,
+              genEmail.text,
+              genPasword.text,
+              phoneno.text,
+              city,
+              country,
+              address.text,
+              id,
+              masjidid,
+              state,
+            );
           } catch (e) {
             return e.toString();
           }

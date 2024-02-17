@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 import 'package:suffa_app/ViewModel/Donner/DonnorAuth/loginViewModel.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
@@ -83,11 +84,28 @@ class _LoginViewState extends State<LoginView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        0.04.ph,
+                        0.02.ph,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              color: Colors.grey[500],
+                              onPressed: () {
+                                Get.toNamed(RoutesNames.loginDashBoardScreen);
+                              },
+                              icon: const Icon(
+                                Icons.admin_panel_settings_rounded,
+                              ),
+                            ),
+                            0.03.pw,
+                          ],
+                        ),
+                        0.01.ph,
                         Text(
                           'Sign In to your account',
-                          style:
-                              GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         0.03.ph,
                         CustomizedFeild(
@@ -131,31 +149,35 @@ class _LoginViewState extends State<LoginView> {
                         Obx(() {
                           return loginController.isLoading == true
                               ? const CircularProgressIndicator.adaptive()
-                              : MaterialButton(
-                                  height: context.mh * 0.05,
-                                  minWidth: context.mw * 0.80,
-                                  color: AppColor.cgreenColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
+                              : ReuseAblebtn(
+                                  title: 'Login',
                                   onPressed: () {
                                     loginController.loginAccount(
                                         emailController, passwordController);
                                   },
-                                  child: Text(
-                                    'Login',
-                                    style: GoogleFonts.poppins(
-                                        color: AppColor.whiteColor),
-                                  ),
                                 );
                         }),
                         0.01.ph,
                         const LoginOrRow(),
                         0.01.ph,
-                        SignInButton(
-                          buttonType: ButtonType.google,
-                          onPressed: () {
-                            loginController.googleLogin();
-                          },
+                        Row(
+                          children: [
+                            0.06.pw,
+                            Expanded(
+                              child: SignInButton(
+                                padding: context.mh * 0.01,
+                                imagePosition: ImagePosition.right,
+                                btnColor: AppColor.geryColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                buttonType: ButtonType.google,
+                                onPressed: () {
+                                  loginController.googleLogin();
+                                },
+                              ),
+                            ),
+                            0.06.pw,
+                          ],
                         ),
                         0.01.ph,
                         Row(
@@ -166,7 +188,7 @@ class _LoginViewState extends State<LoginView> {
                             Text(
                               "Don't have an account",
                               style: GoogleFonts.roboto(
-                                  fontSize: 15,
+                                  fontSize: context.mh * 0.015,
                                   color: AppColor.geryColor,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -178,32 +200,15 @@ class _LoginViewState extends State<LoginView> {
                               child: Text(
                                 "Sign Up",
                                 style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    color: AppColor.cgreenColor,
-                                    fontWeight: FontWeight.bold),
+                                  fontSize: context.mh * 0.014,
+                                  color: AppColor.cgreenColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ],
                         ),
                         0.005.ph,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Get.toNamed(RoutesNames.choiceScreen);
-                              },
-                              child: Text(
-                                'For Admin login',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 12,
-                                    color: AppColor.cgreenColor,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
-                        )
                       ]),
                 ),
               ),

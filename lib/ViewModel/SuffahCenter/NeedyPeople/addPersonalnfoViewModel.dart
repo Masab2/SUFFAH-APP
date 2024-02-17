@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,8 +6,8 @@ import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 
 class AddPersonalInfoViewModel extends GetxController {
-  final RxList<String> programs = ['RashanProgram', 'OneTimeMeal'].obs;
-  var selectedValue = "RashanProgram".obs;
+  final RxList<String> programs = ['Male', 'Female'].obs;
+  var selectedValue = "Male".obs;
   RxString imagePath = ''.obs;
   RxInt selectedGender = 0.obs;
 
@@ -18,7 +17,7 @@ class AddPersonalInfoViewModel extends GetxController {
 
   // For DropDown
   void onItemSelected(String? newValue) {
-    selectedValue.value = newValue ?? "Rashan Program";
+    selectedValue.value = newValue ?? "Male";
   }
 
   // For Radio Button
@@ -36,9 +35,14 @@ class AddPersonalInfoViewModel extends GetxController {
   }
 
   // Add Data Into DataBase
-  void addNeedyPerson(phoneno, address, masjid, program, gender, masjidid) async {
+  void addNeedyPerson(
+      phoneno, address, masjid, program, gender, masjidid) async {
     final result = await _addNeedyPeopleRepo.addNeedyPeople(
-        File(imagePath.value.toString()), phoneno, address, masjid);
+      imagePath.value.toString(),
+      phoneno,
+      address,
+      masjid,
+    );
     await SharePrefs.getId('id').then((value) {
       if (result == null) {
         Get.toNamed(RoutesNames.addNeedyPeopleScreen, arguments: <String>[

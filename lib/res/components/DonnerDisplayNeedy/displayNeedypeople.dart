@@ -52,7 +52,7 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
             title: Text(
               masjidname,
               style: GoogleFonts.poppins(
-                fontSize: context.mh * 0.020,
+                fontSize: context.mh * 0.018,
                 fontWeight: FontWeight.bold,
               ),
             ),

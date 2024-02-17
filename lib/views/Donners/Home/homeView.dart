@@ -18,7 +18,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar.HomeBar(context, const Icon(IconlyLight.search)),
+      appBar: HomeAppBar.HomeBar(
+          context,
+          const Icon(
+            IconlyLight.search,
+            color: AppColor.cgreenColor,
+          ),
+          const Icon(
+            IconlyLight.notification,
+            color: AppColor.cgreenColor,
+          )),
       body: Column(
         children: [
           0.05.ph,
@@ -59,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     var data = snapshot.data!.docs[index];
                     return DonnationChoice(
-                      image: ImageAsset.hungryimg,
+                      image: data['image'],
                       title: data['programTitle'],
                       ontap: () {
                         Get.toNamed(RoutesNames.selectMasjidScreen, arguments: [

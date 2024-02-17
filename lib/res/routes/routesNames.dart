@@ -31,6 +31,7 @@ class RoutesNames {
       '/addaffiliatedProgramScreenforAdmin';
   static const String displayaffiliatedProgramScreenforAdmin =
       '/displayaffiliatedProgramScreenforAdmin';
+  static const String addCountryScreen = '/addCountryScreen';
 
   // Suffa Center DashBoard
   static const String suffahloginDashBoardScreen =
@@ -58,7 +59,6 @@ class RoutesNames {
   static const String addShopsCnicScreen = '/addShopsCnicScreen';
   static const String displayShopScreen = '/displayShopScreen';
   static const String genUsernamePassShopScreen = '/genUsernamePassShopScreen';
-  
 
   // SUFFAH STORE
   static const String suffahStoreloginScreen = '/suffahStoreloginScreen';
