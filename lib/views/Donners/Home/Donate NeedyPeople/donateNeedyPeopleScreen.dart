@@ -105,15 +105,15 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                             masjidname: person.personname,
                             image: person.image,
                             masjidaddress: person.address,
-                            ontap: () async {
-                              await needyPeopleController
+                            ontap: () {
+                              needyPeopleController
                                   .updateStatus(person.personId);
                             },
                             program: program,
                             muntazimid: muntazimid,
                             traling: IconButton(
-                              onPressed: () async {
-                                await needyPeopleController
+                              onPressed: () {
+                                needyPeopleController
                                     .updateStatus(person.personId);
                               },
                               icon: person.tempstatus == 'Added' &&

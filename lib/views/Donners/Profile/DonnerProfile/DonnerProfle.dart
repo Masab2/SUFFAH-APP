@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -71,7 +72,7 @@ class _DonnerProfileState extends State<DonnerProfile> {
                   },
                 ),
                 Container(
-                  height: context.mh * 0.22,
+                  height: context.mh * 0.33,
                   padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
                   margin: EdgeInsets.symmetric(
                       horizontal: context.mw * 0.04,
@@ -111,6 +112,15 @@ class _DonnerProfileState extends State<DonnerProfile> {
                               title: AppLocalizations.of(context)!
                                   .trackDonnationTitle,
                               subtitle: 'Status',
+                              traling: Icon(Icons.arrow_forward_ios)),
+                          const Divider(
+                            endIndent: 20,
+                            indent: 20,
+                          ),
+                          const SettingInfoListTile(
+                              icon: CupertinoIcons.money_dollar_circle_fill,
+                              title: 'Zakat Calulator',
+                              subtitle: 'Calculatate your Zakat',
                               traling: Icon(Icons.arrow_forward_ios)),
                         ],
                       ),

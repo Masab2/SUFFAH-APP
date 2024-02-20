@@ -81,6 +81,13 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
                   label: "Profile",
                   filledIcon: IconlyBold.profile,
                 ),
+                _bottomAppBarItem(
+                  context,
+                  defaultIcon: IconlyLight.more_circle,
+                  page: 4,
+                  label: "More",
+                  filledIcon: IconlyBold.more_circle,
+                ),
               ],
             ),
           ),
@@ -98,7 +105,8 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
         HomeScreen(),
         DonateScreenView(),
         Scaffold(body: Center(child: Text('Home3'))),
-        DonnerProfile()
+        DonnerProfile(),
+        Scaffold(body: Center(child: Text('More'))),
       ],
     );
   }
@@ -113,9 +121,11 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
     return GestureDetector(
       onTap: () {
         bottomController.changePage(page);
-        pageController.animateToPage(page,
-            duration: const Duration(milliseconds: 10),
-            curve: Curves.fastLinearToSlowEaseIn);
+        pageController.animateToPage(
+          page,
+          duration: const Duration(milliseconds: 10),
+          curve: Curves.fastLinearToSlowEaseIn,
+        );
       },
       child: Container(
         color: Colors.transparent,

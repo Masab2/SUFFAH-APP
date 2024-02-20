@@ -166,8 +166,9 @@ class _LoginViewState extends State<LoginView> {
                             Expanded(
                               child: SignInButton(
                                 padding: context.mh * 0.01,
+                                elevation: 0,
                                 imagePosition: ImagePosition.right,
-                                btnColor: AppColor.geryColor,
+                                btnColor: Colors.grey[300],
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 buttonType: ButtonType.google,

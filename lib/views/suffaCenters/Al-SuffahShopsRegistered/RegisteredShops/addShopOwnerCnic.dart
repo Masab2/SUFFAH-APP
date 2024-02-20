@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +26,6 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
   late String shopTitle;
   late String phonenno;
   late String emailAddress;
-
   late String address;
   late String imagePath;
   late String muntazimId;

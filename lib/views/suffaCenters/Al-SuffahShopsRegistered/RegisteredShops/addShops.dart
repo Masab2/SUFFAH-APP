@@ -2,23 +2,17 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:csc_picker/csc_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/ViewModel/SuffahCenter/Registered%20Shops/AddAlShuffahShopsViewModel.dart';
-import 'package:suffa_app/res/components/AddNeedyPeople/addNeedyPeopleComp.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
-import 'package:suffa_app/res/components/CNICFormComp/CnicFormComp.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
-import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
-import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../../../../res/components/AddSuffahCenter/PickImage.dart';
 
 class AddAlSuffahShops extends StatefulWidget {

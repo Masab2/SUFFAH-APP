@@ -45,11 +45,12 @@ class NeedyPeopleController extends GetxController {
   }
 
   // Update the status of the Selected Person
-  Future<void> updateStatus(personId) async {
+  void updateStatus(personId) async {
+    _status.value = _status.value == 'Added' ? 'Waiting' : 'Added';
     await Apis.updateStatusAlSuffahPerson(personId, _status.value.toString())
         .then((value) {
       log('Then Executed');
-      _status.value = _status.value == 'Added' ? 'Waiting' : 'Added';
+      // _status.value = _status.value == 'Added' ? 'Waiting' : 'Added';
     }).onError((error, stackTrace) {
       _status.value = _status.value == 'Added' ? 'Waiting' : 'Added';
     });

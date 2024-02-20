@@ -94,8 +94,14 @@ class DonnerProfileAccountSettings extends StatelessWidget {
 }
 
 class DonnerProfileView extends StatelessWidget {
-  final String title1, title2, subtitle, subtitle2, mainheading;
-  final IconData icon1, icon2;
+  final String title1,
+      title2,
+      title3,
+      subtitle,
+      subtitle2,
+      subtitle3,
+      mainheading;
+  final IconData icon1, icon2, icon3;
   const DonnerProfileView(
       {super.key,
       required this.title1,
@@ -104,7 +110,10 @@ class DonnerProfileView extends StatelessWidget {
       required this.title2,
       required this.subtitle2,
       required this.icon1,
-      required this.icon2});
+      required this.icon2,
+      required this.title3,
+      required this.subtitle3,
+      required this.icon3});
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +141,11 @@ class DonnerProfileView extends StatelessWidget {
             children: [
               0.02.ph,
               UserInfoListTile(icon: icon1, title: title1, subtitle: subtitle),
+              const Divider(
+                endIndent: 20,
+                indent: 20,
+              ),
+              UserInfoListTile(icon: icon2, title: title2, subtitle: subtitle2),
               const Divider(
                 endIndent: 20,
                 indent: 20,
