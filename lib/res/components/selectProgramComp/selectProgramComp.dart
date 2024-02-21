@@ -88,7 +88,7 @@ class SelectProgramComp extends StatelessWidget {
                     ],
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: ontap,
                       child: Text(
                         buttonTitle,
                         style: GoogleFonts.poppins(
@@ -99,7 +99,6 @@ class SelectProgramComp extends StatelessWidget {
                   0.04.ph,
                 ],
               ),
-
             )),
       ],
     );

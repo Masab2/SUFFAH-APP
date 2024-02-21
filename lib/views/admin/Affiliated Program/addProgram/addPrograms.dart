@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +7,7 @@ import 'package:suffa_app/ViewModel/Admin/addProgram/addAffilatedprogramViewMode
 import 'package:suffa_app/res/components/AddNeedyPeople/addNeedyPeopleComp.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/PickImage.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
@@ -23,13 +23,24 @@ class _AddProgramsViewState extends State<AddProgramsView> {
   final priceController = TextEditingController();
   final controller = Get.put(AffiliatedViewModel());
   @override
+  void dispose() {
+    titleController.dispose();
+    priceController.dispose();
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           'Create Program',
-          style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(
+            fontSize: context.mh * 0.020,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: ListView(
@@ -116,29 +127,17 @@ class _AddProgramsViewState extends State<AddProgramsView> {
           ),
           0.05.ph,
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
-            child: MaterialButton(
-              minWidth: context.mw * 0.80,
-              height: context.mh * 0.06,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              onPressed: () {
-                controller.addAffiliatedProgram(
-                  titleController,
-                  controller.selectedValue.value,
-                  priceController,
-                );
-              },
-              color: AppColor.cgreenColor,
-              child: Text(
-                'Add Program',
-                style: GoogleFonts.poppins(
-                    color: AppColor.whiteColor,
-                    fontSize: context.mh * 0.020,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          )
+              padding: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
+              child: ReuseAblebtn(
+                title: 'Add Program',
+                onPressed: () {
+                  controller.addAffiliatedProgram(
+                    titleController,
+                    controller.selectedValue.value,
+                    priceController,
+                  );
+                },
+              ))
         ],
       ),
     );

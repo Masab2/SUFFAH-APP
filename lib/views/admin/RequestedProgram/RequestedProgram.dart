@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:suffa_app/Mail/sendEmail.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
-import 'package:suffa_app/ViewModel/Lang/LanguageChangeViewModel.dart';
-import 'package:suffa_app/res/components/RequestedProgramComp/RequestedProgramComp.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 import '../../../res/components/RequestMemberComp/RequestMemberComp.dart';
@@ -19,7 +16,6 @@ class RequestedProgramView extends StatefulWidget {
 }
 
 class _RequestedProgramViewState extends State<RequestedProgramView> {
-  final AppLanguageController _languageController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

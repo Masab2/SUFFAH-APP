@@ -20,11 +20,6 @@ class _ViewSuffahCenterState extends State<ViewSuffahCenter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(IconlyBold.arrow_left_circle)),
         title: Text(
           'Suffah Center',
           style: GoogleFonts.poppins(fontWeight: FontWeight.bold),

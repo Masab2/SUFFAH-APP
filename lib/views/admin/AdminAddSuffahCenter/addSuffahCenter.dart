@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +8,7 @@ import 'package:suffa_app/ViewModel/Admin/AddSuffahCenter/AddSuffahCenterViewMod
 import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/PickImage.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
-import 'package:suffa_app/utils/color/appColor.dart';
+import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class AddSuffahCenter extends StatefulWidget {
@@ -44,14 +43,12 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(IconlyBold.arrow_left_circle)),
         title: Text(
           'Register Center',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            fontSize: context.mh * 0.024,
+          ),
         ),
         centerTitle: true,
       ),
@@ -138,31 +135,21 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: context.mw * 0.03, vertical: context.mh * 0.03),
-        child: MaterialButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: AppColor.cgreenColor,
-          minWidth: context.mw * 0.80,
-          height: context.mh * 0.06,
-          onPressed: () {
-            addsuffahControlller.addSuffahCenter(
-                muntazimController,
-                emailController,
-                phoneController,
-                cityController,
-                countryController,
-                addressController,
-                masjidController);
-          },
-          child: Text(
-            'Register Masjid',
-            style:
-                GoogleFonts.poppins(color: AppColor.whiteColor, fontSize: 16),
-          ),
-        ),
-      ),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.mw * 0.03, vertical: context.mh * 0.03),
+          child: ReuseAblebtn(
+            title: 'Next',
+            onPressed: () {
+              addsuffahControlller.addSuffahCenter(
+                  muntazimController,
+                  emailController,
+                  phoneController,
+                  cityController,
+                  countryController,
+                  addressController,
+                  masjidController);
+            },
+          )),
     );
   }
 }

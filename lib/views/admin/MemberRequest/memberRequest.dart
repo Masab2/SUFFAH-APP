@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/Admin/MemberRequestAccept/MemberRequestAcceptViewModel.dart';
 import 'package:suffa_app/res/components/RequestMemberComp/RequestMemberComp.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
+import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class MemberRequest extends StatefulWidget {
   const MemberRequest({super.key});
@@ -27,15 +27,11 @@ class _MemberRequestState extends State<MemberRequest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(IconlyBold.arrow_left_circle)),
         title: Text(
           'Members Requested',
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.bold,
+            fontSize: context.mh * 0.023,
           ),
         ),
         centerTitle: true,
