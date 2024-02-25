@@ -59,6 +59,8 @@ class RoutesNames {
   static const String addShopsCnicScreen = '/addShopsCnicScreen';
   static const String displayShopScreen = '/displayShopScreen';
   static const String genUsernamePassShopScreen = '/genUsernamePassShopScreen';
+  static const String selectProgramForShopsAddScreen =
+      '/selectProgramForShopsAddScreen';
 
   // SUFFAH STORE
   static const String suffahStoreloginScreen = '/suffahStoreloginScreen';

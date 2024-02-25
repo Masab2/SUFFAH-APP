@@ -3,15 +3,19 @@ import 'dart:io';
 
 import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/SuffahCenter/Registered%20Shops/AddAlShuffahShopsViewModel.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
+import 'package:suffa_app/res/components/SuffahCenterProfile/suffaCenterProfile.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
+import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import '../../../../res/components/AddSuffahCenter/PickImage.dart';
 
@@ -34,12 +38,14 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
   late String muntazid;
   late String masjidId;
   late String masjidname;
-  
+  late String program;
+
   @override
   void initState() {
     muntazid = Get.arguments[0];
     masjidId = Get.arguments[1];
     masjidname = Get.arguments[2];
+    program = Get.arguments[3];
     super.initState();
   }
 
@@ -96,48 +102,68 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Image(
-                              height: context.mh * 0.20,
-                              width: context.mw * 0.40,
-                              fit: BoxFit.cover,
-                              image: FileImage(
-                                  File(controller.imagePath.toString()))),
+                            height: context.mh * 0.20,
+                            width: context.mw * 0.40,
+                            fit: BoxFit.cover,
+                            image: FileImage(
+                              File(
+                                controller.imagePath.toString(),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
             ),
             0.02.ph,
             Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: context.mw * 0.05,
-                ),
-                child: Obx(() {
-                  return CSCPicker(
-                    dropdownDecoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                        color: Colors.white,
-                        border:
-                            Border.all(color: AppColor.cgreenColor, width: 1)),
-                    layout: Layout.horizontal,
-                    showCities: true,
-                    showStates: true,
-                    flagState: CountryFlag.ENABLE,
-                    currentCountry: controller.currentCountry.value,
-                    currentCity: controller.currentCity.value,
-                    currentState: controller.currentState.value,
-                    onCountryChanged: (value) {
-                      controller.onCountryChanged(value);
-                    },
-                    onCityChanged: (value) {
-                      controller.onCityChanged(value ?? '');
-                      log(value.toString());
-                    },
-                    onStateChanged: (value) {
-                      controller.onStateChanged(value ?? '');
-                    },
-                  );
-                })),
+              padding: EdgeInsets.symmetric(
+                horizontal: context.mw * 0.05,
+              ),
+
+              // CSCPicker(
+              //       dropdownDecoration: BoxDecoration(
+              //           borderRadius:
+              //               const BorderRadius.all(Radius.circular(10)),
+              //           color: Colors.white,
+              //           border:
+              //               Border.all(color: AppColor.cgreenColor, width: 1)),
+              //       layout: Layout.horizontal,
+              //       showCities: true,
+              //       showStates: true,
+              //       flagState: CountryFlag.ENABLE,
+              //       currentCountry: controller.currentCountry.value,
+              //       currentCity: controller.currentCity.value,
+              //       currentState: controller.currentState.value,
+              //       onCountryChanged: (value) {
+              //         controller.onCountryChanged(value);
+              //       },
+              //       onCityChanged: (value) {
+              //         controller.onCityChanged(value ?? '');
+              //         log(value.toString());
+              //       },
+              //       onStateChanged: (value) {
+              //         controller.onStateChanged(value ?? '');
+              //       },
+              //     );
+              child: SelectState(
+                onCountryChanged: (value) {
+                  controller.onCountryChanged(value);
+                },
+                onStateChanged: (value) {
+                  controller.onStateChanged(value);
+                },
+                onCityChanged: (value) {
+                  controller.onCityChanged(value);
+                },
+              ),
+            ),
             0.02.ph,
+            UserInfoListTile(
+              icon: Icons.notes,
+              title: 'Program',
+              subtitle: program,
+            ),
             AddSuffahCenterComp(
               title: 'Shop Title',
               icon: Icons.shop,
@@ -181,6 +207,7 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
                 muntazid,
                 masjidId,
                 masjidname,
+                program,
               );
             },
           )),

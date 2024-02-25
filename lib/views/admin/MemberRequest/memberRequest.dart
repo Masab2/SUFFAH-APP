@@ -49,8 +49,17 @@ class _MemberRequestState extends State<MemberRequest> {
                     size: 40,
                   ),
                 );
-              } else if (!snapshot.hasData) {
-                return const Center(child: Text('No Data Found'));
+              } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    0.40.ph,
+                    const Center(
+                      child: Text('There is No Request for Masjid Members'),
+                    ),
+                  ],
+                );
               } else {
                 return Expanded(
                     child: ListView.builder(

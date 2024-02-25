@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as storage;
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
 
 class Apis {
@@ -18,13 +20,10 @@ class Apis {
 
   // Create Account of The Donner Via Email verified Link
   static Future<void> signUpAccount(var email, password) async {
-    await auth
-        .createUserWithEmailAndPassword(email: email, password: password)
-        .then((value) async {
-      await saveUserData(user, email);
-    }).onError((error, stackTrace) {
-      throw Exception(error.toString());
-    });
+    await auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
   // Create Account of The Donner Via Google
@@ -59,7 +58,7 @@ class Apis {
   static Future<void> saveUserData(User user, email) async {
     final userDoc = await firestore
         .collection(donorinfoCollection)
-        .where('uid', isEqualTo: user.uid)
+        .where('email', isEqualTo: email)
         .limit(1)
         .get();
     if (userDoc.docs.isEmpty) {
@@ -344,7 +343,7 @@ class Apis {
 
   // add Affiliated Program into the database
   static Future<void> addAffiliatedProgramByAdmin(
-      file, title, status, price) async {
+      file, title, status, price, currency) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/Affiliatedprogram$id');
     storage.UploadTask uploadTask = ref.putFile(file);
@@ -356,6 +355,7 @@ class Apis {
         'programTitle': title,
         'Status': status,
         'Price': price,
+        'Currency': currency,
       });
     });
   }
@@ -460,6 +460,7 @@ class Apis {
     password,
     email,
     state,
+    program,
   ) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/ShopImage$id');
@@ -486,6 +487,7 @@ class Apis {
         'genPassword': password,
         'email': email,
         'state': state,
+        'program': program,
       });
     });
   }

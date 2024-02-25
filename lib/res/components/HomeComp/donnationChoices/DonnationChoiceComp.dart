@@ -128,7 +128,7 @@ class DonnationChoice extends StatelessWidget {
                               return Column(
                                 children: [
                                   SimpleAnimationProgressBar(
-                                    height: context.mh * 0.02,
+                                    height: context.mh * 0.01,
                                     width: context.mw * 0.70,
                                     backgroundColor: Colors.grey.shade800,
                                     foregrondColor: AppColor.cgreenColor,

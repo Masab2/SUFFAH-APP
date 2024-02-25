@@ -87,7 +87,10 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                     title: 'Masjid Profile',
                     ontap: () {
                       Get.toNamed(RoutesNames.suffacenterProfileScreen,
-                          arguments: id);
+                          arguments: [
+                            id,
+                            masjidname,
+                          ]);
                     },
                     icon: Icons.mosque_rounded,
                   ),
@@ -116,11 +119,12 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                   AdminDashBoardtiles(
                     title: 'Add Stores Account',
                     ontap: () {
-                      Get.toNamed(RoutesNames.addShopsScreen, arguments: [
-                        id,
-                        masjidId,
-                        masjidname,
-                      ]);
+                      Get.toNamed(RoutesNames.selectProgramForShopsAddScreen,
+                          arguments: [
+                            id,
+                            masjidId,
+                            masjidname,
+                          ]);
                     },
                     icon: IconlyBold.bag,
                   ),

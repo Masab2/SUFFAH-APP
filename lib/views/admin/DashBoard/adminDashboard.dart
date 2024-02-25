@@ -48,7 +48,7 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                       icon: Icons.mosque,
                     ),
                     AdminDashBoardtiles(
-                      title: 'SUFFAH Store',
+                      title: 'Al-SUFFAH Store',
                       ontap: () {},
                       icon: Icons.shop,
                     ),
@@ -69,9 +69,11 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                       icon: Icons.remove_from_queue,
                     ),
                     AdminDashBoardtiles(
-                      title: 'Countrys',
-                      ontap: () {},
-                      icon: Icons.flag,
+                      title: 'Requested Program',
+                      ontap: () {
+                        Get.toNamed(RoutesNames.requestProgramScreen);
+                      },
+                      icon: Icons.control_camera_outlined,
                     ),
                   ],
                 ),
@@ -91,13 +93,13 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                       },
                       icon: Icons.ac_unit_outlined,
                     ),
-                    AdminDashBoardtiles(
-                      title: 'Requested Program',
-                      ontap: () {
-                        Get.toNamed(RoutesNames.requestProgramScreen);
-                      },
-                      icon: Icons.control_camera_outlined,
-                    ),
+                    // AdminDashBoardtiles(
+                    //   title: 'Requested Program',
+                    //   ontap: () {
+                    //     Get.toNamed(RoutesNames.requestProgramScreen);
+                    //   },
+                    //   icon: Icons.control_camera_outlined,
+                    // ),
                   ],
                 ),
               ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
@@ -21,6 +23,7 @@ class EmailAuth {
       await send(message, smtpServer);
       Get.snackbar('Successfull', 'Mail Sent Successfully');
     } catch (e) {
+      log(e.toString());
       Get.snackbar('Error', 'Error Occured');
     }
   }

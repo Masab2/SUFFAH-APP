@@ -1,5 +1,3 @@
-// ignore_for_file: body_might_complete_normally_nullable
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -18,11 +16,14 @@ class LoginRepo {
       final RegExp emailRegExp =
           RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
       if (emailRegExp.hasMatch(email.text) && password.text.length >= 6) {
-        Apis.loginAccount(email.text, password.text).then((value) {
-          return null;
-        }).onError((error, stackTrace) {
-          log(error.toString());
-        });
+        try {
+          await Apis.loginAccount(email.text, password.text);
+          log('Login Successful');
+          return null; // Return null on successful login
+        } catch (error) {
+          log('Login Error: $error');
+          return 'An error occurred while logging in';
+        }
       } else {
         return 'Incorrect Format';
       }

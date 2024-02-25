@@ -19,6 +19,7 @@ import 'package:suffa_app/views/admin/AdminAddSuffahCenter/createEmailView.dart'
 import 'package:suffa_app/views/admin/MemberRequest/memberRequest.dart';
 import 'package:suffa_app/views/admin/RequestedProgram/RequestedProgram.dart';
 import 'package:suffa_app/views/splashView/splashView.dart';
+import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/RegisteredShops/SelectProgram.dart';
 import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/RegisteredShops/addShopOwnerCnic.dart';
 import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/RegisteredShops/addShops.dart';
 import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/RegisteredShops/genUsernameScreen.dart';
@@ -196,6 +197,10 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.displayShopScreen,
             page: () => const DisplayAlshuffaRegisteredShop(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.selectProgramForShopsAddScreen,
+            page: () => const SelectProgramforShopsAdd(),
             transition: Transition.leftToRight),
 
         //& Shuffa Store Routes

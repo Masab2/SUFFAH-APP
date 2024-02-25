@@ -17,7 +17,7 @@ class VerifyScreen extends StatefulWidget {
 }
 
 class _VerifyScreenState extends State<VerifyScreen> {
-  late Timer timer;
+  late Timer timer ;
   @override
   void initState() {
     Apis.user.sendEmailVerification();
@@ -49,10 +49,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   fontWeight: FontWeight.bold, color: AppColor.geryColor),
               children: [
                 TextSpan(
-                    text: '${Apis.user.email}',
-                    style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.cgreenColor)),
+                  text: '${Apis.user.email}',
+                  style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.bold, color: AppColor.cgreenColor),
+                ),
               ],
             ),
           )
@@ -65,7 +65,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
     await Apis.user.reload();
     if (Apis.user.emailVerified) {
       timer.cancel();
-      Get.offAndToNamed(RoutesNames.verifyScreen);
+      Get.offAndToNamed(RoutesNames.bottomNavbarScreen);
     }
   }
 }

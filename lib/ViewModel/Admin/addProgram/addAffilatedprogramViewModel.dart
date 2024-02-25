@@ -1,4 +1,4 @@
-import 'dart:io';
+// ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,6 +9,7 @@ class AffiliatedViewModel extends GetxController {
   final ImagePicker _picker = ImagePicker();
   final RxList<String> programs = ['Active', 'Disable'].obs;
   var selectedValue = "Active".obs;
+  var selectedCurrency = 'PKR'.obs;
   final AffiliatedProgramRepo _addProgramRepo = AffiliatedProgramRepo();
   var image;
 
@@ -23,7 +24,12 @@ class AffiliatedViewModel extends GetxController {
 
   void addAffiliatedProgram(title, status, price) async {
     final result = await _addProgramRepo.addAffiliatedProgram(
-        File(imagePath.value.toString()), title, status, price);
+      imagePath.value.toString(),
+      title,
+      status,
+      price,
+      selectedCurrency.value,
+    );
     if (result == null) {
       Get.snackbar('Program Added', 'Program Added Successfully');
     } else {

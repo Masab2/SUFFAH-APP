@@ -20,6 +20,7 @@ class AddSuffahStoreRepo {
     masjidname,
     state,
     image,
+    program,
   ) async {
     if (shopTitle.text.isEmpty ||
         phoneno.text.isEmpty ||
@@ -59,6 +60,7 @@ class AddSuffahStoreRepo {
     masjidname,
     email,
     state,
+    program,
   ) async {
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
@@ -98,6 +100,7 @@ class AddSuffahStoreRepo {
     masjidname,
     email,
     state,
+    program,
   ) async {
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
@@ -139,6 +142,7 @@ class AddSuffahStoreRepo {
     TextEditingController genPass,
     email,
     state,
+    program,
   ) async {
     if (genUsername.text.isEmpty || genUsername.text.isEmpty) {
       return 'Fill The Required Fields';
@@ -162,6 +166,7 @@ class AddSuffahStoreRepo {
           genPass.text,
           email,
           state,
+          program,
         );
         return null;
       } catch (e) {

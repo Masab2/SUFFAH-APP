@@ -31,13 +31,15 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
   late dynamic image;
   late String shopTitle;
   late String address;
-
+  late String country;
+  late String city;
+  late String state;
   late String phone;
   late String muntazimId;
   late String masjidid;
   late String masjidname;
   late String email;
-
+  late String program;
   @override
   void initState() {
     name = Get.arguments[0];
@@ -48,11 +50,15 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
     image = Get.arguments[5] ?? '';
     shopTitle = Get.arguments[6];
     address = Get.arguments[7];
-    phone = Get.arguments[8];
-    muntazimId = Get.arguments[9];
-    masjidid = Get.arguments[10];
-    masjidname = Get.arguments[11];
-    email = Get.arguments[12];
+    country = Get.arguments[8];
+    city = Get.arguments[9];
+    phone = Get.arguments[10];
+    muntazimId = Get.arguments[11];
+    masjidid = Get.arguments[12];
+    masjidname = Get.arguments[13];
+    email = Get.arguments[14];
+    state = Get.arguments[15];
+    program = Get.arguments[16];
     super.initState();
   }
 
@@ -126,6 +132,7 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
                   emailController,
                   passController,
                   email,
+                  program,
                 );
               },
             )

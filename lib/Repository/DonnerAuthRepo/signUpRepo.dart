@@ -18,13 +18,24 @@ class SignUpRepo {
       final RegExp emailRegExp =
           RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
       if (emailRegExp.hasMatch(email.text) && password.text.length >= 6) {
-        Apis.signUpAccount(email.text, password.text).then((value) {
+        try {
+          // Check if the email is already registered with Google
+          // final googleSignInMethods =
+          //     await Apis.isEmailRegisteredWithGoogle(email.text);
+          // if (googleSignInMethods.isNotEmpty) {
+          //   return 'Email is already registered with Google';
+          // }
+
+          // Proceed with email/password signup
+          await Apis.signUpAccount(email.text, password.text);
+          await Apis.saveUserData(Apis.user, email.text);
           return null;
-        }).onError((error, stackTrace) {
-          log(error.toString());
-        });
+        } catch (error) {
+          log('SignUp Error: $error');
+          return 'An error occurred while signing up';
+        }
       } else {
-        return 'Please Enter the data into Correct Format';
+        return 'Incorrect Format';
       }
     }
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,17 +30,37 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
   late String muntazimId;
   late String masjidId;
   late String masjidname;
+  late String country;
+  late String city;
+  late String state;
+  late String program;
+
+  // shopTitle.text,
+  //         phoneno.text,
+  //         email.text,
+  //         currentCountry.value,
+  //         currentCity.value,
+  //         address.text,
+  //         imagePath.value,
+  //         muntazimid,
+  //         masjidid,
+  //         masjidname,
+  //         currentState.value,
   final controller = Get.find<AddAlsuffahShopsViewModel>();
   @override
   void initState() {
-    shopTitle = Get.arguments[0] ?? "";
-    phonenno = Get.arguments[1] ?? "";
-    emailAddress = Get.arguments[2] ?? "";
-    address = Get.arguments[3] ?? "";
-    imagePath = Get.arguments[4] ?? "";
-    muntazimId = Get.arguments[5] ?? "";
-    masjidId = Get.arguments[6] ?? "";
-    masjidname = Get.arguments[7] ?? "";
+    shopTitle = Get.arguments[0] ?? '';
+    phonenno = Get.arguments[1] ?? '';
+    emailAddress = Get.arguments[2] ?? '';
+    country = Get.arguments[3] ?? 'Pakistan';
+    city = Get.arguments[4] ?? '';
+    address = Get.arguments[5] ?? '';
+    imagePath = Get.arguments[6] ?? '';
+    muntazimId = Get.arguments[7] ?? '';
+    masjidId = Get.arguments[8] ?? '';
+    masjidname = Get.arguments[9] ?? '';
+    state = Get.arguments[10] ?? '';
+    program = Get.arguments[11] ?? '';
     super.initState();
   }
 
@@ -128,6 +147,7 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
                       masjidId,
                       masjidname,
                       emailAddress,
+                      program,
                     );
                   },
                 ),
@@ -149,6 +169,7 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
                       masjidId,
                       masjidname,
                       emailAddress,
+                      program,
                     );
                   },
                 ),

@@ -111,7 +111,7 @@ class _AddPersonalDataState extends State<AddPersonalData> {
                   child: Text(
                     'Gender',
                     style: GoogleFonts.poppins(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: context.mh * 0.017, fontWeight: FontWeight.bold),
                   ),
                 ),
                 0.01.ph,

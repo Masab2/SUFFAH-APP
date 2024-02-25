@@ -72,29 +72,29 @@ class JazzcashModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['pp_Amount'] = this.ppAmount;
-    data['pp_AuthCode'] = this.ppAuthCode;
-    data['pp_BankID'] = this.ppBankID;
-    data['pp_BillReference'] = this.ppBillReference;
-    data['pp_Language'] = this.ppLanguage;
-    data['pp_MerchantID'] = this.ppMerchantID;
-    data['pp_ResponseCode'] = this.ppResponseCode;
-    data['pp_ResponseMessage'] = this.ppResponseMessage;
-    data['pp_RetreivalReferenceNo'] = this.ppRetreivalReferenceNo;
-    data['pp_SubMerchantId'] = this.ppSubMerchantId;
-    data['pp_TxnCurrency'] = this.ppTxnCurrency;
-    data['pp_TxnDateTime'] = this.ppTxnDateTime;
-    data['pp_TxnRefNo'] = this.ppTxnRefNo;
-    data['pp_SettlementExpiry'] = this.ppSettlementExpiry;
-    data['pp_TxnType'] = this.ppTxnType;
-    data['pp_Version'] = this.ppVersion;
-    data['ppmpf_1'] = this.ppmpf1;
-    data['ppmpf_2'] = this.ppmpf2;
-    data['ppmpf_3'] = this.ppmpf3;
-    data['ppmpf_4'] = this.ppmpf4;
-    data['ppmpf_5'] = this.ppmpf5;
-    data['pp_SecureHash'] = this.ppSecureHash;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['pp_Amount'] = ppAmount;
+    data['pp_AuthCode'] = ppAuthCode;
+    data['pp_BankID'] = ppBankID;
+    data['pp_BillReference'] = ppBillReference;
+    data['pp_Language'] = ppLanguage;
+    data['pp_MerchantID'] = ppMerchantID;
+    data['pp_ResponseCode'] = ppResponseCode;
+    data['pp_ResponseMessage'] = ppResponseMessage;
+    data['pp_RetreivalReferenceNo'] = ppRetreivalReferenceNo;
+    data['pp_SubMerchantId'] = ppSubMerchantId;
+    data['pp_TxnCurrency'] = ppTxnCurrency;
+    data['pp_TxnDateTime'] = ppTxnDateTime;
+    data['pp_TxnRefNo'] = ppTxnRefNo;
+    data['pp_SettlementExpiry'] = ppSettlementExpiry;
+    data['pp_TxnType'] = ppTxnType;
+    data['pp_Version'] = ppVersion;
+    data['ppmpf_1'] = ppmpf1;
+    data['ppmpf_2'] = ppmpf2;
+    data['ppmpf_3'] = ppmpf3;
+    data['ppmpf_4'] = ppmpf4;
+    data['ppmpf_5'] = ppmpf5;
+    data['pp_SecureHash'] = ppSecureHash;
     return data;
   }
 }

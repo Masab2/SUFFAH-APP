@@ -39,7 +39,7 @@ class AddNeedyPeopleComp extends StatelessWidget {
             prefixIcon: prefixIcon,
             enabled: true,
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
                 borderSide: const BorderSide(color: AppColor.cgreenColor)),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),

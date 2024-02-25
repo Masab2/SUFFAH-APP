@@ -28,7 +28,10 @@ class UserInfoListTile extends StatelessWidget {
       splashColor: AppColor.cgreenColor.withOpacity(0.23),
       title: Text(
         title,
-        style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+        style: GoogleFonts.poppins(
+          fontWeight: FontWeight.w600,
+          fontSize: context.mh * 0.018,
+        ),
       ),
       subtitle: Text(subtitle),
     );

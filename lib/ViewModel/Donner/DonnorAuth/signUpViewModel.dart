@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:suffa_app/Repository/DonnerAuthRepo/signUpRepo.dart';
@@ -12,9 +14,10 @@ class SignUpViewModel extends GetxController {
       isLoading(true);
       final result = await _signUpRepo.signUpAccount(email, password);
       if (result == null) {
+        log("Sign Up");
         Get.offAllNamed(RoutesNames.verifyScreen);
       } else {
-        Get.snackbar('Error', result.toString());
+        Get.snackbar('Error', result);
       }
     } finally {
       isLoading.value = false;

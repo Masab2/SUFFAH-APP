@@ -18,6 +18,13 @@ class AddAlsuffahShopsViewModel extends GetxController {
   var currentCity = 'Lahore'.obs;
   var currentState = 'Punjab'.obs;
   RxString imagePath = ''.obs;
+  var selectedProgram = ''.obs;
+
+  // DropDown For the Selection of the Program
+  void selectProgram(String program) {
+    selectedProgram.value = program;
+  }
+
   final AddSuffahStoreRepo _addSuffahStoreRepo = AddSuffahStoreRepo();
   Future getImageFromgallery(ImageSource source) async {
     image = await _picker.pickImage(source: source, imageQuality: 80);
@@ -55,6 +62,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
     muntazimid,
     masjidid,
     masjidname,
+    program,
   ) async {
     try {
       final result = await _addSuffahStoreRepo.addNewSuffahStore(
@@ -68,7 +76,10 @@ class AddAlsuffahShopsViewModel extends GetxController {
         masjidid,
         masjidname,
         currentState.value,
-        imagePath.value,
+        File(
+          imagePath.value,
+        ),
+        program,
       );
       if (result == null) {
         Get.toNamed(RoutesNames.addShopsCnicScreen, arguments: [
@@ -83,6 +94,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
           masjidid,
           masjidname,
           currentState.value,
+          program,
         ]);
       } else {
         Get.snackbar('Error', result);
@@ -106,6 +118,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
     masjidid,
     masjidname,
     email,
+    program,
   ) async {
     try {
       final result = await _addSuffahStoreRepo.addSuffahStoreInDBManually(
@@ -125,6 +138,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
         masjidname,
         email,
         currentState.value,
+        program,
       );
       if (result == null) {
         Get.toNamed(RoutesNames.genUsernamePassShopScreen, arguments: [
@@ -144,6 +158,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
           masjidname,
           email,
           currentState.value,
+          program,
         ]);
       } else {
         log(result);
@@ -169,6 +184,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
     masjidid,
     masjidname,
     email,
+    program,
   ) async {
     CnicModel cnicModel =
         await CnicScanner().scanImage(imageSource: imageSource);
@@ -205,6 +221,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
             masjidname,
             email,
             currentState.value,
+            program,
           );
           if (result == null) {
             Get.toNamed(RoutesNames.genUsernamePassShopScreen, arguments: [
@@ -224,6 +241,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
               masjidname,
               email,
               currentState.value,
+              program,
             ]);
           } else {
             Get.snackbar('Error', result);
@@ -252,6 +270,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
     TextEditingController genUsername,
     TextEditingController genPass,
     email,
+    program,
   ) async {
     try {
       final result =
@@ -274,6 +293,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
         genPass,
         email,
         currentState.value,
+        program,
       );
       if (result == null) {
         await EmailAuth.sendEmail(

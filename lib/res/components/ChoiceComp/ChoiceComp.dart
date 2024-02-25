@@ -20,7 +20,7 @@ class ChoiceComp extends StatelessWidget {
       onTap: ontap,
       child: Container(
           padding: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
-          height: context.mh * 0.20,
+          height: context.mh * 0.25,
           width: context.mw / 1.1,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),

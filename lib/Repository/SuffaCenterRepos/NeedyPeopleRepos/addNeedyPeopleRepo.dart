@@ -10,13 +10,9 @@ import 'package:suffa_app/utils/constant/constant.dart';
 class AddNeedyPeopleRepo {
   Future<String?> addNeedyPeople(String file, TextEditingController phoneno,
       TextEditingController address, masjid) async {
-    if (file == '' && phoneno.text.isEmpty && address.text.isEmpty) {
-      return 'Please Enter The Data';
-    } else if (phoneno.text.isEmpty) {
-      return 'Please Enter The Phone No';
-    } else if (address.text.isEmpty) {
-      return 'Please Enter The Address';
-    } else {
+    if (file == null || phoneno.text.isEmpty || address.text.isEmpty || file.isEmpty) {
+      return 'Please Fill the Required Feilds';
+    }  else {
       QuerySnapshot snapshot =
           await Apis.firestore.collection(suffahCenterNeedyPeople).get();
       for (var doc in snapshot.docs) {

@@ -54,10 +54,11 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           child: Column(
             children: [
               SizedBox(
-                width: double.infinity,
+                width: context.mw,
                 child: Align(
                   alignment: Alignment.center,
                   child: Obx(() {
@@ -74,7 +75,7 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
                         labelPadding: EdgeInsets.symmetric(
                           horizontal: context.mw * 0.01,
                         ),
-                        isScrollable: true,
+                        isScrollable: false,
                         indicatorColor: AppColor.whiteColor,
                         indicatorPadding: EdgeInsets.symmetric(
                           horizontal: context.mw * 0.04,
@@ -89,7 +90,7 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
                 ),
               ),
               SizedBox(
-                width: double.maxFinite,
+                width: context.mw,
                 height: context.mh,
                 child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),

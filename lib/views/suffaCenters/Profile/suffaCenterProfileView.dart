@@ -9,6 +9,8 @@ import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
+import '../../../res/components/adminDashBoardTiles/adminTilesUperheading/upperHeading.dart';
+
 class SuffaCenterProfile extends StatefulWidget {
   const SuffaCenterProfile({super.key});
 
@@ -17,9 +19,17 @@ class SuffaCenterProfile extends StatefulWidget {
 }
 
 class _SuffaCenterProfileState extends State<SuffaCenterProfile> {
+  late String id;
+  late String masjidname;
+  @override
+  void initState() {
+    id = Get.arguments[0];
+    masjidname = Get.arguments[1];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final id = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -33,6 +43,11 @@ class _SuffaCenterProfileState extends State<SuffaCenterProfile> {
       ),
       body: Column(
         children: [
+          UpperHeading(
+            icon: Icons.mosque,
+            title: masjidname,
+          ),
+          0.03.ph,
           StreamBuilder(
             stream: Apis.getSuffaCenterData(id),
             builder: (context, snapshot) {
@@ -56,8 +71,54 @@ class _SuffaCenterProfileState extends State<SuffaCenterProfile> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       var data = snapshot.data!.docs[index];
+                      List<dynamic> programs = data['Programs'];
                       return Column(
                         children: [
+                          Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: context.mw * 0.05),
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Program Registered',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.020,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: context.mh * 0.20,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: programs.length,
+                                  itemBuilder: (context, programindex) {
+                                    return UserInfoListTile(
+                                        icon: Icons.system_security_update,
+                                        title: programs[programindex],
+                                        subtitle: 'Registered');
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: context.mw * 0.05),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                'Masjid Information',
+                                style: GoogleFonts.poppins(
+                                  fontSize: context.mh * 0.020,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
                           UserInfoListTile(
                             icon: IconlyBold.user_2,
                             title: 'Masjid Name',
@@ -66,7 +127,7 @@ class _SuffaCenterProfileState extends State<SuffaCenterProfile> {
                           0.01.ph,
                           UserInfoListTile(
                             icon: IconlyBold.message,
-                            title: 'Email Address',
+                            title: 'Masjid Muntazim Email',
                             subtitle: data['email'],
                           ),
                           0.01.ph,
@@ -88,15 +149,10 @@ class _SuffaCenterProfileState extends State<SuffaCenterProfile> {
                             subtitle: data['phoneno'],
                           ),
                           0.01.ph,
-                          UserInfoListTile(
-                            icon: IconlyBold.message,
-                            title: 'Program Registered',
-                            subtitle: data['Programs'][index],
-                          ),
                           0.01.ph,
                           UserInfoListTile(
                             icon: IconlyBold.location,
-                            title: 'Address',
+                            title: 'Masjid Address',
                             subtitle: data['address'],
                           ),
                         ],

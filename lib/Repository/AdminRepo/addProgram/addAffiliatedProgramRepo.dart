@@ -7,22 +7,25 @@ import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 
 class AffiliatedProgramRepo {
   Future<String?> addAffiliatedProgram(
-    File file,
+    String file,
     TextEditingController title,
     status,
     TextEditingController price,
+    cuurency,
   ) async {
-    if (file == null && title.text.isEmpty) {
+    if (file == null ||
+        title.text.isEmpty ||
+        price.text.isEmpty ||
+        file.isEmpty) {
       return 'Please Enter The Data';
-    } else if (title.text.isEmpty) {
-      return 'Please Enter The Tile of teh Program';
     } else {
       try {
         await Apis.addAffiliatedProgramByAdmin(
-          file,
+          File(file),
           title.text,
           status,
           price.text,
+          cuurency,
         );
       } catch (e) {
         return e.toString();

@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'package:currency_picker/currency_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -38,7 +41,7 @@ class _AddProgramsViewState extends State<AddProgramsView> {
         title: Text(
           'Create Program',
           style: GoogleFonts.poppins(
-            fontSize: context.mh * 0.020,
+            fontSize: context.mh * 0.024,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -85,11 +88,50 @@ class _AddProgramsViewState extends State<AddProgramsView> {
               hint: 'Rashan Pack',
               controller: titleController),
           0.01.ph,
-          AddNeedyPeopleComp(
-              title: 'Donnation Price',
-              icon: Icons.title,
-              hint: '00 PKR',
-              controller: priceController),
+          Obx(() {
+            return Row(
+              children: [
+                Expanded(
+                  child: AddNeedyPeopleComp(
+                    title: 'Donation Price',
+                    icon: Icons.title,
+                    hint: '${controller.selectedCurrency.value} 00',
+                    controller: priceController,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    showCurrencyPicker(
+                      context: context,
+                      showFlag: true,
+                      showSearchField: true,
+                      showCurrencyName: true,
+                      showCurrencyCode: true,
+                      favorite: ['PKR'],
+                      onSelect: (Currency currency) {
+                        controller.selectedCurrency.value = currency.code;
+                      },
+                    );
+                  },
+                  child: Container(
+                      width: context.mw * 0.20,
+                      height: context.mh * 0.07,
+                      margin: EdgeInsets.only(right: context.mw * 0.02),
+                      decoration: BoxDecoration(
+                          color: AppColor.cgreenColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Center(
+                          child: Text(
+                        controller.selectedCurrency.value,
+                        style: GoogleFonts.poppins(
+                          fontSize: context.mh * 0.018,
+                          color: AppColor.whiteColor,
+                        ),
+                      ))),
+                ),
+              ],
+            );
+          }),
           0.02.ph,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: context.mw * 0.05),
