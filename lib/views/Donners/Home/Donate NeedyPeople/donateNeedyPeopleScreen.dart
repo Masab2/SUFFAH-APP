@@ -66,7 +66,7 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
             if (needyPeopleController.needyPeople.isEmpty) {
               return const Center(
                 child: SpinKitChasingDots(
-                  color: AppColor.cgreenColor,
+                  color: AppColor.mehroonColor,
                   duration: Duration(seconds: 5),
                   size: 40,
                 ),

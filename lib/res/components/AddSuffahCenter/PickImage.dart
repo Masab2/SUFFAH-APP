@@ -22,7 +22,7 @@ class PickImageWidget extends StatelessWidget {
           height: context.mh * 0.20,
           width: context.mw * 0.60,
           decoration: BoxDecoration(
-              border: Border.all(color: AppColor.cgreenColor),
+              border: Border.all(color: AppColor.mehroonColor),
               borderRadius: BorderRadius.circular(30)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -30,14 +30,14 @@ class PickImageWidget extends StatelessWidget {
             children: [
               const Icon(
                 IconlyBold.camera,
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
                 size: 36,
               ),
               0.02.ph,
               Text(
                 title!,
                 style: GoogleFonts.roboto(
-                    fontSize: 18, color: AppColor.cgreenColor),
+                    fontSize: 18, color: AppColor.mehroonColor),
               )
             ],
           ),
@@ -65,7 +65,7 @@ class PickImageWidgetCircle extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: AppColor.cgreenColor,
+              color: AppColor.mehroonColor,
               width: 2.0,
             ),
           ),
@@ -76,7 +76,7 @@ class PickImageWidgetCircle extends StatelessWidget {
               children: [
                 const Icon(
                   IconlyBold.camera,
-                  color: AppColor.cgreenColor,
+                  color: AppColor.mehroonColor,
                   size: 36,
                 ),
                 0.02.ph,
@@ -84,7 +84,7 @@ class PickImageWidgetCircle extends StatelessWidget {
                   child: Text(
                     title!,
                     style: GoogleFonts.roboto(
-                        fontSize: 18, color: AppColor.cgreenColor),
+                        fontSize: 18, color: AppColor.mehroonColor),
                   ),
                 )
               ],

@@ -123,7 +123,7 @@ class _AddPersonalDataState extends State<AddPersonalData> {
                       children: [
                         CircleAvatar(
                           radius: context.mh * 0.030,
-                          backgroundColor: AppColor.cgreenColor,
+                          backgroundColor: AppColor.mehroonColor,
                           child: const Icon(
                             Icons.ac_unit,
                             color: AppColor.whiteColor,

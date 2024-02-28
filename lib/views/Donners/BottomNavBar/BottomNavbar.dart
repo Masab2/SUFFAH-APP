@@ -136,7 +136,7 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
             Obx(
               () => Icon(
                 bottomController.page.value == page ? filledIcon : defaultIcon,
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
                 size: 26,
               ),
             ),

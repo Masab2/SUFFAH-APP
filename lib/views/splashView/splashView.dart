@@ -22,11 +22,19 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.cgreenColor,
+      backgroundColor: AppColor.mehroonColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [Center(child: Image(image: AssetImage(ImageAsset.applogo)))],
+        children: [
+          Center(
+            child: Image(
+              image: AssetImage(
+                ImageAsset.applogobackremove,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

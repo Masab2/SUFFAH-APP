@@ -26,14 +26,14 @@ class BottomSheetContainer extends StatelessWidget {
           Text(
             'Choose Image',
             style:
-                GoogleFonts.roboto(fontSize: 18, color: AppColor.cgreenColor),
+                GoogleFonts.roboto(fontSize: 18, color: AppColor.mehroonColor),
           ),
           0.03.ph,
           ListTile(
             title: const Text('Pick Image From Gallery'),
             leading: const Icon(
               Icons.photo,
-              color: AppColor.cgreenColor,
+              color: AppColor.mehroonColor,
             ),
             onTap: ongallery,
           ),
@@ -41,7 +41,7 @@ class BottomSheetContainer extends StatelessWidget {
             title: const Text('Pick Image From Camera'),
             leading: const Icon(
               IconlyBold.camera,
-              color: AppColor.cgreenColor,
+              color: AppColor.mehroonColor,
             ),
             onTap: oncamera,
           ),

@@ -15,7 +15,7 @@ class UpperHeading extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColor.cgreenColor,
+        color: AppColor.mehroonColor,
         borderRadius: BorderRadius.circular(20),
       ),
       height: context.mh * 0.200, // Adjust the height as needed
@@ -31,7 +31,7 @@ class UpperHeading extends StatelessWidget {
               child: Icon(
                 icon,
                 size: context.mh * 0.050,
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
               ),
             ),
             0.01.ph,

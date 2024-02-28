@@ -37,14 +37,14 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: AppColor.cgreenColor,
+        backgroundColor: AppColor.mehroonColor,
       ),
       body: Stack(
         children: [
           Container(
             height: context.mh * 0.45,
             decoration: const BoxDecoration(
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
@@ -96,7 +96,7 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
                             hint: 'abc@gmail.com',
                             prefixIcon: const Icon(
                               IconlyBold.message,
-                              color: AppColor.cgreenColor,
+                              color: AppColor.mehroonColor,
                             )),
                         0.02.ph,
                         ValueListenableBuilder(
@@ -107,7 +107,7 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
                               hint: '6 character/digit',
                               prefixIcon: const Icon(
                                 IconlyBold.password,
-                                color: AppColor.cgreenColor,
+                                color: AppColor.mehroonColor,
                               ),
                               obscuretext: _obscurepass.value,
                               sufixIcon: InkWell(
@@ -117,11 +117,11 @@ class _AdminLoginDashBoardState extends State<AdminLoginDashBoard> {
                                   child: _obscurepass.value
                                       ? const Icon(
                                           Icons.visibility_off,
-                                          color: AppColor.cgreenColor,
+                                          color: AppColor.mehroonColor,
                                         )
                                       : const Icon(
                                           Icons.visibility,
-                                          color: AppColor.cgreenColor,
+                                          color: AppColor.mehroonColor,
                                         )),
                               controller: passwordController,
                             );

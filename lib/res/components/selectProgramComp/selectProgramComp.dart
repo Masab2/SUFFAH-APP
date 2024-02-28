@@ -36,7 +36,7 @@ class SelectProgramComp extends StatelessWidget {
               matchTextDirection: true,
               fit: BoxFit.cover,
               placeholder: (context, url) => const SpinKitChasingDots(
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
                 duration: Duration(seconds: 5),
                 size: 40,
               ),
@@ -59,7 +59,7 @@ class SelectProgramComp extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColor.cgreenColor.withOpacity(0.33),
+                    color: AppColor.mehroonColor.withOpacity(0.33),
                     offset: const Offset(
                       5.0,
                       5.0,
@@ -92,7 +92,7 @@ class SelectProgramComp extends StatelessWidget {
                       child: Text(
                         buttonTitle,
                         style: GoogleFonts.poppins(
-                          color: AppColor.cgreenColor,
+                          color: AppColor.mehroonColor,
                           fontWeight: FontWeight.bold,
                         ),
                       )),

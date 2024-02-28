@@ -35,7 +35,10 @@ class CustomizedFeild extends StatelessWidget {
             children: [
               Text(
                 title ?? "",
-                style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.brownColor,
+                ),
               )
             ],
           ),
@@ -43,8 +46,11 @@ class CustomizedFeild extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.grey[200]),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: AppColor.blackColor,
+              ),
+            ),
             child: TextFormField(
               onChanged: onChanged,
               controller: controller,

@@ -118,7 +118,7 @@ class _AddProgramsViewState extends State<AddProgramsView> {
                       height: context.mh * 0.07,
                       margin: EdgeInsets.only(right: context.mw * 0.02),
                       decoration: BoxDecoration(
-                          color: AppColor.cgreenColor,
+                          color: AppColor.mehroonColor,
                           borderRadius: BorderRadius.circular(20)),
                       child: Center(
                           child: Text(
@@ -150,7 +150,7 @@ class _AddProgramsViewState extends State<AddProgramsView> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: const Border.fromBorderSide(
-                      BorderSide(color: AppColor.cgreenColor))),
+                      BorderSide(color: AppColor.mehroonColor))),
               child: DropdownButton<String>(
                 isExpanded: true,
                 value: controller.selectedValue.value,

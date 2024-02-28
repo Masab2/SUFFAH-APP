@@ -111,7 +111,7 @@ class _AddSuffahMemberState extends State<AddSuffahMember> {
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                       color: Colors.white,
                       border:
-                          Border.all(color: AppColor.cgreenColor, width: 1)),
+                          Border.all(color: AppColor.mehroonColor, width: 1)),
                   layout: Layout.horizontal,
                   showCities: true,
                   showStates: true,

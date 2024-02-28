@@ -140,7 +140,7 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
       width: context.mw * 0.30,
       decoration: BoxDecoration(
         color: controller.selectedIndex.value == index
-            ? AppColor.cgreenColor
+            ? AppColor.mehroonColor
             : AppColor.geryColor,
         borderRadius: BorderRadius.circular(16),
       ),

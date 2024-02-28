@@ -47,7 +47,7 @@ class AffiliatedProgramCompAdmin extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColor.cgreenColor.withOpacity(0.33),
+                    color: AppColor.mehroonColor.withOpacity(0.33),
                     offset: const Offset(
                       5.0,
                       5.0,
@@ -82,7 +82,7 @@ class AffiliatedProgramCompAdmin extends StatelessWidget {
                         child: MaterialButton(
                           minWidth: context.mw * 0.50,
                           height: context.mh * 0.04,
-                          color: AppColor.cgreenColor,
+                          color: AppColor.mehroonColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -101,7 +101,7 @@ class AffiliatedProgramCompAdmin extends StatelessWidget {
                         child: MaterialButton(
                           minWidth: context.mw * 0.50,
                           height: context.mh * 0.04,
-                          color: AppColor.cgreenColor,
+                          color: AppColor.mehroonColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),

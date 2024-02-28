@@ -19,11 +19,11 @@ class _DonateScreenViewState extends State<DonateScreenView> {
           context,
           const Icon(
             IconlyLight.search,
-            color: AppColor.cgreenColor,
+            color: AppColor.mehroonColor,
           ),
           const Icon(
             IconlyLight.notification,
-            color: AppColor.cgreenColor,
+            color: AppColor.mehroonColor,
           )),
       body: Column(
         children: [

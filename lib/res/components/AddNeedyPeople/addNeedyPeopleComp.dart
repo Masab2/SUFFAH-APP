@@ -40,10 +40,10 @@ class AddNeedyPeopleComp extends StatelessWidget {
             enabled: true,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
-                borderSide: const BorderSide(color: AppColor.cgreenColor)),
+                borderSide: const BorderSide(color: AppColor.mehroonColor)),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: AppColor.cgreenColor)),
+                borderSide: const BorderSide(color: AppColor.mehroonColor)),
             hintText: hint,
           ),
         ));

@@ -51,7 +51,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 TextSpan(
                   text: '${Apis.user.email}',
                   style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.bold, color: AppColor.cgreenColor),
+                      fontWeight: FontWeight.bold, color: AppColor.mehroonColor),
                 ),
               ],
             ),

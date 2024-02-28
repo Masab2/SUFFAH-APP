@@ -47,7 +47,7 @@ class MasjidDisplayComp extends StatelessWidget {
                       imageUrl: image,
                       fit: BoxFit.fitWidth,
                       placeholder: (context, url) => const SpinKitChasingDots(
-                        color: AppColor.cgreenColor,
+                        color: AppColor.mehroonColor,
                         duration: Duration(seconds: 5),
                         size: 40,
                       ),
@@ -133,7 +133,7 @@ class MasjidDisplayComp extends StatelessWidget {
                                   style: GoogleFonts.poppins(
                                     fontSize: context.mh * 0.013,
                                     fontWeight: FontWeight.bold,
-                                    color: AppColor.cgreenColor,
+                                    color: AppColor.mehroonColor,
                                   ),
                                 ),
                               ],
@@ -155,7 +155,7 @@ class MasjidDisplayComp extends StatelessWidget {
                                   style: GoogleFonts.poppins(
                                     fontSize: context.mh * 0.013,
                                     fontWeight: FontWeight.bold,
-                                    color: AppColor.cgreenColor,
+                                    color: AppColor.mehroonColor,
                                   ),
                                 ),
                               ],
@@ -168,7 +168,7 @@ class MasjidDisplayComp extends StatelessWidget {
                         height: context.mh * 0.02,
                         width: context.mw * 0.55,
                         backgroundColor: Colors.grey.shade800,
-                        foregrondColor: AppColor.cgreenColor,
+                        foregrondColor: AppColor.mehroonColor,
                         ratio: ratio,
                         direction: Axis.horizontal,
                         curve: Curves.fastLinearToSlowEaseIn,
@@ -186,7 +186,7 @@ class MasjidDisplayComp extends StatelessWidget {
         MaterialButton(
           minWidth: context.mw * 0.80,
           height: context.mh * 0.04,
-          color: AppColor.cgreenColor,
+          color: AppColor.mehroonColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

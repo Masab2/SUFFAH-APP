@@ -81,7 +81,7 @@ class _CreateEmailState extends State<CreateEmail> {
               CustomizedFeild(
                 prefixIcon: const Icon(
                   IconlyBold.message,
-                  color: AppColor.cgreenColor,
+                  color: AppColor.mehroonColor,
                 ),
                 controller: emailController,
                 title: 'Email',
@@ -90,7 +90,7 @@ class _CreateEmailState extends State<CreateEmail> {
               CustomizedFeild(
                 prefixIcon: const Icon(
                   IconlyBold.password,
-                  color: AppColor.cgreenColor,
+                  color: AppColor.mehroonColor,
                 ),
                 controller: passwordController,
                 title: 'Password',

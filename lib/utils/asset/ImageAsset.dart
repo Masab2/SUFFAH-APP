@@ -1,5 +1,5 @@
 class ImageAsset {
-  static String applogo = 'assets/images/logo.png';
+  static String applogo = 'assets/images/applogo.png';
   static String applogobackremove = 'assets/images/logobackremove.png';
   static String verifyemail = 'assets/images/verifyemail.png';
   static String mosqueIcon = 'assets/images/mosque.png';
@@ -17,4 +17,5 @@ class ImageAsset {
   static String paypalimg = 'assets/images/paypal.png';
   static String applePayimg = 'assets/images/applepay.png';
   static String googlePayimg = 'assets/images/googlepay.png';
+  static String googleicon = 'assets/images/googleicon.png';
 }

@@ -39,7 +39,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
               ChoiceComp(
                 title: 'Donate People',
                 ontap: () {
-                  Get.toNamed(RoutesNames.loginScreen);
+                  Get.toNamed(RoutesNames.loginChoiceScreen);
                 },
                 image: ImageAsset.donnerIcon,
               ),
@@ -49,7 +49,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                 ontap: () {
                   Get.toNamed(RoutesNames.suffahloginDashBoardScreen);
                 },
-                image: ImageAsset.mosqueIcon,
+                image: ImageAsset.shopIcon,
               ),
               0.03.ph,
               ChoiceComp(

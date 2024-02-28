@@ -50,7 +50,7 @@ class AdminSuffaCenterComp extends StatelessWidget {
                     width: context.mw / 2.9,
                     imageUrl: image,
                     placeholder: (context, url) => const SpinKitChasingDots(
-                      color: AppColor.cgreenColor,
+                      color: AppColor.mehroonColor,
                       duration: Duration(seconds: 5),
                       size: 40,
                     ),
@@ -82,7 +82,7 @@ class AdminSuffaCenterComp extends StatelessWidget {
                           child: Text('$email',
                               style: GoogleFonts.poppins(
                                   fontSize: 12,
-                                  color: AppColor.cgreenColor,
+                                  color: AppColor.mehroonColor,
                                   fontWeight: FontWeight.bold)),
                         ),
                       ],
@@ -101,7 +101,7 @@ class AdminSuffaCenterComp extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
               child: MaterialButton(
                 minWidth: context.mw * 0.80,
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 onPressed: ontap,

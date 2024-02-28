@@ -18,14 +18,14 @@ class UserInfoListTile extends StatelessWidget {
     return ListTile(
       leading: CircleAvatar(
         radius: context.mh * 0.030,
-        backgroundColor: AppColor.cgreenColor,
+        backgroundColor: AppColor.mehroonColor,
         child: Icon(
           icon,
           color: AppColor.whiteColor,
         ),
       ),
-      selectedColor: AppColor.cgreenColor.withOpacity(0.23),
-      splashColor: AppColor.cgreenColor.withOpacity(0.23),
+      selectedColor: AppColor.mehroonColor.withOpacity(0.23),
+      splashColor: AppColor.mehroonColor.withOpacity(0.23),
       title: Text(
         title,
         style: GoogleFonts.poppins(
@@ -58,10 +58,10 @@ class SettingInfoListTile extends StatelessWidget {
       onTap: ontap,
       leading: Icon(
         icon,
-        color: AppColor.cgreenColor,
+        color: AppColor.mehroonColor,
       ),
-      selectedColor: AppColor.cgreenColor.withOpacity(0.23),
-      splashColor: AppColor.cgreenColor.withOpacity(0.23),
+      selectedColor: AppColor.mehroonColor.withOpacity(0.23),
+      splashColor: AppColor.mehroonColor.withOpacity(0.23),
       title: Text(
         title,
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600),

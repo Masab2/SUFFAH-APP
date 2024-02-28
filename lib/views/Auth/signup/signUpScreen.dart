@@ -5,6 +5,8 @@ import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/Donner/DonnorAuth/signUpViewModel.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
+import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
+import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -33,138 +35,109 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColor.cgreenColor,
-      ),
-      resizeToAvoidBottomInset: true,
-      body: Stack(
-        children: [
-          Container(
-            height: context.mh * 0.45,
-            decoration: const BoxDecoration(
-                color: AppColor.cgreenColor,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
-                )),
-          ),
-          Positioned(
-              // top: context.mh * 0.002,
-              right: context.mw * 0.05,
-              left: context.mw * 0.05,
-              child: Image(image: AssetImage(ImageAsset.applogobackremove))),
-          SingleChildScrollView(
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-            child: Padding(
-              padding: EdgeInsets.only(
-                top: context.mh * 0.28,
-                left: context.mw * 0.05,
-                right: context.mw * 0.05,
-              ),
-              child: Container(
-                height: context.mh * 0.55,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3),
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              0.15.ph,
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'Create Your Account',
+                      style: GoogleFonts.poppins(
+                        fontSize: context.mh * 0.034,
+                        color: AppColor.mehroonColor,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
-                    color: AppColor.whiteColor,
-                    borderRadius: BorderRadius.circular(20)),
-                child: SingleChildScrollView(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        0.04.ph,
-                        Text(
-                          'Create your account',
-                          style:
-                              GoogleFonts.poppins(fontWeight: FontWeight.w600),
-                        ),
-                        0.03.ph,
-                        CustomizedFeild(
-                            controller: emailController,
-                            title: 'Email',
-                            hint: 'abc@gmail.com',
-                            prefixIcon: const Icon(
-                              IconlyBold.message,
-                              color: AppColor.cgreenColor,
-                            )),
-                        0.02.ph,
-                        ValueListenableBuilder(
-                          valueListenable: _obscurepass,
-                          builder: (context, value, child) {
-                            return CustomizedFeild(
-                              title: 'Password',
-                              hint: '6 character/digit',
-                              prefixIcon: const Icon(
-                                IconlyBold.password,
-                                color: AppColor.cgreenColor,
-                              ),
-                              obscuretext: _obscurepass.value,
-                              sufixIcon: InkWell(
-                                  onTap: () {
-                                    _obscurepass.value = !_obscurepass.value;
-                                  },
-                                  child: _obscurepass.value
-                                      ? const Icon(
-                                          Icons.visibility_off,
-                                          color: AppColor.cgreenColor,
-                                        )
-                                      : const Icon(
-                                          Icons.visibility,
-                                          color: AppColor.cgreenColor,
-                                        )),
-                              controller: passwordController,
-                            );
-                          },
-                        ),
-                        0.03.ph,
-                        ReuseAblebtn(
-                          title: 'SignUp',
-                          onPressed: () {
-                            signUpController.signUpAccount(
-                                emailController, passwordController);
-                          },
-                        ),
-                        0.02.ph,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Already have an account",
-                              style: GoogleFonts.roboto(
-                                  fontSize: context.mh * 0.015,
-                                  color: AppColor.geryColor,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            0.01.pw,
-                            InkWell(
-                              onTap: () {},
-                              child: Text(
-                                "Login",
-                                style: GoogleFonts.roboto(
-                                    fontSize: context.mh * 0.015,
-                                    color: AppColor.cgreenColor,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        )
-                      ]),
-                ),
+                    ),
+                  ),
+                ],
               ),
-            ),
+              0.04.ph,
+              CustomizedFeild(
+                controller: emailController,
+                title: 'Email',
+                hint: 'abc@gmail.com',
+              ),
+              0.03.ph,
+              ValueListenableBuilder(
+                valueListenable: _obscurepass,
+                builder: (context, value, child) {
+                  return CustomizedFeild(
+                    title: 'Password',
+                    hint: '6 character/digit',
+                    obscuretext: _obscurepass.value,
+                    sufixIcon: InkWell(
+                        onTap: () {
+                          _obscurepass.value = !_obscurepass.value;
+                        },
+                        child: _obscurepass.value
+                            ? const Icon(
+                                Icons.visibility_off,
+                                color: AppColor.mehroonColor,
+                              )
+                            : const Icon(
+                                Icons.visibility,
+                                color: AppColor.mehroonColor,
+                              )),
+                    controller: passwordController,
+                  );
+                },
+              ),
+              0.06.ph,
+              Obx(() {
+                return signUpController.isLoading.value == true
+                    ? const CircularProgressIndicator.adaptive()
+                    : ReuseAblebtn(
+                        title: 'Create Account',
+                        onPressed: () {
+                          signUpController.signUpAccount(
+                              emailController, passwordController);
+                        },
+                      );
+              }),
+              0.03.ph,
+              const LoginOrRow(),
+              0.03.ph,
+              GoogleSignbtn(
+                color: AppColor.brownColor,
+                title: 'Sign in With Google',
+                onPressed: () {},
+              ),
+              0.02.ph,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Already have an Account",
+                    style: GoogleFonts.poppins(
+                      fontSize: context.mh * 0.015,
+                      color: AppColor.geryColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  0.01.pw,
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(RoutesNames.loginScreen);
+                    },
+                    child: Text(
+                      "Login",
+                      style: GoogleFonts.roboto(
+                        fontSize: context.mh * 0.014,
+                        color: AppColor.mehroonColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }

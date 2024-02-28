@@ -35,7 +35,7 @@ class _ViewSuffahCenterState extends State<ViewSuffahCenter> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
                   child: SpinKitChasingDots(
-                    color: AppColor.cgreenColor,
+                    color: AppColor.mehroonColor,
                     duration: Duration(seconds: 5),
                     size: 40,
                   ),

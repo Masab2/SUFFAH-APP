@@ -57,7 +57,7 @@ class DonnationChoice extends StatelessWidget {
               matchTextDirection: true,
               fit: BoxFit.cover,
               placeholder: (context, url) => const SpinKitChasingDots(
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
                 duration: Duration(seconds: 5),
                 size: 40,
               ),
@@ -80,7 +80,7 @@ class DonnationChoice extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: AppColor.cgreenColor.withOpacity(0.03),
+                  color: AppColor.mehroonColor.withOpacity(0.03),
                   offset: const Offset(
                     5.0,
                     5.0,
@@ -117,7 +117,7 @@ class DonnationChoice extends StatelessWidget {
                                 ConnectionState.waiting) {
                               return const Center(
                                 child: SpinKitChasingDots(
-                                  color: AppColor.cgreenColor,
+                                  color: AppColor.mehroonColor,
                                   duration: Duration(seconds: 5),
                                   size: 40,
                                 ),
@@ -131,7 +131,7 @@ class DonnationChoice extends StatelessWidget {
                                     height: context.mh * 0.01,
                                     width: context.mw * 0.70,
                                     backgroundColor: Colors.grey.shade800,
-                                    foregrondColor: AppColor.cgreenColor,
+                                    foregrondColor: AppColor.mehroonColor,
                                     ratio: 3 / 10,
                                     direction: Axis.horizontal,
                                     curve: Curves.fastLinearToSlowEaseIn,
@@ -174,7 +174,7 @@ class DonnationChoice extends StatelessWidget {
                   MaterialButton(
                     minWidth: context.mw * 0.50,
                     height: context.mh * 0.04,
-                    color: AppColor.cgreenColor,
+                    color: AppColor.mehroonColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

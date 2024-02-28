@@ -23,7 +23,7 @@ class HomeAppBar {
               text: "${AppLocalizations.of(context)!.apptitlefirst} ",
               style: GoogleFonts.poppins(
                   fontSize: context.mh * 0.025,
-                  color: AppColor.cgreenColor,
+                  color: AppColor.mehroonColor,
                   fontWeight: FontWeight.bold),
               children: [
             TextSpan(

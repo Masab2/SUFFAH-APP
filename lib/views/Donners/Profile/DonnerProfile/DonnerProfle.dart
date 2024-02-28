@@ -32,11 +32,11 @@ class _DonnerProfileState extends State<DonnerProfile> {
           context,
           const Icon(
             IconlyLight.search,
-            color: AppColor.cgreenColor,
+            color: AppColor.mehroonColor,
           ),
           const Icon(
             IconlyLight.notification,
-            color: AppColor.cgreenColor,
+            color: AppColor.mehroonColor,
           )),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(
@@ -55,7 +55,7 @@ class _DonnerProfileState extends State<DonnerProfile> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(
                         child: SpinKitChasingDots(
-                          color: AppColor.cgreenColor,
+                          color: AppColor.mehroonColor,
                           duration: Duration(seconds: 5),
                           size: 40,
                         ),

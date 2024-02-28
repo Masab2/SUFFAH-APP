@@ -51,7 +51,7 @@ class RequesttoAdminComp extends StatelessWidget {
                   fit: BoxFit.cover,
                   imageUrl: image,
                   placeholder: (context, url) => const SpinKitChasingDots(
-                    color: AppColor.cgreenColor,
+                    color: AppColor.mehroonColor,
                     duration: Duration(seconds: 5),
                     size: 40,
                   ),
@@ -84,7 +84,7 @@ class RequesttoAdminComp extends StatelessWidget {
                           child: Text(email,
                               style: GoogleFonts.poppins(
                                   fontSize: 12,
-                                  color: AppColor.cgreenColor,
+                                  color: AppColor.mehroonColor,
                                   fontWeight: FontWeight.bold)),
                         ),
                       ],
@@ -134,7 +134,7 @@ class RequesttoAdminComp extends StatelessWidget {
                 Expanded(
                   child: MaterialButton(
                     minWidth: context.mw * 0.30,
-                    color: AppColor.cgreenColor,
+                    color: AppColor.mehroonColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     onPressed: onGreenBtnPressed,

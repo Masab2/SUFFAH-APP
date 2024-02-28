@@ -97,7 +97,7 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
             CustomizedFeild(
               prefixIcon: const Icon(
                 IconlyBold.user_2,
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
               ),
               controller: emailController,
               title: 'Username',
@@ -106,7 +106,7 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
             CustomizedFeild(
               prefixIcon: const Icon(
                 IconlyBold.password,
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
               ),
               controller: passController,
               title: 'Password',

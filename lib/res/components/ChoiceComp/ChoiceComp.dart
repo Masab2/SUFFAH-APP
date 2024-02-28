@@ -27,7 +27,7 @@ class ChoiceComp extends StatelessWidget {
             gradient: const LinearGradient(
               colors: [
                 Colors.transparent,
-                AppColor.cgreenColor
+                AppColor.mehroonColor
               ], // Example gradient colors
               begin: Alignment.topLeft,
               end: Alignment.center,

@@ -60,7 +60,7 @@ class RequestedProgramComp extends StatelessWidget {
               style: GoogleFonts.poppins(),
             ),
             trailing: MaterialButton(
-              color: AppColor.cgreenColor,
+              color: AppColor.mehroonColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),

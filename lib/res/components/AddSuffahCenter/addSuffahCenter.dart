@@ -26,7 +26,7 @@ class AddSuffahCenterComp extends StatelessWidget {
     return ListTile(
         leading: CircleAvatar(
           radius: context.mh * 0.030,
-          backgroundColor: AppColor.cgreenColor,
+          backgroundColor: AppColor.mehroonColor,
           child: Center(
               child: Icon(
             icon,
@@ -47,7 +47,7 @@ class AddSuffahCenterComp extends StatelessWidget {
           maxLines: maxlines,
           decoration: InputDecoration(
             border: const UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColor.cgreenColor)),
+                borderSide: BorderSide(color: AppColor.mehroonColor)),
             hintText: hint,
           ),
         ));

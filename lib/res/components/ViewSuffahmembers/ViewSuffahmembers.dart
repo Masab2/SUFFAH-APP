@@ -67,7 +67,7 @@ class SuffaCenterMembersComp extends StatelessWidget {
                           child: Text('$email',
                               style: GoogleFonts.poppins(
                                   fontSize: 12,
-                                  color: AppColor.cgreenColor,
+                                  color: AppColor.mehroonColor,
                                   fontWeight: FontWeight.bold)),
                         ),
                       ],
@@ -86,7 +86,7 @@ class SuffaCenterMembersComp extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
               child: MaterialButton(
                 minWidth: context.mw * 0.80,
-                color: AppColor.cgreenColor,
+                color: AppColor.mehroonColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 onPressed: ontap,
