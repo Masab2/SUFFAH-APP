@@ -53,9 +53,10 @@ class _MyAppState extends State<MyApp> {
         title: 'AL-SUFFA',
         theme: ThemeData(
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: AppColor.mehroonColor),
+            backgroundColor: AppColor.mehroonColor,
+          ),
           colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 0, 68, 61),
+            seedColor: const Color.fromRGBO(128, 0, 0, 1),
           ),
           useMaterial3: true,
         ),

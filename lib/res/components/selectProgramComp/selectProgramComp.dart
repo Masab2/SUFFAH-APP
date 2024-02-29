@@ -48,10 +48,10 @@ class SelectProgramComp extends StatelessWidget {
         ),
         Positioned(
             left: context.mw * 0.030,
-            bottom: -10,
+            bottom: 0,
             right: context.mw * 0.030,
             child: Container(
-              height: context.mh * 0.10,
+              height: context.mh * 0.12,
               width: context.mw * 0.70,
               margin: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
               decoration: BoxDecoration(
@@ -73,29 +73,36 @@ class SelectProgramComp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  0.009.ph,
+                  0.0039.ph,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        title,
-                        style: GoogleFonts.poppins(
-                          fontSize: context.mh * 0.020,
-                          fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Text(
+                            title,
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.020,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       )
                     ],
                   ),
-                  TextButton(
-                      onPressed: ontap,
-                      child: Text(
-                        buttonTitle,
-                        style: GoogleFonts.poppins(
-                          color: AppColor.mehroonColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
+                  Expanded(
+                    child: TextButton(
+                        onPressed: ontap,
+                        child: Text(
+                          buttonTitle,
+                          style: GoogleFonts.poppins(
+                            color: AppColor.mehroonColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                  ),
                   0.04.ph,
                 ],
               ),
