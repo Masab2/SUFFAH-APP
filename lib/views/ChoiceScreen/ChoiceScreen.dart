@@ -31,17 +31,16 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
         children: [
-          0.05.ph,
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ChoiceComp(
-                title: 'Donate People',
+                title: 'Al-Suffah Admin',
                 ontap: () {
-                  Get.toNamed(RoutesNames.loginChoiceScreen);
+                  Get.toNamed(RoutesNames.loginDashBoardScreen);
                 },
-                image: ImageAsset.donnerIcon,
+                image: ImageAsset.shopIcon,
               ),
               0.03.ph,
               ChoiceComp(

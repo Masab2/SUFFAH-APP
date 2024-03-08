@@ -1,58 +1,111 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconly/iconly.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class CustomContainer extends StatelessWidget {
-  String title, subtitle;
-  CustomContainer({super.key, required this.title, required this.subtitle});
+  final String title, profile;
+  const CustomContainer({
+    super.key,
+    required this.title,
+    required this.profile,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: context.mh * 0.12,
-      padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
-      margin: EdgeInsets.symmetric(
-          horizontal: context.mw * 0.04, vertical: context.mh * 0.02),
-      decoration: BoxDecoration(
-        color: AppColor.whiteColor,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 15.0, // soften the shadow
-            spreadRadius: 5.0, //extend the shadow
-            offset: Offset(
-              4.0, // Move to right 5  horizontally
-              4.0, // Move to bottom 5 Vertically
-            ),
-          )
-        ],
-      ),
-      child: Center(
-        child: ListTile(
-          contentPadding: EdgeInsets.symmetric(vertical: context.mh * 0.01),
-          leading: Icon(
-            Icons.account_circle_rounded,
-            color: AppColor.mehroonColor,
-            size: context.mh * 0.070,
-          ),
-          title: Text(
-            title,
-            style: GoogleFonts.poppins(
-                textStyle: TextStyle(
-                    fontSize: context.mh * 0.020, fontWeight: FontWeight.bold)),
-          ),
-          subtitle: Text(subtitle,
+    return Column(
+      children: [
+        profile == ''
+            ? CircleAvatar(
+                radius: context.mh * 0.10,
+                backgroundColor: AppColor.brownColor,
+                child: Icon(
+                  IconlyBold.profile,
+                  size: context.mh * 0.10,
+                ),
+              )
+            : CachedNetworkImage(
+                height: context.mw * 0.4,
+                width: context.mw * 0.4,
+                fit: BoxFit.cover,
+                imageUrl: profile,
+                placeholder: (context, url) => const SpinKitChasingDots(
+                  color: AppColor.mehroonColor,
+                  duration: Duration(seconds: 5),
+                  size: 40,
+                ),
+                errorWidget: (context, url, error) {
+                  return const Icon(Icons.error);
+                },
+              ),
+        0.02.ph,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(IconlyBold.message),
+            0.02.pw,
+            Text(
+              title,
               style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      color: AppColor.geryColor,
-                      fontSize: context.mh * 0.016,
-                      fontWeight: FontWeight.bold))),
+                fontSize: context.mh * 0.020,
+                fontWeight: FontWeight.w600,
+              ),
+            )
+          ],
         ),
-      ),
+        0.01.ph,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              IconlyBold.location,
+              size: context.mh * 0.022,
+            ),
+            0.02.pw,
+            Text(
+              'Pakistan',
+              style: GoogleFonts.poppins(
+                fontSize: context.mh * 0.015,
+                fontWeight: FontWeight.w600,
+                color: AppColor.whiteColor,
+              ),
+            ),
+            0.02.pw,
+            Icon(
+              Icons.monetization_on_outlined,
+              size: context.mh * 0.022,
+            ),
+            0.02.pw,
+            Text(
+              'PKR',
+              style: GoogleFonts.poppins(
+                fontSize: context.mh * 0.015,
+                fontWeight: FontWeight.w600,
+                color: AppColor.whiteColor,
+              ),
+            ),
+            0.02.pw,
+            Icon(
+              Icons.language,
+              size: context.mh * 0.022,
+            ),
+            0.02.pw,
+            Text(
+              'English',
+              style: GoogleFonts.poppins(
+                fontSize: context.mh * 0.015,
+                fontWeight: FontWeight.w600,
+                color: AppColor.whiteColor,
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 }

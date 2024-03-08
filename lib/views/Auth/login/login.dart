@@ -39,13 +39,13 @@ class _LoginViewState extends State<LoginView> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              0.15.ph,
+              0.25.ph,
               Column(
                 children: [
                   Align(
                     alignment: Alignment.topCenter,
                     child: Text(
-                      'Login',
+                      'DONNER LOGIN',
                       style: GoogleFonts.poppins(
                         fontSize: context.mh * 0.034,
                         color: AppColor.mehroonColor,

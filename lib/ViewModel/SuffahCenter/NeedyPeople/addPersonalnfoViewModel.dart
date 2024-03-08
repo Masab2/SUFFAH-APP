@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/Repository/SuffaCenterRepos/NeedyPeopleRepos/addNeedyPeopleRepo.dart';
@@ -10,6 +9,9 @@ class AddPersonalInfoViewModel extends GetxController {
   var selectedValue = "Male".obs;
   RxString imagePath = ''.obs;
   RxInt selectedGender = 0.obs;
+  var currentCountry = 'Pakistan'.obs;
+  var currentCity = 'Lahore'.obs;
+  var currentState = 'Punjab'.obs;
 
   final ImagePicker _picker = ImagePicker();
   final AddNeedyPeopleRepo _addNeedyPeopleRepo = AddNeedyPeopleRepo();
@@ -32,6 +34,24 @@ class AddPersonalInfoViewModel extends GetxController {
     } else {
       Get.snackbar('Fail', 'No Image Selected');
     }
+  }
+
+  // Select The Country
+  void onCountryChanged(value) {
+    currentCountry.value = value;
+    update();
+  }
+
+  // Select The City
+  void onCityChanged(String value) {
+    currentCity.value = value;
+    update();
+  }
+
+  // Select The State
+  void onStateChanged(String value) {
+    currentState.value = value;
+    update();
   }
 
   // Add Data Into DataBase

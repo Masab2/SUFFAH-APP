@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:suffa_app/Model/alSuffahPersonModel/suffaPersonModel.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
-import 'package:suffa_app/enum/AffiliatedProgramEnum.dart';
+import 'package:suffa_app/res/routes/routesNames.dart';
 
 class NeedyPeopleController extends GetxController {
   final isLoading = false.obs;
@@ -26,14 +24,13 @@ class NeedyPeopleController extends GetxController {
           image: doc['PersonProfile'],
           address: doc['PersonAddress'],
           cnicno: doc['CNICNo'],
-          program: program == ProgramType.ONETIMEMEAL
-              ? 'OneTimeMeal'
-              : 'RashanProgram',
+          program: doc['program'],
           masjidname: doc['MasjidName'],
           tempstatus: doc['tempStatus'],
           status: doc['status'],
           personId: doc['personId'],
           donnerSelectionId: doc['donerSelectionId'],
+          requiredDonnation: doc['requiredDonnation'],
         );
       }).toList();
       if (kDebugMode) {
@@ -41,18 +38,6 @@ class NeedyPeopleController extends GetxController {
       } // Add this line to check fetched data
       needyPeople.assignAll(data);
       filteredPeople.assignAll(data);
-    });
-  }
-
-  // Update the status of the Selected Person
-  void updateStatus(personId) async {
-    _status.value = _status.value == 'Added' ? 'Waiting' : 'Added';
-    await Apis.updateStatusAlSuffahPerson(personId, _status.value.toString())
-        .then((value) {
-      log('Then Executed');
-      // _status.value = _status.value == 'Added' ? 'Waiting' : 'Added';
-    }).onError((error, stackTrace) {
-      _status.value = _status.value == 'Added' ? 'Waiting' : 'Added';
     });
   }
 
@@ -67,10 +52,14 @@ class NeedyPeopleController extends GetxController {
     }
   }
 
-  // // Calculate The price of the Person Donation
-  int calulateTotalDonnation(int actualPrice) {
-    final peopleLength =
-        filteredPeople.where((person) => person.tempstatus == "Added").toList();
-    return actualPrice * peopleLength.length;
+  // Check The Donnation Validation
+  void validateDonnation(donnationAmmount, requiredAmmount) {
+    if (donnationAmmount > requiredAmmount) {
+      Get.snackbar('oopps', 'Please Enter the Required Ammount');
+    } else {
+      Get.toNamed(RoutesNames.donatePaymentScreen, arguments: [
+        donnationAmmount,
+      ]);
+    }
   }
 }

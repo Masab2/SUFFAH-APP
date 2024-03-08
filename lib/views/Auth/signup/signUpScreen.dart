@@ -35,11 +35,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
         resizeToAvoidBottomInset: true,
         body: SingleChildScrollView(
           child: Column(
             children: [
-              0.15.ph,
+              0.10.ph,
               Column(
                 children: [
                   Align(

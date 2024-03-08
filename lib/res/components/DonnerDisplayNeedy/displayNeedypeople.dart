@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
+import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class DisplayNeedyPeopleComp extends StatelessWidget {
-  final String masjidname, image, masjidaddress, muntazimid;
+  final String masjidname, image, masjidaddress, muntazimid, cnicno;
   final String program;
   final VoidCallback ontap;
-  final Widget traling;
   const DisplayNeedyPeopleComp(
       {super.key,
       required this.masjidname,
@@ -17,57 +18,173 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
       required this.ontap,
       required this.program,
       required this.muntazimid,
-      required this.traling});
+      required this.cnicno});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
-          child: ListTile(
-            onTap: ontap,
-            style: ListTileStyle.list,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            mouseCursor: MouseCursor.uncontrolled,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: context.mw * 0.02,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: context.mw * 0.03,
+              vertical: context.mh * 0.01,
             ),
-            selectedColor: AppColor.blackColor,
-            leading: Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: AppColor.blackColor,
-                  )),
-              child: CircleAvatar(
-                onBackgroundImageError: (exception, stackTrace) {
-                  Get.snackbar('Error', exception.toString());
-                },
-                backgroundImage: NetworkImage(image),
-                radius: context.mh * 0.050,
-              ),
+            height: context.mh * 0.25,
+            width: context.mw,
+            decoration: BoxDecoration(
+                color: AppColor.masjidgeryColor,
+                borderRadius: BorderRadius.circular(20)),
+            child: Column(
+              children: [
+                0.02.ph,
+                Row(
+                  children: [
+                    0.02.pw,
+                    CircleAvatar(
+                      radius: context.mh * 0.06,
+                      backgroundImage: NetworkImage(image),
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: context.mw * 0.03,
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'CNIC',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.018,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    cnicno,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.013,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'NAME',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.018,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    masjidname,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.013,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'ADDRESS',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.018,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    masjidaddress,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.013,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                0.01.ph,
+                Text(
+                  program,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SimpleAnimationProgressBar(
+                  height: context.mh * 0.01,
+                  width: context.mw * 0.70,
+                  backgroundColor: AppColor.brownColor,
+                  foregrondColor: AppColor.mehroonColor,
+                  ratio: 0.5,
+                  direction: Axis.horizontal,
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  duration: const Duration(seconds: 3),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                0.01.ph,
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.mw * 0.12,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '0',
+                        style: GoogleFonts.poppins(
+                          fontSize: context.mh * 0.015,
+                        ),
+                      ),
+                      Text(
+                        "200",
+                        style: GoogleFonts.poppins(
+                          fontSize: context.mh * 0.015,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
-            title: Text(
-              masjidname,
-              style: GoogleFonts.poppins(
-                fontSize: context.mh * 0.018,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            subtitle: Text(
-              masjidaddress,
-              style: GoogleFonts.poppins(),
-            ),
-            trailing: traling,
           ),
-        ),
-        const Divider(
-          indent: 20,
-          endIndent: 20,
-        )
-      ],
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.circular(10),
+            ),
+            color: AppColor.mehroonColor,
+            minWidth: context.mw * 0.55,
+            onPressed: ontap,
+            child: Text(
+              'Donate Now',
+              style: GoogleFonts.poppins(
+                fontSize: context.mh * 0.017,
+                color: AppColor.whiteColor,
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

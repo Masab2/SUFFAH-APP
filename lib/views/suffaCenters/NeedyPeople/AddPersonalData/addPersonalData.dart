@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -105,13 +106,31 @@ class _AddPersonalDataState extends State<AddPersonalData> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.mw * 0.02,
+                  ),
+                  child: SelectState(
+                    onCountryChanged: (value) {
+                      peronalInfoController.onCountryChanged(value);
+                    },
+                    onStateChanged: (value) {
+                      peronalInfoController.onStateChanged(value);
+                    },
+                    onCityChanged: (value) {
+                      peronalInfoController.onCityChanged(value);
+                    },
+                  ),
+                ),
                 0.01.ph,
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
                   child: Text(
                     'Gender',
                     style: GoogleFonts.poppins(
-                        fontSize: context.mh * 0.017, fontWeight: FontWeight.bold),
+                      fontSize: context.mh * 0.017,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 0.01.ph,

@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/Donner/DonnorAuth/loginViewModel.dart';
@@ -28,125 +30,92 @@ class _DonnerProfileState extends State<DonnerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar.HomeBar(
-          context,
-          const Icon(
-            IconlyLight.search,
-            color: AppColor.mehroonColor,
-          ),
-          const Icon(
-            IconlyLight.notification,
-            color: AppColor.mehroonColor,
-          )),
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics()),
         child: Column(
           children: [
-            0.01.ph,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                0.02.ph,
-                StreamBuilder(
-                  stream: Apis.getLoginDonnerInfo(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: SpinKitChasingDots(
-                          color: AppColor.mehroonColor,
-                          duration: Duration(seconds: 5),
-                          size: 40,
-                        ),
-                      );
-                    } else if (!snapshot.hasData) {
-                      return const Text('No Data Found');
-                    } else {
-                      var data = snapshot.data!.docs.first;
-                      log(data['uid']);
-                      return CustomContainer(
-                          title: AppLocalizations.of(context)!.emailTitle,
-                          subtitle: data['email']);
-                    }
-                  },
+            Container(
+              height: context.mh * 0.40,
+              width: context.mw,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
                 ),
-                Container(
-                  height: context.mh * 0.33,
-                  padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
-                  margin: EdgeInsets.symmetric(
-                      horizontal: context.mw * 0.04,
-                      vertical: context.mw * 0.01),
-                  decoration: BoxDecoration(
-                      color: AppColor.whiteColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.43),
-                          blurRadius: 2.0, // soften the shadow
-                          spreadRadius: 1.0, //extend the shadow
-                          offset: const Offset(
-                            4.0, // Move to right 5  horizontally
-                            4.0, // Move to bottom 5 Vertically
+                gradient: LinearGradient(
+                  colors: [
+                    AppColor.mehroonColor,
+                    AppColor.brownColor,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  StreamBuilder(
+                    stream: Apis.getLoginDonnerInfo(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: SpinKitChasingDots(
+                            color: AppColor.mehroonColor,
+                            duration: Duration(seconds: 5),
+                            size: 40,
                           ),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(10)),
-                  child: SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          0.01.ph,
-                          SettingInfoListTile(
-                              icon: IconlyBold.profile,
-                              title: AppLocalizations.of(context)!.profileTitle,
-                              subtitle: 'Vist Profile',
-                              traling: const Icon(Icons.arrow_forward_ios)),
-                          const Divider(
-                            endIndent: 20,
-                            indent: 20,
-                          ),
-                          SettingInfoListTile(
-                              icon: IconlyBold.heart,
-                              title: AppLocalizations.of(context)!
-                                  .trackDonnationTitle,
-                              subtitle: 'Status',
-                              traling: Icon(Icons.arrow_forward_ios)),
-                          const Divider(
-                            endIndent: 20,
-                            indent: 20,
-                          ),
-                          const SettingInfoListTile(
-                              icon: CupertinoIcons.money_dollar_circle_fill,
-                              title: 'Zakat Calulator',
-                              subtitle: 'Calculatate your Zakat',
-                              traling: Icon(Icons.arrow_forward_ios)),
-                        ],
-                      ),
-                    ),
+                        );
+                      } else if (!snapshot.hasData ||
+                          snapshot.data!.docs.isEmpty) {
+                        return const Center(child: Text('No Data Found'));
+                      } else {
+                        return SingleChildScrollView(
+                            child: CustomContainer(
+                          title: snapshot.data!.docs.first['email'],
+                          profile: snapshot.data!.docs.first['profilePic'],
+                        ));
+                      }
+                    },
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            DonnerProfileAccountSettings(
-              onSettingsTap: () {
-                Get.toNamed(RoutesNames.settingsScreen);
-              },
-              title1: AppLocalizations.of(context)!.appSetting,
-              subtitle: AppLocalizations.of(context)!.editSettingSubtitle,
-              mainheading: AppLocalizations.of(context)!
-                  .donnerProfileHeadingAccountSetting,
-              title2: AppLocalizations.of(context)!.myDonnationTitle,
-              subtitle2: AppLocalizations.of(context)!.myDonnationSubtitle,
-              icon1: IconlyBold.setting,
-              icon2: IconlyBold.heart,
-              title3: AppLocalizations.of(context)!.logOutTitle,
-              subtitle3: AppLocalizations.of(context)!.logOutSubtitle,
-              onLogout: () {
-                donnerProfile.logOutAccount();
-              },
-              icon3: IconlyBold.logout,
+            0.02.ph,
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  const DonnerProfileView(
+                    title1: 'Profile',
+                    subtitle: 'Vist Profile',
+                    icon1: IconlyBold.profile,
+                  ),
+                  0.02.ph,
+                  const DonnerProfileView(
+                    title1: 'Track Donnation',
+                    subtitle: 'Status',
+                    icon1: IconlyBold.heart,
+                  ),
+                  0.02.ph,
+                  const DonnerProfileView(
+                    title1: 'Zakat Calculator',
+                    subtitle: 'Calculate Your Zakkat',
+                    icon1: Icons.calculate_outlined,
+                  ),
+                  0.02.ph,
+                  const DonnerProfileView(
+                    title1: 'Settings',
+                    subtitle: 'Edit',
+                    icon1: Icons.settings,
+                  ),
+                  0.02.ph,
+                  const DonnerProfileView(
+                    title1: 'My Donnation',
+                    subtitle: 'View Your Donations',
+                    icon1: IconlyBold.heart,
+                  ),
+                  0.02.ph,
+                ],
+              ),
             )
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/BottomNavBar/BottomNavBarViewModel.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
+import 'package:suffa_app/views/ChoiceScreen/ChoiceScreen.dart';
 import 'package:suffa_app/views/Donners/Donate/DonateScreenView.dart';
 import 'package:suffa_app/views/Donners/Home/homeView.dart';
 import 'package:suffa_app/views/Donners/Profile/DonnerProfile/DonnerProfle.dart';
@@ -43,7 +44,7 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
 
   BottomAppBar _mainWrapperBottomNavBar(BuildContext context) {
     return BottomAppBar(
-      color: AppColor.whiteColor,
+      color: AppColor.brownColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,7 +52,7 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
         children: [
           Expanded(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _bottomAppBarItem(
                   context,
@@ -106,7 +107,7 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
         DonateScreenView(),
         Scaffold(body: Center(child: Text('Home3'))),
         DonnerProfile(),
-        Scaffold(body: Center(child: Text('More'))),
+        ChoiceScreen()
       ],
     );
   }
@@ -136,15 +137,17 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
             Obx(
               () => Icon(
                 bottomController.page.value == page ? filledIcon : defaultIcon,
-                color: AppColor.mehroonColor,
-                size: 26,
+                color: AppColor.blackColor,
+                size: context.mh * 0.029,
               ),
             ),
             0.003.ph,
             Text(
               label,
               style: GoogleFonts.aBeeZee(
-                  fontSize: 13, fontWeight: FontWeight.w100),
+                fontSize: context.mh * 0.015,
+                fontWeight: FontWeight.w100,
+              ),
             ),
           ],
         ),

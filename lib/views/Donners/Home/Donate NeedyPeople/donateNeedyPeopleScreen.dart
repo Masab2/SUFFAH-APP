@@ -9,10 +9,13 @@ import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/Donner/displayNeedyPeopleController/NeedyPeopleController.dart';
 import 'package:suffa_app/ViewModel/PaymentMethods/JazzCash/jazzcashPaymentViewModel.dart';
 import 'package:suffa_app/res/components/AppBar/AppBar.dart';
+import 'package:suffa_app/res/components/DonnerDisplayNeedy/AmmountDialog/AmmountDialog.dart';
 import 'package:suffa_app/res/components/DonnerDisplayNeedy/displayNeedypeople.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
+import 'package:suffa_app/res/components/TextFormFeilds/DonnerTextFeilds.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
+import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
@@ -27,6 +30,7 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
   final needyPeopleController = Get.put(NeedyPeopleController());
   final jazzcashPayment = Get.put(JazcashPaymentViewModel());
   final searchController = TextEditingController();
+  final donnateController = TextEditingController();
   late String program;
   late String muntazimid;
   late String price;
@@ -44,22 +48,24 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
     needyPeopleController.dispose();
     jazzcashPayment.dispose();
     searchController.dispose();
+    donnateController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar.alSuffahPersonbar(context, () {
-        final totalPrice =
-            needyPeopleController.calulateTotalDonnation(int.parse(price));
-        List<SuffahPersonModel> addedPeople = needyPeopleController.needyPeople
-            .where((person) => person.tempstatus == 'Added')
-            .toList();
-        String tPrice = totalPrice.toString();
-        Get.toNamed(RoutesNames.donatePaymentScreen,
-            arguments: [addedPeople, tPrice, price]);
-      }, program),
+      appBar: AppBar(
+        backgroundColor: AppColor.brownColor,
+        title: Text(
+          program,
+          style: GoogleFonts.poppins(
+            fontSize: context.mh * 0.023,
+            color: AppColor.whiteColor,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
           Obx(() {
@@ -75,18 +81,16 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
               return Expanded(
                   child: Column(
                 children: [
+                  0.02.ph,
                   Row(
                     children: [
                       Expanded(
-                        child: CustomizedFeild(
-                          controller: searchController,
+                        child: DonnerTextFeilsComp(
                           hint: 'Search Person',
-                          prefixIcon: const Icon(
-                            IconlyLight.search,
-                          ),
                           onChanged: (value) {
                             needyPeopleController.filterList(value);
                           },
+                          controller: searchController,
                         ),
                       ),
                     ],
@@ -102,57 +106,41 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                         final person =
                             needyPeopleController.filteredPeople[index];
                         return DisplayNeedyPeopleComp(
-                            masjidname: person.personname,
-                            image: person.image,
-                            masjidaddress: person.address,
-                            ontap: () {
-                              needyPeopleController
-                                  .updateStatus(person.personId);
-                            },
-                            program: program,
-                            muntazimid: muntazimid,
-                            traling: IconButton(
-                              onPressed: () {
-                                needyPeopleController
-                                    .updateStatus(person.personId);
+                          masjidname: person.personname,
+                          image: person.image,
+                          masjidaddress: person.address,
+                          ontap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AmmountDialog(
+                                  controller: donnateController,
+                                  ontap: () {
+                                    needyPeopleController.validateDonnation(
+                                      100,
+                                      1000,
+                                    );
+                                  },
+                                );
                               },
-                              icon: person.tempstatus == 'Added' &&
-                                      person.donnerSelectionId.isNotEmpty &&
-                                      person.donnerSelectionId == Apis.user.uid
-                                  ? const Icon(
-                                      IconlyBold.heart,
-                                      color: Colors.red,
-                                    )
-                                  : const Icon(IconlyLight.heart),
-                            ));
+                            );
+
+                            // DonationDialog(controller: searchController);
+                            // Get.toNamed(
+                            //   RoutesNames.donatePaymentScreen,
+                            //   arguments: [
+                            //     tPrice,
+                            //     price,
+                            //   ],
+                            // );
+                          },
+                          program: program,
+                          muntazimid: muntazimid,
+                          cnicno: person.cnicno,
+                        );
                       },
                     ),
                   ),
-                  Visibility(
-                      visible: needyPeopleController.needyPeople.any(
-                        (person) =>
-                            person.tempstatus == 'Added' &&
-                            person.donnerSelectionId == Apis.user.uid,
-                      ),
-                      child: ReuseAblebtn(
-                        title: 'Donate All',
-                        onPressed: () {
-                          final totalPrice = needyPeopleController
-                              .calulateTotalDonnation(int.parse(price));
-                          String tPrice = totalPrice.toString();
-                          List<SuffahPersonModel> addedPeople =
-                              needyPeopleController.needyPeople
-                                  .where(
-                                      (person) => person.tempstatus == 'Added')
-                                  .toList();
-                          Get.toNamed(RoutesNames.donatePaymentScreen,
-                              arguments: [
-                                addedPeople,
-                                tPrice,
-                                price,
-                              ]);
-                        },
-                      )),
                   0.02.ph,
                 ],
               ));

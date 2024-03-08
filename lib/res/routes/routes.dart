@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
-import 'package:suffa_app/views/Auth/LoginChoice/LoginChoice.dart';
 import 'package:suffa_app/views/Auth/VerifyScreen/verifyScreen.dart';
 import 'package:suffa_app/views/Auth/login/login.dart';
 import 'package:suffa_app/views/Auth/signup/signUpScreen.dart';
@@ -59,10 +58,7 @@ class AppRoutes {
             name: RoutesNames.verifyScreen,
             page: () => const VerifyScreen(),
             transition: Transition.leftToRight),
-        GetPage(
-            name: RoutesNames.loginChoiceScreen,
-            page: () => const LoginChoiceView(),
-            transition: Transition.leftToRight),
+        
 
         //? Choice Screen
         GetPage(

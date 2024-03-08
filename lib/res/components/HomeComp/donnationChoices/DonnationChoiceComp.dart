@@ -2,6 +2,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
@@ -28,172 +29,275 @@ class DonnationChoice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: context.mh * 0.25,
-          width: context.mw,
-          margin: EdgeInsets.symmetric(
-            horizontal: context.mw * 0.02,
-            vertical: context.mh * 0.02,
-          ),
-          // decoration: BoxDecoration(
-          //   // color: AppColor.cgreenColor,
-          //   borderRadius: BorderRadius.circular(20),
-          //   image: DecorationImage(
-          //     opacity: 0.83,
-          //     image: AssetImage(image),
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
-          padding: EdgeInsets.all(context.mw * 0.016),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: CachedNetworkImage(
-              height: context.mh * 0.15,
-              width: context.mw * 0.30,
-              fadeOutCurve: const FlippedCurve(Curves.easeOutCirc),
-              imageUrl: image,
-              matchTextDirection: true,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => const SpinKitChasingDots(
-                color: AppColor.mehroonColor,
-                duration: Duration(seconds: 5),
-                size: 40,
-              ),
-              errorWidget: (context, url, error) {
-                return const Icon(Icons.error);
-              },
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            width: context.mw * 0.85,
+            margin: EdgeInsets.fromLTRB(
+              context.mw * 0.05,
+              context.mh * 0.00,
+              context.mw * 0.002,
+              context.mw * 0.01,
             ),
-          ),
-        ),
-        Positioned(
-          left: 0,
-          bottom: 0,
-          right: 0,
-          child: Container(
-            height: context.mh * 0.15,
-            width: context.mw,
-            margin: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
-            decoration: BoxDecoration(
-              color: AppColor.whiteColor.withOpacity(0.43),
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColor.mehroonColor.withOpacity(0.03),
-                  offset: const Offset(
-                    5.0,
-                    5.0,
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
-                  blurRadius: 10.0,
-                  spreadRadius: 2.0,
+                  child: CachedNetworkImage(
+                    height: context.mh * 0.20,
+                    width: context.mw,
+                    fadeOutCurve: const FlippedCurve(Curves.easeOutCirc),
+                    imageUrl: image,
+                    matchTextDirection: true,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const SpinKitChasingDots(
+                      color: AppColor.mehroonColor,
+                      duration: Duration(seconds: 5),
+                      size: 40,
+                    ),
+                    errorWidget: (context, url, error) {
+                      return const Icon(Icons.error);
+                    },
+                  ),
                 ),
-              ],
-            ),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  0.009.ph,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: context.mh * 0.023,
+                    fontWeight: FontWeight.w700,
+                    color: AppColor.mehroonColor,
+                  ),
+                ),
+                0.01.ph,
+                SingleChildScrollView(
+                  child: Column(
                     children: [
-                      Text(
-                        title,
-                        style: GoogleFonts.poppins(
-                          fontSize: context.mh * 0.020,
-                          fontWeight: FontWeight.bold,
+                      SimpleAnimationProgressBar(
+                        height: context.mh * 0.01,
+                        width: context.mw * 0.70,
+                        backgroundColor: Colors.grey.shade800,
+                        foregrondColor: AppColor.mehroonColor,
+                        ratio: 3 / 10,
+                        direction: Axis.horizontal,
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        duration: const Duration(seconds: 3),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: context.mw * 0.10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Total Donnation',
+                              style: GoogleFonts.poppins(
+                                fontSize: context.mh * 0.014,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade800,
+                              ),
+                            ),
+                            Text(
+                              '1000 Rs',
+                              style: GoogleFonts.poppins(
+                                fontSize: context.mh * 0.014,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade800,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            'Latest Donnation',
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.013,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            '200 PKR',
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.013,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      MaterialButton(
+                        color: AppColor.mehroonColor,
+                        height: context.mh * 0.06,
+                        minWidth: context.mw * 0.60,
+                        onPressed: ontap,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          'Select Program',
+                          style: GoogleFonts.poppins(
+                            fontSize: context.mh * 0.017,
+                            color: AppColor.whiteColor,
+                          ),
                         ),
                       )
                     ],
                   ),
-                  0.008.ph,
-                  Column(
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class DonnationChoiceMasjidComp extends StatelessWidget {
+  final String image;
+  final String title;
+  final VoidCallback ontap;
+  final String program;
+  // int previousTotalNeedyPeople;
+  // static int totalDonations = 0;
+  const DonnationChoiceMasjidComp({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.ontap,
+    required this.program,
+    // this.previousTotalNeedyPeople = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            width: context.mw * 0.85,
+            margin: EdgeInsets.fromLTRB(context.mw * 0.05, context.mh * 0.01,
+                context.mw * 0.002, context.mw * 0.01),
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  child: CachedNetworkImage(
+                    height: context.mh * 0.15,
+                    width: context.mw,
+                    fadeOutCurve: const FlippedCurve(Curves.easeOutCirc),
+                    imageUrl: image,
+                    matchTextDirection: true,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const SpinKitChasingDots(
+                      color: AppColor.mehroonColor,
+                      duration: Duration(seconds: 5),
+                      size: 40,
+                    ),
+                    errorWidget: (context, url, error) {
+                      return const Icon(Icons.error);
+                    },
+                  ),
+                ),
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: context.mh * 0.023,
+                    fontWeight: FontWeight.w700,
+                    color: AppColor.mehroonColor,
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
                     children: [
-                      StreamBuilder(
-                          stream: Apis.getAllNeedyPeopleByProgram(program),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: SpinKitChasingDots(
-                                  color: AppColor.mehroonColor,
-                                  duration: Duration(seconds: 5),
-                                  size: 40,
-                                ),
-                              );
-                            } else if (!snapshot.hasData) {
-                              return const Center(child: Text('No Data Found'));
-                            } else {
-                              return Column(
-                                children: [
-                                  SimpleAnimationProgressBar(
-                                    height: context.mh * 0.01,
-                                    width: context.mw * 0.70,
-                                    backgroundColor: Colors.grey.shade800,
-                                    foregrondColor: AppColor.mehroonColor,
-                                    ratio: 3 / 10,
-                                    direction: Axis.horizontal,
-                                    curve: Curves.fastLinearToSlowEaseIn,
-                                    duration: const Duration(seconds: 3),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: context.mw * 0.10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Ammount Rasied',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: context.mh * 0.014,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey.shade800,
-                                          ),
-                                        ),
-                                        Text(
-                                          '1000 Rs',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: context.mh * 0.014,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey.shade800,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }
-                          }),
+                      SimpleAnimationProgressBar(
+                        height: context.mh * 0.01,
+                        width: context.mw * 0.70,
+                        backgroundColor: Colors.grey.shade800,
+                        foregrondColor: AppColor.mehroonColor,
+                        ratio: 3 / 10,
+                        direction: Axis.horizontal,
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        duration: const Duration(seconds: 3),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: context.mw * 0.10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Ammount Rasied',
+                              style: GoogleFonts.poppins(
+                                fontSize: context.mh * 0.014,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade800,
+                              ),
+                            ),
+                            Text(
+                              '1000 Rs',
+                              style: GoogleFonts.poppins(
+                                fontSize: context.mh * 0.014,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade800,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            'Latest Donnation',
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.013,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            '200 PKR',
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.013,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      MaterialButton(
+                        color: AppColor.mehroonColor,
+                        height: context.mh * 0.06,
+                        minWidth: context.mw * 0.60,
+                        onPressed: ontap,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          'Select Program',
+                          style: GoogleFonts.poppins(
+                            fontSize: context.mh * 0.017,
+                            color: AppColor.whiteColor,
+                          ),
+                        ),
+                      )
                     ],
                   ),
-                  // 0.007.ph,
-                  MaterialButton(
-                    minWidth: context.mw * 0.50,
-                    height: context.mh * 0.04,
-                    color: AppColor.mehroonColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    onPressed: ontap,
-                    child: Text(
-                      AppLocalizations.of(context)!.donnateNow,
-                      style: GoogleFonts.poppins(
-                        fontSize: context.mh * 0.015,
-                        color: AppColor.whiteColor,
-                      ),
-                    ),
-                  ),
-                  0.01.ph,
-                ],
-              ),
+                )
+              ],
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

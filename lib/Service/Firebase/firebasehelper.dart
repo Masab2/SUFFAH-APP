@@ -63,6 +63,8 @@ class Apis {
       firestore.collection(donorinfoCollection).doc(user.uid).set({
         'email': email,
         'uid': user.uid,
+        'profilePic': '',
+        'phoneno': '',
       });
     }
   }
@@ -496,6 +498,15 @@ class Apis {
     return firestore
         .collection(suffahShop)
         .where('masjidId', isEqualTo: masjidid)
+        .snapshots();
+  }
+
+  // Get All Suffah Center Define Program
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getAllSuffahCenterDefinePrograms() {
+    return firestore
+        .collection(suffahCenterDefineProgram)
+        .where('Status', isEqualTo: 'Active')
         .snapshots();
   }
 }

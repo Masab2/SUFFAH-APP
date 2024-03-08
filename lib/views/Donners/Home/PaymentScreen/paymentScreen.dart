@@ -18,12 +18,10 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   final paymentController = Get.put(PaymentViewModel());
-  late List<SuffahPersonModel> addedPeople;
   late String totalPrice;
   late String price;
   @override
   void initState() {
-    addedPeople = Get.arguments[0];
     totalPrice = Get.arguments[1];
     price = Get.arguments[2];
     super.initState();
@@ -56,7 +54,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               image: ImageAsset.hungryimg,
               program: 'OneTimeMeal',
               donnationprice: 'PKR $totalPrice',
-              noofMeals: 'Meal ${addedPeople.length.toString()}',
+              noofMeals: 'Meal ${1.toString()}',
               actualPrice: price,
             ),
             0.05.ph,
@@ -84,13 +82,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   paymentname: 'JazzCash',
                   image: ImageAsset.jazzcashimg,
                   ontap: () {
-                    Get.toNamed(
-                      RoutesNames.jazzCashPaymentScreen,
-                      arguments: [
-                        totalPrice,
-                        addedPeople,
-                      ],
-                    );
+                    // Get.toNamed(
+                    //   RoutesNames.jazzCashPaymentScreen,
+                    //   arguments: [
+                    //     totalPrice,
+                    //   ],
+                    // );
                   },
                   color: AppColor.whiteColor,
                   paymentDescrip: 'Pay With JazzCash',

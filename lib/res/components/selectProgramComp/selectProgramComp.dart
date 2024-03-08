@@ -10,12 +10,14 @@ class SelectProgramComp extends StatelessWidget {
   final String title;
   final String buttonTitle;
   final VoidCallback ontap;
+  final Widget? btn;
   const SelectProgramComp(
       {super.key,
       required this.image,
       required this.title,
       required this.buttonTitle,
-      required this.ontap});
+      required this.ontap,
+      this.btn});
 
   @override
   Widget build(BuildContext context) {

@@ -99,35 +99,41 @@ class _AddProgramsViewState extends State<AddProgramsView> {
                     controller: priceController,
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    showCurrencyPicker(
-                      context: context,
-                      showFlag: true,
-                      showSearchField: true,
-                      showCurrencyName: true,
-                      showCurrencyCode: true,
-                      favorite: ['PKR'],
-                      onSelect: (Currency currency) {
-                        controller.selectedCurrency.value = currency.code;
+                
+                Column(
+                  children: [
+                    0.02.ph,
+                    InkWell(
+                      onTap: () {
+                        showCurrencyPicker(
+                          context: context,
+                          showFlag: true,
+                          showSearchField: true,
+                          showCurrencyName: true,
+                          showCurrencyCode: true,
+                          favorite: ['PKR'],
+                          onSelect: (Currency currency) {
+                            controller.selectedCurrency.value = currency.code;
+                          },
+                        );
                       },
-                    );
-                  },
-                  child: Container(
-                      width: context.mw * 0.20,
-                      height: context.mh * 0.07,
-                      margin: EdgeInsets.only(right: context.mw * 0.02),
-                      decoration: BoxDecoration(
-                          color: AppColor.mehroonColor,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Center(
-                          child: Text(
-                        controller.selectedCurrency.value,
-                        style: GoogleFonts.poppins(
-                          fontSize: context.mh * 0.018,
-                          color: AppColor.whiteColor,
-                        ),
-                      ))),
+                      child: Container(
+                          width: context.mw * 0.20,
+                          height: context.mh * 0.07,
+                          margin: EdgeInsets.only(right: context.mw * 0.02),
+                          decoration: BoxDecoration(
+                              color: AppColor.mehroonColor,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Center(
+                              child: Text(
+                            controller.selectedCurrency.value,
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.018,
+                              color: AppColor.whiteColor,
+                            ),
+                          ))),
+                    ),
+                  ],
                 ),
               ],
             );

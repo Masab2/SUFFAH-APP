@@ -17,7 +17,7 @@ class VerifyScreen extends StatefulWidget {
 }
 
 class _VerifyScreenState extends State<VerifyScreen> {
-  late Timer timer ;
+  late Timer timer;
   @override
   void initState() {
     Apis.user.sendEmailVerification();
@@ -40,18 +40,25 @@ class _VerifyScreenState extends State<VerifyScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(child: Image.asset(ImageAsset.verifyemail)),
+          Center(child: Image.asset(ImageAsset.applogo)),
           0.02.ph,
           RichText(
+            maxLines: 2,
             text: TextSpan(
               text: 'Verification Link is Send to ',
               style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.bold, color: AppColor.geryColor),
+                fontWeight: FontWeight.bold,
+                color: AppColor.mehroonColor,
+                fontSize: context.mh * 0.020,
+              ),
               children: [
                 TextSpan(
                   text: '${Apis.user.email}',
                   style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.bold, color: AppColor.mehroonColor),
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.brownColor,
+                    fontSize: context.mh * 0.020,
+                  ),
                 ),
               ],
             ),

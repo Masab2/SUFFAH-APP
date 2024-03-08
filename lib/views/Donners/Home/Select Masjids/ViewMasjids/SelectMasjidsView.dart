@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
+import 'package:suffa_app/ViewModel/Donner/DisplayMasjid/displayMasjidViewmodel.dart';
 import 'package:suffa_app/res/components/HomeComp/SelectMasjidComp/masjidDisplayComp.dart';
+import 'package:suffa_app/res/components/TextFormFeilds/DonnerTextFeilds.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -20,6 +22,7 @@ class SelectMasjidsView extends StatefulWidget {
 
 class _SelectMasjidsViewState extends State<SelectMasjidsView> {
   final searchController = TextEditingController();
+  final masjidController = Get.put(DisplayMasjidViewModel());
   late String program;
   late String price;
   @override
@@ -30,24 +33,32 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
   }
 
   @override
+  void dispose() {
+    searchController.dispose();
+    masjidController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColor.brownColor,
         title: Text(
-          AppLocalizations.of(context)!.pageTitle,
+          program,
           style: GoogleFonts.poppins(
-            fontSize: context.mh * 0.024,
-            fontWeight: FontWeight.bold,
+            fontSize: context.mh * 0.023,
+            color: AppColor.whiteColor,
           ),
         ),
         centerTitle: true,
       ),
       body: Column(
         children: [
-          CustomizedFeild(
+          0.03.ph,
+          DonnerTextFeilsComp(
+            hint: 'Search Masjid',
             controller: searchController,
-            hint: AppLocalizations.of(context)!.searchMasjid,
-            prefixIcon: const Icon(IconlyLight.search),
           ),
           0.03.ph,
           StreamBuilder(
@@ -90,6 +101,11 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
                         muntazimid: data['adminCreatedId'],
                         receivedDonationsCount: 10,
                         waitingCount: 20,
+                        onlocation: () {
+                          masjidController.openGoogleMap(
+                            data['address'],
+                          );
+                        },
                       );
                     },
                   ));

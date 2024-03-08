@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AddNeedyPeopleRepo {
   Future<String?> addNeedyPeople(String file, TextEditingController phoneno,
       TextEditingController address, masjid) async {

@@ -2,7 +2,6 @@ class RoutesNames {
   // Splash Screen
   static const String splashScreen = '/';
   // AuthScreen
-  static const String loginChoiceScreen = '/loginChoiceScreen';
   static const String loginScreen = '/loginScreen';
   static const String signUpScreen = '/signUpScreen';
   static const String verifyScreen = '/verifyScreen';

@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:developer';
+import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
@@ -12,31 +13,102 @@ import 'package:badges/badges.dart' as badges;
 
 class HomeAppBar {
   static PreferredSizeWidget HomeBar(
-    BuildContext context,
-    Widget leading,
-    Widget trailing,
-  ) {
+      BuildContext context, ValueChanged<dynamic>? onChanged) {
     return AppBar(
-      leading: leading,
-      title: RichText(
-          text: TextSpan(
-              text: "${AppLocalizations.of(context)!.apptitlefirst} ",
-              style: GoogleFonts.poppins(
-                  fontSize: context.mh * 0.025,
-                  color: AppColor.mehroonColor,
-                  fontWeight: FontWeight.bold),
-              children: [
-            TextSpan(
-                text: AppLocalizations.of(context)!.apptitlesecond,
-                style: GoogleFonts.poppins(
-                    fontSize: context.mh * 0.025,
-                    color: AppColor.geryColor,
-                    fontWeight: FontWeight.bold))
-          ])),
+      backgroundColor: AppColor.brownColor,
+      leadingWidth: context.mw * 0.25,
+      // leading: InkWell(
+      //   onTap: () {
+
+      //   },
+      //   child: Row(
+      //     children: [
+      //       0.02.pw,
+      //       Icon(
+      //         IconlyBold.location,
+      //         size: context.mh * 0.020,
+      //       ),
+      //       Text(
+      //         'Pakistan',
+      //         style: GoogleFonts.poppins(
+      //           color: AppColor.whiteColor,
+      //           fontSize: context.mh * 0.013,
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      leading: Row(
+        children: [
+          0.02.pw,
+          Expanded(
+            child: CSCPicker(
+              defaultCountry: CscCountry.Pakistan,
+              dropdownDecoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: AppColor.brownColor,
+              ),
+              layout: Layout.horizontal,
+              showCities: false,
+              showStates: false,
+              flagState: CountryFlag.ENABLE,
+              currentCountry: 'Pakistan',
+              onCountryChanged: onChanged,
+            ),
+          ),
+        ],
+      ),
+      title: Text(
+        AppLocalizations.of(context)!.apptitlefirst,
+        style: GoogleFonts.poppins(
+          fontSize: context.mh * 0.023,
+          color: AppColor.whiteColor,
+        ),
+      ),
       centerTitle: true,
       actions: [
-        trailing,
-        0.04.pw,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              0.01.ph,
+              Row(
+                children: [
+                  0.02.pw,
+                  Icon(
+                    Icons.language,
+                    size: context.mh * 0.020,
+                  ),
+                  Text(
+                    'English',
+                    style: GoogleFonts.poppins(
+                        color: AppColor.whiteColor,
+                        fontSize: context.mh * 0.013),
+                  ),
+                ],
+              ),
+              0.003.ph,
+              Row(
+                children: [
+                  0.02.pw,
+                  Icon(
+                    Icons.monetization_on_outlined,
+                    size: context.mh * 0.020,
+                  ),
+                  Text(
+                    'PKR',
+                    style: GoogleFonts.poppins(
+                      color: AppColor.whiteColor,
+                      fontSize: context.mh * 0.013,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        )
       ],
     );
   }

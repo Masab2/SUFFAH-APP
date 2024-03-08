@@ -10,6 +10,7 @@ class SuffahPersonModel implements Comparable<SuffahPersonModel> {
   final String status;
   final String personId;
   final String donnerSelectionId;
+  final String requiredDonnation;
 
   SuffahPersonModel({
     required this.personname,
@@ -22,7 +23,8 @@ class SuffahPersonModel implements Comparable<SuffahPersonModel> {
     required this.tempstatus,
     required this.status,
     required this.personId,
-    required this.donnerSelectionId, 
+    required this.donnerSelectionId,
+    required this.requiredDonnation,
   });
   @override
   int compareTo(SuffahPersonModel other) {

@@ -22,6 +22,8 @@ class AdminLoginViewModel extends GetxController {
         email.clear();
         password.clear();
         Get.toNamed(RoutesNames.adminDashBoardScreen);
+      }else{
+        Get.snackbar('Error', result);
       }
     } finally {
       isLoading(false);
