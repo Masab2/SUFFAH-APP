@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,10 @@ class DonnerProfile extends StatefulWidget {
 
 class _DonnerProfileState extends State<DonnerProfile> {
   final donnerProfile = Get.put(LoginViewModel());
+
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -84,34 +87,40 @@ class _DonnerProfileState extends State<DonnerProfile> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const DonnerProfileView(
-                    title1: 'Profile',
-                    subtitle: 'Vist Profile',
+                  DonnerProfileView(
+                    title1: l10n!.profileTitle,
+                    subtitle: l10n.profileTitle,
                     icon1: IconlyBold.profile,
                   ),
                   0.02.ph,
-                  const DonnerProfileView(
-                    title1: 'Track Donnation',
-                    subtitle: 'Status',
+                  DonnerProfileView(
+                    title1: l10n.trackDonnationTitle,
+                    subtitle: l10n.trackDonnationTitle,
                     icon1: IconlyBold.heart,
                   ),
                   0.02.ph,
-                  const DonnerProfileView(
-                    title1: 'Zakat Calculator',
-                    subtitle: 'Calculate Your Zakkat',
+                  DonnerProfileView(
+                    title1: l10n.zakatCalculatorTitle,
+                    subtitle: l10n.zakatCalculatorSubtitle,
                     icon1: Icons.calculate_outlined,
                   ),
                   0.02.ph,
-                  const DonnerProfileView(
-                    title1: 'Settings',
-                    subtitle: 'Edit',
+                  DonnerProfileView(
+                    title1: l10n.appSetting,
+                    subtitle: l10n.editSettingSubtitle,
                     icon1: Icons.settings,
                   ),
                   0.02.ph,
-                  const DonnerProfileView(
-                    title1: 'My Donnation',
-                    subtitle: 'View Your Donations',
+                  DonnerProfileView(
+                    title1: l10n.myDonnationTitle,
+                    subtitle: l10n.myDonnationSubtitle,
                     icon1: IconlyBold.heart,
+                  ),
+                  0.02.ph,
+                  DonnerProfileView(
+                    title1: l10n.logOutTitle,
+                    subtitle: l10n.logOutSubtitle,
+                    icon1: IconlyBold.logout,
                   ),
                   0.02.ph,
                 ],

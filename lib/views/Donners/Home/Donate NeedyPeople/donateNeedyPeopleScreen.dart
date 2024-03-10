@@ -18,6 +18,7 @@ import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DonateNeedyPeopleView extends StatefulWidget {
   const DonateNeedyPeopleView({super.key});
@@ -54,6 +55,7 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.brownColor,
@@ -86,7 +88,7 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                     children: [
                       Expanded(
                         child: DonnerTextFeilsComp(
-                          hint: 'Search Person',
+                          hint: l10n!.searchPersonHint,
                           onChanged: (value) {
                             needyPeopleController.filterList(value);
                           },

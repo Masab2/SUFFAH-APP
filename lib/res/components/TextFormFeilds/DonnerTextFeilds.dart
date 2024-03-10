@@ -33,10 +33,10 @@ class DonnerTextFeilsComp extends StatelessWidget {
           ),
           child: TextFormField(
             controller: controller,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: 'Search Masjid',
-              hintStyle: TextStyle(
+              hintText: hint,
+              hintStyle: const TextStyle(
                 color: AppColor.whiteColor,
               ),
             ),

@@ -15,7 +15,6 @@ class _DonateScreenViewState extends State<DonateScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar.HomeBar(context, (value) {}),
       body: Column(
         children: [],
       ),

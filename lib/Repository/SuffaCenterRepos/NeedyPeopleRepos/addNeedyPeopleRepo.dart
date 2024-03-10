@@ -83,11 +83,9 @@ class AddNeedyPeopleRepo {
       if (!programDoc.exists) {
         return 'Suffa center not found';
       }
-
       // Extract current programs from the suffa center document
       List<dynamic> currentPrograms =
           List.from(programDoc.data()!['Programs'] ?? []);
-
       // Check if the program is already added
       if (currentPrograms.contains(program)) {}
       // Add the program to the suffa center collection

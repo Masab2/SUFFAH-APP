@@ -14,7 +14,7 @@ class AddMasjidRepo {
     TextEditingController address,
     state,
   ) async {
-    if (file == '' ||
+    if (file == null ||
         name.text.isEmpty ||
         emailAddress.text.isEmpty ||
         phoneno.text.isEmpty ||

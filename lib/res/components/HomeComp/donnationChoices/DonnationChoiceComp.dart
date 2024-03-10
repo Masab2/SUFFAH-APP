@@ -29,6 +29,7 @@ class DonnationChoice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -94,7 +95,7 @@ class DonnationChoice extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Total Donnation',
+                              l10n!.totalDonnationTitle,
                               style: GoogleFonts.poppins(
                                 fontSize: context.mh * 0.014,
                                 fontWeight: FontWeight.bold,
@@ -116,7 +117,7 @@ class DonnationChoice extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            'Latest Donnation',
+                            l10n.latestDonnationTitle,
                             style: GoogleFonts.poppins(
                               fontSize: context.mh * 0.013,
                               fontWeight: FontWeight.w700,
@@ -140,7 +141,7 @@ class DonnationChoice extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          'Select Program',
+                          l10n.selectProgram,
                           style: GoogleFonts.poppins(
                             fontSize: context.mh * 0.017,
                             color: AppColor.whiteColor,
@@ -177,6 +178,7 @@ class DonnationChoiceMasjidComp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -237,7 +239,7 @@ class DonnationChoiceMasjidComp extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Ammount Rasied',
+                              l10n!.ammountTitle,
                               style: GoogleFonts.poppins(
                                 fontSize: context.mh * 0.014,
                                 fontWeight: FontWeight.bold,
@@ -259,7 +261,7 @@ class DonnationChoiceMasjidComp extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            'Latest Donnation',
+                            l10n!.latestDonnationTitle,
                             style: GoogleFonts.poppins(
                               fontSize: context.mh * 0.013,
                               fontWeight: FontWeight.w700,
@@ -283,7 +285,7 @@ class DonnationChoiceMasjidComp extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          'Select Program',
+                          l10n.selectProgram,
                           style: GoogleFonts.poppins(
                             fontSize: context.mh * 0.017,
                             color: AppColor.whiteColor,

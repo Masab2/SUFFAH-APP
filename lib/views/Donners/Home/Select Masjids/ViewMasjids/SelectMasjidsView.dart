@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/Donner/DisplayMasjid/displayMasjidViewmodel.dart';
 import 'package:suffa_app/res/components/HomeComp/SelectMasjidComp/masjidDisplayComp.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/DonnerTextFeilds.dart';
-import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -41,6 +39,7 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.brownColor,
@@ -57,7 +56,7 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
         children: [
           0.03.ph,
           DonnerTextFeilsComp(
-            hint: 'Search Masjid',
+            hint: l10n!.searchMasjid,
             controller: searchController,
           ),
           0.03.ph,
@@ -72,7 +71,7 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
                       size: 40,
                     ),
                   );
-                } else if (!snapshot.hasData) {
+                } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return const Center(child: Text('No Data Found'));
                 } else {
                   return Expanded(

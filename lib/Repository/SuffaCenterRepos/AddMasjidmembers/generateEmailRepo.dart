@@ -60,7 +60,7 @@ class GenerateEmailSuffaMembersRepo {
           }
           break;
         default:
-          return 'Please Enter the Authorized Domain suffacenter.com';
+          return 'Please Enter the Authorized Domain';
       }
     }
     return null;

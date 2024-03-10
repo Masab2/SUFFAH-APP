@@ -5,6 +5,7 @@ import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DisplayNeedyPeopleComp extends StatelessWidget {
   final String masjidname, image, masjidaddress, muntazimid, cnicno;
@@ -22,6 +23,7 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -57,7 +59,7 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'CNIC',
+                                    l10n!.cnicTitle,
                                     style: GoogleFonts.poppins(
                                       fontSize: context.mh * 0.018,
                                       fontWeight: FontWeight.bold,
@@ -79,7 +81,7 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'NAME',
+                                    l10n.nameTitle,
                                     style: GoogleFonts.poppins(
                                       fontSize: context.mh * 0.018,
                                       fontWeight: FontWeight.bold,
@@ -101,7 +103,7 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'ADDRESS',
+                                    l10n.addressTitle,
                                     style: GoogleFonts.poppins(
                                       fontSize: context.mh * 0.018,
                                       fontWeight: FontWeight.bold,
@@ -176,7 +178,7 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
             minWidth: context.mw * 0.55,
             onPressed: ontap,
             child: Text(
-              'Donate Now',
+              l10n.donateNowtitle,
               style: GoogleFonts.poppins(
                 fontSize: context.mh * 0.017,
                 color: AppColor.whiteColor,

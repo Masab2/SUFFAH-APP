@@ -30,6 +30,7 @@ class MasjidDisplayComp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       children: [
         Container(
@@ -80,13 +81,13 @@ class MasjidDisplayComp extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Recived',
+                                  l10n!.recivedTitle,
                                   style: GoogleFonts.poppins(
                                     fontSize: context.mh * 0.017,
                                   ),
                                 ),
                                 Text(
-                                  'Waiting',
+                                  l10n.waiting,
                                   style: GoogleFonts.poppins(
                                     fontSize: context.mh * 0.017,
                                   ),
@@ -146,7 +147,7 @@ class MasjidDisplayComp extends StatelessWidget {
           minWidth: context.mw * 0.55,
           onPressed: ontap,
           child: Text(
-            'Donate Here',
+            l10n.donateMasjid,
             style: GoogleFonts.poppins(
               fontSize: context.mh * 0.017,
               color: AppColor.whiteColor,
