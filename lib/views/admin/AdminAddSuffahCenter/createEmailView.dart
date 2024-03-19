@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
-import 'package:suffa_app/ViewModel/Admin/createEmailViewModel/CreateEmailViewModel.dart';
+import 'package:suffa_app/ViewModel/Admin/AddSuffahCenter/AddSuffahCenterViewModel.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -21,7 +21,7 @@ class CreateEmail extends StatefulWidget {
 class _CreateEmailState extends State<CreateEmail> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final createEmailController = Get.put(CreateEmailViewModel());
+  final addSuffacenterController = Get.find<AddSuffahCenterViewModel>();
 
   late String image;
   late String name;
@@ -31,11 +31,11 @@ class _CreateEmailState extends State<CreateEmail> {
   late String country;
   late String address;
   late String masjidname;
+  late String state;
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-    createEmailController.dispose();
     super.dispose();
   }
 
@@ -49,74 +49,73 @@ class _CreateEmailState extends State<CreateEmail> {
     country = Get.arguments[5];
     address = Get.arguments[6];
     masjidname = Get.arguments[7];
+    state = Get.arguments[8];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(IconlyBold.arrow_left_circle)),
-          title: Text(
-            'Generate Email',
-            style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+      appBar: AppBar(
+        title: Text(
+          name,
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
           ),
-          centerTitle: true,
         ),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image(
-                height: context.mh * 0.40,
-                image: AssetImage(ImageAsset.verifyemail),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image(
+              height: context.mh * 0.40,
+              image: AssetImage(ImageAsset.applogo),
+            ),
+            CustomizedFeild(
+              prefixIcon: const Icon(
+                IconlyBold.message,
+                color: AppColor.mehroonColor,
               ),
-              CustomizedFeild(
-                prefixIcon: const Icon(
-                  IconlyBold.message,
-                  color: AppColor.mehroonColor,
-                ),
-                controller: emailController,
-                title: 'Email',
-                hint: 'abc@suffacenter.com',
+              controller: emailController,
+              title: 'Email',
+              hint: 'abc@suffacenter.com',
+            ),
+            CustomizedFeild(
+              prefixIcon: const Icon(
+                IconlyBold.password,
+                color: AppColor.mehroonColor,
               ),
-              CustomizedFeild(
-                prefixIcon: const Icon(
-                  IconlyBold.password,
-                  color: AppColor.mehroonColor,
-                ),
-                controller: passwordController,
-                title: 'Password',
-                hint: '*******',
-              ),
-              0.03.ph,
-              ReuseAblebtn(
-                title: 'Register Masjid',
-                onPressed: () {
-                  createEmailController.createEmail(
-                    File(image),
-                    name,
-                    email,
-                    phone,
-                    city,
-                    country,
-                    address,
-                    emailController,
-                    passwordController,
-                    image,
-                    masjidname,
-                  );
-                },
-              )
-            ],
-          ),
-        ));
+              controller: passwordController,
+              title: 'Password',
+              hint: '*******',
+            ),
+            0.03.ph,
+            ReuseAblebtn(
+              title: 'Register Masjid',
+              onPressed: () {
+                addSuffacenterController.createEmail(
+                  File(image),
+                  name,
+                  email,
+                  phone,
+                  city,
+                  country,
+                  address,
+                  emailController,
+                  passwordController,
+                  masjidname,
+                  state,
+                );
+              },
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

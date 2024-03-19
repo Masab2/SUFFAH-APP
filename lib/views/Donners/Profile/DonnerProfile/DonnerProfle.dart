@@ -1,19 +1,11 @@
-import 'dart:developer';
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/Donner/DonnorAuth/loginViewModel.dart';
-import 'package:suffa_app/res/components/AppBar/AppBar.dart';
 import 'package:suffa_app/res/components/DonnerProfile/CustomContainer.dart';
 import 'package:suffa_app/res/components/DonnerProfile/DonnerProfileAccountSettings.dart';
-import 'package:suffa_app/res/components/SuffahCenterProfile/suffaCenterProfile.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -73,9 +65,13 @@ class _DonnerProfileState extends State<DonnerProfile> {
                         return const Center(child: Text('No Data Found'));
                       } else {
                         return SingleChildScrollView(
-                            child: CustomContainer(
-                          title: snapshot.data!.docs.first['email'],
-                          profile: snapshot.data!.docs.first['profilePic'],
+                            child: Column(
+                          children: [
+                            CustomContainer(
+                              title: snapshot.data!.docs.first['email'],
+                              profile: snapshot.data!.docs.first['profilePic'],
+                            ),
+                          ],
                         ));
                       }
                     },
@@ -91,36 +87,44 @@ class _DonnerProfileState extends State<DonnerProfile> {
                     title1: l10n!.profileTitle,
                     subtitle: l10n.profileTitle,
                     icon1: IconlyBold.profile,
+                    ontap: () {
+                      Get.toNamed(RoutesNames.editProfileScreen);
+                    },
                   ),
                   0.02.ph,
                   DonnerProfileView(
                     title1: l10n.trackDonnationTitle,
                     subtitle: l10n.trackDonnationTitle,
                     icon1: IconlyBold.heart,
+                    ontap: () {},
                   ),
                   0.02.ph,
                   DonnerProfileView(
                     title1: l10n.zakatCalculatorTitle,
                     subtitle: l10n.zakatCalculatorSubtitle,
                     icon1: Icons.calculate_outlined,
+                    ontap: () {},
                   ),
                   0.02.ph,
                   DonnerProfileView(
                     title1: l10n.appSetting,
                     subtitle: l10n.editSettingSubtitle,
                     icon1: Icons.settings,
+                    ontap: () {},
                   ),
                   0.02.ph,
                   DonnerProfileView(
                     title1: l10n.myDonnationTitle,
                     subtitle: l10n.myDonnationSubtitle,
                     icon1: IconlyBold.heart,
+                    ontap: () {},
                   ),
                   0.02.ph,
                   DonnerProfileView(
                     title1: l10n.logOutTitle,
                     subtitle: l10n.logOutSubtitle,
                     icon1: IconlyBold.logout,
+                    ontap: () {},
                   ),
                   0.02.ph,
                 ],

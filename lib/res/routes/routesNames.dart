@@ -13,6 +13,7 @@ class RoutesNames {
   static const String selectMasjidScreen = '/selectMasjidScreen';
   static const String donateNeedyPeopleScreen = '/donateNeedyPeopleScreen';
   static const String donatePaymentScreen = '/donatePaymentScreen';
+  static const String editProfileScreen = '/editProfileScreen';
 
   // Payment Screens
   static const String jazzCashPaymentScreen = '/jazzCashPaymentScreen';

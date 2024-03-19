@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/res/components/AddNeedyPeople/addNeedyPeopleComp.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/PickImage.dart';
@@ -14,9 +13,6 @@ import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import '../../../../ViewModel/SuffahCenter/addAffilated/addAffiliatedProgramViewModel.dart';
 import '../../../../res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import '../../../../res/components/CNICFormComp/CnicFormComp.dart';
-import '../../../../res/components/SelectIonCompCenterProgram/ForNeedyorFormasjid.dart';
-import '../../../../utils/color/appColor.dart';
-
 class AddCenterProgramView extends StatefulWidget {
   const AddCenterProgramView({super.key});
 
@@ -46,6 +42,19 @@ class _AddCenterProgramViewState extends State<AddCenterProgramView> {
     masjidId = Get.arguments[2];
     muntazimEmail = Get.arguments[3];
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    priceController.dispose();
+    purposeController.dispose();
+    holdernameController.dispose();
+    cnicnoController.dispose();
+    doIssueController.dispose();
+    doExpireController.dispose();
+    dobController.dispose();
+    super.dispose();
   }
 
   @override

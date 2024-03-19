@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:suffa_app/Model/JazzCashpaymentModel/jazzCashPayment.dart';
 import 'package:suffa_app/Model/alSuffahPersonModel/suffaPersonModel.dart';
+import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
 import 'package:suffa_app/Repository/PaymentMenthods/JazzcashPayment/jazzcashPaymentRepo.dart';
+import 'package:suffa_app/Repository/PaymentMenthods/PaymentRepo/paymentRepo.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/res/components/Payments/JazzCashPayment/PaymentReciptDialog/paymentReciptDialog.dart';
 import 'package:suffa_app/utils/Utils.dart';
@@ -13,10 +15,36 @@ import 'package:suffa_app/utils/constant/constant.dart';
 
 class JazcashPaymentViewModel extends GetxController {
   final JazzcashPaymentRepo _repo = JazzcashPaymentRepo();
+  final PaymentRepo _paymentRepo = PaymentRepo();
   RxBool isLoading = false.obs;
 
   Future<void> jazzCashPayment(
-      ammount, phoneno, ppsecurehash, BuildContext context) async {
+    ammount,
+    phoneno,
+    ppsecurehash,
+    BuildContext context,
+    program,
+    requiredDonnation,
+    masjidname,
+    masjidId,
+    muntazimId,
+    masjidAddress,
+    masjidCountry,
+    masjidCity,
+    masjidstate,
+    masjidEmail,
+    personcnic,
+    personame,
+    dateofBirth,
+    dateofCardExpire,
+    dateofCardIssue,
+    personId,
+    personPhoneNo,
+    personaddress,
+    personprofile,
+    personGender,
+    List<DonnerModel> donnerlist,
+  ) async {
     try {
       isLoading(true);
       dynamic response = await _repo.jazzCashPayment({
@@ -45,21 +73,49 @@ class JazcashPaymentViewModel extends GetxController {
 
       if (response != null) {
         JazzcashModel jazzcashResponse = response;
-        updateStatusForAddedPeople();
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return JazzCashPaymentReceiptDialog(
-                amount: "$ammount PKR",
-                recipientName: jazzcashResponse.ppmpf1.toString(),
-                transactionId: jazzcashResponse.ppTxnRefNo.toString(),
-                date: Utils.dateFormated(
-                  DateTime.now().toString(),
-                ));
+              amount: "$ammount PKR",
+              recipientName: jazzcashResponse.ppmpf1.toString(),
+              transactionId: jazzcashResponse.ppTxnRefNo.toString(),
+              date: Utils.dateFormated(
+                DateTime.now().toString(),
+              ),
+            );
           },
         );
         if (kDebugMode) {
           print(jazzcashResponse.ppResponseMessage);
+        }
+        final result = await _paymentRepo.donnationTrackAfterDonate(
+          program,
+          requiredDonnation,
+          masjidname,
+          masjidId,
+          muntazimId,
+          masjidAddress,
+          masjidCountry,
+          masjidCity,
+          masjidstate,
+          masjidEmail,
+          personcnic,
+          personame,
+          dateofBirth,
+          dateofCardExpire,
+          dateofCardIssue,
+          personId,
+          personPhoneNo,
+          personaddress,
+          personprofile,
+          personGender,
+          donnerlist,
+        );
+        if (result == null) {
+          Get.snackbar('Successfull', 'Donated Succesfully');
+        } else {
+          Get.snackbar('Error', 'Error Occurred While Transaction');
         }
       } else {
         if (kDebugMode) {

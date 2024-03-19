@@ -1,21 +1,13 @@
 // ignore_for_file: unrelated_type_equality_checks
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
-import 'package:suffa_app/Model/alSuffahPersonModel/suffaPersonModel.dart';
-import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/Donner/displayNeedyPeopleController/NeedyPeopleController.dart';
-import 'package:suffa_app/ViewModel/PaymentMethods/JazzCash/jazzcashPaymentViewModel.dart';
-import 'package:suffa_app/res/components/AppBar/AppBar.dart';
 import 'package:suffa_app/res/components/DonnerDisplayNeedy/AmmountDialog/AmmountDialog.dart';
 import 'package:suffa_app/res/components/DonnerDisplayNeedy/displayNeedypeople.dart';
-import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/DonnerTextFeilds.dart';
-import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
-import 'package:suffa_app/res/routes/routesNames.dart';
-import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,25 +21,45 @@ class DonateNeedyPeopleView extends StatefulWidget {
 
 class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
   final needyPeopleController = Get.put(NeedyPeopleController());
-  final jazzcashPayment = Get.put(JazcashPaymentViewModel());
   final searchController = TextEditingController();
   final donnateController = TextEditingController();
   late String program;
   late String muntazimid;
   late String price;
+  late String image;
+  late String currency;
+  late String masjidname;
+  late String masjidid;
+  late String masjidAddress;
+  late String masjidCountry;
+  late String masjidCity;
+  late String masjidState;
+  late String masjidemail;
+  late double convertAmmountDonate;
+
   @override
   void initState() {
     program = Get.arguments[0];
     muntazimid = Get.arguments[1];
     price = Get.arguments[2];
-    needyPeopleController.fetchData(program, muntazimid);
+    image = Get.arguments[3];
+    currency = Get.arguments[4];
+    masjidname = Get.arguments[5];
+    masjidid = Get.arguments[6];
+    masjidAddress = Get.arguments[7];
+    masjidCountry = Get.arguments[8];
+    masjidCity = Get.arguments[9];
+    masjidState = Get.arguments[10];
+    masjidemail = Get.arguments[11];
+    needyPeopleController.fetchData(program, muntazimid, currency);
+    convertAmmountDonate =
+        needyPeopleController.convertCurrency(double.parse(price), currency);
     super.initState();
   }
 
   @override
   void dispose() {
     needyPeopleController.dispose();
-    jazzcashPayment.dispose();
     searchController.dispose();
     donnateController.dispose();
     super.dispose();
@@ -93,6 +105,8 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                             needyPeopleController.filterList(value);
                           },
                           controller: searchController,
+                          icon: Icons.store,
+                          ontap: () {},
                         ),
                       ),
                     ],
@@ -112,33 +126,53 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                           image: person.image,
                           masjidaddress: person.address,
                           ontap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AmmountDialog(
-                                  controller: donnateController,
-                                  ontap: () {
-                                    needyPeopleController.validateDonnation(
-                                      100,
-                                      1000,
-                                    );
-                                  },
-                                );
-                              },
-                            );
-
-                            // DonationDialog(controller: searchController);
-                            // Get.toNamed(
-                            //   RoutesNames.donatePaymentScreen,
-                            //   arguments: [
-                            //     tPrice,
-                            //     price,
-                            //   ],
-                            // );
+                            try {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AmmountDialog(
+                                    controller: donnateController,
+                                    ontap: () {
+                                      needyPeopleController.validateDonnation(
+                                        convertAmmountDonate.toInt(),
+                                        image,
+                                        currency,
+                                        donnateController,
+                                        person.cnicno,
+                                        person.personname,
+                                        person.dateofBirth,
+                                        person.dateofExpire,
+                                        person.dateofIssue,
+                                        person.personId,
+                                        person.phoneno,
+                                        person.address,
+                                        person.image,
+                                        person.gender,
+                                        masjidname,
+                                        muntazimid,
+                                        masjidAddress,
+                                        masjidCountry,
+                                        masjidCity,
+                                        masjidState,
+                                        masjidemail,
+                                        program,
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            } catch (e) {
+                              log(e.toString());
+                            }
+                            // Navigator.pop(context);
+                            // donnateController.clear();
                           },
                           program: program,
                           muntazimid: muntazimid,
                           cnicno: person.cnicno,
+                          price: '$convertAmmountDonate',
+                          recivedDonnation: person.recivedDonnation,
+                          currency: currency,
                         );
                       },
                     ),

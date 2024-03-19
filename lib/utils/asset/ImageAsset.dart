@@ -18,4 +18,5 @@ class ImageAsset {
   static String applePayimg = 'assets/images/applepay.png';
   static String googlePayimg = 'assets/images/googlepay.png';
   static String googleicon = 'assets/images/googleicon.png';
+  static String stripeicon = 'assets/images/stripeicon.png';
 }

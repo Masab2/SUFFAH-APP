@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:csc_picker/csc_picker.dart';
 import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,7 @@ import 'package:suffa_app/ViewModel/Lang/LanguageChangeViewModel.dart';
 import 'package:suffa_app/res/components/AppBar/AppBar.dart';
 import 'package:suffa_app/res/components/HomeComp/donnationChoices/DonnationChoiceComp.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
+import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeController = Get.put(HomeViewModel());
-  final langController = Get.put(AppLanguageController());
+  final langController = Get.find<AppLanguageController>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             0.02.pw,
             Expanded(child: Obx(() {
               return CSCPicker(
-                defaultCountry: CscCountry.Pakistan,
+                selectedItemStyle: const TextStyle(color: AppColor.whiteColor),
                 dropdownDecoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 layout: Layout.horizontal,
                 showCities: false,
                 showStates: false,
-                flagState: CountryFlag.ENABLE,
+                flagState: CountryFlag.DISABLE,
                 currentCountry: homeController.country.value,
                 onCountryChanged: (value) {
                   log(homeController.country.value.toString());
@@ -78,15 +78,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog.adaptive(
-                          title: const Text('Select Language'),
-                          content: Column(
+                        backgroundColor: AppColor.whiteColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        content: SingleChildScrollView(
+                          child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              Image(
+                                image: AssetImage(ImageAsset.applogo),
+                                height: context.mw * 0.4,
+                                width: context.mw * 0.4,
+                              ),
+                              0.01.ph,
+                              Text(
+                                'Select Language',
+                                style: GoogleFonts.roboto(
+                                  fontSize: context.mh * 0.024,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              0.01.ph,
                               buildLanguageItem(context, 'en', 'English'),
                               buildLanguageItem(context, 'de', 'German'),
                               buildLanguageItem(context, 'ur', 'Urdu'),
                             ],
-                          ));
+                          ),
+                        ),
+                      );
                     },
                   );
                 },
@@ -110,15 +130,42 @@ class _HomeScreenState extends State<HomeScreen> {
               0.003.ph,
               InkWell(
                 onTap: () {
-                  showCurrencyPicker(
+                  showDialog(
                     context: context,
-                    showFlag: true,
-                    showSearchField: true,
-                    showCurrencyName: true,
-                    showCurrencyCode: true,
-                    favorite: ['PKR'],
-                    onSelect: (Currency currency) {
-                      homeController.selectedCurrency.value = currency.code;
+                    builder: (BuildContext context) {
+                      return AlertDialog.adaptive(
+                        backgroundColor: AppColor.whiteColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        content: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image(
+                                image: AssetImage(ImageAsset.applogo),
+                                height: context.mw * 0.4,
+                                width: context.mw * 0.4,
+                              ),
+                              0.01.ph,
+                              Text(
+                                'Select Currency',
+                                style: GoogleFonts.roboto(
+                                  fontSize: context.mh * 0.024,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              0.01.ph,
+                              buildCurrencyItem(
+                                  context, Icons.currency_rupee, 'PKR'),
+                              buildCurrencyItem(
+                                  context, Icons.currency_pound_rounded, 'EUR'),
+                              buildCurrencyItem(
+                                  context, Icons.attach_money, 'USD'),
+                            ],
+                          ),
+                        ),
+                      );
                     },
                   );
                 },
@@ -206,11 +253,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: data['image'],
                           title: data['programTitle'],
                           ontap: () {
-                            Get.toNamed(RoutesNames.selectMasjidScreen,
-                                arguments: [
-                                  data['programTitle'],
-                                  data['Price'],
-                                ]);
+                            Get.toNamed(
+                              RoutesNames.selectMasjidScreen,
+                              arguments: [
+                                data['programTitle'],
+                                data['Price'],
+                                homeController.country.value,
+                                data['image'],
+                                homeController.selectedCurrency.value,
+                              ],
+                            );
                           },
                           program: data['programTitle'],
                         );
@@ -301,16 +353,66 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildLanguageItem(
       BuildContext context, String languageCode, String languageName) {
     return ListTile(
-      leading: const Icon(Icons.language),
+      leading: Container(
+          height: context.mw * 0.1,
+          width: context.mw * 0.1,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                AppColor.mehroonColor,
+                AppColor.brownColor,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Icon(
+            Icons.language_sharp,
+            color: AppColor.geryColor,
+            size: context.mh * 0.020,
+          )),
       title: Text(
         languageName,
         style: GoogleFonts.poppins(
-          fontSize: context.mh * 0.018,
-        ),
+            fontSize: context.mh * 0.020, fontWeight: FontWeight.w500),
       ),
       onTap: () {
         langController.changeLanguage(Locale(languageCode));
         Navigator.pop(context); // Close the dialog
+      },
+    );
+  }
+
+  Widget buildCurrencyItem(BuildContext context, IconData icon, currencyname) {
+    return ListTile(
+      leading: Container(
+          height: context.mw * 0.1,
+          width: context.mw * 0.1,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                AppColor.mehroonColor,
+                AppColor.brownColor,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Icon(
+            icon,
+            color: AppColor.geryColor,
+            size: context.mh * 0.020,
+          )),
+      title: Text(
+        currencyname,
+        style: GoogleFonts.poppins(
+            fontSize: context.mh * 0.020, fontWeight: FontWeight.w500),
+      ),
+      onTap: () {
+        homeController.selectedCurrency.value = currencyname;
+        Navigator.pop(context);
       },
     );
   }

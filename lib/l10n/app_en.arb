@@ -26,10 +26,14 @@
   "searchMasjid": "Search Masjid",
   "recivedTitle": "Recived",
   "waiting": "Waiting",
+  "countryTitle": "Country",
   "@_ALSUFFAAHPERSONDONNER": {},
   "donateNowtitle": "Donate Now",
   "searchPersonHint": "Search Person",
   "cnicTitle": "CNIC",
   "nameTitle": "NAME",
-  "addressTitle": "ADDRESS"
+  "addressTitle": "ADDRESS",
+  "@_PAYMENTMETHODSSCREEN": {},
+  "totalAmount": "Total Ammount",
+  "paymentMethods" : "Payment Methods"
 }

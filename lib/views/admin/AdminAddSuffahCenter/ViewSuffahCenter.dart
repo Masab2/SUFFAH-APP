@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
-import 'package:suffa_app/res/components/AddSuffahCenter/displaySuffaCenter.dart';
 import 'package:suffa_app/res/components/RequestMemberComp/RequestMemberComp.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -44,35 +43,29 @@ class _ViewSuffahCenterState extends State<ViewSuffahCenter> {
                 return const Text('No Data Found');
               } else {
                 return Expanded(
-                    child: ListView.builder(
-                  physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    var data = snapshot.data!.docs[index];
-                    return RequesttoAdminComp(
-                      title: data['name'],
-                      image: data['masjidimg'],
-                      email: data['email'],
-                      onGreenBtnPressed: () async {
-                        // await controller.launchPhoneApp(data['phoneno']);
-                      },
-                      centerId: data['centerid'],
-                      address: data['address'],
-                      city: data['masjidname'],
-                      onGreyBtnPressed: () {},
-                      greenBtnText: 'Contact',
-                      greyBtnText: 'Disable',
-                    );
-                    // return AdminSuffaCenterComp(
-                    //     customername: data['name'],
-                    //     image: data['masjidimg'],
-                    //     email: data['email'],
-                    //     ontap: () {},
-                    //     centerId: data['centerid'],
-                    //     address: data['address']);
-                  },
-                ));
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      var data = snapshot.data!.docs[index];
+                      return RequesttoAdminComp(
+                        title: data['name'],
+                        image: data['masjidimg'],
+                        email: data['email'],
+                        onGreenBtnPressed: () async {
+                          // await controller.launchPhoneApp(data['phoneno']);
+                        },
+                        centerId: data['centerid'],
+                        address: data['address'],
+                        city: data['masjidname'],
+                        onGreyBtnPressed: () {},
+                        greenBtnText: 'Contact',
+                        greyBtnText: 'Disable',
+                      );
+                    },
+                  ),
+                );
               }
             },
           )
@@ -80,7 +73,7 @@ class _ViewSuffahCenterState extends State<ViewSuffahCenter> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
-          IconlyLight.add_user,
+          IconlyBold.add_user,
         ),
         onPressed: () {
           Get.toNamed(RoutesNames.addSuffahCenterScreen);

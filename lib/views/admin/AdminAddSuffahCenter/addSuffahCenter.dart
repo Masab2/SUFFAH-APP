@@ -1,4 +1,6 @@
+import 'dart:developer';
 import 'dart:io';
+import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +11,7 @@ import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.da
 import 'package:suffa_app/res/components/AddSuffahCenter/PickImage.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
+import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class AddSuffahCenter extends StatefulWidget {
@@ -23,8 +26,6 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
   final masjidController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  final countryController = TextEditingController();
-  final cityController = TextEditingController();
   final addressController = TextEditingController();
   final addsuffahControlller = Get.put(AddSuffahCenterViewModel());
   @override
@@ -32,10 +33,7 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
     muntazimController.dispose();
     emailController.dispose();
     phoneController.dispose();
-    countryController.dispose();
-    cityController.dispose();
     addressController.dispose();
-    addsuffahControlller.dispose();
     super.dispose();
   }
 
@@ -82,26 +80,60 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image(
-                            height: context.mh * 0.20,
-                            width: context.mw * 0.40,
-                            fit: BoxFit.cover,
-                            image: FileImage(File(
-                                addsuffahControlller.imagePath.toString()))),
+                          height: context.mh * 0.20,
+                          width: context.mw * 0.40,
+                          fit: BoxFit.cover,
+                          image: FileImage(
+                            File(
+                              addsuffahControlller.imagePath.toString(),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
           ),
           0.05.ph,
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: context.mw * 0.04,
+            ),
+            child: CSCPicker(
+              dropdownDecoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  color: Colors.white,
+                  border: Border.all(color: AppColor.mehroonColor, width: 1)),
+              layout: Layout.horizontal,
+              showCities: true,
+              showStates: true,
+              flagState: CountryFlag.ENABLE,
+              currentCountry: addsuffahControlller.country.value,
+              currentCity: addsuffahControlller.currentCity.value,
+              currentState: addsuffahControlller.currentState.value,
+              onCountryChanged: (value) {
+                addsuffahControlller.updateCountry(value);
+              },
+              onCityChanged: (value) {
+                addsuffahControlller.onCityChanged(value ?? '');
+                log(value.toString());
+              },
+              onStateChanged: (value) {
+                addsuffahControlller.onStateChanged(value ?? '');
+              },
+            ),
+          ),
+          0.01.ph,
           AddSuffahCenterComp(
-              title: 'Muntazim Name',
-              icon: IconlyBold.add_user,
-              controller: masjidController),
+            title: 'Muntazim Name',
+            icon: IconlyBold.add_user,
+            controller: muntazimController,
+          ),
           0.01.ph,
           AddSuffahCenterComp(
               title: 'Masjid Name',
               icon: Icons.mosque,
               hint: 'Jamia Masjid',
-              controller: muntazimController),
+              controller: masjidController),
           0.01.ph,
           AddSuffahCenterComp(
               hint: 'abc@gmail.com',
@@ -110,22 +142,11 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
               controller: emailController),
           0.01.ph,
           AddSuffahCenterComp(
-              hint: 'Must be 11 digit',
-              title: 'Phone No',
-              icon: IconlyBold.call,
-              controller: phoneController),
-          0.01.ph,
-          AddSuffahCenterComp(
-              hint: 'PK',
-              title: 'Country',
-              icon: IconlyBold.home,
-              controller: countryController),
-          0.01.ph,
-          AddSuffahCenterComp(
-              hint: 'LHR',
-              title: 'City',
-              icon: Icons.location_city_rounded,
-              controller: cityController),
+            hint: 'Must be 11 digit',
+            title: 'Phone No',
+            icon: IconlyBold.call,
+            controller: phoneController,
+          ),
           0.01.ph,
           AddSuffahCenterComp(
               hint: 'Street 20 B xxxx',
@@ -141,13 +162,12 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
             title: 'Next',
             onPressed: () {
               addsuffahControlller.addSuffahCenter(
-                  muntazimController,
-                  emailController,
-                  phoneController,
-                  cityController,
-                  countryController,
-                  addressController,
-                  masjidController);
+                muntazimController,
+                emailController,
+                phoneController,
+                addressController,
+                masjidController,
+              );
             },
           )),
     );

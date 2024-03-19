@@ -26,10 +26,14 @@
   "searchMasjid": "Suche nach Moschee",
   "recivedTitle": "Erhalten",
   "waiting": "Warten",
+  "countryTitle": "Land",
   "@_ALSUFFAAHPERSONDONNER": {},
   "donateNowtitle": "Spende jetzt",
   "searchPersonHint": "Person suchen",
   "cnicTitle": "CNIC",
   "nameTitle": "NAME",
-  "addressTitle": "ADRESSE"
+  "addressTitle": "ADRESSE",
+  "@_PAYMENTMETHODSSCREEN": {},
+  "totalAmount": "Gesamtmenge",
+  "paymentMethods": "Zahlungsarten"
 }

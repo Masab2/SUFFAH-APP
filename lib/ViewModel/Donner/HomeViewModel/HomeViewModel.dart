@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 
 class HomeViewModel extends GetxController {
   var country = 'Pakistan'.obs;
-  var currentCity = 'Lahore'.obs;
-  var currentState = 'Punjab'.obs;
+  var currentCity = ''.obs;
+  var currentState = ''.obs;
   var selectedCurrency = 'PKR'.obs;
 
   // Update the Country

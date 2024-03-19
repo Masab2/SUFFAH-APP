@@ -9,7 +9,7 @@ import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MasjidDisplayComp extends StatelessWidget {
-  final String masjidname, image, masjidaddress, muntazimid;
+  final String masjidname, image, masjidaddress, muntazimid, country;
   final String program;
   final VoidCallback ontap;
   final VoidCallback onlocation;
@@ -26,6 +26,7 @@ class MasjidDisplayComp extends StatelessWidget {
     required this.receivedDonationsCount,
     required this.waitingCount,
     required this.onlocation,
+    required this.country,
   });
 
   @override
@@ -35,104 +36,132 @@ class MasjidDisplayComp extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.symmetric(
-              horizontal: context.mw * 0.03, vertical: context.mh * 0.01),
+            horizontal: context.mw * 0.03,
+            vertical: context.mh * 0.01,
+          ),
           width: context.mw,
-          height: context.mh * 0.20,
+          height: context.mh * 0.22,
           decoration: BoxDecoration(
             color: AppColor.masjidgeryColor,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
             children: [
-              0.02.pw,
+              0.03.pw,
               CircleAvatar(
                 radius: context.mh * 0.08,
                 backgroundImage: NetworkImage(image),
               ),
               Expanded(
                 child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            masjidname,
-                            style: GoogleFonts.poppins(
-                              fontSize: context.mh * 0.020,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: onlocation,
-                            icon: const Icon(IconlyBold.location),
-                          )
-                        ],
-                      ),
-                      0.03.ph,
-                      Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: context.mw * 0.04,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  l10n!.recivedTitle,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: context.mh * 0.017,
-                                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        0.01.ph,
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: context.mw * 0.05),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                l10n!.countryTitle,
+                                style: GoogleFonts.poppins(
+                                  fontSize: context.mh * 0.018,
                                 ),
-                                Text(
-                                  l10n.waiting,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: context.mh * 0.017,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          0.01.ph,
-                          SimpleAnimationProgressBar(
-                            height: context.mh * 0.02,
-                            width: context.mw * 0.53,
-                            backgroundColor: AppColor.brownColor,
-                            foregrondColor: AppColor.mehroonColor,
-                            ratio: 0.5,
-                            direction: Axis.horizontal,
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            duration: const Duration(seconds: 3),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          0.01.ph,
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: context.mw * 0.04,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '20',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: context.mh * 0.017,
-                                  ),
+                              ),
+                              Text(
+                                country,
+                                style: GoogleFonts.poppins(
+                                  fontSize: context.mh * 0.018,
                                 ),
-                                Text(
-                                  '20',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: context.mh * 0.017,
-                                  ),
-                                )
-                              ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              masjidname,
+                              style: GoogleFonts.poppins(
+                                fontSize: context.mh * 0.020,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          )
-                        ],
-                      ),
-                    ],
+                            IconButton(
+                              onPressed: onlocation,
+                              icon: const Icon(IconlyBold.location),
+                            )
+                          ],
+                        ),
+                        0.02.ph,
+                        Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: context.mw * 0.04,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    l10n!.recivedTitle,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.017,
+                                    ),
+                                  ),
+                                  Text(
+                                    l10n.waiting,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.017,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            0.01.ph,
+                            SimpleAnimationProgressBar(
+                              height: context.mh * 0.02,
+                              width: context.mw * 0.53,
+                              backgroundColor: AppColor.brownColor,
+                              foregrondColor: AppColor.mehroonColor,
+                              ratio: 0.5,
+                              direction: Axis.horizontal,
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              duration: const Duration(seconds: 3),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            0.01.ph,
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: context.mw * 0.04,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '20',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.017,
+                                    ),
+                                  ),
+                                  Text(
+                                    '20',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: context.mh * 0.017,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            0.01.ph,
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               )

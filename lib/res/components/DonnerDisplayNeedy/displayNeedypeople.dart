@@ -1,8 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
-import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,15 +11,34 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
   final String masjidname, image, masjidaddress, muntazimid, cnicno;
   final String program;
   final VoidCallback ontap;
-  const DisplayNeedyPeopleComp(
-      {super.key,
-      required this.masjidname,
-      required this.image,
-      required this.masjidaddress,
-      required this.ontap,
-      required this.program,
-      required this.muntazimid,
-      required this.cnicno});
+  final String price, recivedDonnation, currency;
+  const DisplayNeedyPeopleComp({
+    super.key,
+    required this.masjidname,
+    required this.image,
+    required this.masjidaddress,
+    required this.ontap,
+    required this.program,
+    required this.muntazimid,
+    required this.cnicno,
+    required this.price,
+    required this.recivedDonnation,
+    required this.currency,
+  });
+  double calculatebar() {
+    // Calculate the progress ratio
+    double progressRatio = 0.0;
+    try {
+      double requiredAmount = double.parse(price);
+      double receivedAmount = double.parse(recivedDonnation);
+      if (requiredAmount > 0) {
+        progressRatio = receivedAmount / requiredAmount;
+      }
+    } catch (e) {
+      log('Error parsing donation amounts: $e');
+    }
+    return progressRatio;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +157,7 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
                   width: context.mw * 0.70,
                   backgroundColor: AppColor.brownColor,
                   foregrondColor: AppColor.mehroonColor,
-                  ratio: 0.5,
+                  ratio: calculatebar(),
                   direction: Axis.horizontal,
                   curve: Curves.fastLinearToSlowEaseIn,
                   duration: const Duration(seconds: 3),
@@ -153,13 +172,13 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '0',
+                        '$currency $recivedDonnation',
                         style: GoogleFonts.poppins(
                           fontSize: context.mh * 0.015,
                         ),
                       ),
                       Text(
-                        "200",
+                        '$currency $price',
                         style: GoogleFonts.poppins(
                           fontSize: context.mh * 0.015,
                         ),
@@ -233,7 +252,7 @@ class DisplayPaymentMethodComp extends StatelessWidget {
                         child: Image(
                           image: AssetImage(image),
                           height: context.mw * 0.15,
-                          width: context.mw * 0.30,
+                          width: context.mw * 0.20,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -279,96 +298,68 @@ class DisplayPaymentMethodComp extends StatelessWidget {
 }
 
 class PaymentUperheading extends StatelessWidget {
-  final String image, program, donnationprice, noofMeals, actualPrice;
-  const PaymentUperheading(
-      {super.key,
-      required this.image,
-      required this.program,
-      required this.donnationprice,
-      required this.noofMeals,
-      required this.actualPrice});
+  final String image, donnationprice ,title;
+  const PaymentUperheading({
+    super.key,
+    required this.image,
+    required this.donnationprice, required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.mw * 0.05),
-          child: Row(
-            children: [
-              Column(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image(
-                      image: AssetImage(image),
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                ],
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        program,
-                        style: GoogleFonts.poppins(
-                          fontSize: context.mh * 0.020,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      0.01.ph,
-                      Text(
-                        'Meal for One: $actualPrice PKR',
-                        style: GoogleFonts.poppins(
-                          fontSize: context.mh * 0.012,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      0.01.ph,
-                      Row(
-                        children: [
-                          Text(
-                            donnationprice,
-                            style: GoogleFonts.poppins(
-                              fontSize: context.mh * 0.015,
-                              color: AppColor.geryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          0.01.pw,
-                          Text(
-                            ' | ',
-                            style: GoogleFonts.poppins(
-                              fontSize: context.mh * 0.015,
-                              color: AppColor.geryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          0.01.pw,
-                          Text(
-                            noofMeals,
-                            style: GoogleFonts.poppins(
-                              fontSize: context.mh * 0.015,
-                              color: AppColor.geryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
+        SizedBox(
+          height: context.mh * 0.30,
+          width: double.infinity,
+          child: Image(
+            image: NetworkImage(image),
+            fit: BoxFit.cover,
+            height: context.mh * 0.30,
           ),
         ),
+        Row(
+          children: [
+            Expanded(
+              child: Container(
+                height: context.mh * 0.07,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 2),
+                  gradient: const LinearGradient(
+                    colors: [
+                      AppColor.mehroonColor,
+                      AppColor.brownColor,
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: Center(
+                    child: Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: context.mh * 0.023,
+                    color: AppColor.whiteColor,
+                  ),
+                )),
+              ),
+            ),
+            Container(
+              width: context.mw * 0.40,
+              height: context.mh * 0.07,
+              decoration: BoxDecoration(
+                border: Border.all(width: 2),
+              ),
+              child: Center(
+                  child: Text(
+                donnationprice,
+                style: GoogleFonts.poppins(
+                  fontSize: context.mh * 0.023,
+                ),
+              )),
+            ),
+          ],
+        )
       ],
     );
   }

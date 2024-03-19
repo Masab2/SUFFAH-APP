@@ -1,20 +1,14 @@
-import 'dart:developer';
 import 'dart:io';
-
-import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/SuffahCenter/Registered%20Shops/AddAlShuffahShopsViewModel.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/SuffahCenterProfile/suffaCenterProfile.dart';
-import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import '../../../../res/components/AddSuffahCenter/PickImage.dart';
@@ -120,32 +114,6 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
               padding: EdgeInsets.symmetric(
                 horizontal: context.mw * 0.05,
               ),
-
-              // CSCPicker(
-              //       dropdownDecoration: BoxDecoration(
-              //           borderRadius:
-              //               const BorderRadius.all(Radius.circular(10)),
-              //           color: Colors.white,
-              //           border:
-              //               Border.all(color: AppColor.cgreenColor, width: 1)),
-              //       layout: Layout.horizontal,
-              //       showCities: true,
-              //       showStates: true,
-              //       flagState: CountryFlag.ENABLE,
-              //       currentCountry: controller.currentCountry.value,
-              //       currentCity: controller.currentCity.value,
-              //       currentState: controller.currentState.value,
-              //       onCountryChanged: (value) {
-              //         controller.onCountryChanged(value);
-              //       },
-              //       onCityChanged: (value) {
-              //         controller.onCityChanged(value ?? '');
-              //         log(value.toString());
-              //       },
-              //       onStateChanged: (value) {
-              //         controller.onStateChanged(value ?? '');
-              //       },
-              //     );
               child: SelectState(
                 onCountryChanged: (value) {
                   controller.onCountryChanged(value);

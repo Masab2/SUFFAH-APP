@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharePrefs {
-  // Create the Unique Id for the Service provider
   static int generateRandomNumber() {
     final random = Random();
     return 10000 + random.nextInt(900000);

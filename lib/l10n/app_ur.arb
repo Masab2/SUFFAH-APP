@@ -26,10 +26,14 @@
   "searchMasjid": "مسجد تلاش کریں۔",
   "recivedTitle": "موصول ہوا۔",
   "waiting": "انتظار",
+  "countryTitle": "ملک",
   "@_ALSUFFAAHPERSONDONNER": {},
   "donateNowtitle": "ابھی عطیہ کیجیے",
   "searchPersonHint": "شخص تلاش کریں۔",
   "cnicTitle": "CNIC",
   "nameTitle": "نام",
-  "addressTitle": "پتہ"
+  "addressTitle": "پتہ",
+  "@_PAYMENTMETHODSSCREEN": {},
+  "totalAmount": "کل رقم",
+  "paymentMethods": "ادائیگی کے طریقے"
 }

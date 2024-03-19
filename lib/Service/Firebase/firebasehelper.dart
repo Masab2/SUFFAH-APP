@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as storage;
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
 
 class Apis {
@@ -86,8 +87,20 @@ class Apis {
   }
 
   // Add Suffah center
-  static Future<void> addSuffahCenter(File file, name, email, suffahemail,
-      password, phoneno, city, country, address, adminid, masjidname) async {
+  static Future<void> addSuffahCenter(
+    File file,
+    name,
+    email,
+    suffahemail,
+    password,
+    phoneno,
+    city,
+    country,
+    address,
+    adminid,
+    masjidname,
+    state,
+  ) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/MasjidImages$id');
     storage.UploadTask uploadTask = ref.putFile(file);
@@ -104,6 +117,7 @@ class Apis {
         'masjidimg': imageUrl.toString(),
         'city': city,
         'country': country,
+        'state': state,
         'address': address,
         'masjidname': masjidname,
       });
@@ -117,6 +131,7 @@ class Apis {
         'masjidimg': imageUrl.toString(),
         'city': city,
         'country': country,
+        'state': state,
         'address': address,
         'MemberId': adminid,
         'status': 'Verified',
@@ -127,16 +142,17 @@ class Apis {
         log(error.toString());
       });
     }).onError((error, stackTrace) {
-      throw FirebaseException;
+      log(error.toString());
     });
   }
 
   // get All Registered Suffa Center
   static Stream<QuerySnapshot<Map<String, dynamic>>> getAllSuffaCenterByProgram(
-      program) {
+      program, country) {
     return firestore
         .collection(suffahCenterCollection)
         .where('Programs', arrayContains: program)
+        .where('country', isEqualTo: country)
         .snapshots();
   }
 
@@ -264,7 +280,7 @@ class Apis {
         'DateofCardExpire': doCardExpire,
         'status': 'waiting',
         'tempStatus': 'waiting',
-        'donerSelectionId': '',
+        'recivedDonnation': '0',
       });
     }).onError((error, stackTrace) {
       throw Exception(error.toString());
@@ -313,13 +329,67 @@ class Apis {
         .snapshots();
   }
 
-  // Bulk and Single Donnation Collection
-  static Future<void> donnatationTark() async {
-    final id = DateTime.now().millisecondsSinceEpoch.toString();
-    await firestore.collection(donnationTrack).doc(id).set({
-      'suffaPerson': {},
-      'status': 'Waiting',
-    });
+  // Single Donnation Collection by Multiple People
+  static Future<void> donnatationTark(
+    program,
+    requiredDonnation,
+    masjidname,
+    masjidId,
+    muntazimId,
+    masjidAddress,
+    masjidCountry,
+    masjidCity,
+    masjidstate,
+    masjidEmail,
+    personcnic,
+    personame,
+    dateofBirth,
+    dateofCardExpire,
+    dateofCardIssue,
+    personId,
+    personPhoneNo,
+    personaddress,
+    personprofile,
+    personGender,
+    List<DonnerModel> donnerlist,
+  ) async {
+    try {
+      final id = DateTime.now().millisecondsSinceEpoch.toString();
+      Map<String, dynamic> donnerTrack = {
+        'donners': {},
+        'program': program,
+        'requiredDonnation': requiredDonnation,
+        'masjidname': masjidname,
+        'masjidId': masjidId,
+        'muntazimId': muntazimId,
+        'masjidAddress': masjidAddress,
+        'countryMasjid': masjidCountry,
+        'masjidCity': masjidCity,
+        'masjidState': masjidstate,
+        'masjidEmail': masjidEmail,
+        'personcnic': personcnic,
+        'personname': personame,
+        'dateofBirth': dateofBirth,
+        'dateofCardExpire': dateofCardExpire,
+        'dateofCardIssue': dateofCardIssue,
+        'personId': personId,
+        'PersonPhoneNo': personPhoneNo,
+        'PersonAddress': personaddress,
+        'PersonProfile': personprofile,
+        'personGender': personGender,
+        'trackId': id.toString(),
+      };
+      for (var donner in donnerlist) {
+        donnerTrack['donners'][donner.donnerId] = {
+          'donnerId': donner.donnerId,
+          'donateAmmount': donner.donateAbleAmmount,
+          'currency': donner.currency,
+        };
+      }
+      await firestore.collection(donnationTrack).doc(id).set(donnerTrack);
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   // Update the temporary status of the Al-suffa Person
@@ -328,17 +398,6 @@ class Apis {
       'tempStatus': status,
       'donerSelectionId': user.uid,
     });
-  }
-
-  // get the selected count for the donner to donate
-  static Stream<QuerySnapshot<Map<String, dynamic>>>
-      getAllNeedyPeopleDonateCount(program) {
-    return firestore
-        .collection(suffahCenterNeedyPeople)
-        .where('program', isEqualTo: program)
-        .where('donerSelectionId', isEqualTo: user.uid)
-        .where('tempStatus', isEqualTo: 'Added')
-        .snapshots();
   }
 
   // add Affiliated Program into the database

@@ -8,6 +8,7 @@ import 'package:suffa_app/views/Donners/Home/Donate%20NeedyPeople/donateNeedyPeo
 import 'package:suffa_app/views/Donners/Home/PaymentScreen/Jazzcash/jazzcashScreen.dart';
 import 'package:suffa_app/views/Donners/Home/PaymentScreen/paymentScreen.dart';
 import 'package:suffa_app/views/Donners/Home/Select%20Masjids/ViewMasjids/SelectMasjidsView.dart';
+import 'package:suffa_app/views/Donners/Profile/EditProfile/EditProfile.dart';
 import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
 import 'package:suffa_app/views/admin/Affiliated%20Program/addProgram/addPrograms.dart';
 import 'package:suffa_app/views/admin/Affiliated%20Program/displayprogram/displayAffiliaatedProgram.dart';
@@ -90,6 +91,10 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.jazzCashPaymentScreen,
             page: () => const JazzCashView(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.editProfileScreen,
+            page: () => const EditProfileView(),
             transition: Transition.leftToRight),
 
         //! Adminstration DashBoard
