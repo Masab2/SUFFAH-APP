@@ -1,4 +1,6 @@
+import 'dart:developer';
 import 'dart:io';
+import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,8 +10,9 @@ import 'package:suffa_app/ViewModel/SuffahCenter/Registered%20Shops/AddAlShuffah
 import 'package:suffa_app/res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
+import 'package:suffa_app/res/components/ShopsDropDownForMasjidProgram/ShopsDropDown.dart';
 import 'package:suffa_app/res/components/SuffahCenterProfile/suffaCenterProfile.dart';
-import 'package:country_state_city_picker/country_state_city_picker.dart';
+import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import '../../../../res/components/AddSuffahCenter/PickImage.dart';
 
@@ -27,19 +30,21 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
   var countryController = TextEditingController();
   var cityController = TextEditingController();
   var addressController = TextEditingController();
+  var programController = TextEditingController();
 
-  final controller = Get.put(AddAlsuffahShopsViewModel());
+  final controller = Get.find<AddAlsuffahShopsViewModel>();
   late String muntazid;
   late String masjidId;
   late String masjidname;
-  late String program;
+  late String? program;
 
   @override
   void initState() {
     muntazid = Get.arguments[0];
     masjidId = Get.arguments[1];
     masjidname = Get.arguments[2];
-    program = Get.arguments[3];
+    program = Get.arguments[3] ?? '';
+    controller.fetchPopupMenuItems();
     super.initState();
   }
 
@@ -51,6 +56,7 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
     countryController.dispose();
     cityController.dispose();
     addressController.dispose();
+    programController.dispose();
     super.dispose();
   }
 
@@ -111,27 +117,53 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
             ),
             0.02.ph,
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: context.mw * 0.05,
-              ),
-              child: SelectState(
-                onCountryChanged: (value) {
-                  controller.onCountryChanged(value);
-                },
-                onStateChanged: (value) {
-                  controller.onStateChanged(value);
-                },
-                onCityChanged: (value) {
-                  controller.onCityChanged(value);
-                },
-              ),
-            ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.mw * 0.05,
+                ),
+                child: Obx(() {
+                  return CSCPicker(
+                    dropdownDecoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      color: Colors.white,
+                      border:
+                          Border.all(color: AppColor.mehroonColor, width: 1),
+                    ),
+                    layout: Layout.horizontal,
+                    showCities: true,
+                    showStates: true,
+                    flagState: CountryFlag.DISABLE,
+                    currentCountry: controller.currentCountry.value,
+                    currentCity: controller.currentCity.value,
+                    currentState: controller.currentState.value,
+                    onCountryChanged: (value) {
+                      controller.onCountryChanged(value);
+                    },
+                    onCityChanged: (value) {
+                      controller.onCityChanged(value ?? '');
+                      log(value.toString());
+                    },
+                    onStateChanged: (value) {
+                      controller.onStateChanged(value ?? '');
+                    },
+                  );
+                })),
             0.02.ph,
-            UserInfoListTile(
-              icon: Icons.notes,
-              title: 'Program',
-              subtitle: program,
-            ),
+            program == ''
+                ? Obx(() {
+                    return ShopDropDownComp(
+                      onChanged: (value) {
+                        controller.handelSelectedItem(value.toString());
+                      },
+                      popupList: controller.popupMenuItems,
+                      selectedValue: controller.selectedprogramPopUp.value,
+                    );
+                  })
+                : UserInfoListTile(
+                    icon: Icons.notes,
+                    title: 'Program',
+                    subtitle: program ?? '',
+                  ),
+            0.02.ph,
             AddSuffahCenterComp(
               title: 'Shop Title',
               icon: Icons.shop,
@@ -175,7 +207,7 @@ class _AddAlSuffahShopsState extends State<AddAlSuffahShops> {
                 muntazid,
                 masjidId,
                 masjidname,
-                program,
+                program == '' ? controller.selectedprogramPopUp.value : program,
               );
             },
           )),

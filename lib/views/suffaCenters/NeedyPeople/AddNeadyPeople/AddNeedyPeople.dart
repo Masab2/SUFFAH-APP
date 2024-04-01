@@ -4,10 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/ViewModel/SuffahCenter/NeedyPeople/addNeedyPeopleViewModel.dart';
-import 'package:suffa_app/res/components/AddNeedyPeople/addNeedyPeopleComp.dart';
 import 'package:suffa_app/res/components/CNICFormComp/CnicFormComp.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/loginOrRow/loginOrRow.dart';
@@ -28,6 +26,40 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
   TextEditingController dateofCardIssueController = TextEditingController();
   TextEditingController dateofCardExpireController = TextEditingController();
   final addNeedyController = Get.put(AddNeedyPeopleViewModel());
+  late String image;
+  late String phoneno;
+  late String address;
+  late String masjidname;
+  late String id;
+  late String gender;
+  late String program;
+  late String masjidid;
+  late String masjidEmail;
+  late String masjidCountry;
+  late String masjidState;
+  late String masjidCity;
+  late String masjidaddress;
+  late String donatePrice;
+
+  @override
+  void initState() {
+    image = Get.arguments[0];
+    phoneno = Get.arguments[1];
+    address = Get.arguments[2];
+    masjidname = Get.arguments[3];
+    id = Get.arguments[4];
+    gender = Get.arguments[5];
+    program = Get.arguments[6];
+    masjidid = Get.arguments[7];
+    masjidEmail = Get.arguments[8];
+    masjidCountry = Get.arguments[9];
+    masjidState = Get.arguments[10];
+    masjidCity = Get.arguments[11];
+    masjidaddress = Get.arguments[12];
+    donatePrice = Get.arguments[13];
+    super.initState();
+  }
+
   @override
   void dispose() {
     nameController.dispose();
@@ -41,14 +73,6 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
 
   @override
   Widget build(BuildContext context) {
-    final image = Get.arguments[0];
-    final phoneno = Get.arguments[1];
-    final address = Get.arguments[2];
-    final masjidname = Get.arguments[3];
-    final id = Get.arguments[4];
-    final gender = Get.arguments[5];
-    final program = Get.arguments[6];
-    final masjidid = Get.arguments[7];
     log(id);
     return Scaffold(
       appBar: AppBar(),
@@ -72,7 +96,9 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                         Text(
                           'Enter The ID Cards Details',
                           style: GoogleFonts.poppins(
-                              fontSize: 17, fontWeight: FontWeight.bold),
+                            fontSize: context.mh * 0.018,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -85,9 +111,10 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w400,
-                              color: AppColor.geryColor),
+                            fontSize: context.mh * 0.013,
+                            fontWeight: FontWeight.w400,
+                            color: AppColor.geryColor,
+                          ),
                         ),
                       ],
                     ),
@@ -122,6 +149,12 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                         id,
                         gender == '0' ? 'Male' : 'Female',
                         masjidid,
+                        masjidEmail,
+                        masjidCountry,
+                        masjidState,
+                        masjidCity,
+                        masjidaddress,
+                        donatePrice,
                       );
                     },
                   ),
@@ -146,6 +179,12 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                         id,
                         gender,
                         masjidid,
+                        masjidEmail,
+                        masjidCountry,
+                        masjidState,
+                        masjidCity,
+                        masjidaddress,
+                        donatePrice,
                       );
                     },
                   )

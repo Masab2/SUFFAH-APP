@@ -23,6 +23,10 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
   late String masjidname;
   late String masjidId;
   late String muntazimEmail;
+  late String address;
+  late String country;
+  late String state;
+  late String city;
   final controller = Get.put(ViewSuffahProgramsViewModel());
   @override
   void initState() {
@@ -30,6 +34,10 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
     masjidname = Get.arguments[1];
     masjidId = Get.arguments[2];
     muntazimEmail = Get.arguments[3];
+    address = Get.arguments[4];
+    country = Get.arguments[5];
+    state = Get.arguments[6];
+    city = Get.arguments[7];
     super.initState();
   }
 
@@ -65,11 +73,11 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
                     return TabBar(
                         onTap: (value) => controller.selectTab(value),
                         controller: tabController,
-                        unselectedLabelColor: AppColor.blackColor,
-                        labelColor: AppColor.blackColor,
+                        unselectedLabelColor: AppColor.whiteColor,
+                        labelColor: AppColor.whiteColor,
                         labelStyle: GoogleFonts.nunito(
                             textStyle: TextStyle(
-                          fontSize: context.mh * 0.020,
+                          fontSize: context.mh * 0.018,
                           fontWeight: FontWeight.w600,
                         )),
                         labelPadding: EdgeInsets.symmetric(
@@ -91,7 +99,7 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
               ),
               SizedBox(
                 width: context.mw,
-                height: context.mh,
+                height: context.mh * 0.8,
                 child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: tabController,
@@ -127,6 +135,10 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
               masjidname,
               masjidId,
               muntazimEmail,
+              address,
+              country,
+              state,
+              city,
             ],
           );
         },
@@ -141,7 +153,7 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
       decoration: BoxDecoration(
         color: controller.selectedIndex.value == index
             ? AppColor.mehroonColor
-            : AppColor.geryColor,
+            : AppColor.brownColor,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Tab(

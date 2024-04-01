@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/res/components/adminDashBoardTiles/adminDashBoardtiles.dart';
 import 'package:suffa_app/res/components/adminDashBoardTiles/adminTilesUperheading/upperHeading.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
-import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class SuffaCenterDashboard extends StatefulWidget {
@@ -20,6 +19,10 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
   late String masjidname;
   late String masjidId;
   late String muntazimEmail;
+  late String country;
+  late String state;
+  late String city;
+  late String address;
 
   @override
   void initState() {
@@ -28,6 +31,10 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
     masjidname = Get.arguments?[1] ?? "";
     masjidId = Get.arguments?[2] ?? "";
     muntazimEmail = Get.arguments?[3] ?? "";
+    country = Get.arguments?[4] ?? "";
+    state = Get.arguments?[5] ?? "";
+    city = Get.arguments?[6] ?? "";
+    address = Get.arguments?[7] ?? "";
   }
 
   @override
@@ -59,6 +66,11 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                         id,
                         masjidname,
                         masjidId,
+                        muntazimEmail,
+                        country,
+                        state,
+                        city,
+                        address,
                       ]);
                     },
                     icon: Icons.person,
@@ -103,6 +115,10 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                             masjidname,
                             masjidId,
                             muntazimEmail,
+                            address,
+                            country,
+                            state,
+                            city,
                           ]);
                     },
                     icon: Icons.dashboard,
@@ -119,12 +135,14 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                   AdminDashBoardtiles(
                     title: 'Add Stores Account',
                     ontap: () {
-                      Get.toNamed(RoutesNames.selectProgramForShopsAddScreen,
-                          arguments: [
-                            id,
-                            masjidId,
-                            masjidname,
-                          ]);
+                      Get.toNamed(
+                        RoutesNames.selectProgramForShopsAddScreen,
+                        arguments: [
+                          id,
+                          masjidId,
+                          masjidname,
+                        ],
+                      );
                     },
                     icon: IconlyBold.bag,
                   ),

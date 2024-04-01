@@ -75,7 +75,7 @@ class Apis {
     await auth.signInWithEmailAndPassword(email: email, password: password);
   }
 
-  // LogOut from DashBoard
+  // LogOut from Donner DashBoard
   static Future<void> logOutAccount() async {
     for (final userinfo in user.providerData) {
       if (userinfo.providerId == 'Google') {
@@ -120,6 +120,7 @@ class Apis {
         'state': state,
         'address': address,
         'masjidname': masjidname,
+        'recivedDonnation': '0',
       });
       await firestore.collection(suffahCenterMembers).doc(adminid).set({
         'MuntazimId': adminid,
@@ -246,18 +247,26 @@ class Apis {
 
   // Add Needy People To The database
   static Future<void> addNeedyPeople(
-      File file,
-      muntazimid,
-      phoneno,
-      address,
-      masjidName,
-      program,
-      gender,
-      cnicno,
-      cardholdername,
-      dob,
-      doCardIssue,
-      doCardExpire) async {
+    File file,
+    muntazimid,
+    phoneno,
+    address,
+    masjidName,
+    program,
+    gender,
+    cnicno,
+    cardholdername,
+    dob,
+    doCardIssue,
+    doCardExpire,
+    masjidId,
+    masjidEmail,
+    masjidCountry,
+    masjidState,
+    masjidCity,
+    masjidAddress,
+    donatePrice,
+  ) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/NeedyPeople$id');
     storage.UploadTask uploadTask = ref.putFile(file);
@@ -281,11 +290,39 @@ class Apis {
         'status': 'waiting',
         'tempStatus': 'waiting',
         'recivedDonnation': '0',
+        'masjidId': masjidId,
+        'masjidEmail': masjidEmail,
+        'masjidCountry': masjidCountry,
+        'masjidState': masjidState,
+        'masjidCity': masjidCity,
+        'masjidAddress': masjidAddress,
+        'requiredDonnation': donatePrice,
       });
     }).onError((error, stackTrace) {
       throw Exception(error.toString());
     });
   }
+
+  // Update the Bar For the Donnation
+  static Future<void> updateDonationAmount(id, donationAmount) async {
+    // Retrieve the current receivedDonation value
+    DocumentSnapshot snapshot =
+        await firestore.collection(suffahCenterNeedyPeople).doc(id).get();
+    String currentReceivedDonationStr = snapshot['recivedDonnation'];
+    log(currentReceivedDonationStr);
+    int currentReceivedDonation = int.parse(currentReceivedDonationStr);
+    log(currentReceivedDonation.toString());
+    // Increment the receivedDonation by the recent donation amount
+    int newReceivedDonation =
+        currentReceivedDonation + int.parse(donationAmount);
+    log(newReceivedDonation.toString());
+    // Update the receivedDonation field with the new value
+    await firestore.collection(suffahCenterNeedyPeople).doc(id).update({
+      'recivedDonnation': newReceivedDonation.toString(),
+    });
+  }
+
+  //! Update Shuffa Center Recived and Waiting people
 
   // Get All Needy people According to there Program and By Masjid
   static Stream<QuerySnapshot<Map<String, dynamic>>>
@@ -294,39 +331,13 @@ class Apis {
         .collection(suffahCenterNeedyPeople)
         .where('program', isEqualTo: program)
         .where('MuntazimId', isEqualTo: muntazimid)
-        .where('status', isEqualTo: 'waiting')
         .snapshots();
   }
 
-  // Get All Needy people According to there Program and By Masjid Count
-  static AggregateQuery getAllNeedyPeopleByProgramMasjidCount(
-      program, muntazimid) {
-    return firestore
-        .collection(suffahCenterNeedyPeople)
-        .where('program', isEqualTo: program)
-        .where('MuntazimId', isEqualTo: muntazimid)
-        .where('status', isEqualTo: 'waiting')
-        .count();
-  }
-
-  // Get All Needy people According to there Program and By Masjid How Recived Donnation
-  static AggregateQuery getAllNeedyPeopleByProgramMasjidDonate(
-      program, muntazimid) {
-    return firestore
-        .collection(suffahCenterNeedyPeople)
-        .where('program', isEqualTo: program)
-        .where('MuntazimId', isEqualTo: muntazimid)
-        .where('status', isEqualTo: 'Pending')
-        .count();
-  }
-
-  // Get All Needy people According to there Program
-  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllNeedyPeopleByProgram(
-      program) {
-    return firestore
-        .collection(suffahCenterNeedyPeople)
-        .where('program', isEqualTo: program)
-        .snapshots();
+  // Get All Needy people According to there Program and By Masjid
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getAllNeedyPeopleOneClick() {
+    return firestore.collection(suffahCenterNeedyPeople).snapshots();
   }
 
   // Single Donnation Collection by Multiple People
@@ -356,7 +367,6 @@ class Apis {
     try {
       final id = DateTime.now().millisecondsSinceEpoch.toString();
       Map<String, dynamic> donnerTrack = {
-        'donners': {},
         'program': program,
         'requiredDonnation': requiredDonnation,
         'masjidname': masjidname,
@@ -378,26 +388,35 @@ class Apis {
         'PersonProfile': personprofile,
         'personGender': personGender,
         'trackId': id.toString(),
+        'recivedDonnation': '0',
       };
-      for (var donner in donnerlist) {
-        donnerTrack['donners'][donner.donnerId] = {
-          'donnerId': donner.donnerId,
-          'donateAmmount': donner.donateAbleAmmount,
-          'currency': donner.currency,
-        };
+      double totalReceivedDonation = donnerlist.fold<double>(0, (sum, donner) => sum + double.parse(donner.donateAbleAmmount));
+      final personDoc =
+          await firestore.collection(donnationTrack).doc(personId).get();
+      if (personDoc.exists) {
+        // If person exists, update the document to add the donner to the donner list
+        await firestore
+            .collection(donnationTrack)
+            .doc(personId)
+            .update({
+          'donners': FieldValue.arrayUnion(
+            donnerlist.map((donner) => donner.toJson()).toList(),
+          ),
+          'recivedDonnation': totalReceivedDonation.toString(),
+        });
+      } else {
+        // If person does not exist, create a new document with person details and donner list
+        donnerTrack['donners'] =
+            donnerlist.map((donner) => donner.toJson()).toList();
+        donnerTrack['recivedDonnation'] = totalReceivedDonation.toString();    
+        await firestore
+            .collection(donnationTrack)
+            .doc(personId)
+            .set(donnerTrack);
       }
-      await firestore.collection(donnationTrack).doc(id).set(donnerTrack);
     } catch (e) {
       log(e.toString());
     }
-  }
-
-  // Update the temporary status of the Al-suffa Person
-  static Future<void> updateStatusAlSuffahPerson(id, status) async {
-    await firestore.collection(suffahCenterNeedyPeople).doc(id).update({
-      'tempStatus': status,
-      'donerSelectionId': user.uid,
-    });
   }
 
   // add Affiliated Program into the database
@@ -436,14 +455,6 @@ class Apis {
     });
   }
 
-  // Update The Status of The  Suffa Person Who's Payment is On The Way
-  static Future<void> updateStatusAlSuffahPersonGotDonnation(id, status) async {
-    firestore.collection(suffahCenterNeedyPeople).doc(id).update({
-      'status': status,
-      'tempStatus': 'Success',
-    });
-  }
-
   // add Center Program By Suffa Center into the database
   static Future<void> addAffiliatedProgramBySuffahCenter(
     file,
@@ -458,27 +469,44 @@ class Apis {
     dob,
     dateofIssue,
     dateofExpire,
+    holdername,
+    masjidEmail,
+    phoneNo,
+    address,
+    country,
+    state,
+    city,
   ) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/Affiliatedprogram$id');
     storage.UploadTask uploadTask = ref.putFile(file);
     Future.value(uploadTask).then((value) async {
       var imageUrl = await ref.getDownloadURL();
-      await firestore.collection(suffahCenterDefineProgram).doc(id).set({
-        'programId': id,
-        'image': imageUrl.toString(),
-        'programTitle': title,
-        'Status': status,
-        'Price': price,
-        'purpose': purpose,
-        'MasjidId': masjidId,
-        'masjidname': masjidname,
-        'muntazimId': muntazimId,
-        'CnicNo': cnicno,
-        'dob': dob,
-        'doIssue': dateofIssue,
-        'doExpire': dateofExpire,
-      });
+      await firestore.collection(suffahCenterDefineProgram).doc(id).set(
+        {
+          'programId': id,
+          'image': imageUrl.toString(),
+          'programTitle': title,
+          'Status': status,
+          'Price': price,
+          'purpose': purpose,
+          'MasjidId': masjidId,
+          'masjidname': masjidname,
+          'muntazimId': muntazimId,
+          'CnicNo': cnicno,
+          'dob': dob,
+          'doIssue': dateofIssue,
+          'doExpire': dateofExpire,
+          'CardHolderName': holdername,
+          'masjidEmail': masjidEmail,
+          'recivedDonnation': "0",
+          'PhoneNo': phoneNo,
+          'MasjidAddress': address,
+          'countryMasjid': country,
+          'masjidCity': city,
+          'masjidState': state,
+        },
+      );
     });
   }
 
@@ -520,6 +548,7 @@ class Apis {
     email,
     state,
     program,
+    cardholdername,
   ) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/ShopImage$id');
@@ -547,6 +576,7 @@ class Apis {
         'email': email,
         'state': state,
         'program': program,
+        'CardHolderName': cardholdername,
       });
     });
   }
@@ -557,6 +587,15 @@ class Apis {
     return firestore
         .collection(suffahShop)
         .where('masjidId', isEqualTo: masjidid)
+        .snapshots();
+  }
+
+  // Get All Shops With Respect To Programs
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getShopsforByProgram(
+      program) {
+    return firestore
+        .collection(suffahShop)
+        .where('program', isEqualTo: program)
         .snapshots();
   }
 

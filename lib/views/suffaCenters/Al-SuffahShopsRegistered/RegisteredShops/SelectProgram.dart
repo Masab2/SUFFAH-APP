@@ -8,6 +8,7 @@ import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 import '../../../../Service/Firebase/firebasehelper.dart';
+import '../../../../ViewModel/SuffahCenter/Registered Shops/AddAlShuffahShopsViewModel.dart';
 
 class SelectProgramforShopsAdd extends StatefulWidget {
   const SelectProgramforShopsAdd({super.key});
@@ -18,6 +19,7 @@ class SelectProgramforShopsAdd extends StatefulWidget {
 }
 
 class _SelectProgramforShopsAddState extends State<SelectProgramforShopsAdd> {
+  final controller = Get.put(AddAlsuffahShopsViewModel());
   late String muntazid;
   late String masjidId;
   late String masjidname;
@@ -37,7 +39,7 @@ class _SelectProgramforShopsAddState extends State<SelectProgramforShopsAdd> {
           title: Text(
             masjidname,
             style: GoogleFonts.poppins(
-              fontSize: context.mh * 0.020,
+              fontSize: context.mh * 0.024,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -45,6 +47,34 @@ class _SelectProgramforShopsAddState extends State<SelectProgramforShopsAdd> {
         ),
         body: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: context.mw * 0.05),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Shop For Masjid Program',
+                    style: GoogleFonts.poppins(
+                      fontSize: context.mh * 0.018,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Obx(() => Switch(
+                        value: controller.isShopAdded.value,
+                        onChanged: (value) {
+                          controller.toggleShop(
+                            muntazid,
+                            masjidId,
+                            masjidname,
+                            controller.isShopAdded.value == true
+                                ? 'For Masjid'
+                                : '',
+                          );
+                        },
+                      )),
+                ],
+              ),
+            ),
             StreamBuilder(
               stream: Apis.getAllPrograms(),
               builder: (context, snapshot) {
@@ -56,7 +86,7 @@ class _SelectProgramforShopsAddState extends State<SelectProgramforShopsAdd> {
                       size: 40,
                     ),
                   );
-                } else if (!snapshot.hasData) {
+                } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return const Text('No Data');
                 } else {
                   return Expanded(

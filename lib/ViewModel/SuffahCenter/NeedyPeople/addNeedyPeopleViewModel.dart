@@ -11,19 +11,26 @@ class AddNeedyPeopleViewModel extends GetxController {
 
   // Insert Data Manually
   Future<void> addDataManually(
-      TextEditingController name,
-      TextEditingController cnicno,
-      TextEditingController dob,
-      TextEditingController doCardIssue,
-      TextEditingController doCardExpire,
-      image,
-      phoneno,
-      address,
-      masjid,
-      program,
-      muntazimid,
-      gender,
-      masjidid) async {
+    TextEditingController name,
+    TextEditingController cnicno,
+    TextEditingController dob,
+    TextEditingController doCardIssue,
+    TextEditingController doCardExpire,
+    image,
+    phoneno,
+    address,
+    masjid,
+    program,
+    muntazimid,
+    gender,
+    masjidid,
+    masjidEmail,
+    masjidCountry,
+    masjidState,
+    masjidCity,
+    masjidaddress,
+    donatePrice,
+  ) async {
     try {
       final result = await _addNeedyPeopleRepo.addCnicDataManually(
         name,
@@ -39,6 +46,12 @@ class AddNeedyPeopleViewModel extends GetxController {
         muntazimid,
         gender,
         masjidid,
+        masjidEmail,
+        masjidCountry,
+        masjidState,
+        masjidCity,
+        masjidaddress,
+        donatePrice,
       );
       if (result == null) {
         Get.snackbar('Successfull', 'Person add sucessfully');
@@ -52,20 +65,27 @@ class AddNeedyPeopleViewModel extends GetxController {
 
   // Add Data While Scanning
   Future<void> scanCnic(
-      ImageSource imageSource,
-      TextEditingController name,
-      TextEditingController cnicno,
-      TextEditingController dob,
-      TextEditingController doCardIssue,
-      TextEditingController doCardExpire,
-      image,
-      phoneno,
-      address,
-      masjid,
-      program,
-      muntazimid,
-      gender,
-      masjidid) async {
+    ImageSource imageSource,
+    TextEditingController name,
+    TextEditingController cnicno,
+    TextEditingController dob,
+    TextEditingController doCardIssue,
+    TextEditingController doCardExpire,
+    image,
+    phoneno,
+    address,
+    masjid,
+    program,
+    muntazimid,
+    gender,
+    masjidid,
+    masjidEmail,
+    masjidCountry,
+    masjidState,
+    masjidCity,
+    masjidaddress,
+    donatePrice,
+  ) async {
     CnicModel cnicModel =
         await CnicScanner().scanImage(imageSource: imageSource);
     if (cnicModel == null) {
@@ -98,6 +118,12 @@ class AddNeedyPeopleViewModel extends GetxController {
             muntazimid,
             gender,
             masjidid,
+            masjidEmail,
+            masjidCountry,
+            masjidState,
+            masjidCity,
+            masjidaddress,
+            donatePrice,
           );
           if (result == null) {
             Get.snackbar('Successfull', 'Person add sucessfully');

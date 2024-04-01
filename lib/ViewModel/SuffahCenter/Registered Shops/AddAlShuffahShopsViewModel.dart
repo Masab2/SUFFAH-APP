@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison
 
 import 'dart:developer';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cnic_scanner/cnic_scanner.dart';
 import 'package:cnic_scanner/model/cnic_model.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/Mail/sendEmail.dart';
 import 'package:suffa_app/Repository/SuffaCenterRepos/AddSuffahStores/AddSuffahStoreRepo.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
+import 'package:suffa_app/utils/constant/constant.dart';
 
 class AddAlsuffahShopsViewModel extends GetxController {
   final ImagePicker _picker = ImagePicker();
@@ -18,11 +20,34 @@ class AddAlsuffahShopsViewModel extends GetxController {
   var currentCity = 'Lahore'.obs;
   var currentState = 'Punjab'.obs;
   RxString imagePath = ''.obs;
-  var selectedProgram = ''.obs;
+  var isShopAdded = false.obs;
+  final RxList popupMenuItems = [].obs;
+  final selectedprogramPopUp = 'Select Program'.obs;
 
-  // DropDown For the Selection of the Program
-  void selectProgram(String program) {
-    selectedProgram.value = program;
+  void toggleShop(muntazim, masjidId, masjidname, data) {
+    isShopAdded.value = !isShopAdded.value;
+    if (isShopAdded.value) {
+      Get.toNamed(RoutesNames.addShopsScreen, arguments: [
+        muntazim,
+        masjidId,
+        masjidname,
+        data,
+      ]);
+    }
+  }
+
+  void fetchPopupMenuItems() async {
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection(suffahCenterDefineProgram);
+    QuerySnapshot querySnapshot =
+        await collectionReference.where('Status', isEqualTo: 'Active').get();
+    popupMenuItems.value =
+        querySnapshot.docs.map((doc) => doc['programTitle']).toList();
+  }
+
+  // Selected Value Of the PopUp menu Item For One Click
+  void handelSelectedItem(String selected) {
+    selectedprogramPopUp.value = selected;
   }
 
   final AddSuffahStoreRepo _addSuffahStoreRepo = AddSuffahStoreRepo();

@@ -92,7 +92,7 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
           children: [
             Image(
               height: context.mh * 0.40,
-              image: AssetImage(ImageAsset.verifyemail),
+              image: AssetImage(ImageAsset.applogo),
             ),
             CustomizedFeild(
               prefixIcon: const Icon(

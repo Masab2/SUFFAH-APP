@@ -110,7 +110,9 @@ class _DonnerProfileState extends State<DonnerProfile> {
                     title1: l10n.appSetting,
                     subtitle: l10n.editSettingSubtitle,
                     icon1: Icons.settings,
-                    ontap: () {},
+                    ontap: () {
+                      Get.toNamed(RoutesNames.settingsScreen);
+                    },
                   ),
                   0.02.ph,
                   DonnerProfileView(

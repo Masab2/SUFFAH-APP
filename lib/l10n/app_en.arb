@@ -33,7 +33,13 @@
   "cnicTitle": "CNIC",
   "nameTitle": "NAME",
   "addressTitle": "ADDRESS",
+  "masjidNameTitle": "Masjid Name",
   "@_PAYMENTMETHODSSCREEN": {},
   "totalAmount": "Total Ammount",
-  "paymentMethods" : "Payment Methods"
+  "paymentMethods": "Payment Methods",
+  "@_ONETIMEPAYMENTSCREEN": {},
+  "taglineOne": "Give Charity without the delay for it stands in the",
+  "taglineTwo": " way of calamity",
+  "tabOne": "Shuffa Person",
+  "tabTwo": "Shuffa Masjid"
 }

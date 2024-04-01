@@ -1,9 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// ignore_for_file: must_be_immutable
+
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
+import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
+import 'package:suffa_app/utils/constant/constant.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,7 +20,11 @@ class MasjidDisplayComp extends StatelessWidget {
   final VoidCallback onlocation;
   final dynamic receivedDonationsCount;
   final dynamic waitingCount;
-  const MasjidDisplayComp({
+  int? peopleCount = 0;
+  double waitngPeople = 0.0;
+  double receivedDonation = 0.0;
+
+  MasjidDisplayComp({
     super.key,
     required this.masjidname,
     required this.image,
@@ -27,7 +36,40 @@ class MasjidDisplayComp extends StatelessWidget {
     required this.waitingCount,
     required this.onlocation,
     required this.country,
+    this.peopleCount,
   });
+
+  // Method to fetch waiting people count from Firebase
+  Future<int> fetchWaitingPeopleCount() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+          .instance
+          .collection(suffahCenterNeedyPeople)
+          .where('program', isEqualTo: program)
+          .where('MuntazimId', isEqualTo: muntazimid)
+          .get();
+      return snapshot.size;
+    } catch (e) {
+      log('Error fetching waiting people count: $e');
+      return 0;
+    }
+  }
+
+  Future<double> calculatebar() async {
+    double progressRatio = 0.0;
+    try {
+      int waitingPeopleint = await fetchWaitingPeopleCount();
+      waitngPeople = waitingPeopleint.toDouble();
+      receivedDonation = double.parse(receivedDonationsCount.toString());
+      log(waitngPeople.toString());
+      if (receivedDonation > 0) {
+        progressRatio = receivedDonation / waitngPeople;
+      }
+    } catch (e) {
+      log('Error parsing donation amounts: $e');
+    }
+    return progressRatio;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +102,8 @@ class MasjidDisplayComp extends StatelessWidget {
                       children: [
                         0.01.ph,
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: context.mw * 0.05),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.mw * 0.05),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -107,7 +150,7 @@ class MasjidDisplayComp extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    l10n!.recivedTitle,
+                                    l10n.recivedTitle,
                                     style: GoogleFonts.poppins(
                                       fontSize: context.mh * 0.017,
                                     ),
@@ -122,16 +165,31 @@ class MasjidDisplayComp extends StatelessWidget {
                               ),
                             ),
                             0.01.ph,
-                            SimpleAnimationProgressBar(
-                              height: context.mh * 0.02,
-                              width: context.mw * 0.53,
-                              backgroundColor: AppColor.brownColor,
-                              foregrondColor: AppColor.mehroonColor,
-                              ratio: 0.5,
-                              direction: Axis.horizontal,
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              duration: const Duration(seconds: 3),
-                              borderRadius: BorderRadius.circular(5),
+                            FutureBuilder<double>(
+                              future: calculatebar(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Text('Loading');
+                                } else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else {
+                                  double progressRatio = snapshot.data ?? 0.0;
+
+                                  return SimpleAnimationProgressBar(
+                                    height: context.mh * 0.02,
+                                    width: context.mw * 0.53,
+                                    backgroundColor: AppColor.brownColor,
+                                    foregrondColor: AppColor.mehroonColor,
+                                    ratio:
+                                        progressRatio, // Set ratio with the calculated value
+                                    direction: Axis.horizontal,
+                                    curve: Curves.fastLinearToSlowEaseIn,
+                                    duration: const Duration(seconds: 3),
+                                    borderRadius: BorderRadius.circular(5),
+                                  );
+                                }
+                              },
                             ),
                             0.01.ph,
                             Padding(
@@ -143,16 +201,28 @@ class MasjidDisplayComp extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '20',
+                                    receivedDonationsCount.toString(),
                                     style: GoogleFonts.poppins(
                                       fontSize: context.mh * 0.017,
                                     ),
                                   ),
-                                  Text(
-                                    '20',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: context.mh * 0.017,
-                                    ),
+                                  StreamBuilder(
+                                    stream:
+                                        Apis.getAllNeedyPeopleByProgramMasjid(
+                                            program, muntazimid),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return const Text('Loading');
+                                      } else if (!snapshot.hasData ||
+                                          snapshot.data!.docs.isEmpty) {
+                                        return const Text('0');
+                                      } else {
+                                        peopleCount =
+                                            snapshot.data!.docs.length;
+                                        return Text(peopleCount.toString());
+                                      }
+                                    },
                                   )
                                 ],
                               ),
@@ -168,21 +238,35 @@ class MasjidDisplayComp extends StatelessWidget {
             ],
           ),
         ),
-        MaterialButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusDirectional.circular(10),
-          ),
-          color: AppColor.mehroonColor,
-          minWidth: context.mw * 0.55,
-          onPressed: ontap,
-          child: Text(
-            l10n.donateMasjid,
-            style: GoogleFonts.poppins(
-              fontSize: context.mh * 0.017,
-              color: AppColor.whiteColor,
-            ),
-          ),
-        )
+        FutureBuilder<double>(
+            future: calculatebar(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Text('Loading');
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                double progressRatio = snapshot.data ?? 0.0;
+                return Visibility(
+                  visible: progressRatio == 1.0 ? false : true,
+                  child: MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusDirectional.circular(10),
+                    ),
+                    color: AppColor.mehroonColor,
+                    minWidth: context.mw * 0.55,
+                    onPressed: ontap,
+                    child: Text(
+                      l10n.donateMasjid,
+                      style: GoogleFonts.poppins(
+                        fontSize: context.mh * 0.017,
+                        color: AppColor.whiteColor,
+                      ),
+                    ),
+                  ),
+                );
+              }
+            }),
       ],
     );
   }

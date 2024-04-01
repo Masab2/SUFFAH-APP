@@ -56,14 +56,26 @@ class AddPersonalInfoViewModel extends GetxController {
 
   // Add Data Into DataBase
   void addNeedyPerson(
-      phoneno, address, masjid, program, gender, masjidid) async {
+    phoneno,
+    address,
+    masjid,
+    program,
+    gender,
+    masjidid,
+    masjidEmail,
+    country,
+    state,
+    city,
+    masjidAddress,
+    price,
+  ) async {
     final result = await _addNeedyPeopleRepo.addNeedyPeople(
       imagePath.value.toString(),
       phoneno,
       address,
       masjid,
     );
-    await SharePrefs.getId('id').then((value) {
+    await SharePrefs.getData('id').then((value) {
       if (result == null) {
         Get.toNamed(RoutesNames.addNeedyPeopleScreen, arguments: <String>[
           imagePath.value.toString(),
@@ -73,7 +85,13 @@ class AddPersonalInfoViewModel extends GetxController {
           value.toString(),
           gender.toString(),
           program.toString(),
-          masjidid.toString()
+          masjidid.toString(),
+          masjidEmail.toString(),
+          country.toString(),
+          state.toString(),
+          city.toString(),
+          masjidAddress.toString(),
+          price.toString(),
         ]);
       } else {
         Get.snackbar('Error', result.toString());

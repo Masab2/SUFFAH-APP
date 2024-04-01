@@ -1,19 +1,25 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:suffa_app/Model/DonnationTrackModel/donnationTrackModel.dart';
 import 'package:suffa_app/Model/alSuffahPersonModel/suffaPersonModel.dart';
+import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
+import 'package:suffa_app/utils/constant/constant.dart';
 
 class NeedyPeopleController extends GetxController {
   final isLoading = false.obs;
-  final _status = 'Added'.obs;
   final RxList<SuffahPersonModel> needyPeople = <SuffahPersonModel>[].obs;
   final RxList<SuffahPersonModel> filteredPeople = <SuffahPersonModel>[].obs;
+  final RxList popupMenuItems = [].obs;
+  final selectedprogram = 'All'.obs;
+
   static const double _usdExchangeRate = 0.0036;
   static const double _eurExchangeRate = 0.0033;
-  String get status => _status.value;
 
   void fetchData(program, String muntazimid, targetCurrency) {
     Apis.getAllNeedyPeopleByProgramMasjid(
@@ -40,11 +46,63 @@ class NeedyPeopleController extends GetxController {
           dateofExpire: doc['DateofCardExpire'],
           gender: doc['gender'],
           phoneno: doc['PersonPhoneNo'],
+          masjidid: doc['masjidId'],
+          masjidAddress: doc['masjidAddress'],
+          masjidCountry: doc['masjidCountry'],
+          masjidCity: doc['masjidCity'],
+          masjidState: doc['masjidState'],
+          masjidemail: doc['masjidEmail'],
+          muntazimId: doc['MuntazimId'],
         );
       }).toList();
       if (kDebugMode) {
         print('Fetched data: $data');
-      } // Add this line to check fetched data
+      }
+      needyPeople.assignAll(data);
+      filteredPeople.assignAll(data);
+    });
+  }
+
+  // Fetch Data For the One Click
+  void fetchDataForOneClick(targetCurrency) {
+    Apis.getAllNeedyPeopleOneClick()
+        .listen((QuerySnapshot<Map<String, dynamic>> snapshot) {
+      final List<SuffahPersonModel> data = snapshot.docs.map((doc) {
+        var convertedReceivedDonation = convertCurrency(
+            double.parse(doc['recivedDonnation']), targetCurrency);
+        var convertedDonateAmount = convertCurrency(
+            double.parse(doc['requiredDonnation']), targetCurrency);
+        log(convertedDonateAmount.toString());
+        log(targetCurrency);
+        return SuffahPersonModel(
+          personname: doc['PersonName'],
+          image: doc['PersonProfile'],
+          address: doc['PersonAddress'],
+          cnicno: doc['CNICNo'],
+          program: doc['program'],
+          masjidname: doc['MasjidName'],
+          tempstatus: doc['tempStatus'],
+          status: doc['status'],
+          personId: doc['personId'],
+          requiredDonnation: convertedDonateAmount.toString(),
+          recivedDonnation: convertedReceivedDonation.toString(),
+          dateofBirth: doc['DateofBirth'],
+          dateofIssue: doc['DateofCardIssue'],
+          dateofExpire: doc['DateofCardExpire'],
+          gender: doc['gender'],
+          phoneno: doc['PersonPhoneNo'],
+          masjidid: doc['masjidId'],
+          masjidAddress: doc['masjidAddress'],
+          masjidCountry: doc['masjidCountry'],
+          masjidCity: doc['masjidCity'],
+          masjidState: doc['masjidState'],
+          masjidemail: doc['masjidEmail'],
+          muntazimId: doc['MuntazimId'],
+        );
+      }).toList();
+      if (kDebugMode) {
+        print('Fetched data: $data');
+      }
       needyPeople.assignAll(data);
       filteredPeople.assignAll(data);
     });
@@ -61,30 +119,29 @@ class NeedyPeopleController extends GetxController {
     }
   }
 
+  // Filter List for the One Click
+  void filterListForOneClick(String query) {
+    if (query.toLowerCase() == 'all') {
+      // Check if the query is "All"
+      filteredPeople.assignAll(needyPeople);
+    } else if (query.isEmpty) {
+      filteredPeople.assignAll(needyPeople);
+    } else {
+      final filtered = needyPeople.where((person) =>
+          person.program.toLowerCase().contains(query.toLowerCase()));
+      filteredPeople.assignAll(filtered);
+    }
+  }
+
   // Check The Donnation Validation
   void validateDonnation(
-    int requiredAmmount,
+    requiredAmmount,
     String image,
     String currency,
     TextEditingController donnateController,
-    personcnic,
-    personname,
-    dateofBirth,
-    dateofCardExpire,
-    dateofCardIssue,
-    personId,
-    personPhoneNo,
-    personAddress,
-    personprofile,
-    persongender,
-    masjidname,
-    masjidid,
-    masjidAddress,
-    masjidCountry,
-    masjidCity,
-    masjidState,
-    masjidEmail,
-    program,
+    DonnationTrackModel model,
+    List<DonnerModel> donnermodel,
+    BuildContext context,
   ) {
     if (donnateController.text.isNotEmpty) {
       final String donate = donnateController.text;
@@ -94,32 +151,11 @@ class NeedyPeopleController extends GetxController {
       } else if (donnationAmmount > requiredAmmount) {
         Get.snackbar('oopps', 'Please Enter the Required Ammount');
       } else {
-        final String ammount = donnationAmmount.toString();
-        final String reqAmmount = requiredAmmount.toString();
         Get.toNamed(
           RoutesNames.donatePaymentScreen,
-          arguments: <String>[
-            ammount,
-            reqAmmount,
-            image,
-            currency,
-            personcnic,
-            personname,
-            dateofBirth,
-            dateofCardExpire,
-            dateofCardIssue,
-            personId,
-            personPhoneNo,
-            personAddress,
-            personprofile,
-            persongender,
-            masjidname,
-            masjidid,
-            masjidAddress,
-            masjidCountry,
-            masjidCity,
-            masjidState,
-            masjidEmail,
+          arguments: [
+            model,
+            donnermodel,
           ],
         );
       }
@@ -128,7 +164,7 @@ class NeedyPeopleController extends GetxController {
     }
   }
 
-  // Convert the Currency Into the Desired Currency
+  // Convert the Donnation Ammount Into the Desired Currency
   double convertCurrency(double amount, String targetCurrency) {
     double convertedAmount = 0;
     switch (targetCurrency) {
@@ -152,5 +188,19 @@ class NeedyPeopleController extends GetxController {
         break;
     }
     return convertedAmount;
+  }
+
+  // Fetch the Programs In the Popup Menu Item For One Click
+  void fetchPopupMenuItems() async {
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection(suffahAffiliatedprogram);
+    QuerySnapshot querySnapshot = await collectionReference.get();
+    popupMenuItems.value =
+        querySnapshot.docs.map((doc) => doc['programTitle']).toList();
+  }
+
+  // Selected Value Of the PopUp menu Item For One Click
+  void handelSelectedItem(String selected) {
+    selectedprogram.value = selected;
   }
 }

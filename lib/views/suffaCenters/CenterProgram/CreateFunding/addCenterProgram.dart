@@ -13,6 +13,7 @@ import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import '../../../../ViewModel/SuffahCenter/addAffilated/addAffiliatedProgramViewModel.dart';
 import '../../../../res/components/AddSuffahCenter/BottomSheetContainer.dart';
 import '../../../../res/components/CNICFormComp/CnicFormComp.dart';
+
 class AddCenterProgramView extends StatefulWidget {
   const AddCenterProgramView({super.key});
 
@@ -27,6 +28,10 @@ class _AddCenterProgramViewState extends State<AddCenterProgramView> {
   late String masjidname;
   late String masjidId;
   late String muntazimEmail;
+  late String address;
+  late String country;
+  late String state;
+  late String city;
   var titleController = TextEditingController();
   var priceController = TextEditingController();
   var purposeController = TextEditingController();
@@ -35,12 +40,17 @@ class _AddCenterProgramViewState extends State<AddCenterProgramView> {
   var doIssueController = TextEditingController();
   var doExpireController = TextEditingController();
   var dobController = TextEditingController();
+  var phoneController = TextEditingController();
   @override
   void initState() {
     id = Get.arguments[0];
     masjidname = Get.arguments[1];
     masjidId = Get.arguments[2];
     muntazimEmail = Get.arguments[3];
+    address = Get.arguments[4];
+    country = Get.arguments[5];
+    state = Get.arguments[6];
+    city = Get.arguments[7];
     super.initState();
   }
 
@@ -54,6 +64,7 @@ class _AddCenterProgramViewState extends State<AddCenterProgramView> {
     doIssueController.dispose();
     doExpireController.dispose();
     dobController.dispose();
+    phoneController.dispose();
     super.dispose();
   }
 
@@ -118,6 +129,11 @@ class _AddCenterProgramViewState extends State<AddCenterProgramView> {
                 hint: 'Masab / Ayesha',
                 controller: priceController),
             AddNeedyPeopleComp(
+                title: 'Phone No',
+                icon: Icons.person,
+                hint: '*********',
+                controller: phoneController),
+            AddNeedyPeopleComp(
               title: 'Purpose',
               icon: Icons.person,
               hint: 'For Needy People / For Masjid etc',
@@ -159,6 +175,11 @@ class _AddCenterProgramViewState extends State<AddCenterProgramView> {
                     masjidname,
                     masjidId,
                     muntazimEmail,
+                    phoneController,
+                    address,
+                    country,
+                    state,
+                    city,
                   );
                 },
               )),

@@ -34,18 +34,6 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
   late String city;
   late String state;
   late String program;
-
-  // shopTitle.text,
-  //         phoneno.text,
-  //         email.text,
-  //         currentCountry.value,
-  //         currentCity.value,
-  //         address.text,
-  //         imagePath.value,
-  //         muntazimid,
-  //         masjidid,
-  //         masjidname,
-  //         currentState.value,
   final controller = Get.find<AddAlsuffahShopsViewModel>();
   @override
   void initState() {

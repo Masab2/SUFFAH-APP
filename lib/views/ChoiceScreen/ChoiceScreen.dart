@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/res/components/ChoiceComp/ChoiceComp.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
+import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class ChoiceScreen extends StatefulWidget {
@@ -19,10 +20,23 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'WELCOME TO AL-SUFFAH',
+          'Admin Portals',
           style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-            fontSize: context.mh * 0.023,
+            fontSize: context.mh * 0.024,
+            color: AppColor.whiteColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppColor.mehroonColor,
+                AppColor.brownColor,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
           ),
         ),
         centerTitle: true,
@@ -31,6 +45,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
         children: [
+          0.02.ph,
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

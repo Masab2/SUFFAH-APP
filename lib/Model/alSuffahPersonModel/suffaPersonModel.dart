@@ -15,6 +15,13 @@ class SuffahPersonModel {
   final String dateofIssue;
   final String dateofExpire;
   final String gender;
+  final String masjidid;
+  final String masjidAddress;
+  final String masjidCountry;
+  final String masjidCity;
+  final String masjidState;
+  final String masjidemail;
+  final String muntazimId;
 
   SuffahPersonModel({
     required this.personname,
@@ -33,5 +40,12 @@ class SuffahPersonModel {
     required this.dateofIssue,
     required this.dateofExpire,
     required this.gender,
+    required this.masjidid,
+    required this.masjidAddress,
+    required this.masjidCountry,
+    required this.masjidCity,
+    required this.masjidState,
+    required this.masjidemail,
+    required this.muntazimId,
   });
 }

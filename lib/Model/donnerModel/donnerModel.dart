@@ -7,4 +7,12 @@ class DonnerModel {
       {required this.donnerId,
       required this.donateAbleAmmount,
       required this.currency});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'donnerId': donnerId,
+      'donateAmmount': donateAbleAmmount,
+      'currency': currency,
+    };
+  }    
 }

@@ -1,8 +1,6 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'dart:io';
-
-import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,6 +30,12 @@ class _AddPersonalDataState extends State<AddPersonalData> {
   late String masjidname;
   late String program;
   late String masjidid;
+  late String masjidEmail;
+  late String masjidCountry;
+  late String masjidState;
+  late String masjidCity;
+  late String masjidaddress;
+  late String donnationPrice;
 
   @override
   void initState() {
@@ -39,6 +43,12 @@ class _AddPersonalDataState extends State<AddPersonalData> {
     masjidname = Get.arguments[1] ?? '';
     program = Get.arguments[2] ?? '';
     masjidid = Get.arguments[3] ?? '';
+    masjidEmail = Get.arguments[4] ?? '';
+    masjidCountry = Get.arguments[5] ?? '';
+    masjidState = Get.arguments[6] ?? '';
+    masjidCity = Get.arguments[7] ?? '';
+    masjidaddress = Get.arguments[8] ?? '';
+    donnationPrice = Get.arguments[9] ?? '';
     super.initState();
   }
 
@@ -106,22 +116,6 @@ class _AddPersonalDataState extends State<AddPersonalData> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: context.mw * 0.02,
-                  ),
-                  child: SelectState(
-                    onCountryChanged: (value) {
-                      peronalInfoController.onCountryChanged(value);
-                    },
-                    onStateChanged: (value) {
-                      peronalInfoController.onStateChanged(value);
-                    },
-                    onCityChanged: (value) {
-                      peronalInfoController.onCityChanged(value);
-                    },
-                  ),
-                ),
                 0.01.ph,
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
@@ -223,6 +217,12 @@ class _AddPersonalDataState extends State<AddPersonalData> {
                 program,
                 peronalInfoController.selectedValue.toString(),
                 masjidid,
+                masjidEmail,
+                masjidCountry,
+                masjidState,
+                masjidCity,
+                masjidaddress,
+                donnationPrice,
               );
             },
           )),

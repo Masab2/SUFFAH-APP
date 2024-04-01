@@ -14,16 +14,19 @@ class CustomizedFeild extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   TextEditingController controller;
   int maxlines;
-  CustomizedFeild(
-      {super.key,
-      this.title,
-      this.onChanged,
-      required this.controller,
-      this.hint,
-      this.sufixIcon,
-      this.prefixIcon,
-      this.maxlines = 1,
-      this.obscuretext});
+  TextInputType? keyboardtype;
+  CustomizedFeild({
+    super.key,
+    this.title,
+    this.onChanged,
+    required this.controller,
+    this.hint,
+    this.sufixIcon,
+    this.prefixIcon,
+    this.maxlines = 1,
+    this.obscuretext,
+    this.keyboardtype,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +59,7 @@ class CustomizedFeild extends StatelessWidget {
               controller: controller,
               obscureText: obscuretext ?? false,
               maxLines: maxlines,
+              keyboardType: keyboardtype,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: hint,

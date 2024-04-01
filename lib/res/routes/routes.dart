@@ -7,6 +7,8 @@ import 'package:suffa_app/views/Donners/BottomNavBar/BottomNavbar.dart';
 import 'package:suffa_app/views/Donners/Home/Donate%20NeedyPeople/donateNeedyPeopleScreen.dart';
 import 'package:suffa_app/views/Donners/Home/PaymentScreen/Jazzcash/jazzcashScreen.dart';
 import 'package:suffa_app/views/Donners/Home/PaymentScreen/paymentScreen.dart';
+import 'package:suffa_app/views/Donners/Home/SeeAllMasjidProgram/seeAllMasjidProgram.dart';
+import 'package:suffa_app/views/Donners/Home/SeeAllPrograms/seeAllPrograms.dart';
 import 'package:suffa_app/views/Donners/Home/Select%20Masjids/ViewMasjids/SelectMasjidsView.dart';
 import 'package:suffa_app/views/Donners/Profile/EditProfile/EditProfile.dart';
 import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
@@ -19,6 +21,7 @@ import 'package:suffa_app/views/admin/AdminAddSuffahCenter/addSuffahCenter.dart'
 import 'package:suffa_app/views/admin/AdminAddSuffahCenter/createEmailView.dart';
 import 'package:suffa_app/views/admin/MemberRequest/memberRequest.dart';
 import 'package:suffa_app/views/admin/RequestedProgram/RequestedProgram.dart';
+import 'package:suffa_app/views/splashView/SplashPreodic.dart';
 import 'package:suffa_app/views/splashView/splashView.dart';
 import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/RegisteredShops/SelectProgram.dart';
 import 'package:suffa_app/views/suffaCenters/Al-SuffahShopsRegistered/RegisteredShops/addShopOwnerCnic.dart';
@@ -40,12 +43,17 @@ import 'package:suffa_app/views/suffaCenters/Profile/suffaCenterProfileView.dart
 import 'package:suffa_app/views/suffaStores/Auth/SuffahStoreAuth.dart';
 import 'package:suffa_app/views/suffaStores/DashBoard/shuffaShopDashBoard.dart';
 import 'package:suffa_app/views/ChoiceScreen/ChoiceScreen.dart';
+
 class AppRoutes {
   static appRoutes() => [
         //! Donner Auth Screens
         GetPage(
             name: RoutesNames.splashScreen,
             page: () => const SplashView(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.splashScreen,
+            page: () => const SplashChoices(),
             transition: Transition.leftToRight),
         GetPage(
             name: RoutesNames.loginScreen,
@@ -59,7 +67,6 @@ class AppRoutes {
             name: RoutesNames.verifyScreen,
             page: () => const VerifyScreen(),
             transition: Transition.leftToRight),
-        
 
         //? Choice Screen
         GetPage(
@@ -95,6 +102,14 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.editProfileScreen,
             page: () => const EditProfileView(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.seeAllProgramsScreen,
+            page: () => const SeeAllProgramView(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.seeAllMasjidProgramScreen,
+            page: () => const SeeAllMasjidProgramView(),
             transition: Transition.leftToRight),
 
         //! Adminstration DashBoard
@@ -188,6 +203,7 @@ class AppRoutes {
             name: RoutesNames.centerProgramDisplayScreen,
             page: () => const DisplayCenterProgram(),
             transition: Transition.leftToRight),
+
         GetPage(
             name: RoutesNames.addShopsScreen,
             page: () => const AddAlSuffahShops(),

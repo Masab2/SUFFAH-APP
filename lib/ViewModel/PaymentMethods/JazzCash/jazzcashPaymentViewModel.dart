@@ -1,14 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:suffa_app/Model/DonnationTrackModel/donnationTrackModel.dart';
 import 'package:suffa_app/Model/JazzCashpaymentModel/jazzCashPayment.dart';
-import 'package:suffa_app/Model/alSuffahPersonModel/suffaPersonModel.dart';
 import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
 import 'package:suffa_app/Repository/PaymentMenthods/JazzcashPayment/jazzcashPaymentRepo.dart';
 import 'package:suffa_app/Repository/PaymentMenthods/PaymentRepo/paymentRepo.dart';
-import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/res/components/Payments/JazzCashPayment/PaymentReciptDialog/paymentReciptDialog.dart';
 import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
@@ -23,26 +21,7 @@ class JazcashPaymentViewModel extends GetxController {
     phoneno,
     ppsecurehash,
     BuildContext context,
-    program,
-    requiredDonnation,
-    masjidname,
-    masjidId,
-    muntazimId,
-    masjidAddress,
-    masjidCountry,
-    masjidCity,
-    masjidstate,
-    masjidEmail,
-    personcnic,
-    personame,
-    dateofBirth,
-    dateofCardExpire,
-    dateofCardIssue,
-    personId,
-    personPhoneNo,
-    personaddress,
-    personprofile,
-    personGender,
+    DonnationTrackModel model,
     List<DonnerModel> donnerlist,
   ) async {
     try {
@@ -90,26 +69,7 @@ class JazcashPaymentViewModel extends GetxController {
           print(jazzcashResponse.ppResponseMessage);
         }
         final result = await _paymentRepo.donnationTrackAfterDonate(
-          program,
-          requiredDonnation,
-          masjidname,
-          masjidId,
-          muntazimId,
-          masjidAddress,
-          masjidCountry,
-          masjidCity,
-          masjidstate,
-          masjidEmail,
-          personcnic,
-          personame,
-          dateofBirth,
-          dateofCardExpire,
-          dateofCardIssue,
-          personId,
-          personPhoneNo,
-          personaddress,
-          personprofile,
-          personGender,
+          model,
           donnerlist,
         );
         if (result == null) {
@@ -127,15 +87,5 @@ class JazcashPaymentViewModel extends GetxController {
     } finally {
       isLoading(false);
     }
-  }
-
-  void updateStatusForAddedPeople() {
-    final List<SuffahPersonModel> addedPeople = Get.arguments[1];
-    addedPeople.forEach((person) async {
-      if (person.tempstatus == 'Added') {
-        await Apis.updateStatusAlSuffahPersonGotDonnation(
-            person.personId, 'Pending');
-      }
-    });
   }
 }

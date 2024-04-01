@@ -1,15 +1,16 @@
 import 'dart:developer';
 import 'package:csc_picker/csc_picker.dart';
-import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
+import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/ViewModel/Donner/HomeViewModel/HomeViewModel.dart';
 import 'package:suffa_app/ViewModel/Lang/LanguageChangeViewModel.dart';
 import 'package:suffa_app/res/components/AppBar/AppBar.dart';
 import 'package:suffa_app/res/components/HomeComp/donnationChoices/DonnationChoiceComp.dart';
+import 'package:suffa_app/res/components/HomeComp/donnationChoices/MasjidProgramSeeAll/MasjidProgramSeeAll.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
@@ -36,33 +37,38 @@ class _HomeScreenState extends State<HomeScreen> {
         Row(
           children: [
             0.02.pw,
-            Expanded(child: Obx(() {
-              return CSCPicker(
-                selectedItemStyle: const TextStyle(color: AppColor.whiteColor),
-                dropdownDecoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  color: AppColor.brownColor,
-                ),
-                layout: Layout.horizontal,
-                showCities: false,
-                showStates: false,
-                flagState: CountryFlag.DISABLE,
-                currentCountry: homeController.country.value,
-                onCountryChanged: (value) {
-                  log(homeController.country.value.toString());
-                  homeController.updateCountry(value);
-                  log(value);
+            Expanded(
+              child: Obx(
+                () {
+                  return CSCPicker(
+                    selectedItemStyle:
+                        const TextStyle(color: AppColor.whiteColor),
+                    dropdownDecoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      color: AppColor.brownColor,
+                    ),
+                    layout: Layout.horizontal,
+                    showCities: false,
+                    showStates: false,
+                    flagState: CountryFlag.DISABLE,
+                    currentCountry: homeController.country.value,
+                    onCountryChanged: (value) {
+                      log(homeController.country.value.toString());
+                      homeController.updateCountry(value);
+                      log(value);
+                    },
+                    onStateChanged: (value) {
+                      homeController.onCityChanged(value ?? '');
+                    },
+                    onCityChanged: (value) {
+                      homeController.onStateChanged(value ?? '');
+                    },
+                  );
                 },
-                onStateChanged: (value) {
-                  homeController.onCityChanged(value ?? '');
-                },
-                onCityChanged: (value) {
-                  homeController.onStateChanged(value ?? '');
-                },
-              );
-            })),
+              ),
+            ),
           ],
         ),
         Padding(
@@ -213,12 +219,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: AppColor.mehroonColor,
                     ),
                   ),
-                  Text(
-                    l10n.seeAll,
-                    style: GoogleFonts.poppins(
-                      fontSize: context.mh * 0.017,
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.mehroonColor,
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(RoutesNames.seeAllProgramsScreen, arguments: [
+                        homeController.country.value,
+                        homeController.selectedCurrency.value,
+                      ]);
+                    },
+                    child: Text(
+                      l10n.seeAll,
+                      style: GoogleFonts.poppins(
+                        fontSize: context.mh * 0.017,
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.mehroonColor,
+                      ),
                     ),
                   ),
                 ],
@@ -312,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return const Text('No Data');
+                  return const Text('No Data Found');
                 } else {
                   return SizedBox(
                     height: context.mh * 0.3,
@@ -327,15 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         return DonnationChoiceMasjidComp(
                           image: data['image'],
                           title: data['programTitle'],
-                          ontap: () {
-                            Get.toNamed(
-                              RoutesNames.selectMasjidScreen,
-                              arguments: [
-                                data['programTitle'],
-                                data['Price'],
-                              ],
-                            );
-                          },
+                          ontap: () {},
                           program: data['programTitle'],
                         );
                       },
@@ -387,32 +393,35 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildCurrencyItem(BuildContext context, IconData icon, currencyname) {
     return ListTile(
       leading: Container(
-          height: context.mw * 0.1,
-          width: context.mw * 0.1,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: LinearGradient(
-              colors: [
-                AppColor.mehroonColor,
-                AppColor.brownColor,
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+        height: context.mw * 0.1,
+        width: context.mw * 0.1,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+            colors: [
+              AppColor.mehroonColor,
+              AppColor.brownColor,
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          child: Icon(
-            icon,
-            color: AppColor.geryColor,
-            size: context.mh * 0.020,
-          )),
+        ),
+        child: Icon(
+          icon,
+          color: AppColor.geryColor,
+          size: context.mh * 0.020,
+        ),
+      ),
       title: Text(
         currencyname,
         style: GoogleFonts.poppins(
             fontSize: context.mh * 0.020, fontWeight: FontWeight.w500),
       ),
-      onTap: () {
+      onTap: () async {
         homeController.selectedCurrency.value = currencyname;
-        Navigator.pop(context);
+        await SharePrefs.saveData(
+            'currency', homeController.selectedCurrency.value.toString());
+        log('Data Saved');
       },
     );
   }

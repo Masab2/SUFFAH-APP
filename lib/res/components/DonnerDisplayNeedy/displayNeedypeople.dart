@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconly/iconly.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -48,162 +50,181 @@ class DisplayNeedyPeopleComp extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.symmetric(
-              horizontal: context.mw * 0.03,
-              vertical: context.mh * 0.01,
-            ),
+                horizontal: context.mw * 0.03, vertical: context.mh * 0.01),
             height: context.mh * 0.25,
             width: context.mw,
             decoration: BoxDecoration(
                 color: AppColor.masjidgeryColor,
                 borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              children: [
-                0.02.ph,
-                Row(
-                  children: [
-                    0.02.pw,
-                    CircleAvatar(
-                      radius: context.mh * 0.06,
-                      backgroundImage: NetworkImage(image),
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: context.mw * 0.03,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    l10n!.cnicTitle,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: context.mh * 0.018,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    cnicno,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: context.mh * 0.013,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    l10n.nameTitle,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: context.mh * 0.018,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    masjidname,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: context.mh * 0.013,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    l10n.addressTitle,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: context.mh * 0.018,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    masjidaddress,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: context.mh * 0.013,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                0.01.ph,
-                Text(
-                  program,
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SimpleAnimationProgressBar(
-                  height: context.mh * 0.01,
-                  width: context.mw * 0.70,
-                  backgroundColor: AppColor.brownColor,
-                  foregrondColor: AppColor.mehroonColor,
-                  ratio: calculatebar(),
-                  direction: Axis.horizontal,
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  duration: const Duration(seconds: 3),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                0.01.ph,
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: context.mw * 0.12,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  0.02.ph,
+                  Row(
                     children: [
-                      Text(
-                        '$currency $recivedDonnation',
-                        style: GoogleFonts.poppins(
-                          fontSize: context.mh * 0.015,
-                        ),
+                      0.02.pw,
+                      CircleAvatar(
+                        radius: context.mh * 0.04,
+                        backgroundImage: NetworkImage(image),
                       ),
-                      Text(
-                        '$currency $price',
-                        style: GoogleFonts.poppins(
-                          fontSize: context.mh * 0.015,
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: context.mw * 0.03,
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      l10n!.cnicTitle,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: context.mh * 0.015,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      cnicno,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: context.mh * 0.013,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      l10n.nameTitle,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: context.mh * 0.015,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      masjidname,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: context.mh * 0.013,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      l10n.addressTitle,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: context.mh * 0.015,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      masjidaddress,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: context.mh * 0.013,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],
                   ),
-                )
-              ],
-            ),
-          ),
-          MaterialButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.circular(10),
-            ),
-            color: AppColor.mehroonColor,
-            minWidth: context.mw * 0.55,
-            onPressed: ontap,
-            child: Text(
-              l10n.donateNowtitle,
-              style: GoogleFonts.poppins(
-                fontSize: context.mh * 0.017,
-                color: AppColor.whiteColor,
+                  0.01.ph,
+                  Text(
+                    program,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SimpleAnimationProgressBar(
+                    height: context.mh * 0.01,
+                    width: context.mw * 0.70,
+                    backgroundColor: AppColor.brownColor,
+                    foregrondColor: AppColor.mehroonColor,
+                    ratio: calculatebar(),
+                    direction: Axis.horizontal,
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    duration: const Duration(seconds: 3),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  0.01.ph,
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.mw * 0.12,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '$currency $recivedDonnation',
+                          style: GoogleFonts.poppins(
+                            fontSize: context.mh * 0.015,
+                          ),
+                        ),
+                        Text(
+                          '$currency $price',
+                          style: GoogleFonts.poppins(
+                            fontSize: context.mh * 0.015,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  0.01.ph,
+                  Visibility(
+                    visible: recivedDonnation == price ? false : true,
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusDirectional.circular(10),
+                      ),
+                      color: AppColor.mehroonColor,
+                      minWidth: context.mw * 0.55,
+                      onPressed: ontap,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            l10n.donateNowtitle,
+                            style: GoogleFonts.poppins(
+                              fontSize: context.mh * 0.017,
+                              color: AppColor.whiteColor,
+                            ),
+                          ),
+                          0.03.pw,
+                          Icon(
+                            IconlyLight.heart,
+                            color: AppColor.whiteColor,
+                            size: context.mh * 0.023,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -298,11 +319,12 @@ class DisplayPaymentMethodComp extends StatelessWidget {
 }
 
 class PaymentUperheading extends StatelessWidget {
-  final String image, donnationprice ,title;
+  final String image, donnationprice, title;
   const PaymentUperheading({
     super.key,
     required this.image,
-    required this.donnationprice, required this.title,
+    required this.donnationprice,
+    required this.title,
   });
 
   @override

@@ -30,10 +30,16 @@
   "@_ALSUFFAAHPERSONDONNER": {},
   "donateNowtitle": "ابھی عطیہ کیجیے",
   "searchPersonHint": "شخص تلاش کریں۔",
-  "cnicTitle": "CNIC",
+  "cnicTitle": "قومی شناختی کارڈ",
   "nameTitle": "نام",
   "addressTitle": "پتہ",
+  "masjidNameTitle": "مسجد کا نام",
   "@_PAYMENTMETHODSSCREEN": {},
   "totalAmount": "کل رقم",
-  "paymentMethods": "ادائیگی کے طریقے"
+  "paymentMethods": "ادائیگی کے طریقے",
+  "@_ONETIMEPAYMENTSCREEN": {},
+  "taglineOne": "صدقہ بلا تاخیر کرو کیونکہ یہ مصیبت کی",
+  "taglineTwo": "راہ میں حائل ہے۔",
+  "tabOne": "شفاء شخص",
+  "tabTwo": "شفاء مسجد"
 }

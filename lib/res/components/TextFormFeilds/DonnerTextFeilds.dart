@@ -7,19 +7,22 @@ class DonnerTextFeilsComp extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final TextEditingController controller;
   final IconData icon;
-  final VoidCallback ? ontap;
+  final IconData? icon2;
+  final VoidCallback? ontap;
   const DonnerTextFeilsComp(
       {super.key,
       required this.hint,
       this.onChanged,
       required this.controller,
-      required this.icon, this.ontap});
+      required this.icon,
+      this.ontap, this.icon2});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
+          width: context.mw,
           height: context.mh * 0.06,
           margin: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
           padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
@@ -55,12 +58,28 @@ class DonnerTextFeilsComp extends StatelessWidget {
               height: context.mw * 0.13,
               width: context.mw * 0.13,
               decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColor.masjidgeryColor,
-              ),
+                  color: AppColor.masjidgeryColor,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  )),
               child: Center(
                 child: Icon(icon),
               ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 0,
+          right: context.mw * 0.170,
+          child: Container(
+            height: context.mw * 0.13,
+            width: context.mw * 0.13,
+            decoration: const BoxDecoration(
+              color: AppColor.masjidgeryColor,
+            ),
+            child: Center(
+              child: Icon(icon2),
             ),
           ),
         )

@@ -14,28 +14,11 @@ class SharePrefs {
     await prefs.setString(key, data);
   }
 
-  static Future<String> getId(key) async {
+  // Get The Saved Data
+  static Future<String> getData(key) async {
     final prefs = await SharedPreferences.getInstance();
-    final String Id = prefs.getString(key) ?? '';
-    return Id;
-  }
-
-  static Future<String> getMasjid(key) async {
-    final prefs = await SharedPreferences.getInstance();
-    final String masjidname = prefs.getString(key) ?? '';
-    return masjidname;
-  }
-
-  static Future<String> getMasjidID(key) async {
-    final prefs = await SharedPreferences.getInstance();
-    final String masjidname = prefs.getString(key) ?? '';
-    return masjidname;
-  }
-
-  static Future<String> getMuntazimEmail(key) async {
-    final prefs = await SharedPreferences.getInstance();
-    final String masjidname = prefs.getString(key) ?? '';
-    return masjidname;
+    final String data = prefs.getString(key) ?? '';
+    return data;
   }
 
   static Future<void> saveRandomId() async {

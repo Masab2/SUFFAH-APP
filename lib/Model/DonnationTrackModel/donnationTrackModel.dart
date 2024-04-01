@@ -21,6 +21,7 @@ class DonnationTrackModel {
   final String masjidState;
   final String masjidemail;
   final String program;
+  final String muntazimId;
 
   DonnationTrackModel({
     required this.donnationAmmount,
@@ -45,5 +46,6 @@ class DonnationTrackModel {
     required this.masjidState,
     required this.masjidemail,
     required this.program,
+    required this.muntazimId,
   });
 }

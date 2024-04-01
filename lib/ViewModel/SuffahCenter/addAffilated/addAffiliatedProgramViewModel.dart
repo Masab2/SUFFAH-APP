@@ -11,6 +11,9 @@ class AddCenterProgramController extends GetxController {
   final ImagePicker _picker = ImagePicker();
   var image;
   RxString imagePath = ''.obs;
+  var currentCountry = 'Pakistan'.obs;
+  var currentCity = 'Lahore'.obs;
+  var currentState = 'Punjab'.obs;
   final AddCenterProgramRepo _programRepo = AddCenterProgramRepo();
 
   Future getImageFromgallery(ImageSource source) async {
@@ -20,6 +23,24 @@ class AddCenterProgramController extends GetxController {
     } else {
       Get.snackbar('Fail', 'No Image Selected');
     }
+  }
+
+  // Select The Country
+  void onCountryChanged(value) {
+    currentCountry.value = value;
+    update();
+  }
+
+  // Select The City
+  void onCityChanged(String value) {
+    currentCity.value = value;
+    update();
+  }
+
+  // Select The State
+  void onStateChanged(String value) {
+    currentState.value = value;
+    update();
   }
 
   // Add Program to The Database And Request to The Admin
@@ -37,6 +58,11 @@ class AddCenterProgramController extends GetxController {
     masjidname,
     masjidId,
     muntazimEmail,
+    TextEditingController phoneNoController,
+    address,
+    country,
+    state,
+    city,
   ) async {
     try {
       final result = await _programRepo.requestProgramManually(
@@ -53,6 +79,12 @@ class AddCenterProgramController extends GetxController {
         muntazimId.toString(),
         masjidname.toString(),
         masjidId.toString(),
+        muntazimEmail,
+        phoneNoController,
+        address,
+        country,
+        state,
+        city,
       );
 
       if (result == null) {
@@ -68,4 +100,6 @@ class AddCenterProgramController extends GetxController {
       Get.snackbar('Error', e.toString());
     }
   }
+
+  // Scan Id Card For Automation
 }

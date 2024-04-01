@@ -64,7 +64,8 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
           DonnerTextFeilsComp(
             hint: l10n!.searchMasjid,
             controller: searchController,
-            icon: Icons.search,
+            icon: Icons.mosque,
+            icon2: Icons.search,
           ),
           0.03.ph,
           StreamBuilder(
@@ -94,7 +95,6 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
                       image: data['masjidimg'],
                       masjidaddress: data['address'],
                       ontap: () {
-                        
                         Get.toNamed(
                           RoutesNames.donateNeedyPeopleScreen,
                           arguments: [
@@ -115,7 +115,7 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
                       },
                       program: program,
                       muntazimid: data['adminCreatedId'],
-                      receivedDonationsCount: 10,
+                      receivedDonationsCount: data['recivedDonnation'],
                       waitingCount: 20,
                       onlocation: () {
                         masjidController.openGoogleMap(

@@ -5,9 +5,9 @@ import 'package:iconly/iconly.dart';
 import 'package:suffa_app/ViewModel/BottomNavBar/BottomNavBarViewModel.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-import 'package:suffa_app/views/ChoiceScreen/ChoiceScreen.dart';
 import 'package:suffa_app/views/Donners/Donate/DonateScreenView.dart';
 import 'package:suffa_app/views/Donners/Home/homeView.dart';
+import 'package:suffa_app/views/Donners/More/MoreScreenView.dart';
 import 'package:suffa_app/views/Donners/Profile/DonnerProfile/DonnerProfle.dart';
 
 class CustomizedBottomNavBar extends StatefulWidget {
@@ -107,7 +107,7 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
         DonateScreenView(),
         Scaffold(body: Center(child: Text('Home3'))),
         DonnerProfile(),
-        ChoiceScreen()
+        MoreScreenView(),
       ],
     );
   }

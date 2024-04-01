@@ -33,7 +33,13 @@
   "cnicTitle": "CNIC",
   "nameTitle": "NAME",
   "addressTitle": "ADRESSE",
+  "masjidNameTitle": "Name der Moschee",
   "@_PAYMENTMETHODSSCREEN": {},
   "totalAmount": "Gesamtmenge",
-  "paymentMethods": "Zahlungsarten"
+  "paymentMethods": "Zahlungsarten",
+  "@_ONETIMEPAYMENTSCREEN": {},
+  "taglineOne": "Spenden Sie unverzüglich Wohltätigkeit, denn ",
+  "taglineTwo": " sie steht dem Unglück im Weg",
+  "tabOne": "Shuffa Person",
+  "tabTwo": "Shuffa Masjid"
 }

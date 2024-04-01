@@ -121,7 +121,7 @@ class RequesttoAdminComp extends StatelessWidget {
                   child: Expanded(
                     child: MaterialButton(
                       minWidth: context.mw * 0.30,
-                      color: AppColor.geryColor,
+                      color: AppColor.brownColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       onPressed: onGreyBtnPressed,

@@ -18,6 +18,12 @@ class AddCenterProgramRepo {
     muntazimId,
     masjidname,
     masjidId,
+    masjidEmail,
+    TextEditingController phoneNoController,
+    address,
+    country,
+    state,
+    city,
   ) async {
     if (title.text.isEmpty ||
         price.text.isEmpty ||
@@ -43,6 +49,13 @@ class AddCenterProgramRepo {
         dob.text,
         doCardissue.text,
         doCardExpire.text,
+        holdername.text,
+        masjidEmail,
+        phoneNoController.text,
+        address,
+        country,
+        state,
+        city,
       );
       return null;
     } catch (e) {

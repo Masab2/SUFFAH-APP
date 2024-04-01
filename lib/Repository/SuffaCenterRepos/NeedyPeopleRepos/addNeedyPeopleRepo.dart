@@ -1,18 +1,19 @@
 // ignore_for_file: unnecessary_null_comparison, body_might_complete_normally_nullable
-
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class AddNeedyPeopleRepo {
   Future<String?> addNeedyPeople(String file, TextEditingController phoneno,
       TextEditingController address, masjid) async {
-    if (file == null || phoneno.text.isEmpty || address.text.isEmpty || file.isEmpty) {
+    if (file == null ||
+        phoneno.text.isEmpty ||
+        address.text.isEmpty ||
+        file.isEmpty) {
       return 'Please Fill the Required Feilds';
-    }  else {
+    } else {
       QuerySnapshot snapshot =
           await Apis.firestore.collection(suffahCenterNeedyPeople).get();
       for (var doc in snapshot.docs) {
@@ -27,19 +28,26 @@ class AddNeedyPeopleRepo {
   }
 
   Future<String?> addCnicDataManually(
-      TextEditingController holdername,
-      TextEditingController cnicNo,
-      TextEditingController dob,
-      TextEditingController doCardissue,
-      TextEditingController doCardExpire,
-      File file,
-      String phoneno,
-      String address,
-      String masjid,
-      program,
-      muntazimid,
-      gender,
-      masjidid) async {
+    TextEditingController holdername,
+    TextEditingController cnicNo,
+    TextEditingController dob,
+    TextEditingController doCardissue,
+    TextEditingController doCardExpire,
+    File file,
+    String phoneno,
+    String address,
+    String masjid,
+    program,
+    muntazimid,
+    gender,
+    masjidid,
+    masjidEmail,
+    masjidCountry,
+    masjidState,
+    masjidCity,
+    masjidaddress,
+    donatePrice,
+  ) async {
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
         dob.text.isEmpty ||
@@ -72,6 +80,13 @@ class AddNeedyPeopleRepo {
         dob.text,
         doCardissue.text,
         doCardExpire.text,
+        masjidid,
+        masjidEmail,
+        masjidCountry,
+        masjidState,
+        masjidCity,
+        masjidaddress,
+        donatePrice,
       );
       // Check if the program is available in the suffa center collection
       final DocumentSnapshot<Map<String, dynamic>> programDoc =
@@ -118,6 +133,12 @@ class AddNeedyPeopleRepo {
     muntazimid,
     gender,
     masjidid,
+    masjidEmail,
+    masjidCountry,
+    masjidState,
+    masjidCity,
+    masjidaddress,
+    donatePrice,
   ) async {
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
@@ -151,6 +172,13 @@ class AddNeedyPeopleRepo {
         dob.text,
         doCardissue.text,
         doCardExpire.text,
+        masjidid,
+        masjidEmail,
+        masjidCountry,
+        masjidState,
+        masjidCity,
+        masjidaddress,
+        donatePrice,
       );
       // Check if the program is available in the suffa center collection
       final DocumentSnapshot<Map<String, dynamic>> programDoc =

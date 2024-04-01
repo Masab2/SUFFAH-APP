@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
@@ -26,8 +25,8 @@ class ChoiceComp extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             gradient: const LinearGradient(
               colors: [
-                Colors.transparent,
-                AppColor.mehroonColor
+                AppColor.mehroonColor,
+                AppColor.brownColor,
               ], // Example gradient colors
               begin: Alignment.topLeft,
               end: Alignment.center,
@@ -59,7 +58,7 @@ class ChoiceComp extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontSize: context.mh * 0.022,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black54,
+                          color: AppColor.whiteColor,
                         ),
                       ),
                     ),

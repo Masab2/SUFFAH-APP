@@ -1,6 +1,7 @@
 class RoutesNames {
   // Splash Screen
   static const String splashScreen = '/';
+  static const String splashChoices = '/splashChoices';
   // AuthScreen
   static const String loginScreen = '/loginScreen';
   static const String signUpScreen = '/signUpScreen';
@@ -14,6 +15,8 @@ class RoutesNames {
   static const String donateNeedyPeopleScreen = '/donateNeedyPeopleScreen';
   static const String donatePaymentScreen = '/donatePaymentScreen';
   static const String editProfileScreen = '/editProfileScreen';
+  static const String seeAllProgramsScreen = '/seeAllProgramsScreen';
+  static const String seeAllMasjidProgramScreen = '/seeAllMasjidProgramScreen';
 
   // Payment Screens
   static const String jazzCashPaymentScreen = '/jazzCashPaymentScreen';

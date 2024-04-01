@@ -8,8 +8,8 @@ import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 import '../../res/routes/routesNames.dart';
 
-class SplashView extends StatelessWidget {
-  const SplashView({super.key});
+class SplashChoices extends StatelessWidget {
+  const SplashChoices({super.key});
 
   @override
   Widget build(BuildContext context) {
