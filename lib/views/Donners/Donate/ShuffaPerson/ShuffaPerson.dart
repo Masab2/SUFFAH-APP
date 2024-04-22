@@ -195,6 +195,7 @@ class _ShuffaPersonViewState extends State<ShuffaPersonView> {
                             model,
                             donnerModel,
                             context,
+                            'forPerson',
                           );
                         },
                         donateController,

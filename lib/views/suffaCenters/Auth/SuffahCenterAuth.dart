@@ -8,7 +8,7 @@ import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/res/components/TextFormFeilds/customizedFeild.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SuffahCenterLoginDashBoard extends StatefulWidget {
   const SuffahCenterLoginDashBoard({super.key});
 
@@ -33,6 +33,7 @@ class _SuffahCenterLoginDashBoardState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(),
@@ -45,7 +46,7 @@ class _SuffahCenterLoginDashBoardState
                   Align(
                     alignment: Alignment.topCenter,
                     child: Text(
-                      'Al-Suffah Center',
+                      l10n!.portalTwoAdmin,
                       style: GoogleFonts.poppins(
                         fontSize: context.mh * 0.024,
                         color: AppColor.mehroonColor,
@@ -56,7 +57,7 @@ class _SuffahCenterLoginDashBoardState
                   Align(
                     alignment: Alignment.topCenter,
                     child: Text(
-                      'Login Here',
+                      l10n.loginTitle,
                       style: GoogleFonts.poppins(
                         fontSize: context.mh * 0.018,
                         color: AppColor.mehroonColor,
@@ -69,7 +70,7 @@ class _SuffahCenterLoginDashBoardState
               0.04.ph,
               CustomizedFeild(
                 controller: emailController,
-                title: 'Email',
+                title: l10n.emailHint,
                 hint: 'abc@gmail.com',
               ),
               0.03.ph,
@@ -77,7 +78,7 @@ class _SuffahCenterLoginDashBoardState
                 valueListenable: _obscurepass,
                 builder: (context, value, child) {
                   return CustomizedFeild(
-                    title: 'Password',
+                    title: l10n.passwordHint,
                     hint: '6 character/digit',
                     obscuretext: _obscurepass.value,
                     sufixIcon: InkWell(
@@ -102,7 +103,7 @@ class _SuffahCenterLoginDashBoardState
                 return suffaCenterAuthController.isLoading.value == true
                     ? const CircularProgressIndicator.adaptive()
                     : ReuseAblebtn(
-                        title: 'Login',
+                        title: l10n.loginButton,
                         onPressed: () {
                           suffaCenterAuthController.suffaLoginAccount(
                               emailController, passwordController, context);

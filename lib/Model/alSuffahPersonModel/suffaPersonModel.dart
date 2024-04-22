@@ -22,6 +22,7 @@ class SuffahPersonModel {
   final String masjidState;
   final String masjidemail;
   final String muntazimId;
+  final bool programStatus;
 
   SuffahPersonModel({
     required this.personname,
@@ -47,5 +48,6 @@ class SuffahPersonModel {
     required this.masjidState,
     required this.masjidemail,
     required this.muntazimId,
+    required this.programStatus,
   });
 }

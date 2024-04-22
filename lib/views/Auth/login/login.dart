@@ -102,7 +102,7 @@ class _LoginViewState extends State<LoginView> {
                         title: 'Login',
                         onPressed: () {
                           loginController.loginAccount(
-                              emailController, passwordController);
+                              emailController, passwordController, context);
                         },
                       );
               }),

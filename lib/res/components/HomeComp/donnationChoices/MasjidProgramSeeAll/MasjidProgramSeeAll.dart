@@ -6,18 +6,40 @@ import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'dart:developer';
+
 class DonnationChoiceMasjidComp extends StatelessWidget {
   final String image;
   final String title;
   final VoidCallback ontap;
   final String program;
+  final String price, recivedDonnation, currency;
+  final VoidCallback onProgramClick;
   const DonnationChoiceMasjidComp({
     super.key,
     required this.image,
     required this.title,
     required this.ontap,
     required this.program,
+    required this.price,
+    required this.recivedDonnation,
+    required this.currency,
+    required this.onProgramClick,
   });
+  double calculatebar() {
+    // Calculate the progress ratio
+    double progressRatio = 0.0;
+    try {
+      double requiredAmount = double.parse(price);
+      double receivedAmount = double.parse(recivedDonnation);
+      if (requiredAmount > 0) {
+        progressRatio = receivedAmount / requiredAmount;
+      }
+    } catch (e) {
+      log('Error parsing donation amounts: $e');
+    }
+    return progressRatio;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +75,15 @@ class DonnationChoiceMasjidComp extends StatelessWidget {
                     },
                   ),
                 ),
-                Text(
-                  title,
-                  style: GoogleFonts.poppins(
-                    fontSize: context.mh * 0.023,
-                    fontWeight: FontWeight.w700,
-                    color: AppColor.mehroonColor,
+                InkWell(
+                  onTap: onProgramClick,
+                  child: Text(
+                    title,
+                    style: GoogleFonts.poppins(
+                      fontSize: context.mh * 0.023,
+                      fontWeight: FontWeight.w700,
+                      color: AppColor.mehroonColor,
+                    ),
                   ),
                 ),
                 SingleChildScrollView(
@@ -69,7 +94,7 @@ class DonnationChoiceMasjidComp extends StatelessWidget {
                         width: context.mw * 0.70,
                         backgroundColor: Colors.grey.shade800,
                         foregrondColor: AppColor.mehroonColor,
-                        ratio: 3 / 10,
+                        ratio: calculatebar(),
                         direction: Axis.horizontal,
                         curve: Curves.fastLinearToSlowEaseIn,
                         duration: const Duration(seconds: 3),
@@ -90,7 +115,7 @@ class DonnationChoiceMasjidComp extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '1000 Rs',
+                              '$recivedDonnation $currency',
                               style: GoogleFonts.poppins(
                                 fontSize: context.mh * 0.014,
                                 fontWeight: FontWeight.bold,
@@ -128,7 +153,7 @@ class DonnationChoiceMasjidComp extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          l10n.selectProgram,
+                          l10n.donateNowtitle,
                           style: GoogleFonts.poppins(
                             fontSize: context.mh * 0.017,
                             color: AppColor.whiteColor,

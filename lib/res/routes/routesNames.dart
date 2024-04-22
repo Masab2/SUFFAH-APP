@@ -17,6 +17,8 @@ class RoutesNames {
   static const String editProfileScreen = '/editProfileScreen';
   static const String seeAllProgramsScreen = '/seeAllProgramsScreen';
   static const String seeAllMasjidProgramScreen = '/seeAllMasjidProgramScreen';
+  static const String trackDonnationScreen = '/trackDonnationScreen';
+  static const String detailtrackDonnationScreen = '/detailDonnationScreen';
 
   // Payment Screens
   static const String jazzCashPaymentScreen = '/jazzCashPaymentScreen';
@@ -36,6 +38,7 @@ class RoutesNames {
   static const String displayaffiliatedProgramScreenforAdmin =
       '/displayaffiliatedProgramScreenforAdmin';
   static const String addCountryScreen = '/addCountryScreen';
+  static const String adminDonnationTrackScreen = '/adminDonnationTrackScreen';
 
   // Suffa Center DashBoard
   static const String suffahloginDashBoardScreen =

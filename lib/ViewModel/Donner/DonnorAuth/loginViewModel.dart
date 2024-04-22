@@ -8,10 +8,10 @@ class LoginViewModel extends GetxController {
   final _loginRepo = LoginRepo();
   RxBool isLoading = false.obs;
   Future<void> loginAccount(
-      TextEditingController email, TextEditingController password) async {
+      TextEditingController email, TextEditingController password, BuildContext context) async {
     try {
       isLoading(true);
-      final result = await _loginRepo.loginAccount(email, password);
+      final result = await _loginRepo.loginAccount(email, password,context);
       if (result == null) {
         Get.offAllNamed(RoutesNames.bottomNavbarScreen);
       } else {

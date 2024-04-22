@@ -38,6 +38,7 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
   late String masjidState;
   late String masjidemail;
   late double convertAmmountDonate;
+  late String programStatus;
 
   @override
   void initState() {
@@ -53,6 +54,7 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
     masjidCity = Get.arguments[9];
     masjidState = Get.arguments[10];
     masjidemail = Get.arguments[11];
+    programStatus = Get.arguments[12];
     needyPeopleController.fetchData(program, muntazimid, currency);
     convertAmmountDonate =
         needyPeopleController.convertCurrency(double.parse(price), currency);
@@ -174,6 +176,7 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                                 model,
                                 donnerModel,
                                 context,
+                                programStatus,
                               );
                             }, donnateController, context);
                           },

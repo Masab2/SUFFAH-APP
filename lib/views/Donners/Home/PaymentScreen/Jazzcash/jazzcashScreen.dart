@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:suffa_app/Model/DonnationTrackMasjidModel/DonnationTrackMasjidModel.dart';
 import 'package:suffa_app/Model/DonnationTrackModel/donnationTrackModel.dart';
 import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
 import 'package:suffa_app/ViewModel/PaymentMethods/JazzCash/jazzcashPaymentViewModel.dart';
@@ -23,13 +24,17 @@ class JazzCashView extends StatefulWidget {
 class _JazzCashViewState extends State<JazzCashView> {
   final jazzcashPayment = Get.put(JazcashPaymentViewModel());
   final paymentNoController = TextEditingController();
-  late DonnationTrackModel model;
+  late DonnationTrackModel? model;
+  late DonnationTrackMasjidModel? masjidModel;
   late List<DonnerModel> donnermodel;
+  late String programStatus;
 
   @override
   void initState() {
-    model = Get.arguments[0];
-    donnermodel = Get.arguments[1];
+    programStatus = Get.arguments[0];
+    model = Get.arguments[1];
+    masjidModel = Get.arguments[2];
+    donnermodel = Get.arguments[3];
     super.initState();
   }
 
@@ -86,14 +91,25 @@ class _JazzCashViewState extends State<JazzCashView> {
                           var bytes = utf8.encode(superdata);
                           var hmacSha256 = Hmac(sha256, key);
                           Digest sha256Result = hmacSha256.convert(bytes);
-                          await jazzcashPayment.jazzCashPayment(
-                            model.donnationAmmount,
-                            paymentNoController.text,
-                            sha256Result.toString(),
-                            context,
-                            model,
-                            donnermodel,
-                          );
+                          if (programStatus == "forMasjid") {
+                            await jazzcashPayment.jazzCashPaymentForMasjid(
+                              masjidModel!.donnationAmmount,
+                              paymentNoController.text,
+                              sha256Result.toString(),
+                              context,
+                              masjidModel,
+                              donnermodel,
+                            );
+                          } else if (programStatus == "forPerson") {
+                            await jazzcashPayment.jazzCashPaymentForPerson(
+                              model!.donnationAmmount,
+                              paymentNoController.text,
+                              sha256Result.toString(),
+                              context,
+                              model,
+                              donnermodel,
+                            );
+                          }
                         },
                         color: const Color(0xFF00A859), // JazzCash color
                         textColor: Colors.white,

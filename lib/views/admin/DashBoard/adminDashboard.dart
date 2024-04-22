@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconly/iconly.dart';
 import 'package:suffa_app/res/components/adminDashBoardTiles/adminDashBoardtiles.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 import '../../../res/components/adminDashBoardTiles/adminTilesUperheading/upperHeading.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdminDashBoard extends StatefulWidget {
   const AdminDashBoard({super.key});
@@ -17,10 +19,11 @@ class AdminDashBoard extends StatefulWidget {
 class _AdminDashBoardState extends State<AdminDashBoard> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Admin Panel',
+            l10n!.adminPanelTitle,
             style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
@@ -41,16 +44,18 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AdminDashBoardtiles(
-                      title: 'SUFFAH Center',
+                      title: l10n.shuffahCenterTitle,
                       ontap: () {
                         Get.toNamed(RoutesNames.viewSuffahCenterScreen);
                       },
                       icon: Icons.mosque,
                     ),
                     AdminDashBoardtiles(
-                      title: 'Al-SUFFAH Store',
-                      ontap: () {},
-                      icon: Icons.shop,
+                      title: l10n.donnationTrackTitle,
+                      ontap: () {
+                        Get.toNamed(RoutesNames.adminDonnationTrackScreen);
+                      },
+                      icon: IconlyBold.heart,
                     ),
                   ],
                 ),
@@ -62,14 +67,14 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AdminDashBoardtiles(
-                      title: 'Members Request',
+                      title: l10n.memberRequestTitle,
                       ontap: () {
                         Get.toNamed(RoutesNames.memberRequestScreen);
                       },
                       icon: Icons.remove_from_queue,
                     ),
                     AdminDashBoardtiles(
-                      title: 'Requested Program',
+                      title: l10n.requestedProgramTitle,
                       ontap: () {
                         Get.toNamed(RoutesNames.requestProgramScreen);
                       },
@@ -85,7 +90,7 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AdminDashBoardtiles(
-                      title: 'Affiliated Program',
+                      title: l10n.affiliatedProgramTitle,
                       ontap: () {
                         Get.toNamed(
                           RoutesNames.displayaffiliatedProgramScreenforAdmin,

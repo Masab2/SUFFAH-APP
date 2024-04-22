@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:suffa_app/Model/DonnationTrackMasjidModel/DonnationTrackMasjidModel.dart';
+import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/ViewModel/Donner/HomeViewModel/HomeViewModel.dart';
@@ -12,6 +14,7 @@ import 'package:suffa_app/res/components/AppBar/AppBar.dart';
 import 'package:suffa_app/res/components/HomeComp/donnationChoices/DonnationChoiceComp.dart';
 import 'package:suffa_app/res/components/HomeComp/donnationChoices/MasjidProgramSeeAll/MasjidProgramSeeAll.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
+import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -27,6 +30,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final homeController = Get.put(HomeViewModel());
   final langController = Get.find<AppLanguageController>();
+  final TextEditingController donatecontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    donatecontroller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -264,6 +274,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         var data = snapshot.data!.docs[index];
                         return DonnationChoice(
+                          onprogramClick: () {
+                            Utils.showBottomSheetForProgramDefault(
+                              () {},
+                              data['programTitle'],
+                              data['purpose'],
+                              context,
+                            );
+                          },
                           image: data['image'],
                           title: data['programTitle'],
                           ontap: () {
@@ -275,6 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 homeController.country.value,
                                 data['image'],
                                 homeController.selectedCurrency.value,
+                                data['personDefine']
                               ],
                             );
                           },
@@ -302,12 +321,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  Text(
-                    l10n.seeAll,
-                    style: GoogleFonts.poppins(
-                      fontSize: context.mh * 0.017,
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.mehroonColor,
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(RoutesNames.seeAllMasjidProgramScreen);
+                    },
+                    child: Text(
+                      l10n.seeAll,
+                      style: GoogleFonts.poppins(
+                        fontSize: context.mh * 0.017,
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.mehroonColor,
+                      ),
                     ),
                   ),
                 ],
@@ -341,8 +365,75 @@ class _HomeScreenState extends State<HomeScreen> {
                         return DonnationChoiceMasjidComp(
                           image: data['image'],
                           title: data['programTitle'],
-                          ontap: () {},
+                          ontap: () {
+                            Utils.showBottomSheetAmmount(
+                              () {
+                                final DonnationTrackMasjidModel model =
+                                    DonnationTrackMasjidModel(
+                                  donnationAmmount: donatecontroller.text,
+                                  requiredDonnation: data['Price'],
+                                  image: data['image'],
+                                  currency:
+                                      homeController.selectedCurrency.value,
+                                  personcnic: data['CnicNo'],
+                                  personame: data['CardHolderName'],
+                                  dateofBirth: data['dob'],
+                                  dateofCardExpire: data['doExpire'],
+                                  dateofCardIssue: data['doIssue'],
+                                  masjidname: data['masjidname'],
+                                  masjidid: data['MasjidId'],
+                                  masjidAddress: data['MasjidAddress'],
+                                  masjidCountry: data['countryMasjid'],
+                                  masjidCity: data['masjidCity'],
+                                  masjidState: data['masjidState'],
+                                  masjidemail: data['masjidEmail'],
+                                  program: data['programTitle'],
+                                  muntazimId: data['muntazimId'],
+                                  programId: data['programId'],
+                                );
+                                final List<DonnerModel> donnerModel = [];
+                                DonnerModel donner = DonnerModel(
+                                  donnerId: Apis.user.uid,
+                                  donateAbleAmmount: donatecontroller.text,
+                                  currency:
+                                      homeController.selectedCurrency.value,
+                                );
+                                donnerModel.add(donner);
+                                homeController.validateDonnation(
+                                  double.parse(data['Price']).toInt(),
+                                  data['image'],
+                                  homeController.selectedCurrency.value,
+                                  donatecontroller,
+                                  model,
+                                  donnerModel,
+                                  context,
+                                  data['centerDefine'].toString(),
+                                );
+                              },
+                              donatecontroller,
+                              context,
+                            );
+                          },
                           program: data['programTitle'],
+                          price: data['Price'],
+                          recivedDonnation: data['recivedDonnation'],
+                          currency: homeController.selectedCurrency.value,
+                          onProgramClick: () {
+                            Utils.showBottomSheetForProgramDetails(
+                              () {},
+                              data['programTitle'],
+                              data['masjidname'],
+                              data['purpose'],
+                              data['MasjidAddress'],
+                              data['countryMasjid'],
+                              data['masjidCity'],
+                              data['masjidState'],
+                              data['Price'],
+                              data['recivedDonnation'],
+                              homeController.selectedCurrency.value,
+                              context,
+                            );
+                          },
                         );
                       },
                     ),

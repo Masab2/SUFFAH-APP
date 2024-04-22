@@ -52,7 +52,7 @@ class NeedyPeopleController extends GetxController {
           masjidCity: doc['masjidCity'],
           masjidState: doc['masjidState'],
           masjidemail: doc['masjidEmail'],
-          muntazimId: doc['MuntazimId'],
+          muntazimId: doc['MuntazimId'], programStatus: true,
         );
       }).toList();
       if (kDebugMode) {
@@ -97,7 +97,7 @@ class NeedyPeopleController extends GetxController {
           masjidCity: doc['masjidCity'],
           masjidState: doc['masjidState'],
           masjidemail: doc['masjidEmail'],
-          muntazimId: doc['MuntazimId'],
+          muntazimId: doc['MuntazimId'], programStatus: true,
         );
       }).toList();
       if (kDebugMode) {
@@ -142,6 +142,7 @@ class NeedyPeopleController extends GetxController {
     DonnationTrackModel model,
     List<DonnerModel> donnermodel,
     BuildContext context,
+    String programStatus,
   ) {
     if (donnateController.text.isNotEmpty) {
       final String donate = donnateController.text;
@@ -154,6 +155,7 @@ class NeedyPeopleController extends GetxController {
         Get.toNamed(
           RoutesNames.donatePaymentScreen,
           arguments: [
+            programStatus,
             model,
             donnermodel,
           ],

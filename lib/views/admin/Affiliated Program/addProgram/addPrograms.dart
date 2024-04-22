@@ -23,6 +23,7 @@ class AddProgramsView extends StatefulWidget {
 
 class _AddProgramsViewState extends State<AddProgramsView> {
   final titleController = TextEditingController();
+  final purposeController = TextEditingController();
   final priceController = TextEditingController();
   final controller = Get.put(AffiliatedViewModel());
   @override
@@ -30,6 +31,7 @@ class _AddProgramsViewState extends State<AddProgramsView> {
     titleController.dispose();
     priceController.dispose();
     controller.dispose();
+    purposeController.dispose();
     super.dispose();
   }
 
@@ -87,6 +89,11 @@ class _AddProgramsViewState extends State<AddProgramsView> {
               icon: Icons.title,
               hint: 'Rashan Pack',
               controller: titleController),
+          AddNeedyPeopleComp(
+              title: 'Purpose',
+              icon: Icons.description,
+              hint: 'Rashan Pack',
+              controller: purposeController),
           0.01.ph,
           Obx(() {
             return Row(
@@ -99,7 +106,6 @@ class _AddProgramsViewState extends State<AddProgramsView> {
                     controller: priceController,
                   ),
                 ),
-                
                 Column(
                   children: [
                     0.02.ph,
@@ -173,7 +179,7 @@ class _AddProgramsViewState extends State<AddProgramsView> {
               ),
             ),
           ),
-          0.05.ph,
+          0.03.ph,
           Padding(
               padding: EdgeInsets.symmetric(horizontal: context.mw * 0.03),
               child: ReuseAblebtn(
@@ -183,9 +189,10 @@ class _AddProgramsViewState extends State<AddProgramsView> {
                     titleController,
                     controller.selectedValue.value,
                     priceController,
+                    purposeController,
                   );
                 },
-              ))
+              )),
         ],
       ),
     );

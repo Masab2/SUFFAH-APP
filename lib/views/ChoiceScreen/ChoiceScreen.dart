@@ -6,7 +6,7 @@ import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ChoiceScreen extends StatefulWidget {
   const ChoiceScreen({super.key});
 
@@ -17,10 +17,11 @@ class ChoiceScreen extends StatefulWidget {
 class _ChoiceScreenState extends State<ChoiceScreen> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Admin Portals',
+          l10n!.adminProtalsTitle,
           style: GoogleFonts.poppins(
             fontSize: context.mh * 0.024,
             color: AppColor.whiteColor,
@@ -51,7 +52,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ChoiceComp(
-                title: 'Al-Suffah Admin',
+                title: l10n.portalOneAdmin,
                 ontap: () {
                   Get.toNamed(RoutesNames.loginDashBoardScreen);
                 },
@@ -59,7 +60,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
               ),
               0.03.ph,
               ChoiceComp(
-                title: 'Al-Suffah Center',
+                title: l10n.portalTwoAdmin,
                 ontap: () {
                   Get.toNamed(RoutesNames.suffahloginDashBoardScreen);
                 },
@@ -67,7 +68,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
               ),
               0.03.ph,
               ChoiceComp(
-                title: 'Al-Suffah Shop',
+                title: l10n.portalThreeAdmin,
                 ontap: () {
                   Get.toNamed(RoutesNames.suffahStoreloginScreen);
                 },

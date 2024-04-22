@@ -22,13 +22,14 @@ class AffiliatedViewModel extends GetxController {
     }
   }
 
-  void addAffiliatedProgram(title, status, price) async {
+  void addAffiliatedProgram(title, status, price,purpose) async {
     final result = await _addProgramRepo.addAffiliatedProgram(
       imagePath.value.toString(),
       title,
       status,
       price,
       selectedCurrency.value,
+      purpose
     );
     if (result == null) {
       Get.snackbar('Program Added', 'Program Added Successfully');

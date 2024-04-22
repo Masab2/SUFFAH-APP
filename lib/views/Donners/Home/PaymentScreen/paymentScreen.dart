@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:suffa_app/Model/DonnationTrackMasjidModel/DonnationTrackMasjidModel.dart';
 import 'package:suffa_app/Model/DonnationTrackModel/donnationTrackModel.dart';
 import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
 import 'package:suffa_app/ViewModel/Donner/PaymentViewModels/PaymentViewModel.dart';
@@ -20,13 +21,22 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   final paymentController = Get.put(PaymentViewModel());
-  late DonnationTrackModel model;
+  late DonnationTrackModel? model;
+  late DonnationTrackMasjidModel? masjidModel;
   late List<DonnerModel> donnermodel;
+  late String programStatus;
 
   @override
   void initState() {
-    model = Get.arguments[0];
-    donnermodel = Get.arguments[1];
+    programStatus = Get.arguments[0];
+    if (programStatus == "forMasjid") {
+      masjidModel = Get.arguments[1];
+      model = null;
+    } else if (programStatus == "forPerson") {
+      model = Get.arguments[1];
+      masjidModel = null;
+    }
+    donnermodel = Get.arguments[2];
     super.initState();
   }
 
@@ -44,8 +54,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
         child: Column(
           children: [
             PaymentUperheading(
-              image: model.image,
-              donnationprice: '${model.currency} ${model.donnationAmmount}',
+              image: programStatus == 'forMasjid'
+                  ? masjidModel?.image ?? ''
+                  : model?.image ?? '',
+              donnationprice:
+                  '${programStatus == 'forMasjid' ? masjidModel?.currency : model?.currency} ${programStatus == 'forMasjid' ? masjidModel?.donnationAmmount : model?.donnationAmmount}',
               title: l10n!.totalAmount,
             ),
             0.02.ph,
@@ -69,7 +82,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     Get.toNamed(
                       RoutesNames.jazzCashPaymentScreen,
                       arguments: [
+                        programStatus,
                         model,
+                        masjidModel,
                         donnermodel,
                       ],
                     );

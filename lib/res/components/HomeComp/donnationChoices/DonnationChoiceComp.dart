@@ -14,15 +14,13 @@ class DonnationChoice extends StatelessWidget {
   final String title;
   final VoidCallback ontap;
   final String program;
-  // int previousTotalNeedyPeople;
-  // static int totalDonations = 0;
+  final VoidCallback? onprogramClick;
   const DonnationChoice({
     super.key,
     required this.image,
     required this.title,
     required this.ontap,
-    required this.program,
-    // this.previousTotalNeedyPeople = 0,
+    required this.program, this.onprogramClick,
   });
 
   @override
@@ -63,12 +61,15 @@ class DonnationChoice extends StatelessWidget {
                     },
                   ),
                 ),
-                Text(
-                  title,
-                  style: GoogleFonts.poppins(
-                    fontSize: context.mh * 0.023,
-                    fontWeight: FontWeight.w700,
-                    color: AppColor.mehroonColor,
+                InkWell(
+                  onTap: onprogramClick ,
+                  child: Text(
+                    title,
+                    style: GoogleFonts.poppins(
+                      fontSize: context.mh * 0.023,
+                      fontWeight: FontWeight.w700,
+                      color: AppColor.mehroonColor,
+                    ),
                   ),
                 ),
                 0.01.ph,

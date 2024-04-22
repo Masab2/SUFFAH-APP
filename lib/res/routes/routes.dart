@@ -12,6 +12,9 @@ import 'package:suffa_app/views/Donners/Home/SeeAllPrograms/seeAllPrograms.dart'
 import 'package:suffa_app/views/Donners/Home/Select%20Masjids/ViewMasjids/SelectMasjidsView.dart';
 import 'package:suffa_app/views/Donners/Profile/EditProfile/EditProfile.dart';
 import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
+import 'package:suffa_app/views/Donners/Profile/TrackDonnation/TrackDonnation.dart';
+import 'package:suffa_app/views/Donners/Profile/TrackDonnation/detailTrackDonnation.dart';
+import 'package:suffa_app/views/admin/AdminDonnationTrack/AdminDonnationTrackView.dart';
 import 'package:suffa_app/views/admin/Affiliated%20Program/addProgram/addPrograms.dart';
 import 'package:suffa_app/views/admin/Affiliated%20Program/displayprogram/displayAffiliaatedProgram.dart';
 import 'package:suffa_app/views/admin/Auth/LoginDashBoard/adminLoginDashBoard.dart';
@@ -111,6 +114,14 @@ class AppRoutes {
             name: RoutesNames.seeAllMasjidProgramScreen,
             page: () => const SeeAllMasjidProgramView(),
             transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.trackDonnationScreen,
+            page: () => const TrackDonnation(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.detailtrackDonnationScreen,
+            page: () => const DetailTrackDonnation(),
+            transition: Transition.leftToRight),
 
         //! Adminstration DashBoard
         GetPage(
@@ -152,6 +163,10 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.addCountryScreen,
             page: () => const DisplayAffiliatedProgram(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.adminDonnationTrackScreen,
+            page: () => const AdminDonnationTrackView(),
             transition: Transition.leftToRight),
 
         //* Suffa Center DashBoard

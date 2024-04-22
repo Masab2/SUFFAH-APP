@@ -17,7 +17,7 @@ class AdminLoginViewModel extends GetxController {
   ) async {
     try {
       isLoading(true);
-      final result = await _adminLoginRepo.adminLoginAccount(email, password);
+      final result = await _adminLoginRepo.adminLoginAccount(email, password,context);
       if (result == null) {
         email.clear();
         password.clear();

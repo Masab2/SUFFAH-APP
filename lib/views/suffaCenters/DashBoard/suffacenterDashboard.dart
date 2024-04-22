@@ -6,6 +6,7 @@ import 'package:suffa_app/res/components/adminDashBoardTiles/adminDashBoardtiles
 import 'package:suffa_app/res/components/adminDashBoardTiles/adminTilesUperheading/upperHeading.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SuffaCenterDashboard extends StatefulWidget {
   const SuffaCenterDashboard({super.key});
@@ -39,10 +40,11 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'AL-SUFFAH CENTER',
+          l10n!.portalTwoAdmin,
           style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -60,7 +62,7 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AdminDashBoardtiles(
-                    title: 'Neady People',
+                    title: l10n.needyPeopleTitle,
                     ontap: () {
                       Get.toNamed(RoutesNames.selectProgramScreen, arguments: [
                         id,
@@ -76,7 +78,7 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                     icon: Icons.person,
                   ),
                   AdminDashBoardtiles(
-                    title: "Masjid Member's",
+                    title: l10n.masjidMemberTitle,
                     ontap: () {
                       Get.toNamed(RoutesNames.suffacenterViewMembersScreen,
                           arguments: [
@@ -96,7 +98,7 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AdminDashBoardtiles(
-                    title: 'Masjid Profile',
+                    title: l10n.masjidProfileTitle,
                     ontap: () {
                       Get.toNamed(RoutesNames.suffacenterProfileScreen,
                           arguments: [
@@ -107,7 +109,7 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                     icon: Icons.mosque_rounded,
                   ),
                   AdminDashBoardtiles(
-                    title: 'Suffah Center Program',
+                    title: l10n.shuffahCenterProgramTitle,
                     ontap: () {
                       Get.toNamed(RoutesNames.centerProgramDisplayScreen,
                           arguments: [
@@ -133,7 +135,7 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AdminDashBoardtiles(
-                    title: 'Add Stores Account',
+                    title: l10n.addStoresAccountTitle,
                     ontap: () {
                       Get.toNamed(
                         RoutesNames.selectProgramForShopsAddScreen,
@@ -147,7 +149,7 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                     icon: IconlyBold.bag,
                   ),
                   AdminDashBoardtiles(
-                    title: 'List Registered Stores',
+                    title: l10n.shuffahStoreTitle,
                     ontap: () {
                       Get.toNamed(RoutesNames.displayShopScreen, arguments: [
                         masjidId,

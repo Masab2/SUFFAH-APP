@@ -22,7 +22,7 @@ class _SeeAllMasjidProgramViewState extends State<SeeAllMasjidProgramView> {
       appBar: AppBar(
         backgroundColor: AppColor.brownColor,
         title: Text(
-          'All Programs',
+          'All Masjid Programs',
           style: GoogleFonts.poppins(
             fontSize: context.mh * 0.023,
             color: AppColor.whiteColor,

@@ -26,6 +26,7 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
   late String country;
   late String image;
   late String currency;
+  late String programStatus;
   @override
   void initState() {
     program = Get.arguments[0];
@@ -33,6 +34,7 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
     country = Get.arguments[2];
     image = Get.arguments[3];
     currency = Get.arguments[4];
+    programStatus = Get.arguments[5];
     super.initState();
   }
 
@@ -110,6 +112,7 @@ class _SelectMasjidsViewState extends State<SelectMasjidsView> {
                             data['city'],
                             data['state'],
                             data['email'],
+                            programStatus,
                           ],
                         );
                       },

@@ -7,6 +7,7 @@ import 'package:suffa_app/ViewModel/Donner/DonnorAuth/loginViewModel.dart';
 import 'package:suffa_app/res/components/DonnerProfile/CustomContainer.dart';
 import 'package:suffa_app/res/components/DonnerProfile/DonnerProfileAccountSettings.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
+import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -96,7 +97,9 @@ class _DonnerProfileState extends State<DonnerProfile> {
                     title1: l10n.trackDonnationTitle,
                     subtitle: l10n.trackDonnationTitle,
                     icon1: IconlyBold.heart,
-                    ontap: () {},
+                    ontap: () {
+                      Get.toNamed(RoutesNames.trackDonnationScreen);
+                    },
                   ),
                   0.02.ph,
                   DonnerProfileView(
@@ -126,7 +129,15 @@ class _DonnerProfileState extends State<DonnerProfile> {
                     title1: l10n.logOutTitle,
                     subtitle: l10n.logOutSubtitle,
                     icon1: IconlyBold.logout,
-                    ontap: () {},
+                    ontap: () {
+                      Utils.showBlurDialog(
+                        context,
+                        'Logout',
+                        'Are you Sure',
+                        'No',
+                        'Yes',
+                      );
+                    },
                   ),
                   0.02.ph,
                 ],

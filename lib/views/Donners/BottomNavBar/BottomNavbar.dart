@@ -8,7 +8,9 @@ import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:suffa_app/views/Donners/Donate/DonateScreenView.dart';
 import 'package:suffa_app/views/Donners/Home/homeView.dart';
 import 'package:suffa_app/views/Donners/More/MoreScreenView.dart';
+import 'package:suffa_app/views/Donners/Notifs/NotificationScreenView.dart';
 import 'package:suffa_app/views/Donners/Profile/DonnerProfile/DonnerProfle.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomizedBottomNavBar extends StatefulWidget {
   const CustomizedBottomNavBar({super.key});
@@ -35,14 +37,25 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 2, 2),
       body: _mainWrapperBody(),
-      bottomNavigationBar: SafeArea(child: _mainWrapperBottomNavBar(context)),
+      bottomNavigationBar: SafeArea(
+        child: _mainWrapperBottomNavBar(
+          context,
+          l10n!.homeTitle,
+          l10n.donateTitle,
+          l10n.notifsTitle,
+          l10n.profileTitle,
+          l10n.moreTitle,
+        ),
+      ),
     );
   }
 
-  BottomAppBar _mainWrapperBottomNavBar(BuildContext context) {
+  BottomAppBar _mainWrapperBottomNavBar(
+      BuildContext context, String home, donate, notifs, profile, more) {
     return BottomAppBar(
       color: AppColor.brownColor,
       child: Row(
@@ -58,35 +71,35 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
                   context,
                   defaultIcon: IconlyLight.home,
                   page: 0,
-                  label: "Home",
+                  label: home,
                   filledIcon: IconlyBold.home,
                 ),
                 _bottomAppBarItem(
                   context,
                   defaultIcon: IconlyLight.heart,
                   page: 1,
-                  label: "Donate",
+                  label: donate,
                   filledIcon: IconlyBold.heart,
                 ),
                 _bottomAppBarItem(
                   context,
                   defaultIcon: IconlyLight.notification,
                   page: 2,
-                  label: "Notifs",
+                  label: notifs,
                   filledIcon: IconlyBold.notification,
                 ),
                 _bottomAppBarItem(
                   context,
                   defaultIcon: IconlyLight.profile,
                   page: 3,
-                  label: "Profile",
+                  label: profile,
                   filledIcon: IconlyBold.profile,
                 ),
                 _bottomAppBarItem(
                   context,
                   defaultIcon: IconlyLight.more_circle,
                   page: 4,
-                  label: "More",
+                  label: more,
                   filledIcon: IconlyBold.more_circle,
                 ),
               ],
@@ -105,7 +118,7 @@ class _CustomizedBottomNavBarState extends State<CustomizedBottomNavBar> {
       children: const [
         HomeScreen(),
         DonateScreenView(),
-        Scaffold(body: Center(child: Text('Home3'))),
+        NotificationScreenView(),
         DonnerProfile(),
         MoreScreenView(),
       ],

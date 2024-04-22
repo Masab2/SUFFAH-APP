@@ -6,7 +6,7 @@ import 'package:suffa_app/res/components/MoreComp/MoreTabsComp.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class MoreScreenView extends StatefulWidget {
   const MoreScreenView({super.key});
 
@@ -17,6 +17,7 @@ class MoreScreenView extends StatefulWidget {
 class _MoreScreenViewState extends State<MoreScreenView> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -53,56 +54,56 @@ class _MoreScreenViewState extends State<MoreScreenView> {
                 runAlignment: WrapAlignment.center,
                 children: [
                   MoreTabsComp(
-                    title: 'Videos',
+                    title: l10n!.videoTitle,
                     icon: IconlyBold.video,
                     onTap: () {},
                   ),
                   MoreTabsComp(
-                    title: 'Accounts',
+                    title: l10n.accountTitle,
                     icon: IconlyBold.profile,
                     onTap: () {
                       // Get.toNamed(RoutesNames.editProfileScreen);
                     },
                   ),
                   MoreTabsComp(
-                    title: 'Guide',
+                    title: l10n.guideTitle,
                     icon: Icons.notes,
                     onTap: () {},
                   ),
                   MoreTabsComp(
-                    title: 'Services',
+                    title: l10n.serviceTitle,
                     icon: Icons.admin_panel_settings,
                     onTap: () {
                       Get.toNamed(RoutesNames.choiceScreen);
                     },
                   ),
                   MoreTabsComp(
-                    title: 'FAQs',
+                    title: l10n.faqTitle,
                     icon: Icons.question_answer,
                     onTap: () {},
                   ),
                   MoreTabsComp(
-                    title: 'Services',
+                    title: l10n.serviceTitle,
                     icon: IconlyBold.video,
                     onTap: () {},
                   ),
                   MoreTabsComp(
-                    title: 'Services',
+                    title: l10n.serviceTitle,
                     icon: IconlyBold.video,
                     onTap: () {},
                   ),
                   MoreTabsComp(
-                    title: 'Services',
+                    title: l10n.serviceTitle,
                     icon: IconlyBold.video,
                     onTap: () {},
                   ),
                   MoreTabsComp(
-                    title: 'Services',
+                    title: l10n.serviceTitle,
                     icon: IconlyBold.video,
                     onTap: () {},
                   ),
                   MoreTabsComp(
-                    title: 'Services',
+                    title: l10n.serviceTitle,
                     icon: IconlyBold.video,
                     onTap: () {},
                   ),

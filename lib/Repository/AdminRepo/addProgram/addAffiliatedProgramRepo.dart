@@ -12,6 +12,7 @@ class AffiliatedProgramRepo {
     status,
     TextEditingController price,
     cuurency,
+  TextEditingController purpose,
   ) async {
     if (file == null ||
         title.text.isEmpty ||
@@ -26,6 +27,7 @@ class AffiliatedProgramRepo {
           status,
           price.text,
           cuurency,
+          purpose.text,
         );
       } catch (e) {
         return e.toString();

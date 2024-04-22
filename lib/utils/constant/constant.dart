@@ -7,10 +7,13 @@ const String adminCollection = 'admin';
 const String suffahCenterCollection = 'SuffahCenter';
 const String suffahCenterMembers = 'SuffahCenterMembers';
 const String suffahCenterNeedyPeople = 'SuffahCenterNeedyPeople';
-const String donnationTrack = 'donnationTrack';
+const String donnationTrackPerson = 'donnationTrackPerson';
+const String donnationTrackDonnerAll = 'donnationTrackDonnerAll';
+const String donnationTrackMasjid = 'donnationTrackMasjid';
 const String suffahAffiliatedprogram = 'suffahAffiliatedprogram';
 const String suffahCenterDefineProgram = 'CenterDefineProgram';
 const String suffahShop = 'SuffahShop';
+const String notifsCollection = 'Notifications';
 
 //^ Payment Methods
 // jazzcash Payment

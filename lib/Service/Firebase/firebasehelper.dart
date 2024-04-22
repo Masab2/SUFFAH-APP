@@ -341,7 +341,7 @@ class Apis {
   }
 
   // Single Donnation Collection by Multiple People
-  static Future<void> donnatationTark(
+  static Future<void> donnatationTarkPerson(
     program,
     requiredDonnation,
     masjidname,
@@ -390,15 +390,25 @@ class Apis {
         'trackId': id.toString(),
         'recivedDonnation': '0',
       };
-      double totalReceivedDonation = donnerlist.fold<double>(0, (sum, donner) => sum + double.parse(donner.donateAbleAmmount));
+      // Get the existing received donation amount from Firestore
+      final existingDoc =
+          await firestore.collection(donnationTrackMasjid).doc(personId).get();
+      double existingReceivedDonation = 0;
+
+      if (existingDoc.exists) {
+        existingReceivedDonation =
+            double.tryParse(existingDoc.get('recivedDonnation') ?? '0') ?? 0;
+      }
+
+      // Calculate the total received donation including the latest donation
+      double totalReceivedDonation = existingReceivedDonation +
+          donnerlist.fold<double>(
+              0, (sum, donner) => sum + double.parse(donner.donateAbleAmmount));
       final personDoc =
-          await firestore.collection(donnationTrack).doc(personId).get();
+          await firestore.collection(donnationTrackPerson).doc(personId).get();
       if (personDoc.exists) {
         // If person exists, update the document to add the donner to the donner list
-        await firestore
-            .collection(donnationTrack)
-            .doc(personId)
-            .update({
+        await firestore.collection(donnationTrackPerson).doc(personId).update({
           'donners': FieldValue.arrayUnion(
             donnerlist.map((donner) => donner.toJson()).toList(),
           ),
@@ -408,9 +418,9 @@ class Apis {
         // If person does not exist, create a new document with person details and donner list
         donnerTrack['donners'] =
             donnerlist.map((donner) => donner.toJson()).toList();
-        donnerTrack['recivedDonnation'] = totalReceivedDonation.toString();    
+        donnerTrack['recivedDonnation'] = totalReceivedDonation.toString();
         await firestore
-            .collection(donnationTrack)
+            .collection(donnationTrackPerson)
             .doc(personId)
             .set(donnerTrack);
       }
@@ -419,9 +429,110 @@ class Apis {
     }
   }
 
+  // Masjid Donation For there Program
+  static Future<void> donnatationTarkMasjid(
+    program,
+    requiredDonnation,
+    masjidname,
+    masjidId,
+    muntazimId,
+    masjidAddress,
+    masjidCountry,
+    masjidCity,
+    masjidstate,
+    masjidEmail,
+    cnic,
+    muntazimname,
+    dateofBirth,
+    dateofCardExpire,
+    dateofCardIssue,
+    programId,
+    List<DonnerModel> donnerlist,
+  ) async {
+    try {
+      final id = DateTime.now().millisecondsSinceEpoch.toString();
+      Map<String, dynamic> donnerTrack = {
+        'program': program,
+        'requiredDonnation': requiredDonnation,
+        'masjidname': masjidname,
+        'masjidId': masjidId,
+        'muntazimId': muntazimId,
+        'masjidAddress': masjidAddress,
+        'countryMasjid': masjidCountry,
+        'masjidCity': masjidCity,
+        'masjidState': masjidstate,
+        'masjidEmail': masjidEmail,
+        'Muntazimcnic': cnic,
+        'Muntazimname': muntazimname,
+        'dateofBirth': dateofBirth,
+        'dateofCardExpire': dateofCardExpire,
+        'dateofCardIssue': dateofCardIssue,
+        'trackId': id.toString(),
+        'recivedDonnation': '0',
+        'programId': programId,
+      };
+      // Get the existing received donation amount from Firestore
+      final existingDoc =
+          await firestore.collection(donnationTrackMasjid).doc(programId).get();
+      double existingReceivedDonation = 0;
+
+      if (existingDoc.exists) {
+        existingReceivedDonation =
+            double.tryParse(existingDoc.get('recivedDonnation') ?? '0') ?? 0;
+      }
+
+      // Calculate the total received donation including the latest donation
+      double totalReceivedDonation = existingReceivedDonation +
+          donnerlist.fold<double>(
+              0, (sum, donner) => sum + double.parse(donner.donateAbleAmmount));
+
+      final personDoc =
+          await firestore.collection(donnationTrackMasjid).doc(programId).get();
+      if (personDoc.exists) {
+        // If person exists, update the document to add the donner to the donner list
+        await firestore.collection(donnationTrackMasjid).doc(programId).update({
+          'donners': FieldValue.arrayUnion(
+            donnerlist.map((donner) => donner.toJson()).toList(),
+          ),
+          'recivedDonnation': totalReceivedDonation.toString(),
+        });
+      } else {
+        // If person does not exist, create a new document with person details and donner list
+        donnerTrack['donners'] =
+            donnerlist.map((donner) => donner.toJson()).toList();
+        donnerTrack['recivedDonnation'] = totalReceivedDonation.toString();
+        await firestore
+            .collection(donnationTrackMasjid)
+            .doc(programId)
+            .set(donnerTrack);
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  // Update the Bar For the Donnation Masjid
+  static Future<void> updateDonationAmountForMasjid(id, donationAmount) async {
+    // Retrieve the current receivedDonation value
+    DocumentSnapshot snapshot =
+        await firestore.collection(suffahCenterDefineProgram).doc(id).get();
+    String currentReceivedDonationStr = snapshot['recivedDonnation'];
+    log(currentReceivedDonationStr);
+    int currentReceivedDonation = int.parse(currentReceivedDonationStr);
+    log(currentReceivedDonation.toString());
+    // Increment the receivedDonation by the recent donation amount
+    int newReceivedDonation =
+        currentReceivedDonation + int.parse(donationAmount);
+    log(newReceivedDonation.toString());
+    // Update the receivedDonation field with the new value
+    await firestore.collection(suffahCenterDefineProgram).doc(id).update({
+      'recivedDonnation': newReceivedDonation.toString(),
+    });
+  }
+
   // add Affiliated Program into the database
   static Future<void> addAffiliatedProgramByAdmin(
-      file, title, status, price, currency) async {
+      file, title, status, price, currency, purpose) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = imagestorage.ref().child('/Images/Affiliatedprogram$id');
     storage.UploadTask uploadTask = ref.putFile(file);
@@ -434,6 +545,8 @@ class Apis {
         'Status': status,
         'Price': price,
         'Currency': currency,
+        'personDefine': 'forPerson',
+        'purpose': purpose,
       });
     });
   }
@@ -505,6 +618,7 @@ class Apis {
           'countryMasjid': country,
           'masjidCity': city,
           'masjidState': state,
+          'centerDefine': 'forMasjid',
         },
       );
     });
@@ -606,5 +720,74 @@ class Apis {
         .collection(suffahCenterDefineProgram)
         .where('Status', isEqualTo: 'Active')
         .snapshots();
+  }
+
+  // Notification Collection for the Donner transprency
+  static Future<void> addNotification(
+    String title,
+    String body,
+    String ammount,
+    String currency,
+  ) async {
+    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    await firestore.collection(notifsCollection).doc(id).set({
+      'notifId': id,
+      'title': title,
+      'body': body,
+      'time': DateTime.now().toString(),
+      'seen': 'false',
+      'donnnerId': user.uid,
+      'Ammount': ammount,
+      'currency': currency,
+    });
+  }
+
+  // get all the  Donnation Track by Stepper for Donner
+  static Future<void> addDonationTrack(
+    String title,
+    String body,
+    String ammount,
+    String currency,
+    String status,
+  ) async {
+    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    await firestore.collection(donnationTrackDonnerAll).doc(id).set({
+      'trackId': id,
+      'title': title,
+      'body': body,
+      'time': DateTime.now().toString(),
+      'seen': 'false',
+      'donnnerId': user.uid,
+      'Ammount': ammount,
+      'currency': currency,
+      'Status': status,
+    });
+  }
+
+  // Notification Collection for the Donner transprency Fetch Notifs
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllNotifs() {
+    return firestore
+        .collection(notifsCollection)
+        .where('donnnerId', isEqualTo: user.uid)
+        .snapshots();
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllDonnationTrack() {
+    return firestore
+        .collection(donnationTrackDonnerAll)
+        .where('donnnerId', isEqualTo: user.uid)
+        .snapshots();
+  }
+
+  // Get all the donnation track For Admin to Proceeed the Donnation for Person
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getAllDonationTrackForPerson() {
+    return firestore.collection(donnationTrackPerson).snapshots();
+  }
+
+  // Get all the donnation track For Admin to Proceeed the Donnation for Masjid
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getAllDonationTrackForMasjid() {
+    return firestore.collection(donnationTrackMasjid).snapshots();
   }
 }
