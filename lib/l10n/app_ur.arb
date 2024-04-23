@@ -53,6 +53,12 @@
   "faqTitle": "عمومی سوالات",
   "@_NOTIFS_SCREEN": {},
   "notifsTitle": "اطلاعات",
+  "@_ZAKAT_CALCULATOR_SCREEN": {},
+  "depositedsavinggirasTitle": "جمع/ بچت / گراس",
+  "propertyVechicleTitle": "مالیات/ مشاورہ/ ماشین",
+  "debtsTitle": "مالیات",
+  "otherWealthTitle": "دوسرہ مالیات",
+  "calculateZakatButton": "زکوٰۃ کا حساب لگائیں۔",
   "@_ADMIN_PROTALS_SCREEN": {},
   "adminProtalsTitle": "ایڈمن پورٹلز",
   "portalOneAdmin": "الشفاء ایڈمن",
@@ -82,5 +88,6 @@
   "emailEnterError": "براہ کرم ای میل درج کریں۔",
   "passwordEnterError": "براہ کرم پاس ورڈ درج کریں۔",
   "passwordLengthError": "پاس ورڈ کا حد نہیں ہے۔",
-  "technicalError": "لاگ ان کرتے وقت ایک خرابی پیش آگئی"
+  "technicalError": "لاگ ان کرتے وقت ایک خرابی پیش آگئی",
+  "zakatTitleError": "آپ کی زکوٰۃ قابل ادائیگی نہیں ہے۔"
 }

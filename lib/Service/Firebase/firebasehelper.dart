@@ -749,6 +749,12 @@ class Apis {
     String ammount,
     String currency,
     String status,
+    String cnicNo,
+    String name,
+    String address,
+    String location,
+    String program,
+    String donnationStatus,
   ) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     await firestore.collection(donnationTrackDonnerAll).doc(id).set({
@@ -761,6 +767,12 @@ class Apis {
       'Ammount': ammount,
       'currency': currency,
       'Status': status,
+      'cnicNo': cnicNo,
+      'name': name,
+      'address': address,
+      'location': location,
+      'program': program,
+      'DonnationStatus': donnationStatus,
     });
   }
 

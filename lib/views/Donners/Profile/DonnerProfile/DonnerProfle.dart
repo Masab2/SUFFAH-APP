@@ -106,7 +106,9 @@ class _DonnerProfileState extends State<DonnerProfile> {
                     title1: l10n.zakatCalculatorTitle,
                     subtitle: l10n.zakatCalculatorSubtitle,
                     icon1: Icons.calculate_outlined,
-                    ontap: () {},
+                    ontap: () {
+                      Get.toNamed(RoutesNames.zakatCalulatorScreen);
+                    },
                   ),
                   0.02.ph,
                   DonnerProfileView(
@@ -122,7 +124,9 @@ class _DonnerProfileState extends State<DonnerProfile> {
                     title1: l10n.myDonnationTitle,
                     subtitle: l10n.myDonnationSubtitle,
                     icon1: IconlyBold.heart,
-                    ontap: () {},
+                    ontap: () {
+                      Get.toNamed(RoutesNames.myDonnationScreen);
+                    },
                   ),
                   0.02.ph,
                   DonnerProfileView(
@@ -132,10 +136,13 @@ class _DonnerProfileState extends State<DonnerProfile> {
                     ontap: () {
                       Utils.showBlurDialog(
                         context,
-                        'Logout',
+                        l10n.logOutTitle,
                         'Are you Sure',
                         'No',
                         'Yes',
+                        () {
+                          donnerProfile.logOutAccount();
+                        },
                       );
                     },
                   ),

@@ -67,46 +67,62 @@ class _TrackDonnationState extends State<TrackDonnation>
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       var data = snapshot.data!.docs[index];
-                      return ListTile(
-                        leading: CircleAvatar(
-                          radius: context.mw * 0.060,
-                          backgroundColor: AppColor.mehroonColor,
-                          child: Icon(
-                            IconlyBold.heart,
-                            color: AppColor.whiteColor,
-                            size: context.mw * 0.050,
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: context.mh * 0.01,
+                          horizontal: context.mw * 0.02,
+                        ),
+                        child: Card(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                        ),
-                        title: Text(data['title'],
-                            style: GoogleFonts.poppins(
-                              fontSize: context.mh * 0.018,
-                              fontWeight: FontWeight.w600,
-                              color: AppColor.mehroonColor,
-                            )),
-                        subtitle: Text(
-                          data['body'],
-                        ),
-                        trailing: InkWell(
-                          onTap: () {
-                            Get.toNamed(
-                              RoutesNames.detailtrackDonnationScreen,
-                              arguments: [
-                                data['Status'],
-                                data['time'],
-                              ]
-                            );
-                          },
-                          child: Container(
-                            width: context.mw * 0.20,
-                            height: context.mh * 0.05,
-                            decoration: BoxDecoration(
-                                color: AppColor.mehroonColor,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Center(
-                              child: Text(
-                                'Track',
+                          color: Colors.white,
+                          shadowColor: AppColor.mehroonColor,
+                          margin: EdgeInsets.zero,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              radius: context.mw * 0.060,
+                              backgroundColor: AppColor.mehroonColor,
+                              child: Icon(
+                                IconlyBold.heart,
+                                color: AppColor.whiteColor,
+                                size: context.mw * 0.050,
+                              ),
+                            ),
+                            title: Text(data['title'],
                                 style: GoogleFonts.poppins(
-                                  color: AppColor.whiteColor,
+                                  fontSize: context.mh * 0.018,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.mehroonColor,
+                                )),
+                            subtitle: Text(
+                              data['body'],
+                            ),
+                            trailing: InkWell(
+                              onTap: () {
+                                Get.toNamed(
+                                    RoutesNames.detailtrackDonnationScreen,
+                                    arguments: [
+                                      data['Status'],
+                                      data['time'],
+                                    ]);
+                              },
+                              child: Container(
+                                width: context.mw * 0.20,
+                                height: context.mh * 0.05,
+                                decoration: BoxDecoration(
+                                    color: AppColor.mehroonColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                  child: Text(
+                                    'Track',
+                                    style: GoogleFonts.poppins(
+                                      color: AppColor.whiteColor,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

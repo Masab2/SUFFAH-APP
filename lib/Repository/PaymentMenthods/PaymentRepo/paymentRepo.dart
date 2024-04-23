@@ -44,9 +44,14 @@ class PaymentRepo {
       Apis.addDonationTrack(
         'Donnation Sent',
         'Track for ${model?.personame} of ${model?.program} Program',
-        model?.donnationAmmount.toString() ?? '0',
+        model?.donnationAmmount.toString() ?? '',
         model?.currency ?? 'PKR',
         'Recived by Admin',
+        model?.personcnic ?? '',
+        model?.personame ?? '',
+        model?.personaddress ?? '',
+        '${model?.masjidCountry}/${model?.masjidCity}/${model?.masjidState} ',
+        model?.program ?? '', 'forPerson',
       );
       return null;
     } catch (e) {
@@ -89,6 +94,18 @@ class PaymentRepo {
         'Donnation Sent to Admin for ${model?.masjidname} of ${model?.program} Program ',
         model?.donnationAmmount.toString() ?? '0',
         model?.currency ?? 'PKR',
+      );
+      Apis.addDonationTrack(
+        'Donnation Sent',
+        'Track for ${model?.masjidname} of ${model?.program} Program',
+        model?.donnationAmmount.toString() ?? '',
+        model?.currency ?? 'PKR',
+        'Recived by Admin',
+        model?.personcnic ?? '',
+        model?.personame ?? '',
+        model?.masjidAddress ?? '',
+        '${model?.masjidCountry}/${model?.masjidCity}/${model?.masjidState} ',
+        model?.program ?? '', 'forMasjid',
       );
       return null;
     } catch (e) {

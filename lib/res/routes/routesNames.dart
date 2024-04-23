@@ -19,6 +19,8 @@ class RoutesNames {
   static const String seeAllMasjidProgramScreen = '/seeAllMasjidProgramScreen';
   static const String trackDonnationScreen = '/trackDonnationScreen';
   static const String detailtrackDonnationScreen = '/detailDonnationScreen';
+  static const String zakatCalulatorScreen = '/zakatCalulatorScreen';
+  static const String myDonnationScreen = '/myDonnationScreen';
 
   // Payment Screens
   static const String jazzCashPaymentScreen = '/jazzCashPaymentScreen';

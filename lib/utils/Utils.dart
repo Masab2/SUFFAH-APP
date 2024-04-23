@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:intl/intl.dart';
@@ -33,41 +34,6 @@ class Utils {
           ),
         )
         .toString();
-  }
-
-  // Donnation Ammount Dialog
-  static showDonnationDialog(
-    TextEditingController controller,
-    BuildContext context,
-  ) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Enter Donation Amount'),
-          content: TextFormField(
-            controller: controller,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              labelText: 'Amount',
-              hintText: 'Enter donation amount',
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Donate'),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   // Show Shop Dialog
@@ -481,8 +447,8 @@ class Utils {
   }
 
   // Logout Dialog Box
-  static showBlurDialog(
-      BuildContext context, title, content, darkbtntext, lightBtntext) {
+  static showBlurDialog(BuildContext context, title, content, darkbtntext,
+      lightBtntext, VoidCallback ontap) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -510,9 +476,7 @@ class Utils {
                     color: AppColor.mehroonColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                    onPressed: ontap,
                     child: Text(lightBtntext,
                         style: GoogleFonts.poppins(color: AppColor.whiteColor)),
                   ),
@@ -547,6 +511,46 @@ class Utils {
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+
+  static showZakatDialog(zakatAmount) {
+    showDialog(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(
+            child: Image(
+              image: AssetImage(ImageAsset.applogo),
+              height: context.mw * 0.3,
+              width: context.mw * 0.3,
+            ),
+          ),
+          content: Text(
+            'Your Zakat amount is $zakatAmount',
+            textAlign: TextAlign.center,
+          ),
+          actions: <Widget>[
+            MaterialButton(
+              color: AppColor.mehroonColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              onPressed: () {
+                Get.back();
+              },
+              child: Text(
+                'OK',
+                style: GoogleFonts.poppins(
+                  color: AppColor.whiteColor,
+                  fontSize: context.mh * 0.016,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          ],
         );
       },
     );

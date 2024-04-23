@@ -53,6 +53,12 @@
   "faqTitle": "FAQ",
   "@_NOTIFS_SCREEN": {},
   "notifsTitle": "Benachrichtigungen",
+  "@_ZAKAT_CALCULATOR_SCREEN": {},
+  "depositedsavinggirasTitle": "Hinterlegte / rettende / Giras",
+  "propertyVechicleTitle": "Immobilien / Fahrzeugwerte",
+  "debtsTitle": "Schulden",
+  "otherWealthTitle": "Anderer Reichtum",
+  "calculateZakatButton": "Berechnen Sie Zakat",
   "@_ADMIN_PROTALS_SCREEN": {},
   "adminProtalsTitle": "Admin Protals",
   "portalOneAdmin": "Al-SHUFFAH ADMIN",
@@ -82,5 +88,6 @@
   "emailEnterError": "Bitte E-Mail Adresse eingeben",
   "passwordEnterError": "Bitte Passwort eingeben",
   "passwordLengthError": "Passwort muss mindestens 6 Zeichen haben",
-  "technicalError": "Beim Anmelden ist ein Fehler aufgetreten"
+  "technicalError": "Beim Anmelden ist ein Fehler aufgetreten",
+  "zakatTitleError": "Ihr Zakat ist nicht zahlbar"
 }

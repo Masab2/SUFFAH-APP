@@ -11,9 +11,11 @@ import 'package:suffa_app/views/Donners/Home/SeeAllMasjidProgram/seeAllMasjidPro
 import 'package:suffa_app/views/Donners/Home/SeeAllPrograms/seeAllPrograms.dart';
 import 'package:suffa_app/views/Donners/Home/Select%20Masjids/ViewMasjids/SelectMasjidsView.dart';
 import 'package:suffa_app/views/Donners/Profile/EditProfile/EditProfile.dart';
+import 'package:suffa_app/views/Donners/Profile/MyDonnation/MyDonnation.dart';
 import 'package:suffa_app/views/Donners/Profile/Setting/settings.dart';
 import 'package:suffa_app/views/Donners/Profile/TrackDonnation/TrackDonnation.dart';
 import 'package:suffa_app/views/Donners/Profile/TrackDonnation/detailTrackDonnation.dart';
+import 'package:suffa_app/views/Donners/Profile/ZakatCalculator/ZakatCalculator.dart';
 import 'package:suffa_app/views/admin/AdminDonnationTrack/AdminDonnationTrackView.dart';
 import 'package:suffa_app/views/admin/Affiliated%20Program/addProgram/addPrograms.dart';
 import 'package:suffa_app/views/admin/Affiliated%20Program/displayprogram/displayAffiliaatedProgram.dart';
@@ -55,7 +57,7 @@ class AppRoutes {
             page: () => const SplashView(),
             transition: Transition.leftToRight),
         GetPage(
-            name: RoutesNames.splashScreen,
+            name: RoutesNames.splashChoices,
             page: () => const SplashChoices(),
             transition: Transition.leftToRight),
         GetPage(
@@ -121,6 +123,14 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.detailtrackDonnationScreen,
             page: () => const DetailTrackDonnation(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.zakatCalulatorScreen,
+            page: () => const ZakatCalculator(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.myDonnationScreen,
+            page: () => const MyDonnation(),
             transition: Transition.leftToRight),
 
         //! Adminstration DashBoard

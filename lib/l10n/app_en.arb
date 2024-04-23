@@ -53,6 +53,12 @@
   "faqTitle": "FAQ's",
   "@_NOTIFS_SCREEN": {},
   "notifsTitle": "Notifs",
+  "@_ZAKAT_CALCULATOR_SCREEN": {},
+  "depositedsavinggirasTitle": "Deposited / Saving / Giras",
+  "propertyVechicleTitle": "Property / Vehicle Values",
+  "debtsTitle": "Debts",
+  "otherWealthTitle": "Other Wealth",
+  "calculateZakatButton": "Calculate Zakat",
   "@_ADMIN_PROTALS_SCREEN": {},
   "adminProtalsTitle": "Admin Protals",
   "portalOneAdmin": "Al-SHUFFAH ADMIN",
@@ -82,5 +88,6 @@
   "emailEnterError": "Please Enter the Email address",
   "passwordEnterError": "Please Enter the Password",
   "passwordLengthError": "Password must be at least 6 characters",
-  "technicalError": "An error occurred while logging in"
+  "technicalError": "An error occurred while logging in",
+  "zakatTitleError": "Your Zakat is not Payable"
 }
