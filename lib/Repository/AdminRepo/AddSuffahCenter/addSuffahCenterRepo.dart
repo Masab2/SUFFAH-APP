@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddSuffahCenterRepo {
   Future<String?> addSuffahCenter(
@@ -19,28 +20,22 @@ class AddSuffahCenterRepo {
     TextEditingController address,
     TextEditingController masjid,
     state,
+    BuildContext context,
   ) async {
-    if (file == null &&
-        name.text.isEmpty &&
-        emailAddress.text.isEmpty &&
-        phoneno.text.isEmpty &&
+    final l10n = AppLocalizations.of(context);
+    if (file == null ||
+        name.text.isEmpty ||
+        emailAddress.text.isEmpty ||
+        phoneno.text.isEmpty ||
         address.text.isEmpty) {
-      return 'Please Enter The Data';
-    } else if (name.text.isEmpty) {
-      return 'Please Enter The Name of The Muntazim';
-    } else if (emailAddress.text.isEmpty) {
-      return 'Please Enter The Email Address';
-    } else if (phoneno.text.isEmpty) {
-      return 'Please Enter The Phone No';
-    } else if (address.text.isEmpty) {
-      return 'Please Enter The Address';
+      return l10n!.dataEnterError;
     } else {
       final RegExp emailRegExp =
           RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
       if (emailRegExp.hasMatch(emailAddress.text)) {
         return null;
       } else {
-        return 'Please Enter the Email Address in the Proper Format';
+        return l10n!.emailEnterError;
       }
     }
   }
@@ -58,13 +53,11 @@ class AddSuffahCenterRepo {
     TextEditingController genPasword,
     String masjidname,
     state,
+    BuildContext context,
   ) async {
-    if (genEmail.text.isEmpty && genPasword.text.isEmpty) {
-      return 'Please Enter the Email address and Password';
-    } else if (genEmail.text.isEmpty) {
-      return 'Please Enter the Email Address';
-    } else if (genPasword.text.isEmpty) {
-      return 'Please Enter the Password';
+    final l10n = AppLocalizations.of(context);
+    if (genEmail.text.isEmpty || genPasword.text.isEmpty) {
+      return l10n!.dataEnterError;
     } else {
       final String emailText = genEmail.text;
       final String passwordText = genPasword.text;
@@ -76,7 +69,7 @@ class AddSuffahCenterRepo {
       for (var doc in snapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
         if (data["suffahemail"] == genEmail.text) {
-          return 'The Email is Already Available';
+          return l10n!.emailAlreadyAvailable;
         }
       }
       // If the loop completes and does not find a matching email, proceed with registration
@@ -104,7 +97,7 @@ class AddSuffahCenterRepo {
           }
           break;
         default:
-          return 'Please Enter the Authorized Domain';
+          return l10n!.enterAuthrizedDomain;
       }
     }
     return null;

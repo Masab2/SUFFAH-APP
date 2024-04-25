@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AffiliatedProgramRepo {
   Future<String?> addAffiliatedProgram(
@@ -12,13 +13,15 @@ class AffiliatedProgramRepo {
     status,
     TextEditingController price,
     cuurency,
-  TextEditingController purpose,
+    TextEditingController purpose,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     if (file == null ||
         title.text.isEmpty ||
         price.text.isEmpty ||
         file.isEmpty) {
-      return 'Please Enter The Data';
+      return l10n!.dataEnterError;
     } else {
       try {
         await Apis.addAffiliatedProgramByAdmin(

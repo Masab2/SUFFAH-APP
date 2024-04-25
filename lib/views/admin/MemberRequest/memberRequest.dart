@@ -74,7 +74,10 @@ class _MemberRequestState extends State<MemberRequest> {
                       image: data['masjidimg'],
                       email: data['email'],
                       onGreenBtnPressed: () {
-                        memberRequestViewModel.acceptRequest(data['MemberId']);
+                        memberRequestViewModel.acceptRequest(
+                          data['MemberId'],
+                          context,
+                        );
                       },
                       centerId: data['Desig'],
                       address: data['Masjidname'],

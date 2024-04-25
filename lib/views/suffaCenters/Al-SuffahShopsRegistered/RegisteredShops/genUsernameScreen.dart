@@ -133,6 +133,7 @@ class _GenUserNamePassShopScreenState extends State<GenUserNamePassShopScreen> {
                   passController,
                   email,
                   program,
+                  context,
                 );
               },
             )

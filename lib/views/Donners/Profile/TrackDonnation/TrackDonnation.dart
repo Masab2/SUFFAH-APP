@@ -25,7 +25,7 @@ class _TrackDonnationState extends State<TrackDonnation>
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Track Donnation',
+          'Track Donation',
           style: GoogleFonts.poppins(
             fontSize: context.mh * 0.024,
             color: AppColor.whiteColor,
@@ -52,89 +52,112 @@ class _TrackDonnationState extends State<TrackDonnation>
           StreamBuilder(
             stream: Apis.getAllDonnationTrack(),
             builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: SpinKitChasingDots(
-                    color: AppColor.mehroonColor,
-                    duration: Duration(seconds: 5),
-                  ),
-                );
-              } else if (!snapshot.hasData) {
-                return const Text('No Data');
-              } else {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      var data = snapshot.data!.docs[index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: context.mh * 0.01,
-                          horizontal: context.mw * 0.02,
-                        ),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return const Center(
+                    child: SpinKitChasingDots(
+                      color: AppColor.mehroonColor,
+                      duration: Duration(seconds: 5),
+                    ),
+                  );
+                case ConnectionState.none:
+                case ConnectionState.active:
+                case ConnectionState.done:
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return Column(
+                      children: [
+                        0.4.ph,
+                        Center(
+                          child: Text(
+                            'No Donnation For Track',
+                            style: TextStyle(
+                              color: AppColor.mehroonColor,
+                              fontSize: context.mh * 0.023,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                          color: Colors.white,
-                          shadowColor: AppColor.mehroonColor,
-                          margin: EdgeInsets.zero,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              radius: context.mw * 0.060,
-                              backgroundColor: AppColor.mehroonColor,
-                              child: Icon(
-                                IconlyBold.heart,
-                                color: AppColor.whiteColor,
-                                size: context.mw * 0.050,
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          var data = snapshot.data!.docs[index];
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: context.mh * 0.01,
+                              horizontal: context.mw * 0.02,
+                            ),
+                            child: Card(
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                            ),
-                            title: Text(data['title'],
-                                style: GoogleFonts.poppins(
-                                  fontSize: context.mh * 0.018,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.mehroonColor,
-                                )),
-                            subtitle: Text(
-                              data['body'],
-                            ),
-                            trailing: InkWell(
-                              onTap: () {
-                                Get.toNamed(
-                                    RoutesNames.detailtrackDonnationScreen,
-                                    arguments: [
-                                      data['Status'],
-                                      data['time'],
-                                    ]);
-                              },
-                              child: Container(
-                                width: context.mw * 0.20,
-                                height: context.mh * 0.05,
-                                decoration: BoxDecoration(
+                              color: Colors.white,
+                              shadowColor: AppColor.mehroonColor,
+                              margin: EdgeInsets.zero,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  radius: context.mw * 0.060,
+                                  backgroundColor: AppColor.mehroonColor,
+                                  child: Icon(
+                                    IconlyBold.heart,
+                                    color: AppColor.whiteColor,
+                                    size: context.mw * 0.050,
+                                  ),
+                                ),
+                                title: Text(
+                                  data['title'],
+                                  style: GoogleFonts.poppins(
+                                    fontSize: context.mh * 0.018,
+                                    fontWeight: FontWeight.w600,
                                     color: AppColor.mehroonColor,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Center(
-                                  child: Text(
-                                    'Track',
-                                    style: GoogleFonts.poppins(
-                                      color: AppColor.whiteColor,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  data['body'],
+                                ),
+                                trailing: InkWell(
+                                  onTap: () {
+                                    Get.toNamed(
+                                      RoutesNames.detailtrackDonnationScreen,
+                                      arguments: [
+                                        data['Status'],
+                                        data['time'],
+                                        data['DonnationStatus']
+                                      ],
+                                    );
+                                  },
+                                  child: Container(
+                                    width: context.mw * 0.20,
+                                    height: context.mh * 0.05,
+                                    decoration: BoxDecoration(
+                                      color: AppColor.mehroonColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Track',
+                                        style: GoogleFonts.poppins(
+                                          color: AppColor.whiteColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                );
+                          );
+                        },
+                      ),
+                    );
+                  }
               }
             },
-          )
+          ),
         ],
       ),
     );

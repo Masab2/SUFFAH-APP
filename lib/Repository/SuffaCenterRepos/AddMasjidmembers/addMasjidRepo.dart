@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 
-
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddMasjidRepo {
   Future<String?> addSuffahCenterMembers(
@@ -13,7 +13,9 @@ class AddMasjidRepo {
     country,
     TextEditingController address,
     state,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     if (file == null ||
         name.text.isEmpty ||
         emailAddress.text.isEmpty ||
@@ -22,14 +24,14 @@ class AddMasjidRepo {
         country == '' ||
         address.text.isEmpty ||
         state == '') {
-      return 'Please Enter All The Required Data';
+      return l10n!.dataEnterError;
     } else {
       final RegExp emailRegExp =
           RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
       if (emailRegExp.hasMatch(emailAddress.text)) {
         return null;
       } else {
-        return 'Please Enter the Email Address in the Proper Format';
+        return l10n!.emailEnterError;
       }
     }
   }

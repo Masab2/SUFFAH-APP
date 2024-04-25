@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/Repository/AdminRepo/addProgram/addAffiliatedProgramRepo.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AffiliatedViewModel extends GetxController {
   RxString imagePath = ''.obs;
@@ -22,17 +24,20 @@ class AffiliatedViewModel extends GetxController {
     }
   }
 
-  void addAffiliatedProgram(title, status, price,purpose) async {
+  void addAffiliatedProgram(
+      title, status, price, purpose, BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
     final result = await _addProgramRepo.addAffiliatedProgram(
       imagePath.value.toString(),
       title,
       status,
       price,
       selectedCurrency.value,
-      purpose
+      purpose,
+      context,
     );
     if (result == null) {
-      Get.snackbar('Program Added', 'Program Added Successfully');
+      Get.snackbar('Success', l10n!.addedSuccessfully);
     } else {
       Get.snackbar('Error', result.toString());
     }

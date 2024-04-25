@@ -64,9 +64,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     showStates: false,
                     flagState: CountryFlag.DISABLE,
                     currentCountry: homeController.country.value,
-                    onCountryChanged: (value) {
+                    onCountryChanged: (value) async{
                       log(homeController.country.value.toString());
                       homeController.updateCountry(value);
+                       await SharePrefs.saveData('country', homeController.country.value.toString());
                       log(value);
                     },
                     onStateChanged: (value) {
@@ -276,7 +277,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         return DonnationChoice(
                           onprogramClick: () {
                             Utils.showBottomSheetForProgramDefault(
-                              () {},
+                              () {
+                                Get.toNamed(
+                                  RoutesNames.selectMasjidScreen,
+                                  arguments: [
+                                    data['programTitle'],
+                                    data['Price'],
+                                    homeController.country.value,
+                                    data['image'],
+                                    homeController.selectedCurrency.value,
+                                    data['personDefine']
+                                  ],
+                                );
+                              },
                               data['programTitle'],
                               data['purpose'],
                               context,
@@ -420,7 +433,56 @@ class _HomeScreenState extends State<HomeScreen> {
                           currency: homeController.selectedCurrency.value,
                           onProgramClick: () {
                             Utils.showBottomSheetForProgramDetails(
-                              () {},
+                              () {
+                                Get.back();
+                                Utils.showBottomSheetAmmount(
+                                  () {
+                                    final DonnationTrackMasjidModel model =
+                                        DonnationTrackMasjidModel(
+                                      donnationAmmount: donatecontroller.text,
+                                      requiredDonnation: data['Price'],
+                                      image: data['image'],
+                                      currency:
+                                          homeController.selectedCurrency.value,
+                                      personcnic: data['CnicNo'],
+                                      personame: data['CardHolderName'],
+                                      dateofBirth: data['dob'],
+                                      dateofCardExpire: data['doExpire'],
+                                      dateofCardIssue: data['doIssue'],
+                                      masjidname: data['masjidname'],
+                                      masjidid: data['MasjidId'],
+                                      masjidAddress: data['MasjidAddress'],
+                                      masjidCountry: data['countryMasjid'],
+                                      masjidCity: data['masjidCity'],
+                                      masjidState: data['masjidState'],
+                                      masjidemail: data['masjidEmail'],
+                                      program: data['programTitle'],
+                                      muntazimId: data['muntazimId'],
+                                      programId: data['programId'],
+                                    );
+                                    final List<DonnerModel> donnerModel = [];
+                                    DonnerModel donner = DonnerModel(
+                                      donnerId: Apis.user.uid,
+                                      donateAbleAmmount: donatecontroller.text,
+                                      currency:
+                                          homeController.selectedCurrency.value,
+                                    );
+                                    donnerModel.add(donner);
+                                    homeController.validateDonnation(
+                                      double.parse(data['Price']).toInt(),
+                                      data['image'],
+                                      homeController.selectedCurrency.value,
+                                      donatecontroller,
+                                      model,
+                                      donnerModel,
+                                      context,
+                                      data['centerDefine'].toString(),
+                                    );
+                                  },
+                                  donatecontroller,
+                                  context,
+                                );
+                              },
                               data['programTitle'],
                               data['masjidname'],
                               data['purpose'],

@@ -8,6 +8,7 @@ import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class SeeAllProgramView extends StatefulWidget {
   const SeeAllProgramView({super.key});
 
@@ -27,7 +28,7 @@ class _SeeAllProgramViewState extends State<SeeAllProgramView> {
 
   @override
   Widget build(BuildContext context) {
-        final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.brownColor,
@@ -76,7 +77,8 @@ class _SeeAllProgramViewState extends State<SeeAllProgramView> {
                               data['Price'],
                               country,
                               data['image'],
-                              currency
+                              currency,
+                              data['personDefine']
                             ],
                           );
                         },

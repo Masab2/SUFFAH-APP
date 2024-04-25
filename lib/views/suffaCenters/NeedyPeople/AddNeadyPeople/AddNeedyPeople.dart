@@ -155,6 +155,7 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                         masjidCity,
                         masjidaddress,
                         donatePrice,
+                        context,
                       );
                     },
                   ),
@@ -185,6 +186,7 @@ class _AddNeedyPeopleState extends State<AddNeedyPeople> {
                         masjidCity,
                         masjidaddress,
                         donatePrice,
+                        context,
                       );
                     },
                   )

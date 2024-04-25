@@ -136,6 +136,7 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
                       masjidname,
                       emailAddress,
                       program,
+                      context,
                     );
                   },
                 ),
@@ -158,6 +159,7 @@ class _AddSuffahShopCnicState extends State<AddSuffahShopCnic> {
                       masjidname,
                       emailAddress,
                       program,
+                      context,
                     );
                   },
                 ),

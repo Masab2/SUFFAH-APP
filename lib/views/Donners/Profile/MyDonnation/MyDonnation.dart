@@ -57,40 +57,59 @@ class _MyDonnationState extends State<MyDonnation> {
         children: [
           0.02.ph,
           StreamBuilder(
-            stream: Apis.getAllDonnationTrack(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: SpinKitChasingDots(
-                    color: AppColor.mehroonColor,
-                    duration: Duration(seconds: 5),
-                  ),
-                );
-              } else if (!snapshot.hasData) {
-                return const Text('No Data');
-              } else {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      var data = snapshot.data!.docs[index];
-                      return MyDonnationComp(
-                        icon: data['DonnationStatus'] == 'forPerson'
-                            ? IconlyBold.profile
-                            : Icons.mosque_rounded,
-                        cnicno: data['cnicNo'],
-                        personname: data['name'],
-                        address: data['address'],
-                        location: data['location'],
-                        program: data['program'],
-                        lastDonnated: '${data['Ammount']} ${data['currency']}',
+              stream: Apis.getAllDonnationTrack(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return const Center(
+                      child: SpinKitChasingDots(
+                        color: AppColor.mehroonColor,
+                        duration: Duration(seconds: 5),
+                      ),
+                    );
+                  case ConnectionState.none:
+                  case ConnectionState.active:
+                  case ConnectionState.done:
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return Column(
+                        children: [
+                          0.4.ph,
+                          Center(
+                            child: Text(
+                              'No Records Found',
+                              style: TextStyle(
+                                color: AppColor.mehroonColor,
+                                fontSize: context.mh * 0.023,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
                       );
-                    },
-                  ),
-                );
-              }
-            },
-          )
+                    } else {
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            var data = snapshot.data!.docs[index];
+                            return MyDonnationComp(
+                              icon: data['DonnationStatus'] == 'forPerson'
+                                  ? IconlyBold.profile
+                                  : Icons.mosque_rounded,
+                              cnicno: data['cnicNo'],
+                              personname: data['name'],
+                              address: data['address'],
+                              location: data['location'],
+                              program: data['program'],
+                              lastDonnated:
+                                  '${data['Ammount']} ${data['currency']}',
+                            );
+                          },
+                        ),
+                      );
+                    }
+                }
+              })
         ],
       ),
     );

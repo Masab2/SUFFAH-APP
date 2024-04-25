@@ -11,6 +11,7 @@ import 'package:suffa_app/Repository/PaymentMenthods/PaymentRepo/paymentRepo.dar
 import 'package:suffa_app/res/components/Payments/JazzCashPayment/PaymentReciptDialog/paymentReciptDialog.dart';
 import 'package:suffa_app/utils/Utils.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class JazcashPaymentViewModel extends GetxController {
   final JazzcashPaymentRepo _repo = JazzcashPaymentRepo();
@@ -25,6 +26,7 @@ class JazcashPaymentViewModel extends GetxController {
     DonnationTrackModel? model,
     List<DonnerModel> donnerlist,
   ) async {
+    final l10n = AppLocalizations.of(context);
     try {
       isLoading(true);
       dynamic response = await _repo.jazzCashPayment({
@@ -74,9 +76,9 @@ class JazcashPaymentViewModel extends GetxController {
           donnerlist,
         );
         if (result == null) {
-          Get.snackbar('Successfull', 'Donated Succesfully');
+          Get.snackbar('Successfull', l10n!.donatedSuccessfully);
         } else {
-          Get.snackbar('Error', 'Error Occurred While Transaction');
+          Get.snackbar('Error', l10n!.transactionError);
         }
       } else {
         if (kDebugMode) {
@@ -84,7 +86,7 @@ class JazcashPaymentViewModel extends GetxController {
         }
       }
     } catch (e) {
-      Get.snackbar('Error', 'Error Occurred While Transaction');
+      Get.snackbar('Error', e.toString());
     } finally {
       isLoading(false);
     }
@@ -99,6 +101,7 @@ class JazcashPaymentViewModel extends GetxController {
     DonnationTrackMasjidModel? model,
     List<DonnerModel> donnerlist,
   ) async {
+    final l10n = AppLocalizations.of(context);
     try {
       isLoading(true);
       dynamic response = await _repo.jazzCashPayment({
@@ -148,9 +151,9 @@ class JazcashPaymentViewModel extends GetxController {
           donnerlist,
         );
         if (result == null) {
-          Get.snackbar('Successfull', 'Donated Succesfully');
+          Get.snackbar('Successfull', l10n!.donatedSuccessfully);
         } else {
-          Get.snackbar('Error', 'Error Occurred While Transaction');
+          Get.snackbar('Error', l10n!.transactionError);
         }
       } else {
         if (kDebugMode) {
@@ -158,7 +161,7 @@ class JazcashPaymentViewModel extends GetxController {
         }
       }
     } catch (e) {
-      Get.snackbar('Error', 'Error Occurred While Transaction');
+      Get.snackbar('Error', l10n!.transactionError);
     } finally {
       isLoading(false);
     }

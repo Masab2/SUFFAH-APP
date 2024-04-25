@@ -120,7 +120,6 @@ class Apis {
         'state': state,
         'address': address,
         'masjidname': masjidname,
-        'recivedDonnation': '0',
       });
       await firestore.collection(suffahCenterMembers).doc(adminid).set({
         'MuntazimId': adminid,
@@ -138,7 +137,7 @@ class Apis {
         'status': 'Verified',
         'Desig': 'Muntazim',
         'masjidname': masjidname,
-        'centerId': id.toString()
+        'centerId': id.toString(),
       }).onError((error, stackTrace) {
         log(error.toString());
       });
@@ -317,12 +316,25 @@ class Apis {
         currentReceivedDonation + int.parse(donationAmount);
     log(newReceivedDonation.toString());
     // Update the receivedDonation field with the new value
-    await firestore.collection(suffahCenterNeedyPeople).doc(id).update({
-      'recivedDonnation': newReceivedDonation.toString(),
-    });
+    await firestore.collection(suffahCenterNeedyPeople).doc(id).update(
+      {
+        'recivedDonnation': newReceivedDonation.toString(),
+      },
+    );
   }
 
-  //! Update Shuffa Center Recived and Waiting people
+  //! Update Shuffa Center Recived Donnation Array Creation
+  static Future<void> updateSuffaCenterProgramAndDonation(
+      suffaCenterId, List<Map<String, dynamic>> programs) async {
+    await firestore
+        .collection(suffahCenterCollection)
+        .doc(suffaCenterId)
+        .update(
+      {
+        'RecivedDonnation': FieldValue.arrayUnion(programs),
+      },
+    );
+  }
 
   // Get All Needy people According to there Program and By Masjid
   static Stream<QuerySnapshot<Map<String, dynamic>>>
@@ -331,7 +343,15 @@ class Apis {
         .collection(suffahCenterNeedyPeople)
         .where('program', isEqualTo: program)
         .where('MuntazimId', isEqualTo: muntazimid)
+        .where('status', isEqualTo: 'waiting')
         .snapshots();
+  }
+
+  // Update the Status of the Needy People
+  static Future<void> updateNeedyPeopleStatus(id) async {
+    await firestore.collection(suffahCenterNeedyPeople).doc(id).update({
+      'status': 'Recived',
+    });
   }
 
   // Get All Needy people According to there Program and By Masjid
@@ -392,22 +412,18 @@ class Apis {
       };
       // Get the existing received donation amount from Firestore
       final existingDoc =
-          await firestore.collection(donnationTrackMasjid).doc(personId).get();
-      double existingReceivedDonation = 0;
-
+          await firestore.collection(donnationTrackPerson).doc(personId).get();
+      int existingReceivedDonation = 0;
       if (existingDoc.exists) {
         existingReceivedDonation =
-            double.tryParse(existingDoc.get('recivedDonnation') ?? '0') ?? 0;
-      }
-
-      // Calculate the total received donation including the latest donation
-      double totalReceivedDonation = existingReceivedDonation +
-          donnerlist.fold<double>(
-              0, (sum, donner) => sum + double.parse(donner.donateAbleAmmount));
-      final personDoc =
-          await firestore.collection(donnationTrackPerson).doc(personId).get();
-      if (personDoc.exists) {
-        // If person exists, update the document to add the donner to the donner list
+            int.tryParse(existingDoc.get('recivedDonnation') ?? '0') ?? 0;
+        // Calculate the total received donation including the latest donation
+        int totalReceivedDonation = existingReceivedDonation +
+            donnerlist.fold<int>(
+              0,
+              (sum, donner) => sum + int.parse(donner.donateAbleAmmount),
+            );
+        // Update existing document with entire donor list and received donation
         await firestore.collection(donnationTrackPerson).doc(personId).update({
           'donners': FieldValue.arrayUnion(
             donnerlist.map((donner) => donner.toJson()).toList(),
@@ -415,10 +431,10 @@ class Apis {
           'recivedDonnation': totalReceivedDonation.toString(),
         });
       } else {
-        // If person does not exist, create a new document with person details and donner list
         donnerTrack['donners'] =
             donnerlist.map((donner) => donner.toJson()).toList();
-        donnerTrack['recivedDonnation'] = totalReceivedDonation.toString();
+        donnerTrack['recivedDonnation'] =
+            donnerlist.first.donateAbleAmmount.toString();
         await firestore
             .collection(donnationTrackPerson)
             .doc(personId)
@@ -428,6 +444,10 @@ class Apis {
       log(e.toString());
     }
   }
+  
+  // Update the Total donnationn in the  main bar 
+  
+
 
   // Masjid Donation For there Program
   static Future<void> donnatationTarkMasjid(
@@ -474,22 +494,15 @@ class Apis {
       // Get the existing received donation amount from Firestore
       final existingDoc =
           await firestore.collection(donnationTrackMasjid).doc(programId).get();
-      double existingReceivedDonation = 0;
+      int existingReceivedDonation = 0;
 
       if (existingDoc.exists) {
         existingReceivedDonation =
-            double.tryParse(existingDoc.get('recivedDonnation') ?? '0') ?? 0;
-      }
-
-      // Calculate the total received donation including the latest donation
-      double totalReceivedDonation = existingReceivedDonation +
-          donnerlist.fold<double>(
-              0, (sum, donner) => sum + double.parse(donner.donateAbleAmmount));
-
-      final personDoc =
-          await firestore.collection(donnationTrackMasjid).doc(programId).get();
-      if (personDoc.exists) {
-        // If person exists, update the document to add the donner to the donner list
+            int.tryParse(existingDoc.get('recivedDonnation') ?? '0') ?? 0;
+        // Calculate the total received donation including the latest donation
+        int totalReceivedDonation = existingReceivedDonation +
+            donnerlist.fold<int>(
+                0, (sum, donner) => sum + int.parse(donner.donateAbleAmmount));
         await firestore.collection(donnationTrackMasjid).doc(programId).update({
           'donners': FieldValue.arrayUnion(
             donnerlist.map((donner) => donner.toJson()).toList(),
@@ -497,10 +510,10 @@ class Apis {
           'recivedDonnation': totalReceivedDonation.toString(),
         });
       } else {
-        // If person does not exist, create a new document with person details and donner list
         donnerTrack['donners'] =
             donnerlist.map((donner) => donner.toJson()).toList();
-        donnerTrack['recivedDonnation'] = totalReceivedDonation.toString();
+        donnerTrack['recivedDonnation'] =
+            donnerlist.first.donateAbleAmmount.toString();
         await firestore
             .collection(donnationTrackMasjid)
             .doc(programId)
@@ -795,6 +808,25 @@ class Apis {
   static Stream<QuerySnapshot<Map<String, dynamic>>>
       getAllDonationTrackForPerson() {
     return firestore.collection(donnationTrackPerson).snapshots();
+  }
+
+  // Donnation Track for the Shuffa Center
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getAllDonationTrackForPersonForSuffaCenter(masjidid, muntazimId) {
+    return firestore
+        .collection(donnationTrackPerson)
+        .where('masjidId', isEqualTo: masjidid)
+        .where('muntazimId', isEqualTo: muntazimId)
+        .snapshots();
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getAllDonationTrackForMasjidForSuffaCenter(masjidid, muntazimId) {
+    return firestore
+        .collection(donnationTrackMasjid)
+        .where('masjidId', isEqualTo: masjidid)
+        .where('muntazimId', isEqualTo: muntazimId)
+        .snapshots();
   }
 
   // Get all the donnation track For Admin to Proceeed the Donnation for Masjid

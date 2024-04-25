@@ -18,7 +18,11 @@ class SuffaCenterAuthViewModel extends GetxController {
   ) async {
     try {
       isLoading(true);
-      final result = await _adminLoginRepo.suffahLoginAccount(email, password);
+      final result = await _adminLoginRepo.suffahLoginAccount(
+        email,
+        password,
+        context,
+      );
       if (result == null) {
         email.clear();
         password.clear();

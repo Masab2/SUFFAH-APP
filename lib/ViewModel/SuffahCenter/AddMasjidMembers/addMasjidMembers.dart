@@ -1,4 +1,4 @@
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/Repository/SuffaCenterRepos/AddMasjidmembers/addMasjidRepo.dart';
@@ -40,7 +40,16 @@ class AddMasjidMemberViewModel extends GetxController {
   }
 
   Future<void> addSuffahCenterMasjidMembers(
-      name, emailAddress, phoneno, city, country, address, masjidid,state) async {
+    name,
+    emailAddress,
+    phoneno,
+    city,
+    country,
+    address,
+    masjidid,
+    state,
+    BuildContext context,
+  ) async {
     final result = await _addMasjidRepo.addSuffahCenterMembers(
       imagePath.value.toString(),
       name,
@@ -50,6 +59,7 @@ class AddMasjidMemberViewModel extends GetxController {
       currentCountry.value.toString(),
       address,
       currentState.value.toString(),
+      context,
     );
     if (result == null) {
       Get.toNamed(RoutesNames.suffacentergenerateEmailScreen, arguments: [

@@ -55,6 +55,27 @@ class MasjidDisplayComp extends StatelessWidget {
     }
   }
 
+  Future<int> fetchReceivedPeopleCount(String program) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+          .instance
+          .collection(suffahCenterCollection)
+          .where('RecivedDonnation', arrayContains: {'Program': program}).get();
+
+      double totalDonation = 0.0;
+      snapshot.docs.forEach((doc) {
+        List<dynamic> receivedDonations = doc['RecivedDonnation'];
+        receivedDonations.forEach((donation) {
+          totalDonation += double.parse(donation['DonationAmount']);
+        });
+      });
+      return totalDonation.toInt();
+    } catch (e) {
+      log('Error fetching received people count: $e');
+      return 0;
+    }
+  }
+
   Future<double> calculatebar() async {
     double progressRatio = 0.0;
     try {

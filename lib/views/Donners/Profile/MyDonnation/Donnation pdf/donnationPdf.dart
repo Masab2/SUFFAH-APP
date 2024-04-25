@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
+import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
@@ -13,7 +14,7 @@ class MyDonnationPdf {
   static Future<void> generateDonationHistoryPDF() async {
     var donationsSnapshot = await Apis.firestore
         .collection(donnationTrackDonnerAll)
-        .get(); // Use get() to fetch all documents
+        .get();
     // Prepare donation data for PDF generation
     List<Map<String, dynamic>> donations =
         donationsSnapshot.docs.map((doc) => doc.data()).toList();
@@ -22,9 +23,10 @@ class MyDonnationPdf {
     // Define text style for the PDF
     const textStyle = pw.TextStyle(fontSize: 12);
 
-    pdf.addPage(
-      pw.Page(
-        build: (context) => pw.Column(
+    pdf.addPage(pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      build: (context) => [
+        pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
             // Title
@@ -50,12 +52,14 @@ class MyDonnationPdf {
                 style: textStyle,
               ),
               pw.Divider(
-                  height: 20, thickness: 1), // Add divider between donations
+                height: 20,
+                thickness: 1,
+              ), // Add divider between donations
             ],
           ],
         ),
-      ),
-    );
+      ],
+    ));
 
     final directory = await getExternalStorageDirectory();
 

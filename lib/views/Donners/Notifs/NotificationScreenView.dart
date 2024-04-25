@@ -55,10 +55,10 @@ class _NotificationScreenViewState extends State<NotificationScreenView> {
           0.03.pw,
         ],
       ),
-      body: Column(
-        children: [
-          Obx(() {
-            if (controller.notifsList.isEmpty) {
+      body: Obx(
+        () {
+          switch (controller.isLoading.value) {
+            case true:
               return const Center(
                 child: SpinKitChasingDots(
                   color: AppColor.mehroonColor,
@@ -66,25 +66,36 @@ class _NotificationScreenViewState extends State<NotificationScreenView> {
                   size: 40,
                 ),
               );
-            } else {
-              return Expanded(
-                child: ListView.builder(
-                  reverse: true,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: controller.notifsList.length,
-                  itemBuilder: (context, index) {
-                    final notifs = controller.notifsList[index];
-                    return NotificationComp(
-                      title: notifs.title,
-                      body: notifs.body,
-                      time: notifs.time,
-                    );
-                  },
-                ),
-              );
-            }
-          })
-        ],
+            case false:
+              if (controller.notifsList.isEmpty) {
+                return Center(
+                  child: Text(
+                    'No notifications available',
+                    style: TextStyle(
+                      fontSize: context.mh * 0.024,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                );
+              } else {
+                return Expanded(
+                  child: ListView.builder(
+                    reverse: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: controller.notifsList.length,
+                    itemBuilder: (context, index) {
+                      final notifs = controller.notifsList[index];
+                      return NotificationComp(
+                        title: notifs.title,
+                        body: notifs.body,
+                        time: notifs.time,
+                      );
+                    },
+                  ),
+                );
+              }
+          }
+        },
       ),
     );
   }

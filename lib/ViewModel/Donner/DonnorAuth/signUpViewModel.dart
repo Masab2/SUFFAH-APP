@@ -9,10 +9,17 @@ class SignUpViewModel extends GetxController {
   final SignUpRepo _signUpRepo = SignUpRepo();
   RxBool isLoading = false.obs;
   Future<void> signUpAccount(
-      TextEditingController email, TextEditingController password) async {
+    TextEditingController email,
+    TextEditingController password,
+    BuildContext context,
+  ) async {
     try {
       isLoading(true);
-      final result = await _signUpRepo.signUpAccount(email, password);
+      final result = await _signUpRepo.signUpAccount(
+        email,
+        password,
+        context,
+      );
       if (result == null) {
         log("Sign Up");
         Get.offAllNamed(RoutesNames.verifyScreen);

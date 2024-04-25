@@ -70,6 +70,7 @@ class RoutesNames {
   static const String genUsernamePassShopScreen = '/genUsernamePassShopScreen';
   static const String selectProgramForShopsAddScreen =
       '/selectProgramForShopsAddScreen';
+  static const String recivedDonnationScreen = '/recivedDonnationScreen';
 
   // SUFFAH STORE
   static const String suffahStoreloginScreen = '/suffahStoreloginScreen';

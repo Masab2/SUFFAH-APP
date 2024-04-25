@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+        appBar: AppBar(),
         resizeToAvoidBottomInset: true,
         body: SingleChildScrollView(
           child: Column(
@@ -93,18 +93,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         title: 'Create Account',
                         onPressed: () {
                           signUpController.signUpAccount(
-                              emailController, passwordController);
+                            emailController,
+                            passwordController,
+                            context,
+                          );
                         },
                       );
               }),
               0.03.ph,
               const LoginOrRow(),
-              0.03.ph,
-              GoogleSignbtn(
-                color: AppColor.brownColor,
-                title: 'Sign in With Google',
-                onPressed: () {},
-              ),
               0.02.ph,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -27,7 +27,7 @@ class AdminAuthRepo {
           return null;
         }
       }
-       return 'Invalid email or password'; 
+       return l10n!.emailEnterError; 
     }
   }
 }

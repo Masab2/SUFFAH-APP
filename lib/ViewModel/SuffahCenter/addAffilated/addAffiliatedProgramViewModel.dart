@@ -63,6 +63,7 @@ class AddCenterProgramController extends GetxController {
     country,
     state,
     city,
+    BuildContext context,
   ) async {
     try {
       final result = await _programRepo.requestProgramManually(
@@ -85,6 +86,7 @@ class AddCenterProgramController extends GetxController {
         country,
         state,
         city,
+        context,
       );
 
       if (result == null) {

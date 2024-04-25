@@ -39,12 +39,12 @@ import 'package:suffa_app/views/suffaCenters/CenterProgram/displayProgram/displa
 import 'package:suffa_app/views/suffaCenters/DashBoard/suffacenterDashboard.dart';
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/AddMembers/addMember.dart';
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/GenerateEmail/generateEmail.dart';
-import 'package:suffa_app/views/suffaCenters/Masjid%20Members/ViewMembers/MembersDetails/MembersDetails.dart';
 import 'package:suffa_app/views/suffaCenters/Masjid%20Members/ViewMembers/ViewMasjidmembers.dart';
 import 'package:suffa_app/views/suffaCenters/NeedyPeople/AddNeadyPeople/AddNeedyPeople.dart';
 import 'package:suffa_app/views/suffaCenters/NeedyPeople/AddPersonalData/addPersonalData.dart';
 import 'package:suffa_app/views/suffaCenters/NeedyPeople/selectProgram/selectProgram.dart';
 import 'package:suffa_app/views/suffaCenters/Profile/suffaCenterProfileView.dart';
+import 'package:suffa_app/views/suffaCenters/RecivedDonnations/recivedDonnationsTab.dart';
 import 'package:suffa_app/views/suffaStores/Auth/SuffahStoreAuth.dart';
 import 'package:suffa_app/views/suffaStores/DashBoard/shuffaShopDashBoard.dart';
 import 'package:suffa_app/views/ChoiceScreen/ChoiceScreen.dart';
@@ -122,7 +122,7 @@ class AppRoutes {
             transition: Transition.leftToRight),
         GetPage(
             name: RoutesNames.detailtrackDonnationScreen,
-            page: () => const DetailTrackDonnation(),
+            page: () => const DetailTrackDonation(),
             transition: Transition.leftToRight),
         GetPage(
             name: RoutesNames.zakatCalulatorScreen,
@@ -205,10 +205,6 @@ class AppRoutes {
             page: () => const GenerateEmailSuffaMembers(),
             transition: Transition.leftToRight),
         GetPage(
-            name: RoutesNames.suffacenterMemberDetailScreen,
-            page: () => const SuffaCenterMemberDetail(),
-            transition: Transition.leftToRight),
-        GetPage(
             name: RoutesNames.addNeedyPeopleScreen,
             page: () => const AddNeedyPeople(),
             transition: Transition.leftToRight),
@@ -248,6 +244,10 @@ class AppRoutes {
         GetPage(
             name: RoutesNames.selectProgramForShopsAddScreen,
             page: () => const SelectProgramforShopsAdd(),
+            transition: Transition.leftToRight),
+        GetPage(
+            name: RoutesNames.recivedDonnationScreen,
+            page: () => const RecivedDonnationTab(),
             transition: Transition.leftToRight),
 
         //& Shuffa Store Routes

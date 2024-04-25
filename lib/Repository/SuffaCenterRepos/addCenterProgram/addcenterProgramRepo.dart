@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddCenterProgramRepo {
   Future<String?> requestProgramManually(
@@ -24,7 +25,9 @@ class AddCenterProgramRepo {
     country,
     state,
     city,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     if (title.text.isEmpty ||
         price.text.isEmpty ||
         purpose.text.isEmpty ||
@@ -33,7 +36,7 @@ class AddCenterProgramRepo {
         dob.text.isEmpty ||
         doCardissue.text.isEmpty ||
         doCardExpire.text.isEmpty) {
-      return 'Please enter all the required data';
+      return l10n!.dataEnterError;
     }
     try {
       await Apis.addAffiliatedProgramBySuffahCenter(

@@ -1,4 +1,4 @@
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
@@ -29,8 +29,19 @@ class CreateEmailAddressSuffaMembersViewModel extends GetxController {
     }
   }
 
-  Future<void> createEmail(file, name, emailAddress, phoneno, city, country,
-      address, genEmail, genPassword, masjidid, state) async {
+  Future<void> createEmail(
+      file,
+      name,
+      emailAddress,
+      phoneno,
+      city,
+      country,
+      address,
+      genEmail,
+      genPassword,
+      masjidid,
+      state,
+      BuildContext context) async {
     final result = await _createEmailRepo.createEmail(
       file,
       name,
@@ -43,6 +54,7 @@ class CreateEmailAddressSuffaMembersViewModel extends GetxController {
       genPassword,
       masjidid,
       state,
+      context,
     );
     if (result == null) {
       await sendEmail(

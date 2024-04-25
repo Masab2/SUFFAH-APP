@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddSuffahStoreRepo {
   Future<String?> addNewSuffahStore(
@@ -21,7 +22,9 @@ class AddSuffahStoreRepo {
     state,
     image,
     program,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     if (shopTitle.text.isEmpty ||
         phoneno.text.isEmpty ||
         email.text.isEmpty ||
@@ -30,14 +33,14 @@ class AddSuffahStoreRepo {
         address.text.isEmpty ||
         state == '' ||
         image == '') {
-      return "Please fill all fields";
+      return l10n!.dataEnterError;
     } else {
       final RegExp emailRegExp =
           RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
       if (emailRegExp.hasMatch(email.text)) {
         return null;
       } else {
-        return 'Please Enter the Email Address in the Proper Format';
+        return l10n!.emailEnterError;
       }
     }
   }
@@ -61,20 +64,22 @@ class AddSuffahStoreRepo {
     email,
     state,
     program,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
         dob.text.isEmpty ||
         doCardissue.text.isEmpty ||
         doCardExpire.text.isEmpty) {
-      return 'Please enter all the required data';
+      return l10n!.dataEnterError;
     } else {
       QuerySnapshot snapshot =
           await Apis.firestore.collection(suffahCenterNeedyPeople).get();
       for (var doc in snapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
         if (data["CNICNo"] == cnicNo.text) {
-          return 'This CNIC is already registered';
+          return l10n!.cnicAlreadyAvailable;
         } else {
           return null;
         }
@@ -101,20 +106,22 @@ class AddSuffahStoreRepo {
     email,
     state,
     program,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
         dob.text.isEmpty ||
         doCardissue.text.isEmpty ||
         doCardExpire.text.isEmpty) {
-      return 'Please enter all the required data';
+      return l10n!.dataEnterError;
     } else {
       QuerySnapshot snapshot =
           await Apis.firestore.collection(suffahCenterNeedyPeople).get();
       for (var doc in snapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
         if (data["CNICNo"] == cnicNo.text) {
-          return 'This CNIC is already registered';
+          return l10n!.cnicAlreadyAvailable;
         } else {
           return null;
         }
@@ -143,9 +150,11 @@ class AddSuffahStoreRepo {
     email,
     state,
     program,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     if (genUsername.text.isEmpty || genUsername.text.isEmpty) {
-      return 'Fill The Required Fields';
+      return l10n!.dataEnterError;
     } else {
       try {
         await Apis.addSuffahStore(

@@ -5,18 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ShuffaCenterAuthRepo {
   Future<String?> suffahLoginAccount(
     TextEditingController email,
     TextEditingController password,
+    BuildContext context,
   ) async {
-    if (email.text.isEmpty && password.text.isEmpty) {
-      return 'Please Enter the Data';
-    } else if (email.text.isEmpty) {
-      return 'Please Enter the Email address';
-    } else if (password.text.isEmpty) {
-      return 'Please Enter the Password';
+    final l10n = AppLocalizations.of(context);
+    if (email.text.isEmpty || password.text.isEmpty) {
+      return l10n!.dataEnterError;
     } else {
       QuerySnapshot snapshot =
           await Apis.firestore.collection(suffahCenterMembers).get();
@@ -52,7 +51,7 @@ class ShuffaCenterAuthRepo {
           return null;
         }
       }
-      return 'Invalid email or password';
+      return l10n!.emailEnterError;
     }
   }
 }

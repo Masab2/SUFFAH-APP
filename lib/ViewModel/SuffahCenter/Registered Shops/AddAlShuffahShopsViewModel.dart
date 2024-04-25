@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:developer';
 import 'dart:io';
@@ -12,7 +12,7 @@ import 'package:suffa_app/Mail/sendEmail.dart';
 import 'package:suffa_app/Repository/SuffaCenterRepos/AddSuffahStores/AddSuffahStoreRepo.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AddAlsuffahShopsViewModel extends GetxController {
   final ImagePicker _picker = ImagePicker();
   var image;
@@ -88,6 +88,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
     masjidid,
     masjidname,
     program,
+    BuildContext context,
   ) async {
     try {
       final result = await _addSuffahStoreRepo.addNewSuffahStore(
@@ -105,6 +106,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
           imagePath.value,
         ),
         program,
+        context,
       );
       if (result == null) {
         Get.toNamed(RoutesNames.addShopsCnicScreen, arguments: [
@@ -144,6 +146,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
     masjidname,
     email,
     program,
+    BuildContext context,
   ) async {
     try {
       final result = await _addSuffahStoreRepo.addSuffahStoreInDBManually(
@@ -164,6 +167,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
         email,
         currentState.value,
         program,
+        context,
       );
       if (result == null) {
         Get.toNamed(RoutesNames.genUsernamePassShopScreen, arguments: [
@@ -210,11 +214,13 @@ class AddAlsuffahShopsViewModel extends GetxController {
     masjidname,
     email,
     program,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     CnicModel cnicModel =
         await CnicScanner().scanImage(imageSource: imageSource);
     if (cnicModel == null) {
-      Get.snackbar('No Image Found', 'Scan Your Id Card');
+      Get.snackbar('Oops', l10n!.scanYourIdCard);
     } else {
       name.text = cnicModel.cnicHolderName;
       cnicno.text = cnicModel.cnicNumber;
@@ -226,7 +232,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
           dob.text.isEmpty &&
           doCardIssue.text.isEmpty &&
           doCardExpire.text.isEmpty) {
-        Get.snackbar('No Image Found', 'Scan Your Id Card');
+        Get.snackbar('Oops', l10n!.scanYourIdCard);
       } else {
         try {
           final result = await _addSuffahStoreRepo.addSuffahStoreInDBScan(
@@ -247,6 +253,7 @@ class AddAlsuffahShopsViewModel extends GetxController {
             email,
             currentState.value,
             program,
+            context,
           );
           if (result == null) {
             Get.toNamed(RoutesNames.genUsernamePassShopScreen, arguments: [
@@ -296,7 +303,9 @@ class AddAlsuffahShopsViewModel extends GetxController {
     TextEditingController genPass,
     email,
     program,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     try {
       final result =
           await _addSuffahStoreRepo.addUserStoreWithGeneratedPassword(
@@ -319,11 +328,12 @@ class AddAlsuffahShopsViewModel extends GetxController {
         email,
         currentState.value,
         program,
+        context,
       );
       if (result == null) {
         await EmailAuth.sendEmail(
             email, genUsername.text, genPass.text, 'Al-Suffah');
-        Get.snackbar('Successfull', 'Shop Added Successfully');
+        Get.snackbar('Successfull', l10n!.shopAddedSuccessfully);
       } else {
         log(result);
         Get.snackbar('Error', result);

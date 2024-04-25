@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/Repository/SuffaCenterRepos/NeedyPeopleRepos/addNeedyPeopleRepo.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddNeedyPeopleViewModel extends GetxController {
   final AddNeedyPeopleRepo _addNeedyPeopleRepo = AddNeedyPeopleRepo();
@@ -30,7 +31,9 @@ class AddNeedyPeopleViewModel extends GetxController {
     masjidCity,
     masjidaddress,
     donatePrice,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     try {
       final result = await _addNeedyPeopleRepo.addCnicDataManually(
         name,
@@ -52,9 +55,10 @@ class AddNeedyPeopleViewModel extends GetxController {
         masjidCity,
         masjidaddress,
         donatePrice,
+        context,
       );
       if (result == null) {
-        Get.snackbar('Successfull', 'Person add sucessfully');
+        Get.snackbar('Successfull', l10n!.addedSuccessfully);
       } else {
         Get.snackbar('Error', result);
       }
@@ -85,11 +89,13 @@ class AddNeedyPeopleViewModel extends GetxController {
     masjidCity,
     masjidaddress,
     donatePrice,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     CnicModel cnicModel =
         await CnicScanner().scanImage(imageSource: imageSource);
     if (cnicModel == null) {
-      Get.snackbar('No Image Found', 'Scan Your Id Card');
+      Get.snackbar('Oops', l10n!.scanYourIdCard);
     } else {
       name.text = cnicModel.cnicHolderName;
       cnicno.text = cnicModel.cnicNumber;
@@ -101,7 +107,7 @@ class AddNeedyPeopleViewModel extends GetxController {
           dob.text.isEmpty &&
           doCardIssue.text.isEmpty &&
           doCardExpire.text.isEmpty) {
-        Get.snackbar('No Image Found', 'Scan Your Id Card');
+        Get.snackbar('Oops', l10n!.scanYourIdCard);
       } else {
         try {
           final result = await _addNeedyPeopleRepo.addCnicDataScan(
@@ -124,9 +130,10 @@ class AddNeedyPeopleViewModel extends GetxController {
             masjidCity,
             masjidaddress,
             donatePrice,
+            context,
           );
           if (result == null) {
-            Get.snackbar('Successfull', 'Person add sucessfully');
+            Get.snackbar('Successfull', l10n!.addedSuccessfully);
           } else {
             Get.snackbar('Error', result);
           }
@@ -134,7 +141,6 @@ class AddNeedyPeopleViewModel extends GetxController {
           Get.snackbar('Error', e.toString());
         }
       }
-
       update();
     }
   }

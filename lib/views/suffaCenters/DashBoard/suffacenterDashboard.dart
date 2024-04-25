@@ -64,29 +64,34 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                   AdminDashBoardtiles(
                     title: l10n.needyPeopleTitle,
                     ontap: () {
-                      Get.toNamed(RoutesNames.selectProgramScreen, arguments: [
-                        id,
-                        masjidname,
-                        masjidId,
-                        muntazimEmail,
-                        country,
-                        state,
-                        city,
-                        address,
-                      ]);
+                      Get.toNamed(
+                        RoutesNames.selectProgramScreen,
+                        arguments: [
+                          id,
+                          masjidname,
+                          masjidId,
+                          muntazimEmail,
+                          country,
+                          state,
+                          city,
+                          address,
+                        ],
+                      );
                     },
                     icon: Icons.person,
                   ),
                   AdminDashBoardtiles(
-                    title: l10n.masjidMemberTitle,
+                    title: 'Recived Donnations',
                     ontap: () {
-                      Get.toNamed(RoutesNames.suffacenterViewMembersScreen,
-                          arguments: [
-                            id,
-                            masjidId,
-                          ]);
+                      Get.toNamed(
+                        RoutesNames.recivedDonnationScreen,
+                        arguments: [
+                          id,
+                          masjidId,
+                        ],
+                      );
                     },
-                    icon: Icons.mosque,
+                    icon: IconlyBold.heart,
                   ),
                 ],
               ),
@@ -156,6 +161,26 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                       ]);
                     },
                     icon: Icons.verified,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: Get.width * 0.04, vertical: Get.height * 0.01),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AdminDashBoardtiles(
+                    title: l10n.masjidMemberTitle,
+                    ontap: () {
+                      Get.toNamed(RoutesNames.suffacenterViewMembersScreen,
+                          arguments: [
+                            id,
+                            masjidId,
+                          ]);
+                    },
+                    icon: Icons.mosque,
                   ),
                 ],
               ),

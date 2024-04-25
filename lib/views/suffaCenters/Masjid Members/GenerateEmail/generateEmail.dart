@@ -97,6 +97,7 @@ class _GenerateEmailSuffaMembersState extends State<GenerateEmailSuffaMembers> {
                     passwordController,
                     masjidid,
                     state,
+                    context,
                   );
                 },
               )

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suffa_app/Repository/SuffaCenterRepos/NeedyPeopleRepos/addNeedyPeopleRepo.dart';
@@ -68,12 +69,14 @@ class AddPersonalInfoViewModel extends GetxController {
     city,
     masjidAddress,
     price,
+    BuildContext context,
   ) async {
     final result = await _addNeedyPeopleRepo.addNeedyPeople(
       imagePath.value.toString(),
       phoneno,
       address,
       masjid,
+      context,
     );
     await SharePrefs.getData('id').then((value) {
       if (result == null) {

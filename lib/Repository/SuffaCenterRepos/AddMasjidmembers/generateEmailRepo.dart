@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class GenerateEmailSuffaMembersRepo {
   Future<String?> createEmail(
     File file,
@@ -19,21 +19,20 @@ class GenerateEmailSuffaMembersRepo {
     TextEditingController genPasword,
     masjidid,
     state,
+    BuildContext context,
   ) async {
-    if (genEmail.text.isEmpty && genPasword.text.isEmpty) {
-      return 'Please Enter the Email address and Password';
-    } else if (genEmail.text.isEmpty) {
-      return 'Please Enter the Email Address';
-    } else if (genPasword.text.isEmpty) {
-      return 'Please Enter the Password';
-    } else {
+    final l10n = AppLocalizations.of(context);
+    if (genEmail.text.isEmpty || genPasword.text.isEmpty) {
+      return l10n!.dataEnterError;
+    }
+    else {
       final id = await SharePrefs.getData('id');
       QuerySnapshot snapshot =
           await Apis.firestore.collection(suffahCenterMembers).get();
       for (var doc in snapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
         if (data["suffahemail"] == genEmail.text) {
-          return 'The Email is Already Available';
+          return l10n!.emailAlreadyAvailable;
         }
       }
 
@@ -60,7 +59,7 @@ class GenerateEmailSuffaMembersRepo {
           }
           break;
         default:
-          return 'Please Enter the Authorized Domain';
+          return l10n!.enterAuthrizedDomain;
       }
     }
     return null;

@@ -10,7 +10,7 @@ import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class NeedyPeopleController extends GetxController {
   final isLoading = false.obs;
   final RxList<SuffahPersonModel> needyPeople = <SuffahPersonModel>[].obs;
@@ -144,13 +144,14 @@ class NeedyPeopleController extends GetxController {
     BuildContext context,
     String programStatus,
   ) {
+    final l10n = AppLocalizations.of(context);
     if (donnateController.text.isNotEmpty) {
       final String donate = donnateController.text;
       final int donnationAmmount = int.parse(donate);
       if (donnationAmmount == 0) {
-        Get.snackbar('oopps', 'Please Enter the Required Ammount');
+        Get.snackbar('oopps', l10n!.requiredAmmount);
       } else if (donnationAmmount > requiredAmmount) {
-        Get.snackbar('oopps', 'Please Enter the Required Ammount');
+        Get.snackbar('oopps', l10n!.requiredAmmount);
       } else {
         Get.toNamed(
           RoutesNames.donatePaymentScreen,
@@ -162,7 +163,7 @@ class NeedyPeopleController extends GetxController {
         );
       }
     } else {
-      Get.snackbar('Error', 'Please Enter the ammount');
+      Get.snackbar('Error', l10n!.requiredAmmount);
     }
   }
 

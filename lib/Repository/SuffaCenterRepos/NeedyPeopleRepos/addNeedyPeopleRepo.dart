@@ -4,22 +4,29 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/utils/constant/constant.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddNeedyPeopleRepo {
-  Future<String?> addNeedyPeople(String file, TextEditingController phoneno,
-      TextEditingController address, masjid) async {
+  Future<String?> addNeedyPeople(
+    String file,
+    TextEditingController phoneno,
+    TextEditingController address,
+    masjid,
+    BuildContext context,
+  ) async {
+    final l10n = AppLocalizations.of(context);
     if (file == null ||
         phoneno.text.isEmpty ||
         address.text.isEmpty ||
         file.isEmpty) {
-      return 'Please Fill the Required Feilds';
+      return l10n!.dataEnterError;
     } else {
       QuerySnapshot snapshot =
           await Apis.firestore.collection(suffahCenterNeedyPeople).get();
       for (var doc in snapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
         if (data['PersonAddress'] == address.text) {
-          return 'This address is available';
+          return l10n!.addressAlreadyAvailable;
         } else {
           return null;
         }
@@ -47,13 +54,15 @@ class AddNeedyPeopleRepo {
     masjidCity,
     masjidaddress,
     donatePrice,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
         dob.text.isEmpty ||
         doCardissue.text.isEmpty ||
         doCardExpire.text.isEmpty) {
-      return 'Please enter all the required data';
+      return l10n!.dataEnterError;
     }
 
     // Validate CNIC uniqueness
@@ -62,7 +71,7 @@ class AddNeedyPeopleRepo {
     for (var doc in snapshot.docs) {
       final data = doc.data() as Map<String, dynamic>;
       if (data["CNICNo"] == cnicNo.text) {
-        return 'This CNIC is already registered';
+        return l10n!.cnicAlreadyAvailable;
       }
     }
     try {
@@ -96,7 +105,7 @@ class AddNeedyPeopleRepo {
               .get();
 
       if (!programDoc.exists) {
-        return 'Suffa center not found';
+        return l10n!.programNotFoundInShuffahCenter;
       }
       // Extract current programs from the suffa center document
       List<dynamic> currentPrograms =
@@ -139,13 +148,15 @@ class AddNeedyPeopleRepo {
     masjidCity,
     masjidaddress,
     donatePrice,
+    BuildContext context,
   ) async {
+    final l10n = AppLocalizations.of(context);
     if (holdername.text.isEmpty ||
         cnicNo.text.isEmpty ||
         dob.text.isEmpty ||
         doCardissue.text.isEmpty ||
         doCardExpire.text.isEmpty) {
-      return 'Please enter all the required data';
+      return l10n!.dataEnterError;
     }
 
     // Validate CNIC uniqueness
@@ -154,7 +165,7 @@ class AddNeedyPeopleRepo {
     for (var doc in snapshot.docs) {
       final data = doc.data() as Map<String, dynamic>;
       if (data["CNICNo"] == cnicNo.text) {
-        return 'This CNIC is already registered';
+        return l10n!.cnicAlreadyAvailable;
       }
     }
     try {
@@ -188,7 +199,7 @@ class AddNeedyPeopleRepo {
               .get();
 
       if (!programDoc.exists) {
-        return 'Program not found in Suffa center';
+        return l10n!.programNotFoundInShuffahCenter;
       }
 
       // Extract current programs from the suffa center document

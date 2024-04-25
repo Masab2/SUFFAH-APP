@@ -50,6 +50,7 @@ class AddSuffahCenterViewModel extends GetxController {
     TextEditingController phoneno,
     TextEditingController address,
     TextEditingController masjidname,
+    BuildContext context,
   ) async {
     final result = await _addSuffahCenterRepo.addSuffahCenter(
       File(imagePath.value.toString()),
@@ -61,6 +62,7 @@ class AddSuffahCenterViewModel extends GetxController {
       address,
       masjidname,
       currentState.value,
+      context,
     );
     if (result == null) {
       Get.toNamed(RoutesNames.createEmailScreen, arguments: [
@@ -92,6 +94,7 @@ class AddSuffahCenterViewModel extends GetxController {
     genPassword,
     String masjidname,
     state,
+    BuildContext context,
   ) async {
     final result = await _addSuffahCenterRepo.createEmail(
       file,
@@ -105,6 +108,7 @@ class AddSuffahCenterViewModel extends GetxController {
       genPassword,
       masjidname,
       currentState.value,
+      context,
     );
     if (result == null) {
       await EmailAuth.sendEmail(

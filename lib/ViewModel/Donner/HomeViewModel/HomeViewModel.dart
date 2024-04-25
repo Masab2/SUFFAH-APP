@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:suffa_app/Model/DonnationTrackMasjidModel/DonnationTrackMasjidModel.dart';
 import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HomeViewModel extends GetxController {
   var country = 'Pakistan'.obs;
   var currentCity = ''.obs;
@@ -39,13 +39,14 @@ class HomeViewModel extends GetxController {
     BuildContext context,
     String  programStatus,
   ) {
+    final l10n = AppLocalizations.of(context);
     if (donnateController.text.isNotEmpty) {
       final String donate = donnateController.text;
       final int donnationAmmount = int.parse(donate);
       if (donnationAmmount == 0) {
-        Get.snackbar('oopps', 'Please Enter the Required Ammount');
+        Get.snackbar('oopps', l10n!.requiredAmmount);
       } else if (donnationAmmount > requiredAmmount) {
-        Get.snackbar('oopps', 'Please Enter the Required Ammount');
+        Get.snackbar('oopps', l10n!.requiredAmmount);
       } else {
         Get.toNamed(
           RoutesNames.donatePaymentScreen,
@@ -57,7 +58,7 @@ class HomeViewModel extends GetxController {
         );
       }
     } else {
-      Get.snackbar('Error', 'Please Enter the ammount');
+      Get.snackbar('Error', l10n!.requiredAmmount);
     }
   }
 }

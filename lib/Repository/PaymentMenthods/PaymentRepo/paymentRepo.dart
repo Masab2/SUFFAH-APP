@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:suffa_app/Model/DonnationTrackMasjidModel/DonnationTrackMasjidModel.dart';
 import 'package:suffa_app/Model/DonnationTrackModel/donnationTrackModel.dart';
 import 'package:suffa_app/Model/donnerModel/donnerModel.dart';
@@ -51,8 +50,18 @@ class PaymentRepo {
         model?.personame ?? '',
         model?.personaddress ?? '',
         '${model?.masjidCountry}/${model?.masjidCity}/${model?.masjidState} ',
-        model?.program ?? '', 'forPerson',
+        model?.program ?? '',
+        'forPerson',
       );
+      // List<Map<String, dynamic>> programs = [
+      //   {
+      //     'Program': model?.program,
+      //     'DonationAmount': model?.donnationAmmount,
+      //   },
+      // ];
+
+      // Apis.updateSuffaCenterProgramAndDonation(model?.masjidid, programs);
+
       return null;
     } catch (e) {
       log(e.toString());
@@ -105,8 +114,10 @@ class PaymentRepo {
         model?.personame ?? '',
         model?.masjidAddress ?? '',
         '${model?.masjidCountry}/${model?.masjidCity}/${model?.masjidState} ',
-        model?.program ?? '', 'forMasjid',
+        model?.program ?? '',
+        'forMasjid',
       );
+
       return null;
     } catch (e) {
       log(e.toString());
