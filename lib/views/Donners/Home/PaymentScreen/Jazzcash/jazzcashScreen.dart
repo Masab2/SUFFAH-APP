@@ -94,7 +94,7 @@ class _JazzCashViewState extends State<JazzCashView> {
                           if (programStatus == "forMasjid") {
                             await jazzcashPayment.jazzCashPaymentForMasjid(
                               masjidModel!.donnationAmmount,
-                              paymentNoController.text,
+                              paymentNoController,
                               sha256Result.toString(),
                               context,
                               masjidModel,
@@ -103,7 +103,7 @@ class _JazzCashViewState extends State<JazzCashView> {
                           } else if (programStatus == "forPerson") {
                             await jazzcashPayment.jazzCashPaymentForPerson(
                               model!.donnationAmmount,
-                              paymentNoController.text,
+                              paymentNoController,
                               sha256Result.toString(),
                               context,
                               model,

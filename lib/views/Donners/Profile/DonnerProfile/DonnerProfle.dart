@@ -63,7 +63,7 @@ class _DonnerProfileState extends State<DonnerProfile> {
                         );
                       } else if (!snapshot.hasData ||
                           snapshot.data!.docs.isEmpty) {
-                        return const Center(child: Text('No Data Found'));
+                        return Center(child: Text(l10n!.noDataFound));
                       } else {
                         return SingleChildScrollView(
                             child: Column(
@@ -137,9 +137,9 @@ class _DonnerProfileState extends State<DonnerProfile> {
                       Utils.showBlurDialog(
                         context,
                         l10n.logOutTitle,
-                        'Are you Sure',
-                        'No',
-                        'Yes',
+                        l10n.areYouSure,
+                        l10n.no,
+                        l10n.yes,
                         () {
                           donnerProfile.logOutAccount();
                         },

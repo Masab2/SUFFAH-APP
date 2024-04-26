@@ -8,6 +8,8 @@ import 'package:suffa_app/ViewModel/Donner/TrackDonnation/trackDonnationViewMode
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TrackDonnation extends StatefulWidget {
   const TrackDonnation({Key? key}) : super(key: key);
@@ -22,10 +24,11 @@ class _TrackDonnationState extends State<TrackDonnation>
   final controller = Get.put(TrackDonnationViewModel());
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Track Donation',
+          l10n!.trackDonnationTitle,
           style: GoogleFonts.poppins(
             fontSize: context.mh * 0.024,
             color: AppColor.whiteColor,
@@ -69,7 +72,7 @@ class _TrackDonnationState extends State<TrackDonnation>
                         0.4.ph,
                         Center(
                           child: Text(
-                            'No Donnation For Track',
+                            l10n.noDataFound,
                             style: TextStyle(
                               color: AppColor.mehroonColor,
                               fontSize: context.mh * 0.023,

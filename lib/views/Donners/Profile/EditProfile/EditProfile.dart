@@ -5,7 +5,7 @@ import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/res/components/DonnerProfile/CustomContainer.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class EditProfileView extends StatefulWidget {
   const EditProfileView({super.key});
 
@@ -16,6 +16,7 @@ class EditProfileView extends StatefulWidget {
 class _EditProfileViewState extends State<EditProfileView> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: Column(
         children: [
@@ -53,13 +54,12 @@ class _EditProfileViewState extends State<EditProfileView> {
                       );
                     } else if (!snapshot.hasData ||
                         snapshot.data!.docs.isEmpty) {
-                      return const Center(child: Text('No Data Found'));
+                      return Center(child: Text(l10n!.noDataFound));
                     } else {
                       return Column(
                         children: [
                           CustomContainer(
-                            title: snapshot.data?.docs.first['email'] ??
-                                'No Email Found',
+                            title: snapshot.data?.docs.first['email'],
                             profile: snapshot.data?.docs.first['profilePic'],
                           ),
                         ],
@@ -82,7 +82,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                   ),
                 );
               } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                return const Center(child: Text('No Data Found'));
+                return Center(child: Text(l10n!.noDataFound));
               } else {
                 return Column(
                   children: [
@@ -96,7 +96,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                         child: Text(
                           'UserID',
                           style: GoogleFonts.poppins(
-                            fontSize: context.mh * 0.023,
+                            fontSize: context.mh * 0.018,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -116,7 +116,11 @@ class _EditProfileViewState extends State<EditProfileView> {
                       ),
                       child: Center(
                         child: Text(
-                          snapshot.data?.docs.first['uid'] ?? 'No Name Found',
+                          snapshot.data?.docs.first['uid'],
+                          style: GoogleFonts.poppins(
+                            fontSize: context.mh * 0.017,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -128,9 +132,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          'Email Address :',
+                          l10n!.emailHint,
                           style: GoogleFonts.poppins(
-                            fontSize: context.mh * 0.023,
+                            fontSize: context.mh * 0.018,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -150,7 +154,11 @@ class _EditProfileViewState extends State<EditProfileView> {
                       ),
                       child: Center(
                         child: Text(
-                          snapshot.data?.docs.first['email'] ?? 'No Name Found',
+                          snapshot.data?.docs.first['email'],
+                          style: GoogleFonts.poppins(
+                            fontSize: context.mh * 0.017,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     )

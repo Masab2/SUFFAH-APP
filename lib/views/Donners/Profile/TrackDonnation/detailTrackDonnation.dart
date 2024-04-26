@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class DetailTrackDonation extends StatefulWidget {
   const DetailTrackDonation({Key? key}) : super(key: key);
 
@@ -28,10 +28,11 @@ class _DetailTrackDonationState extends State<DetailTrackDonation> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Detail Track Donation',
+          l10n!.donationDetailsTitle,
           style: GoogleFonts.poppins(
             fontSize: context.mh * 0.024,
             color: AppColor.whiteColor,
@@ -60,17 +61,17 @@ class _DetailTrackDonationState extends State<DetailTrackDonation> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _StepIndicator(
-                  title: 'Received By Admin',
+                  title: l10n.recivedByAdmin,
                   isActive: status == 'Recived by Admin',
                 ),
                 _StepIndicator(
-                  title: 'Received By Shops',
+                  title: l10n.recivedByShops,
                   isActive: status == 'Received by Shop',
                 ),
                 _StepIndicator(
                   title: donationStatus == "forPerson"
-                      ? 'Received by Person'
-                      : 'Received by Masjid',
+                      ? l10n.recivedByPerson
+                      : l10n.recivedByMasjid,
                   isActive: status == 'Received by Masjid' &&
                       donationStatus == "forPerson",
                 ),
@@ -128,7 +129,7 @@ class _StepIndicator extends StatelessWidget {
             ),
           ],
         ),
-        if (!isLast) // Add vertical line if it's not the last step
+        if (!isLast)
           Row(
             children: [
               0.03.pw,

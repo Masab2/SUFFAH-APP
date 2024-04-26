@@ -20,7 +20,7 @@ class JazcashPaymentViewModel extends GetxController {
 
   Future<void> jazzCashPaymentForPerson(
     ammount,
-    phoneno,
+    TextEditingController phoneno,
     ppsecurehash,
     BuildContext context,
     DonnationTrackModel? model,
@@ -28,7 +28,11 @@ class JazcashPaymentViewModel extends GetxController {
   ) async {
     final l10n = AppLocalizations.of(context);
     try {
-      isLoading(true);
+     isLoading(true);
+      if (phoneno.text.isEmpty || phoneno.text.length != 11) {
+        Get.snackbar('Error', l10n!.dataEnterError);
+        return;
+      }
       dynamic response = await _repo.jazzCashPayment({
         "pp_Version": pp_ver,
         "pp_TxnType": pp_TxnType,
@@ -50,7 +54,7 @@ class JazcashPaymentViewModel extends GetxController {
         ),
         "pp_ReturnURL": pp_ReturnUrl,
         "pp_SecureHash": ppsecurehash,
-        "ppmpf_1": phoneno,
+        "ppmpf_1": phoneno.text,
       });
 
       if (response != null) {
@@ -91,11 +95,11 @@ class JazcashPaymentViewModel extends GetxController {
       isLoading(false);
     }
   }
-  
+
   // For Masjid Program
   Future<void> jazzCashPaymentForMasjid(
     ammount,
-    phoneno,
+    TextEditingController phoneno,
     ppsecurehash,
     BuildContext context,
     DonnationTrackMasjidModel? model,
@@ -104,6 +108,10 @@ class JazcashPaymentViewModel extends GetxController {
     final l10n = AppLocalizations.of(context);
     try {
       isLoading(true);
+      if (phoneno.text.isEmpty || phoneno.text.length != 11) {
+        Get.snackbar('Error', l10n!.dataEnterError);
+        return;
+      }
       dynamic response = await _repo.jazzCashPayment({
         "pp_Version": pp_ver,
         "pp_TxnType": pp_TxnType,
@@ -125,7 +133,7 @@ class JazcashPaymentViewModel extends GetxController {
         ),
         "pp_ReturnURL": pp_ReturnUrl,
         "pp_SecureHash": ppsecurehash,
-        "ppmpf_1": phoneno,
+        "ppmpf_1": phoneno.text,
       });
 
       if (response != null) {

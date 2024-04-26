@@ -56,7 +56,7 @@ class _SeeAllProgramViewState extends State<SeeAllProgramView> {
                   ),
                 );
               } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                return const Text('No Data');
+                return Text(l10n.noDataFound);
               } else {
                 return Expanded(
                   child: ListView.builder(

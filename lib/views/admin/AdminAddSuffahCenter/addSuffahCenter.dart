@@ -13,6 +13,7 @@ import 'package:suffa_app/res/components/AddSuffahCenter/addSuffahCenter.dart';
 import 'package:suffa_app/res/components/ResuableBtn/ReuseAbleBtn.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddSuffahCenter extends StatefulWidget {
   const AddSuffahCenter({super.key});
@@ -39,10 +40,11 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Register Center',
+          l10n!.registerCenter,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.bold,
             fontSize: context.mh * 0.024,
@@ -124,53 +126,54 @@ class _AddSuffahCenterState extends State<AddSuffahCenter> {
           ),
           0.01.ph,
           AddSuffahCenterComp(
-            title: 'Muntazim Name',
+            title: l10n.muntazimNameTitle,
             icon: IconlyBold.add_user,
             controller: muntazimController,
           ),
           0.01.ph,
           AddSuffahCenterComp(
-              title: 'Masjid Name',
+              title: l10n.masjidNameTitle,
               icon: Icons.mosque,
               hint: 'Jamia Masjid',
               controller: masjidController),
           0.01.ph,
           AddSuffahCenterComp(
               hint: 'abc@gmail.com',
-              title: 'Eamil Address',
+              title: l10n.emailHint,
               icon: IconlyBold.message,
               controller: emailController),
           0.01.ph,
           AddSuffahCenterComp(
             hint: 'Must be 11 digit',
-            title: 'Phone No',
+            title: l10n.phoneNoTitle,
             icon: IconlyBold.call,
             controller: phoneController,
           ),
           0.01.ph,
           AddSuffahCenterComp(
               hint: 'Street 20 B xxxx',
-              title: 'Address',
+              title: l10n.addressTitle,
               icon: IconlyBold.location,
               controller: addressController),
         ],
       ),
       bottomNavigationBar: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.mw * 0.03, vertical: context.mh * 0.03),
-          child: ReuseAblebtn(
-            title: 'Next',
-            onPressed: () {
-              addsuffahControlller.addSuffahCenter(
-                muntazimController,
-                emailController,
-                phoneController,
-                addressController,
-                masjidController,
-                context,
-              );
-            },
-          )),
+        padding: EdgeInsets.symmetric(
+            horizontal: context.mw * 0.03, vertical: context.mh * 0.03),
+        child: ReuseAblebtn(
+          title: l10n.nextbtn,
+          onPressed: () {
+            addsuffahControlller.addSuffahCenter(
+              muntazimController,
+              emailController,
+              phoneController,
+              addressController,
+              masjidController,
+              context,
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:suffa_app/res/components/MyDonnationComp/MyDonnationComp.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:suffa_app/views/Donners/Profile/MyDonnation/Donnation%20pdf/donnationPdf.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class MyDonnation extends StatefulWidget {
   const MyDonnation({super.key});
 
@@ -18,10 +18,11 @@ class MyDonnation extends StatefulWidget {
 class _MyDonnationState extends State<MyDonnation> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My Donnations',
+          l10n!.myDonnationTitle,
           style: GoogleFonts.poppins(
             fontSize: context.mh * 0.024,
             color: AppColor.whiteColor,
@@ -76,7 +77,7 @@ class _MyDonnationState extends State<MyDonnation> {
                           0.4.ph,
                           Center(
                             child: Text(
-                              'No Records Found',
+                              l10n.noDataFound,
                               style: TextStyle(
                                 color: AppColor.mehroonColor,
                                 fontSize: context.mh * 0.023,

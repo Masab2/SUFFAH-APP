@@ -4,10 +4,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
+import 'package:suffa_app/ViewModel/SuffahCenter/AddMasjidMembers/viewMasjidMemberViewModel.dart';
 import 'package:suffa_app/res/components/RequestMemberComp/RequestMemberComp.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ViewSuffahCenter extends StatefulWidget {
   const ViewSuffahCenter({super.key});
 
@@ -16,12 +17,15 @@ class ViewSuffahCenter extends StatefulWidget {
 }
 
 class _ViewSuffahCenterState extends State<ViewSuffahCenter> {
+  final controller = Get.put(ViewMasjidMemberViewModel());
+
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Suffah Center',
+          l10n!.shuffahCenterTitle,
           style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -40,7 +44,7 @@ class _ViewSuffahCenterState extends State<ViewSuffahCenter> {
                   ),
                 );
               } else if (!snapshot.hasData) {
-                return const Text('No Data Found');
+                return Text(l10n.noDataFound);
               } else {
                 return Expanded(
                   child: ListView.builder(
@@ -54,14 +58,16 @@ class _ViewSuffahCenterState extends State<ViewSuffahCenter> {
                         image: data['masjidimg'],
                         email: data['email'],
                         onGreenBtnPressed: () async {
-                          // await controller.launchPhoneApp(data['phoneno']);
+                          await controller.launchPhoneApp(data['phoneno']);
                         },
                         centerId: data['centerid'],
                         address: data['address'],
                         city: data['masjidname'],
-                        onGreyBtnPressed: () {},
-                        greenBtnText: 'Contact',
-                        greyBtnText: 'Disable',
+                        onGreyBtnPressed: () {
+
+                        },
+                        greenBtnText: l10n.contactTitle,
+                        greyBtnText: l10n.disableTitle
                       );
                     },
                   ),

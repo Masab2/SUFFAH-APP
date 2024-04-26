@@ -81,7 +81,7 @@ class _SuffaCenterDashboardState extends State<SuffaCenterDashboard> {
                     icon: Icons.person,
                   ),
                   AdminDashBoardtiles(
-                    title: 'Recived Donnations',
+                    title: l10n.recivedDonnation,
                     ontap: () {
                       Get.toNamed(
                         RoutesNames.recivedDonnationScreen,
