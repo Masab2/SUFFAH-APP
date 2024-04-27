@@ -173,7 +173,7 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                               );
                               donnerModel.add(donner);
                               needyPeopleController.validateDonnation(
-                                int.parse(convertAmmountDonate.toString()),
+                                convertAmmountDonate.toInt(),
                                 image,
                                 currency,
                                 donnateController,
