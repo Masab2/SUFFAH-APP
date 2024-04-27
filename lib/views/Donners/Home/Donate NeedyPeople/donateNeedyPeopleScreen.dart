@@ -113,7 +113,10 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                           icon: Icons.store,
                           icon2: Icons.search,
                           ontap: () {
-                            Utils.showShopDialog(program, context);
+                            Utils.showShopDialog(program, context, () {
+                              needyPeopleController
+                                  .openGoogleMap(masjidAddress);
+                            });
                           },
                         ),
                       ),
@@ -170,7 +173,7 @@ class _DonateNeedyPeopleViewState extends State<DonateNeedyPeopleView> {
                               );
                               donnerModel.add(donner);
                               needyPeopleController.validateDonnation(
-                                convertAmmountDonate.toInt(),
+                                int.parse(convertAmmountDonate.toString()),
                                 image,
                                 currency,
                                 donnateController,

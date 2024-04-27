@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
+import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -331,7 +332,15 @@ class PaymentUperheading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        image == '' ? SizedBox(
+          height: context.mh * 0.30,
+          width: double.infinity,
+          child: Image(
+            image: AssetImage(ImageAsset.hungryimg),
+            fit: BoxFit.cover,
+            height: context.mh * 0.30,
+          ),
+        ):SizedBox(
           height: context.mh * 0.30,
           width: double.infinity,
           child: Image(

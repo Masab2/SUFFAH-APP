@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:url_launcher/url_launcher.dart' as launcher;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -205,5 +205,11 @@ class NeedyPeopleController extends GetxController {
   // Selected Value Of the PopUp menu Item For One Click
   void handelSelectedItem(String selected) {
     selectedprogram.value = selected;
+  }
+
+  // Open Google Maps According to Address
+  void openGoogleMap(String address) async {
+    String url = "https://www.google.com/maps/search/?api=1&query=$address";
+    await launcher.launchUrl(Uri.parse(url));
   }
 }

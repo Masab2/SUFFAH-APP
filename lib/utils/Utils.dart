@@ -37,7 +37,7 @@ class Utils {
   }
 
   // Show Shop Dialog
-  static showShopDialog(program, BuildContext context) {
+  static showShopDialog(program, BuildContext context, VoidCallback ontap) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -98,8 +98,9 @@ class Utils {
                                 ),
                                 subtitle: Text(
                                     snapshot.data!.docs[index]['masjidname']),
-                                trailing: const Icon(
-                                  IconlyBold.location,
+                                trailing: IconButton(
+                                  onPressed: ontap,
+                                  icon: const Icon(IconlyLight.location),
                                 ));
                           },
                         );

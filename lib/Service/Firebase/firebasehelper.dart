@@ -409,6 +409,7 @@ class Apis {
         'personGender': personGender,
         'trackId': id.toString(),
         'recivedDonnation': '0',
+        'donners': donnerlist.map((donner) => donner.toJson()).toList(),
       };
       // Get the existing received donation amount from Firestore
       final existingDoc =
@@ -431,8 +432,6 @@ class Apis {
           'recivedDonnation': totalReceivedDonation.toString(),
         });
       } else {
-        donnerTrack['donners'] =
-            donnerlist.map((donner) => donner.toJson()).toList();
         donnerTrack['recivedDonnation'] =
             donnerlist.first.donateAbleAmmount.toString();
         await firestore
@@ -444,10 +443,8 @@ class Apis {
       log(e.toString());
     }
   }
-  
-  // Update the Total donnationn in the  main bar 
-  
 
+  // Update the Total donnationn in the  main bar
 
   // Masjid Donation For there Program
   static Future<void> donnatationTarkMasjid(
@@ -490,6 +487,7 @@ class Apis {
         'trackId': id.toString(),
         'recivedDonnation': '0',
         'programId': programId,
+        'donners': donnerlist.map((donner) => donner.toJson()).toList(),
       };
       // Get the existing received donation amount from Firestore
       final existingDoc =
@@ -510,8 +508,6 @@ class Apis {
           'recivedDonnation': totalReceivedDonation.toString(),
         });
       } else {
-        donnerTrack['donners'] =
-            donnerlist.map((donner) => donner.toJson()).toList();
         donnerTrack['recivedDonnation'] =
             donnerlist.first.donateAbleAmmount.toString();
         await firestore

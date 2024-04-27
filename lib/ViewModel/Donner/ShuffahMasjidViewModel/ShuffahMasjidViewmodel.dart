@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:suffa_app/Model/ShuffahMasjidModel/ShuffamasjidModel.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
-
+import 'package:url_launcher/url_launcher.dart' as launcher;
 class ShuffahMasjidViewModel extends GetxController {
   final RxList<ShuffahMasjidModel> needyPeople = <ShuffahMasjidModel>[].obs;
   final RxList<ShuffahMasjidModel> filteredPeople = <ShuffahMasjidModel>[].obs;
@@ -82,5 +82,11 @@ class ShuffahMasjidViewModel extends GetxController {
         break;
     }
     return convertedAmount;
+  }
+
+  // Open Google Maps According to Address
+  void openGoogleMap(String address) async {
+    String url = "https://www.google.com/maps/search/?api=1&query=$address";
+    await launcher.launchUrl(Uri.parse(url));
   }
 }

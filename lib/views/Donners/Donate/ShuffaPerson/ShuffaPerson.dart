@@ -158,7 +158,7 @@ class _ShuffaPersonViewState extends State<ShuffaPersonView> {
                           final DonnationTrackModel model = DonnationTrackModel(
                             donnationAmmount: donateController.text,
                             requiredDonnation: person.requiredDonnation,
-                            image: '',
+                            image: person.image,
                             currency: widget.currency,
                             personcnic: person.cnicno,
                             personame: person.personname,
@@ -206,9 +206,15 @@ class _ShuffaPersonViewState extends State<ShuffaPersonView> {
                     recivedDonnation: person.recivedDonnation,
                     currency: widget.currency,
                     onshopClick: () {
-                      Utils.showShopDialog(person.program, context);
+                      Utils.showShopDialog(person.program, context, () {
+                        needyPeopleController
+                            .openGoogleMap(person.masjidAddress);
+                      });
                     },
                     personname: person.personname,
+                    onMasjidlocation: () {
+                      needyPeopleController.openGoogleMap(person.masjidAddress);
+                    },
                   );
                 },
               ),

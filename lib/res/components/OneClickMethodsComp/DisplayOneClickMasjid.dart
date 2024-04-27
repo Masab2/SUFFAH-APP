@@ -7,10 +7,11 @@ import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class DisplayOneClickMasjid extends StatelessWidget {
   final String cnic, image, masjidaddress, muntazimid, masjidname, name;
   final String program;
-  final VoidCallback ontap, onaddressClick;
+  final VoidCallback ontap, onaddressClick, onshopClick;
   final String price, recivedDonnation, currency;
   const DisplayOneClickMasjid({
     super.key,
@@ -26,6 +27,7 @@ class DisplayOneClickMasjid extends StatelessWidget {
     required this.onaddressClick,
     required this.masjidname,
     required this.name,
+    required this.onshopClick,
   });
 
   double calculatebar() {
@@ -199,7 +201,7 @@ class DisplayOneClickMasjid extends StatelessWidget {
                                 right: context.mw * 0.03,
                               ),
                               child: InkWell(
-                                onTap: onaddressClick,
+                                onTap: onshopClick,
                                 child: Icon(
                                   Icons.store,
                                   size: context.mh * 0.035,

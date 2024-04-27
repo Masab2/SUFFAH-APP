@@ -9,23 +9,26 @@ import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class DisplayOneClickPerson extends StatelessWidget {
-  final String masjidname, image, masjidaddress, muntazimid, cnicno ,personname;
+  final String masjidname, image, masjidaddress, muntazimid, cnicno, personname;
   final String program;
-  final VoidCallback ontap, onshopClick;
+  final VoidCallback ontap, onshopClick, onMasjidlocation;
   final String price, recivedDonnation, currency;
-  const DisplayOneClickPerson(
-      {super.key,
-      required this.masjidname,
-      required this.image,
-      required this.masjidaddress,
-      required this.muntazimid,
-      required this.cnicno,
-      required this.program,
-      required this.ontap,
-      required this.price,
-      required this.recivedDonnation,
-      required this.currency,
-      required this.onshopClick, required this.personname});
+  const DisplayOneClickPerson({
+    super.key,
+    required this.masjidname,
+    required this.image,
+    required this.masjidaddress,
+    required this.muntazimid,
+    required this.cnicno,
+    required this.program,
+    required this.ontap,
+    required this.price,
+    required this.recivedDonnation,
+    required this.currency,
+    required this.onshopClick,
+    required this.personname,
+    required this.onMasjidlocation,
+  });
 
   double calculatebar() {
     // Calculate the progress ratio
@@ -170,7 +173,7 @@ class DisplayOneClickPerson extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        'Masjid Name',
+                                        l10n.masjidNameTitle,
                                         style: GoogleFonts.poppins(
                                           fontSize: context.mh * 0.015,
                                           fontWeight: FontWeight.bold,
@@ -211,7 +214,7 @@ class DisplayOneClickPerson extends StatelessWidget {
                                 right: context.mw * 0.03,
                               ),
                               child: InkWell(
-                                onTap: onshopClick,
+                                onTap: onMasjidlocation,
                                 child: Icon(
                                   IconlyBold.location,
                                   size: context.mh * 0.035,
@@ -323,4 +326,3 @@ class DisplayOneClickPerson extends StatelessWidget {
     );
   }
 }
-
