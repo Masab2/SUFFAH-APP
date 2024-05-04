@@ -64,10 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     showStates: false,
                     flagState: CountryFlag.DISABLE,
                     currentCountry: homeController.country.value,
-                    onCountryChanged: (value) async{
+                    onCountryChanged: (value) async {
                       log(homeController.country.value.toString());
                       homeController.updateCountry(value);
-                       await SharePrefs.saveData('country', homeController.country.value.toString());
+                      await SharePrefs.saveData(
+                          'country', homeController.country.value.toString());
                       log(value);
                     },
                     onStateChanged: (value) {
@@ -336,7 +337,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.toNamed(RoutesNames.seeAllMasjidProgramScreen);
+                      Get.toNamed(
+                        RoutesNames.seeAllMasjidProgramScreen,
+                      );
                     },
                     child: Text(
                       l10n.seeAll,
@@ -352,7 +355,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             0.01.ph,
             StreamBuilder(
-              stream: Apis.getAllSuffahCenterDefinePrograms(),
+              stream: Apis.getAllSuffahCenterDefinePrograms(
+                  homeController.country.value),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -375,6 +379,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         var data = snapshot.data!.docs[index];
+                        var ammountConvert = homeController.convertCurrency(
+                            double.parse(data['Price']),
+                            homeController.country.value);
                         return DonnationChoiceMasjidComp(
                           image: data['image'],
                           title: data['programTitle'],
@@ -428,7 +435,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                           program: data['programTitle'],
-                          price: data['Price'],
+                          price: ammountConvert.toString(),
                           recivedDonnation: data['recivedDonnation'],
                           currency: homeController.selectedCurrency.value,
                           onProgramClick: () {
@@ -440,7 +447,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     final DonnationTrackMasjidModel model =
                                         DonnationTrackMasjidModel(
                                       donnationAmmount: donatecontroller.text,
-                                      requiredDonnation: data['Price'],
+                                      requiredDonnation: ammountConvert.toString(),
                                       image: data['image'],
                                       currency:
                                           homeController.selectedCurrency.value,

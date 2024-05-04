@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/ViewModel/SuffahCenter/AddMasjidMembers/viewMasjidMemberViewModel.dart';
-import 'package:suffa_app/res/components/RequestMemberComp/RequestMemberComp.dart';
+import 'package:suffa_app/res/components/DisplayShuffaCentercomp/DisplayShuffaCenterComp.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -53,7 +53,7 @@ class _ViewSuffahCenterState extends State<ViewSuffahCenter> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       var data = snapshot.data!.docs[index];
-                      return RequesttoAdminComp(
+                      return DisplayShuffaCenterCompToAdmin(
                         title: data['name'],
                         image: data['masjidimg'],
                         email: data['email'],

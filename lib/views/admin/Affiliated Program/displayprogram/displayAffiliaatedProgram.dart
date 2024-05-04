@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
-import 'package:suffa_app/res/components/RequestMemberComp/RequestMemberComp.dart';
+import 'package:suffa_app/res/components/DisplayAffiliatedprogramForAdmin/DisplayAffiliatedProgramForAdmin.dart';
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -54,29 +54,25 @@ class _DisplayAffiliatedProgramState extends State<DisplayAffiliatedProgram> {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     var data = snapshot.data!.docs[index];
-                    return RequesttoAdminComp(
-                        title: data['programTitle'],
-                        image: data['image'],
-                        email: "${data['Price']} \t ${data['Currency']}",
-                        onGreenBtnPressed: () {},
-                        centerId: '',
-                        address: data['Status'],
-                        city: data['Currency'],
-                        onGreyBtnPressed: () {},
-                        greenBtnText: 'Disable',
-                        greyBtnText: 'Rename');
-                    // return Padding(
-                    //   padding: EdgeInsets.symmetric(
-                    //     horizontal: context.mw * 0.03,
-                    //     vertical: context.mh * 0.03,
-                    //   ),
-                    //   child: SelectProgramComp(
-                    //     image: data['image'],
-                    //     title: data['programTitle'],
-                    //     buttonTitle: 'Registered In This Program',
-                    //     ontap: () {},
-                    //   ),
-                    // );
+                    return DisplayAffiliatedProgramtoAdminComp(
+                      title: data['programTitle'],
+                      image: data['image'],
+                      email: "${data['Price']} \t ${data['Currency']}",
+                      onGreenBtnPressed: () {
+                        Apis.disableProgram(data['programId']);
+                        Get.snackbar('Program', 'Disabled Successfully');
+                      },
+                      centerId: '',
+                      address: data['Status'],
+                      city: data['Currency'],
+                      onGreyBtnPressed: () {
+                        Apis.activeProgram(data['programId']);
+                        Get.snackbar('Program', 'Activated Successfully');
+                      },
+                      greenBtnText: 'Disable',
+                      greyBtnText: 'Active',
+                      status: data['Status'],
+                    );
                   },
                 ));
               }

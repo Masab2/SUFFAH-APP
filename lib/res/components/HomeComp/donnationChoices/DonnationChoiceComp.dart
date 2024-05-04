@@ -81,7 +81,7 @@ class DonnationChoice extends StatelessWidget {
                         width: context.mw * 0.70,
                         backgroundColor: Colors.grey.shade800,
                         foregrondColor: AppColor.mehroonColor,
-                        ratio: 3 / 10,
+                        ratio: 0 / 10,
                         direction: Axis.horizontal,
                         curve: Curves.fastLinearToSlowEaseIn,
                         duration: const Duration(seconds: 3),
@@ -102,7 +102,7 @@ class DonnationChoice extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '1000 Rs',
+                              '0 PKR',
                               style: GoogleFonts.poppins(
                                 fontSize: context.mh * 0.014,
                                 fontWeight: FontWeight.bold,
@@ -123,7 +123,7 @@ class DonnationChoice extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '200 PKR',
+                            '0 PKR',
                             style: GoogleFonts.poppins(
                               fontSize: context.mh * 0.013,
                               fontWeight: FontWeight.w700,

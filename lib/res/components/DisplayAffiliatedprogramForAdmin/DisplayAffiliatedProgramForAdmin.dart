@@ -1,17 +1,17 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
-class RequesttoAdminComp extends StatelessWidget {
+class DisplayAffiliatedProgramtoAdminComp extends StatelessWidget {
   final VoidCallback onGreenBtnPressed, onGreyBtnPressed;
   final String greenBtnText, greyBtnText;
   final String title, image, email, address, centerId, city;
-  const RequesttoAdminComp({
+  final String status;
+  const DisplayAffiliatedProgramtoAdminComp({
     super.key,
     required this.title,
     required this.image,
@@ -23,6 +23,7 @@ class RequesttoAdminComp extends StatelessWidget {
     required this.onGreyBtnPressed,
     required this.greenBtnText,
     required this.greyBtnText,
+    required this.status,
   });
 
   @override
@@ -120,7 +121,7 @@ class RequesttoAdminComp extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Visibility(
-                  visible: centerId == 'Muntazim' ? false : true,
+                  visible: status == 'Active' ? false : true,
                   child: Expanded(
                     child: MaterialButton(
                       minWidth: context.mw * 0.30,
@@ -135,15 +136,18 @@ class RequesttoAdminComp extends StatelessWidget {
                   ),
                 ),
                 0.02.pw,
-                Expanded(
-                  child: MaterialButton(
-                    minWidth: context.mw * 0.30,
-                    color: AppColor.mehroonColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    onPressed: onGreenBtnPressed,
-                    child: Text(greenBtnText,
-                        style: GoogleFonts.poppins(color: AppColor.whiteColor)),
+                Visibility(
+                  visible: status == 'Disable' ? false : true,
+                  child: Expanded(
+                    child: MaterialButton(
+                      minWidth: context.mw * 0.30,
+                      color: AppColor.mehroonColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      onPressed: onGreenBtnPressed,
+                      child: Text(greenBtnText,
+                          style: GoogleFonts.poppins(color: AppColor.whiteColor)),
+                    ),
                   ),
                 ),
               ],

@@ -16,7 +16,8 @@ import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
 class ShuffaMasjidView extends StatefulWidget {
   final String currency;
-  const ShuffaMasjidView({super.key, required this.currency});
+  final String country;
+  const ShuffaMasjidView({super.key, required this.currency, required this.country});
 
   @override
   State<ShuffaMasjidView> createState() => _ShuffaMasjidViewState();
@@ -35,7 +36,7 @@ class _ShuffaMasjidViewState extends State<ShuffaMasjidView> {
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchMasjidProgramOneClick(widget.currency);
+    controller.fetchMasjidProgramOneClick(widget.currency,widget.country);
     return Scaffold(
       body: Column(
         children: [

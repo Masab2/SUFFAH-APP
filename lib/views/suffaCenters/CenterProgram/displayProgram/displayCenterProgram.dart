@@ -5,6 +5,7 @@ import 'package:suffa_app/ViewModel/SuffahCenter/addAffilated/tabControllerViewS
 import 'package:suffa_app/res/routes/routesNames.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 import 'package:suffa_app/views/suffaCenters/CenterProgram/displayProgram/Active/Al-suffahactiveprogram.dart';
+import 'package:suffa_app/views/suffaCenters/CenterProgram/displayProgram/Disable/disableProgramView.dart';
 import 'package:suffa_app/views/suffaCenters/CenterProgram/displayProgram/Rejected/Al-SuffahRejectedProgram.dart';
 import 'package:suffa_app/views/suffaCenters/CenterProgram/displayProgram/Requested/Al-SuffahRequestedProgram.dart';
 import '../../../../utils/color/appColor.dart';
@@ -18,7 +19,7 @@ class DisplayCenterProgram extends StatefulWidget {
 
 class _DisplayCenterProgramState extends State<DisplayCenterProgram>
     with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: 3, vsync: this);
+  late TabController tabController = TabController(length: 4, vsync: this);
   late String id;
   late String masjidname;
   late String masjidId;
@@ -93,6 +94,7 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
                           _buildTab('Active', 0),
                           _buildTab('Requested', 1),
                           _buildTab('Rejected', 2),
+                          _buildTab('Disable', 3),
                         ]);
                   }),
                 ),
@@ -120,6 +122,11 @@ class _DisplayCenterProgramState extends State<DisplayCenterProgram>
                               horizontal: context.mw * 0.03,
                               vertical: context.mh * 0.02),
                           child: const AlSuffahRejectedView()),
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.mw * 0.03,
+                              vertical: context.mh * 0.02),
+                          child: const AlSuffahDisableProgramView()),
                     ]),
               )
             ],

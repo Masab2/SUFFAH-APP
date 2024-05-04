@@ -565,6 +565,24 @@ class Apis {
     return firestore.collection(suffahAffiliatedprogram).snapshots();
   }
 
+  // Disable Affiliated program
+  static Future<void> disableProgram(id) async {
+    await firestore.collection(suffahAffiliatedprogram).doc(id).update(
+      {
+        'Status': 'Disable',
+      },
+    );
+  }
+
+  // Rename The Title of the Affiliated program
+  static Future<void> activeProgram(id) async {
+    await firestore.collection(suffahAffiliatedprogram).doc(id).update(
+      {
+        'Status': 'Active',
+      },
+    );
+  }
+
   // Add Programs into The Suffa center Collection
   static Future<void> updateTheSuffaCenterPrograms(
     List<dynamic> programs,
@@ -640,6 +658,22 @@ class Apis {
         .collection(suffahCenterDefineProgram)
         .where('Status', isEqualTo: status)
         .snapshots();
+  }
+
+  // Disable The Masjid Donnation program
+  static Future<void> disableMasjidDonnationProgram(id) async {
+    await firestore.collection(suffahCenterDefineProgram).doc(id).update(
+      {
+        'Status': 'Disable',
+      },
+    );
+  }
+  static Future<void> activeMasjidDonnationProgram(id) async {
+    await firestore.collection(suffahCenterDefineProgram).doc(id).update(
+      {
+        'Status': 'Active',
+      },
+    );
   }
 
   // If Accept or Reject Then Update the Status
@@ -724,10 +758,11 @@ class Apis {
 
   // Get All Suffah Center Define Program
   static Stream<QuerySnapshot<Map<String, dynamic>>>
-      getAllSuffahCenterDefinePrograms() {
+      getAllSuffahCenterDefinePrograms(country) {
     return firestore
         .collection(suffahCenterDefineProgram)
         .where('Status', isEqualTo: 'Active')
+        .where('countryMasjid', isEqualTo: country)
         .snapshots();
   }
 

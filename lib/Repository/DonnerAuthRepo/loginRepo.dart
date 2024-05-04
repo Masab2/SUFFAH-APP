@@ -20,7 +20,7 @@ class LoginRepo {
         try {
           await Apis.loginAccount(email.text, password.text);
           log('Login Successful');
-          return null; // Return null on successful login
+          return null;
         } catch (error) {
           log('Login Error: $error');
           return l10n!.technicalError;

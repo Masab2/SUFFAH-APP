@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:suffa_app/Service/Local%20Storage/sharedPrefs.dart';
 import 'package:suffa_app/ViewModel/Donner/DonateViewModel/DonateViewModel.dart';
+import 'package:suffa_app/ViewModel/Donner/HomeViewModel/HomeViewModel.dart';
 import 'package:suffa_app/utils/asset/ImageAsset.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
@@ -23,20 +23,7 @@ class _DonateScreenViewState extends State<DonateScreenView>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
   final controller = Get.put(DonateViewModel());
-  String currency = 'PKR';
-  Future<void> getCurrency() async {
-    String currencyValue = await SharePrefs.getData('currency');
-    setState(() {
-      currency = currencyValue;
-    });
-  }
-
-  @override
-  void initState() {
-    getCurrency();
-    super.initState();
-  }
-
+  final homeController = Get.find<HomeViewModel>();
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -124,10 +111,11 @@ class _DonateScreenViewState extends State<DonateScreenView>
                       dragStartBehavior: DragStartBehavior.start,
                       children: [
                         ShuffaPersonView(
-                          currency: currency,
+                          currency: homeController.selectedCurrency.value,
                         ),
                         ShuffaMasjidView(
-                          currency: currency,
+                          currency: homeController.selectedCurrency.value,
+                          country: homeController.country.value,
                         )
                       ],
                     ),

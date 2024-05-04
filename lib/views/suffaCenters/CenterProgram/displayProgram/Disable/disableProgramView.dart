@@ -4,22 +4,22 @@ import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
 import 'package:suffa_app/res/components/DisplayAffiliatedprogramForAdmin/DisplayAffiliatedProgramForAdmin.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 
-class AlSuffahActiveProgramView extends StatefulWidget {
-  const AlSuffahActiveProgramView({super.key});
+class AlSuffahDisableProgramView extends StatefulWidget {
+  const AlSuffahDisableProgramView({super.key});
 
   @override
-  State<AlSuffahActiveProgramView> createState() =>
-      _AlSuffahActiveProgramViewState();
+  State<AlSuffahDisableProgramView> createState() =>
+      _AlSuffahDisableProgramViewState();
 }
 
-class _AlSuffahActiveProgramViewState extends State<AlSuffahActiveProgramView> {
+class _AlSuffahDisableProgramViewState extends State<AlSuffahDisableProgramView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           StreamBuilder(
-            stream: Apis.suffahRequestedProgram('Active'),
+            stream: Apis.suffahRequestedProgram('Disable'),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
@@ -45,15 +45,16 @@ class _AlSuffahActiveProgramViewState extends State<AlSuffahActiveProgramView> {
                         image: data['image'],
                         email: data['masjidname'],
                         onGreenBtnPressed: () async {
-                          Apis.disableMasjidDonnationProgram(data['programId']);
+                          
                         },
                         centerId: data['MasjidId'],
                         address: data['purpose'],
                         city: '${data['Price']}',
-                        onGreyBtnPressed: () async {},
+                        onGreyBtnPressed: () async {
+                          Apis.activeMasjidDonnationProgram(data['programId']);
+                        },
                         greenBtnText: 'Disable',
-                        greyBtnText: 'Enable',
-                        status: data['Status'],
+                        greyBtnText: 'Enable', status: data['Status'],
                       );
                     },
                   ),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:suffa_app/Model/DonnationTrackMasjidModel/DonnationTrackMasjidModel.dart';
@@ -9,6 +10,8 @@ class HomeViewModel extends GetxController {
   var currentCity = ''.obs;
   var currentState = ''.obs;
   var selectedCurrency = 'PKR'.obs;
+   static const double _usdExchangeRate = 0.0036;
+  static const double _eurExchangeRate = 0.0033;
 
   // Update the Country
   void updateCountry(value) {
@@ -60,5 +63,31 @@ class HomeViewModel extends GetxController {
     } else {
       Get.snackbar('Error', l10n!.requiredAmmount);
     }
+  }
+
+  // Convert the Donnation Ammount Into the Desired Currency
+  double convertCurrency(double amount, String targetCurrency) {
+    double convertedAmount = 0;
+    switch (targetCurrency) {
+      case 'USD':
+        convertedAmount = amount * _usdExchangeRate;
+        if (kDebugMode) {
+          print('$amount PKR is $convertedAmount USD');
+        }
+        break;
+      case 'EUR':
+        convertedAmount = amount * _eurExchangeRate;
+        if (kDebugMode) {
+          print('$amount PKR is $convertedAmount EUR');
+        }
+        break;
+      default:
+        convertedAmount = amount;
+        if (kDebugMode) {
+          print('$amount PKR is $convertedAmount PKR');
+        }
+        break;
+    }
+    return convertedAmount;
   }
 }

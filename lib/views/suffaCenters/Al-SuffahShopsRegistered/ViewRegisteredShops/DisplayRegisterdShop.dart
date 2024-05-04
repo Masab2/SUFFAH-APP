@@ -3,10 +3,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/Service/Firebase/firebasehelper.dart';
+import 'package:suffa_app/ViewModel/SuffahCenter/AddMasjidMembers/viewMasjidMemberViewModel.dart';
+import 'package:suffa_app/res/components/DisplayShuffaCentercomp/DisplayShuffaCenterComp.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
-import '../../../../res/components/RequestMemberComp/RequestMemberComp.dart';
 
 class DisplayAlshuffaRegisteredShop extends StatefulWidget {
   const DisplayAlshuffaRegisteredShop({super.key});
@@ -18,6 +19,7 @@ class DisplayAlshuffaRegisteredShop extends StatefulWidget {
 
 class _DisplayAlshuffaRegisteredShopState
     extends State<DisplayAlshuffaRegisteredShop> {
+      final controller = Get.put(ViewMasjidMemberViewModel());
   late String masjidid;
   @override
   void initState() {
@@ -62,15 +64,19 @@ class _DisplayAlshuffaRegisteredShopState
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       var data = snapshot.data!.docs[index];
-                      return RequesttoAdminComp(
+                      return DisplayShuffaCenterCompToAdmin(
                         title: data['ShopTitle'],
                         image: data['Image'],
                         email: data['Phoneno'],
-                        onGreenBtnPressed: () async {},
+                        onGreenBtnPressed: () async {
+                          controller.launchPhoneApp(data['Phoneno']);
+                        },
                         centerId: data['ShopId'],
                         address: data['Address'],
                         city: data['City'],
-                        onGreyBtnPressed: () async {},
+                        onGreyBtnPressed: () async {
+
+                        },
                         greenBtnText: 'Contact',
                         greyBtnText: 'Disable',
                       );

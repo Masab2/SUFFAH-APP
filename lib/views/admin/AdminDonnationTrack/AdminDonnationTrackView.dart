@@ -66,7 +66,7 @@ class _AdminDonnationTrackViewState extends State<AdminDonnationTrackView>
           ),
           0.01.ph,
           SizedBox(
-            height: context.mh * 0.8,
+            height: context.mh * 0.6,
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: tabController,

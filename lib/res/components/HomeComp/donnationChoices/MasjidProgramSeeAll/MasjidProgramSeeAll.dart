@@ -136,7 +136,7 @@ class DonnationChoiceMasjidComp extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '200 PKR',
+                            '0 PKR',
                             style: GoogleFonts.poppins(
                               fontSize: context.mh * 0.013,
                               fontWeight: FontWeight.w700,

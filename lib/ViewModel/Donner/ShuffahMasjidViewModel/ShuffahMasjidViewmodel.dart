@@ -12,8 +12,8 @@ class ShuffahMasjidViewModel extends GetxController {
   static const double _usdExchangeRate = 0.0036;
   static const double _eurExchangeRate = 0.0033;
 
-  void fetchMasjidProgramOneClick(targetCurrency) {
-    Apis.getAllSuffahCenterDefinePrograms()
+  void fetchMasjidProgramOneClick(targetCurrency,country) {
+    Apis.getAllSuffahCenterDefinePrograms(country)
         .listen((QuerySnapshot<Map<String, dynamic>> snapshot) {
       final List<ShuffahMasjidModel> data = snapshot.docs.map((doc) {
         var convertedReceivedDonation = convertCurrency(

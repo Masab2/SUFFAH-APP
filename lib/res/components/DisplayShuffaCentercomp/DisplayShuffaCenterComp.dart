@@ -7,11 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:suffa_app/utils/color/appColor.dart';
 import 'package:suffa_app/utils/extenshion/extenshion.dart';
 
-class RequesttoAdminComp extends StatelessWidget {
+class DisplayShuffaCenterCompToAdmin extends StatelessWidget {
   final VoidCallback onGreenBtnPressed, onGreyBtnPressed;
   final String greenBtnText, greyBtnText;
   final String title, image, email, address, centerId, city;
-  const RequesttoAdminComp({
+  const DisplayShuffaCenterCompToAdmin({
     super.key,
     required this.title,
     required this.image,
@@ -119,22 +119,6 @@ class RequesttoAdminComp extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Visibility(
-                  visible: centerId == 'Muntazim' ? false : true,
-                  child: Expanded(
-                    child: MaterialButton(
-                      minWidth: context.mw * 0.30,
-                      color: AppColor.brownColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      onPressed: onGreyBtnPressed,
-                      child: Text(greyBtnText,
-                          style:
-                              GoogleFonts.poppins(color: AppColor.whiteColor)),
-                    ),
-                  ),
-                ),
-                0.02.pw,
                 Expanded(
                   child: MaterialButton(
                     minWidth: context.mw * 0.30,
